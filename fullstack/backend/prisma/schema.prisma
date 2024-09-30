@@ -23,8 +23,28 @@ model User {
   created_at DateTime
   updated_at DateTime
   is_active Boolean
+  certification UserCertification[]
   skills  UserSkill[]  
   role     Role    @relation(fields: [role_id], references: [id])
+}
+model Certification{
+  id       String   @id @default(auto()) @map("_id") @db.ObjectId
+  name     String
+  issued_by String
+  is_certificate Boolean
+  UserCertification UserCertification[]
+}
+model UserCertification{
+id      String   @id @default(auto()) @map("_id") @db.ObjectId 
+  userId String @db.ObjectId
+  certificationId String @db.ObjectId
+  started_at DateTime
+  completed_at DateTime
+  competency competency @default(BEGINNER)
+  user   User   @relation(fields: [userId], references: [id])
+  certification  Certification  @relation(fields: [certificationId], references: [id])
+  @@unique([userId, certificationId])
+
 }
 model Skill {
   id       String   @id @default(auto()) @map("_id") @db.ObjectId
@@ -33,6 +53,8 @@ model Skill {
   updated_at DateTime
   is_active Boolean
   User UserSkill[] 
+
+  RoleSkill RoleSkill[]
 }
 model UserSkill {
   id      String   @id @default(auto()) @map("_id") @db.ObjectId 
@@ -42,12 +64,22 @@ model UserSkill {
   skill  Skill  @relation(fields: [skillId], references: [id])
   @@unique([userId, skillId])
 }
+model RoleSkill {
+  id      String   @id @default(auto()) @map("_id") @db.ObjectId 
+  RoleId String @db.ObjectId
+  skillId String @db.ObjectId
+  role   Role   @relation(fields: [RoleId], references: [id])
+  skill  Skill  @relation(fields: [skillId], references: [id])
+  @@unique([RoleId, skillId])
+}
 model Role {
   id          String     @id @default(auto()) @map("_id") @db.ObjectId
   name        String     @unique
   desc        String
 
   User User[]
+
+  RoleSkill RoleSkill[]
 }
 enum Department {
   FULLSTACK
@@ -55,4 +87,9 @@ enum Department {
   DATAENGINEERING
   DEVOPS
   OTHER
+}
+enum competency {
+  BEGINNER
+  INTERMEDIATED
+  PRO
 }
