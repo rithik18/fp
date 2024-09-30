@@ -1,0 +1,58 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model User {
+  id       String   @id @default(auto()) @map("_id") @db.ObjectId
+  name     String
+  role_id   String  @db.ObjectId
+  joining_date String
+  department Department @default(OTHER)
+  mail String @unique
+  created_at DateTime
+  updated_at DateTime
+  is_active Boolean
+  skills  UserSkill[]  
+  role     Role    @relation(fields: [role_id], references: [id])
+}
+model Skill {
+  id       String   @id @default(auto()) @map("_id") @db.ObjectId
+  name     String   @unique
+  created_at DateTime
+  updated_at DateTime
+  is_active Boolean
+  User UserSkill[] 
+}
+model UserSkill {
+  id      String   @id @default(auto()) @map("_id") @db.ObjectId 
+  userId String @db.ObjectId
+  skillId String @db.ObjectId
+  user   User   @relation(fields: [userId], references: [id])
+  skill  Skill  @relation(fields: [skillId], references: [id])
+  @@unique([userId, skillId])
+}
+model Role {
+  id          String     @id @default(auto()) @map("_id") @db.ObjectId
+  name        String     @unique
+  desc        String
+
+  User User[]
+}
+enum Department {
+  FULLSTACK
+  DATAANALYTICS
+  DATAENGINEERING
+  DEVOPS
+  OTHER
+}
