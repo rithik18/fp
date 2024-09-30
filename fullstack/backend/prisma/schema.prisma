@@ -82,6 +82,7 @@ model Role {
   RoleSkill RoleSkill[]
 }
 enum Department {
+  ADMIN
   FULLSTACK
   DATAANALYTICS
   DATAENGINEERING
