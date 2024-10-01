@@ -8,7 +8,7 @@ import { validate } from '../utils/validation';
 const Login = () => {
   useEffect(() => {
    validate()
-   console.log(Cookies.get('role') )
+   console.log(Cookies.get('role'),"cookei role")
    if (Cookies.get('role') === "ADMIN" && Cookies.get('auth')=='true') {
     n('/admin')
   }else if(Cookies.get('role') !== "ADMIN" && Cookies.get('auth')=='true'){
@@ -56,8 +56,11 @@ const Login = () => {
       });
       Cookies.set("token", response.data.token);
       Cookies.set("data", response.data.data);
+      Cookies.set("auth", "true");
+      console.log("loggedin")
       toast.success(`Welcome ${response.data.data.name}`);
       if (Cookies.get("role") === "ADMIN") {
+        console.log("admin")
         n("/admin");
       } else {
         n("/user");

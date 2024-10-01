@@ -1,7 +1,6 @@
 import Cookies from "js-cookie";
 import axios from "axios";
 export const validate = async () => {
-  console.log("hello")
     try {
       const token = await Cookies.get("token");
       const role = await Cookies.get("role");
