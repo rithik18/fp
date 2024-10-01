@@ -2,6 +2,7 @@ import { useEffect } from 'react'
 import { validate } from '../utils/validation';
 import { useNavigate } from 'react-router-dom';
 import Cookies from "js-cookie";
+import Navbar from '../components/navbar';
 
 const Admin_add_user = () => {
 
@@ -19,7 +20,10 @@ const Admin_add_user = () => {
    
      const n = useNavigate();
   return (
-    <div>Admin_add_user</div>
+    <div>
+      <Navbar/>
+      <div>Admin_add_user</div>
+    </div>
   )
 }
 
