@@ -22,7 +22,7 @@ app.post('/login', async (req, res)=>{
     res.status(200);
     const data = await prisma.user.findUnique({where:{mail:email}})
     console.log(data.department)
-    if(data.department!='ADMIN'){
+    if(data.department=='ADMIN'){
         app.use('/admin', admin);
     }else{
         app.use('/user', user);
