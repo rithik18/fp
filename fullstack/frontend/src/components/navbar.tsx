@@ -20,7 +20,7 @@ import {
 import { Button } from "@/components/ui/button";
 import Cookies from "js-cookie";
 import { toast,ToastContainer } from "react-toastify";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const navbar = () => {
   const n=useNavigate()
@@ -79,7 +79,7 @@ const navbar = () => {
                 <DropdownMenuContent>
                   <DropdownMenuLabel>User Details</DropdownMenuLabel>
                   <DropdownMenuSeparator />
-                  <DropdownMenuItem>Add User</DropdownMenuItem>
+                  <DropdownMenuItem><Link to={'/add_user'}>Add User</Link></DropdownMenuItem>
                   <DropdownMenuItem>View User</DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>
