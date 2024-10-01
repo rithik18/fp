@@ -1,7 +1,8 @@
 const express = require('express');
 const router = express.Router();
-const {adminMiddleware} = require('../middlewares/adminMiddleware');
 
-router.use(adminMiddleware)
-
-// router.use('/login')
+router.post('/',(req,res)=>{
+    console.log("first")
+    res.send({"hell":"hell"})
+})
+module.exports = router;

@@ -1,87 +1,55 @@
+const express = require("express");
+const cors = require("cors");
+const { PrismaClient } = require("@prisma/client");
+const { adminMiddleware } = require("./middlewares/adminMiddleware");
+const { userMiddleware } = require("./middlewares/userMiddleware");
 
-// const express = require('express');
+const prisma = new PrismaClient();
+const userRoutes = require("./routes/userRoutes");
+const adminRoutes = require("./routes/adminRoutes");
 
-// const app = express();
-// const PORT = 3000;
-
-// const cors = require('cors');
-// const { PrismaClient } = require('@prisma/client');
-// const prisma=new PrismaClient()
-// app.use(cors());
-// app.use(express.json());
-
-
-// const user = require('./routes/userRoutes');
-// const admin = require('./routes/adminRoutes');
-
-
-
-
-// app.post('/login', async (req, res)=>{
-//     const {email}=req.body
-//     res.status(200);
-//     const data = await prisma.user.findUnique({where:{mail:email}})
-//     console.log(data.department)
-//     if(data.department=='ADMIN'){
-//         app.use('/admin', admin);
-//     }else{
-//         app.use('/user', user);
-//     }
-//     res.send(`Welcome ${email}${department}`);
-// });
-
-// app.listen(PORT, (error) =>{
-//     if(!error)
-//         console.log("Server is Successfully Running,and App is listening on port "+ PORT)
-//     else 
-//         console.log("Error occurred, server can't start", error);
-//     }
-// );
-const express = require('express');
 const app = express();
+const PORT = 3000;
 
-// Mock user data
-const users = [
-    { id: 1, name: 'Alice', role: 'admin' },
-    { id: 2, name: 'Bob', role: 'user' }
-];
+app.use(cors());
+app.use(express.json());
 
-// Middleware to check user role
-const checkRole = (requiredRole) => {
-    return (req, res, next) => {
-        const userId = req.userId; // Assume user ID is set in request
-        const user = users.find(u => u.id === userId);
+// Login Route
+app.post("/role", async (req, res) => {
+  const { email } = req.body;
 
-        if (!user) {
-            return res.status(403).json({ message: 'User not found' });
-        }
+  try {
+    const user = await prisma.user.findUnique({ where: { mail: email } });
 
-        if (user.role !== requiredRole) {
-            return res.status(403).json({ message: 'Forbidden: Insufficient role' });
-        }
+    if (!user) {
+      return res.status(404).send("User not found");
+    }
 
-        next(); // Role is valid, proceed
-    };
-};
+    // Optionally, attach user info to the request for middleware usage
+    req.data = user; // Attach user object to the request
+    console.log(req.data)
+    // Send user information back, including department
+    res.status(200).send({
+      message: `Welcome ${email}`,
+      department: user.department,
+    });
 
-// Mock authentication middleware
-app.use((req, res, next) => {
-    // Simulate user with ID 1 (admin) or ID 2 (user)
-    req.userId = 1; // Change this to 2 to test user access
-    next();
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Internal server error");
+  }
 });
 
-// Protected routes
-app.get('/admin', checkRole('admin'), (req, res) => {
-    res.send('Welcome, Admin!');
+// Protecting the admin and user routes
+app.use("/admin", adminMiddleware, adminRoutes);
+app.use("/user", userMiddleware, userRoutes);
+
+app.listen(PORT, (error) => {
+  if (!error) {
+    console.log(`Server is successfully running on port ${PORT}`);
+  } else {
+    console.log("Error occurred, server can't start", error);
+  }
 });
 
-app.get('/user', checkRole('user'), (req, res) => {
-    res.send('Welcome, User!');
-});
 
-// Start the server
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-    console.log(`Server is running on http://localhost:${PORT}`);
-});

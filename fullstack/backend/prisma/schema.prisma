@@ -23,6 +23,7 @@ model User {
   created_at DateTime
   updated_at DateTime
   is_active Boolean
+  password String
   certification UserCertification[]
   skills  UserSkill[]  
   role     Role    @relation(fields: [role_id], references: [id])
