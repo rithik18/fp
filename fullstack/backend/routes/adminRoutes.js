@@ -10,6 +10,6 @@ router.post('/',(req,res)=>{
     const token= jwt.sign({id,email,password,department}, process.env.JWT_SECRET, {
         expiresIn: process.env.JWT_EXPIRES_IN, // Set expiration time from env
       });
-      return res.json({token,'auth':'true'})//return jwt token
+      return res.json({token,'auth':'true',data:req.data})//return jwt token
 })
 module.exports = router;
