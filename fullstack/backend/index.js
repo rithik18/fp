@@ -24,11 +24,7 @@ app.post("/role", async (req, res) => {
     if (!user) {
       return res.status(404).send("User not found");
     }
-
-    // Optionally, attach user info to the request for middleware usage
-    req.data = user; // Attach user object to the request
-    console.log(req.data)
-    // Send user information back, including department
+    // Send user role information back
     res.status(200).send({
       message: `Welcome ${email}`,
       department: user.department,

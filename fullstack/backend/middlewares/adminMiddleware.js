@@ -51,11 +51,12 @@ const prisma = new PrismaClient();
 const adminMiddleware = async(req, res, next) => {
   const { email,password} = req.body;
   const user = await prisma.user.findUnique({ where: { mail: email,password: password} });
-
+  
     if (!user) {
       return res.status(404).send("User not found");
     }
   if (user && user.department === 'ADMIN') {
+    req.data=user
     return next();
   }
   return res.status(403).send("Access denied");
