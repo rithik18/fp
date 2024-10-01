@@ -3,11 +3,13 @@ const router = express.Router();
 const  jwt = require('jsonwebtoken');
 
 router.post('/',(req,res)=>{
-    const {email,password,department}=req.data
-    const token= jwt.sign({email,password,department}, process.env.JWT_SECRET, {
+    if(req.token){
+        return res.json({'auth':'true'})
+    }
+    const {id,email,password,department}=req.data
+    const token= jwt.sign({id,email,password,department}, process.env.JWT_SECRET, {
         expiresIn: process.env.JWT_EXPIRES_IN, // Set expiration time from env
       });
-      console.log(token)
-      return res.json({token})
+      return res.json({token,'auth':'true'})//return jwt token
 })
 module.exports = router;
