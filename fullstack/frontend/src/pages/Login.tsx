@@ -7,15 +7,16 @@ import { useEffect } from "react";
 import { validate } from '../utils/validation';
 const Login = () => {
   useEffect(() => {
-   validate()
-   console.log(Cookies.get('role'),"cookei role")
-   if (Cookies.get('role') === "ADMIN" && Cookies.get('auth')=='true') {
-    n('/admin')
-  }else if(Cookies.get('role') !== "ADMIN" && Cookies.get('auth')=='true'){
-    n('/user')
-  }else{
-    n('/')
-  }
+    console.log(Cookies.get('role'),"cookei role")
+    if (Cookies.get('role') === "ADMIN" && Cookies.get('auth')=='true') {
+      validate()
+      n('/admin')
+    }else if(Cookies.get('role') !== "ADMIN" && Cookies.get('auth')=='true'){
+      validate()
+      n('/user')
+    }else{
+      n('/')
+    }
   }, []);
 
   const n = useNavigate();
