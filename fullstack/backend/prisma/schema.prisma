@@ -24,6 +24,7 @@ model User {
   updated_at DateTime
   is_active Boolean
   password String
+  designation  Designation @default(SOFTWARE_ENGINEER)
   certification UserCertification[]
   skills  UserSkill[]  
   role     Role    @relation(fields: [role_id], references: [id])
@@ -84,11 +85,19 @@ model Role {
 }
 enum Department {
   ADMIN
-  FULLSTACK
-  DATAANALYTICS
-  DATAENGINEERING
+  FULL_STACK
+  DATA_ANALYTICS
+  DATA_ENGINEERING
   DEVOPS
   OTHER
+}
+enum Designation {
+  ADMIN
+  SOFTWARE_ENGINEER
+  SENIOR_SOFTWARE_ENGINEER
+  SOLUTION_ENABLER
+  SOLUTION_CONSULTANT
+  PRINCIPAL_ARCHITECT
 }
 enum competency {
   BEGINNER
