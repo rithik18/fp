@@ -12,4 +12,31 @@ router.post('/',(req,res)=>{
       });
       return res.json({token,'auth':'true',data:req.data})//return jwt token
 })
+
+router.post('/view_user')
+router.post('/add_user')
+router.post('/edit_user')
+router.post('/delete_user')
+
+router.post('/view_skill')
+router.post('/add_skill')
+router.post('/edit_skill')
+router.post('/delete_skill')
+
+router.post('/view_role')
+router.post('/add_role')
+router.post('/edit_role')
+router.post('/delete_role')
+
+router.post('/view_certification')
+router.post('/add_certification')
+router.post('/edit_certification')
+router.post('/delete_certification')
+
+router.post('/view_role_skill')
+router.post('/add_role_skill')
+router.post('/edit_role_skill')
+router.post('/delete_role_skill')
+
+
 module.exports = router;
