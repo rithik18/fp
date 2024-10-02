@@ -26,9 +26,19 @@ const update_skill = async (req, res) => {
     res.status(403).send({ msg: e });
   }
 };
-
+const delete_skill = async (req, res) => {
+    console.log(req.body.data);
+    try {
+      const resp = await prisma.skill.delete({ where: { id: req.body.id }});
+      res.send({ msg: "Skill Deleted" });
+    } catch (e) {
+      console.log(e);
+      res.status(403).send({ msg: e });
+    }
+  };
 module.exports = {
   view_skill,
   add_skill,
   update_skill,
+  delete_skill
 };

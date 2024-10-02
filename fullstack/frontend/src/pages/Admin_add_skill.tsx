@@ -13,6 +13,18 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog"
+
 import { Textarea } from "@/components/ui/textarea";
 import { Input } from "../components/ui/input";
 import { Label } from "../components/ui/label";
@@ -28,6 +40,13 @@ const Admin_add_skill = () => {
   const [editskillname, seteditskillname] = useState("");
   const [editskillmsg, seteditskillmsg] = useState("");
   const [editskillsno, seteditskillsno] = useState(-1);
+  const [deleteskillsno, setdeleteskillsno] = useState(-1);
+
+  const[a,seta]=useState([])
+  const[b,setb]=useState([])
+  const[c,setc]=useState(10)
+  const[p,setp]=useState(1)
+  const[pc,setpc]=useState(1)
   const handleAddSkill = async () => {
     const token = await Cookies.get("token");
     const skillInput = document.getElementById("skill") as HTMLInputElement;
@@ -37,7 +56,6 @@ const Admin_add_skill = () => {
     var data = {
       name: skill,
       desc: desc,
-      is_active: true,
       created_at: new Date().toISOString(),
       updated_at: new Date().toISOString(),
     };
@@ -101,6 +119,33 @@ else{
     
   }
 }
+const handleDeleteSkill=async()=>{
+  const token = await Cookies.get("token");
+    const reqOptions = {
+      url: "http://localhost:3000/admin/delete_skill",
+      method: "POST",
+      data: { token: token,id:skillData[deleteskillsno].id},
+    };
+    console.log(reqOptions);
+
+    try {
+      const response = await axios.request(reqOptions);
+      if (response.status == 200) {
+        toast.success("Skill Deleted");
+        getAllSkill()
+      }
+    } catch (e) {
+      if (e!.status == 403) {
+        console.log(e)
+        toast.error("Skill exsist");
+      }
+else{
+  toast.error(`${e}`);
+}
+    
+}
+
+}
   const getAllSkill = async () => {
     const token = await Cookies.get("token");
     const reqOptions = {
@@ -115,11 +160,36 @@ else{
       if (response.status == 200) {
         console.log(response.data.data);
         setskillData(response.data.data);
+        seta(response.data.data)
+        setb(response.data.data.slice(0,c))
+        setpc(Math.ceil(response.data.data.length/c))
+        // console.log(response.data.data.length,response.data.data.length/c,c,p,pc,"hell")
       }
     } catch (e) {
       toast.error(e as String);
     }
   };
+  useEffect(() => {
+    const ini= async() => {
+      console.log("first")
+      console.log((p-1)*c,(p-1)*c+c)
+      setb(a.slice((p-1)*c,(p-1)*c+c))
+      
+      
+    }
+    ini()
+  }, [p])
+  useEffect(() => {
+  
+    const ini = async () => {
+      
+      setb(a.slice(0,c))
+      setpc(a.length/c)
+      setp(1)
+  
+    }
+    ini()
+  }, [c])
   useEffect(() => {
     validate();
     getAllSkill();
@@ -146,6 +216,7 @@ else{
       <Navbar />
       <H1 className="text-center pb-8 mx-auto">Skills Section</H1>
       <div className="grid grid-cols-3 gap-4 mx-auto px-4">
+      
         {editskill ? (
           <div className="grid w-full max-w-sm items-center gap-4 p-4">
             <H2>Add Skills</H2>
@@ -201,7 +272,7 @@ else{
               </TableRow>
             </TableHeader>
             <TableBody>
-              {skillData.map((e: any, sno) => {
+              {b.map((e: any, sno) => {
                 return (
                   <TableRow key={e.id}>
                     <TableCell className="font-medium">{sno + 1}</TableCell>
@@ -222,13 +293,36 @@ else{
                       />
                     </TableCell>
                     <TableCell>
-                      <Trash2 size={20} className="text-red-600" />
+                      
+                      <AlertDialog>
+  <AlertDialogTrigger><Trash2 size={20} className="text-red-600" /></AlertDialogTrigger>
+  <AlertDialogContent>
+    <AlertDialogHeader>
+      <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+      <AlertDialogDescription>
+        This action cannot be undone. This will permanently delete skill.
+      </AlertDialogDescription>
+    </AlertDialogHeader>
+    <AlertDialogFooter>
+      <AlertDialogCancel>Cancel</AlertDialogCancel>
+      <AlertDialogAction onClick={()=>{setdeleteskillsno(sno);console.log(sno);handleDeleteSkill()}}>Continue</AlertDialogAction>
+    </AlertDialogFooter>
+  </AlertDialogContent>
+</AlertDialog>
+
                     </TableCell>
                   </TableRow>
                 );
               })}
             </TableBody>
           </Table>
+          {p}/{pc}
+          <div>
+          
+        <button onClick={()=>{console.log(p);if(p-1>0)setp(p-1)}}>Previous</button>
+        {p}
+        <button onClick={()=>{if(p+1<=pc)setp(p+1)}}>Next</button>
+      </div>
         </div>
       </div>
       {/* <Datatable/> */}
