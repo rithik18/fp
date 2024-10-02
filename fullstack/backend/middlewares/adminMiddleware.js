@@ -9,8 +9,8 @@ const adminMiddleware = async (req, res, next) => {
     var decoded =await new Promise((resolve, reject) => {
       jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
         if (err) {
-          reject(err);
-        } else {
+          return res.status(401).send('Unauthorized: Invalid token');
+      } else {
           resolve(decoded)  
         }
       });

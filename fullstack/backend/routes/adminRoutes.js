@@ -3,6 +3,7 @@ const router = express.Router();
 const  jwt = require('jsonwebtoken');
 
 const userController=require('../controllers/userController')
+const skillController=require('../controllers/skillController')
 
 router.post('/',(req,res)=>{
     if(req.token){
@@ -20,9 +21,9 @@ router.post('/add_user',userController.add_user)
 // router.post('/edit_user')
 // router.post('/delete_user')
 
-// router.post('/view_skill')
-// router.post('/add_skill')
-// router.post('/edit_skill')
+router.post('/view_skill',skillController.view_skill)
+router.post('/add_skill',skillController.add_skill)
+router.post('/edit_skill',skillController.update_skill)
 // router.post('/delete_skill')
 
 // router.post('/view_role')

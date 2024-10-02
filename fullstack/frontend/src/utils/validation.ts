@@ -22,14 +22,21 @@ export const validate = async () => {
       }
 
       const response = await axios.request(reqOptions);
-      if (response.status == 403) {
+      if (response.status != 200) {
         console.log("first1")
-        Cookies.set("auth", "false");
+        Cookies.remove('auth')
+        Cookies.remove('role')
+        Cookies.remove('token')
+        Cookies.remove('data')
       } else {
         console.log("first",response.data)
         Cookies.set("auth", response.data.auth);
       }
     } catch (e) {
+        Cookies.remove('auth')
+        Cookies.remove('role')
+        Cookies.remove('token')
+        Cookies.remove('data')
 console.log(e)
     }
   };

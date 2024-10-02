@@ -8,7 +8,7 @@ const userMiddleware = async (req, res, next) => {
     var decoded =await new Promise((resolve, reject) => {
       jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
         if (err) {
-          reject(err);
+          return res.status(401).send('Unauthorized: Invalid token');
         } else {
           resolve(decoded)  
         }
