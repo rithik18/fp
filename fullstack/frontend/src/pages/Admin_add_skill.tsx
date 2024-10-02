@@ -23,7 +23,7 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
   AlertDialogTrigger,
-} from "@/components/ui/alert-dialog"
+} from "@/components/ui/alert-dialog";
 
 import { Textarea } from "@/components/ui/textarea";
 import { Input } from "../components/ui/input";
@@ -42,11 +42,13 @@ const Admin_add_skill = () => {
   const [editskillsno, seteditskillsno] = useState(-1);
   const [deleteskillsno, setdeleteskillsno] = useState(-1);
 
-  const[a,seta]=useState([])
-  const[b,setb]=useState([])
-  const[c,setc]=useState(10)
-  const[p,setp]=useState(1)
-  const[pc,setpc]=useState(1)
+  const [a, seta] = useState([]);
+  const [b, setb] = useState([]);
+  const [c, setc] = useState(10);
+  const [p, setp] = useState(1);
+  const [pc, setpc] = useState(1);
+  const [d, setd] = useState(1);
+
   const handleAddSkill = async () => {
     const token = await Cookies.get("token");
     const skillInput = document.getElementById("skill") as HTMLInputElement;
@@ -70,18 +72,17 @@ const Admin_add_skill = () => {
       const response = await axios.request(reqOptions);
       if (response.status == 200) {
         toast.success("Skill added");
-        getAllSkill()
+        getAllSkill();
       }
     } catch (e) {
       if (e!.status == 403) {
         toast.error("Skill exsist");
+      } else {
+        toast.error(`${e}`);
       }
-else{
-  toast.error(`${e}`);
-}
     }
   };
-  const handleUpdateSkill=async()=>{
+  const handleUpdateSkill = async () => {
     const token = await Cookies.get("token");
     var data = {
       name: editskillname,
@@ -91,7 +92,7 @@ else{
     const reqOptions = {
       url: "http://localhost:3000/admin/edit_skill",
       method: "POST",
-      data: { token: token, data: data,id:skillData[editskillsno].id},
+      data: { token: token, data: data, id: skillData[editskillsno].id },
     };
     console.log(reqOptions);
 
@@ -99,32 +100,34 @@ else{
       const response = await axios.request(reqOptions);
       if (response.status == 200) {
         toast.success("Skill Edited");
-        getAllSkill()
-        seteditskillname("")
-        seteditskillmsg("")
-        const skillInput = document.getElementById("editskill") as HTMLInputElement;
-        skillInput.value="";
-        const descInput = document.getElementById("editmessage") as HTMLInputElement;
-        descInput.value="";
+        getAllSkill();
+        seteditskillname("");
+        seteditskillmsg("");
+        const skillInput = document.getElementById(
+          "editskill"
+        ) as HTMLInputElement;
+        skillInput.value = "";
+        const descInput = document.getElementById(
+          "editmessage"
+        ) as HTMLInputElement;
+        descInput.value = "";
         seteditskill(!editskill);
       }
     } catch (e) {
       if (e!.status == 403) {
-        console.log(e)
+        console.log(e);
         toast.error("Skill exsist");
+      } else {
+        toast.error(`${e}`);
       }
-else{
-  toast.error(`${e}`);
-}
-    
-  }
-}
-const handleDeleteSkill=async()=>{
-  const token = await Cookies.get("token");
+    }
+  };
+  const handleDeleteSkill = async () => {
+    const token = await Cookies.get("token");
     const reqOptions = {
       url: "http://localhost:3000/admin/delete_skill",
       method: "POST",
-      data: { token: token,id:skillData[deleteskillsno].id},
+      data: { token: token, id: skillData[deleteskillsno].id },
     };
     console.log(reqOptions);
 
@@ -132,20 +135,17 @@ const handleDeleteSkill=async()=>{
       const response = await axios.request(reqOptions);
       if (response.status == 200) {
         toast.success("Skill Deleted");
-        getAllSkill()
+        getAllSkill();
       }
     } catch (e) {
       if (e!.status == 403) {
-        console.log(e)
+        console.log(e);
         toast.error("Skill exsist");
+      } else {
+        toast.error(`${e}`);
       }
-else{
-  toast.error(`${e}`);
-}
-    
-}
-
-}
+    }
+  };
   const getAllSkill = async () => {
     const token = await Cookies.get("token");
     const reqOptions = {
@@ -160,9 +160,10 @@ else{
       if (response.status == 200) {
         console.log(response.data.data);
         setskillData(response.data.data);
-        seta(response.data.data)
-        setb(response.data.data.slice(0,c))
-        setpc(Math.ceil(response.data.data.length/c))
+        seta(response.data.data);
+        setb(response.data.data.slice(0, c));
+        setpc(Math.ceil(response.data.data.length / c));
+        setd(response.data.data.length)
         // console.log(response.data.data.length,response.data.data.length/c,c,p,pc,"hell")
       }
     } catch (e) {
@@ -170,26 +171,21 @@ else{
     }
   };
   useEffect(() => {
-    const ini= async() => {
-      console.log("first")
-      console.log((p-1)*c,(p-1)*c+c)
-      setb(a.slice((p-1)*c,(p-1)*c+c))
-      
-      
-    }
-    ini()
-  }, [p])
-  useEffect(() => {
-  
     const ini = async () => {
-      
-      setb(a.slice(0,c))
-      setpc(a.length/c)
-      setp(1)
-  
-    }
-    ini()
-  }, [c])
+      console.log("first");
+      console.log((p - 1) * c, (p - 1) * c + c);
+      setb(a.slice((p - 1) * c, (p - 1) * c + c));
+    };
+    ini();
+  }, [p]);
+  useEffect(() => {
+    const ini = async () => {
+      setb(a.slice(0, c));
+      setpc(a.length / c);
+      setp(1);
+    };
+    ini();
+  }, [c]);
   useEffect(() => {
     validate();
     getAllSkill();
@@ -216,7 +212,6 @@ else{
       <Navbar />
       <H1 className="text-center pb-8 mx-auto">Skills Section</H1>
       <div className="grid grid-cols-3 gap-4 mx-auto px-4">
-      
         {editskill ? (
           <div className="grid w-full max-w-sm items-center gap-4 p-4">
             <H2>Add Skills</H2>
@@ -237,27 +232,45 @@ else{
                 size={20}
                 onClick={() => {
                   // toast.warning("hell")
-                  seteditskillname("")
-                  seteditskillmsg("")
-                  const skillInput = document.getElementById("editskill") as HTMLInputElement;
-                  skillInput.value="";
-                  const descInput = document.getElementById("editmessage") as HTMLInputElement;
-                  descInput.value="";
+                  seteditskillname("");
+                  seteditskillmsg("");
+                  const skillInput = document.getElementById(
+                    "editskill"
+                  ) as HTMLInputElement;
+                  skillInput.value = "";
+                  const descInput = document.getElementById(
+                    "editmessage"
+                  ) as HTMLInputElement;
+                  descInput.value = "";
                   seteditskill(!editskill);
                 }}
               />
             </div>
             <Label htmlFor="editskill">Skill Name</Label>
-            <Input type="editskill" id="editskill" placeholder="edit Skill Name" value={editskillname} onChange={(e:any)=>{seteditskillname(e.target.value)}} />
+            <Input
+              type="editskill"
+              id="editskill"
+              placeholder="edit Skill Name"
+              value={editskillname}
+              onChange={(e: any) => {
+                seteditskillname(e.target.value);
+              }}
+            />
 
             <Label htmlFor="editmessage">Skill Description</Label>
-            <Textarea placeholder="Type your description here." id="editmessage" value={editskillmsg}  onChange={(e:any)=>{seteditskillmsg(e.target.value)}}/>
+            <Textarea
+              placeholder="Type your description here."
+              id="editmessage"
+              value={editskillmsg}
+              onChange={(e: any) => {
+                seteditskillmsg(e.target.value);
+              }}
+            />
             <Button variant={"default"} onClick={handleUpdateSkill}>
               Update
             </Button>
           </div>
-        )
-      }
+        )}
 
         <div className="col-span-2">
           <Table>
@@ -283,33 +296,44 @@ else{
                       <PencilLine
                         size={20}
                         onClick={() => {
-                          if(editskill){
-                            seteditskill(false)
+                          if (editskill) {
+                            seteditskill(false);
                           }
-                          seteditskillname(skillData[sno].name)
-                          seteditskillmsg(skillData[sno].desc)
-                          seteditskillsno(sno)
+                          seteditskillname(skillData[sno].name);
+                          seteditskillmsg(skillData[sno].desc);
+                          seteditskillsno(sno);
                         }}
                       />
                     </TableCell>
                     <TableCell>
-                      
                       <AlertDialog>
-  <AlertDialogTrigger><Trash2 size={20} className="text-red-600" /></AlertDialogTrigger>
-  <AlertDialogContent>
-    <AlertDialogHeader>
-      <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
-      <AlertDialogDescription>
-        This action cannot be undone. This will permanently delete skill.
-      </AlertDialogDescription>
-    </AlertDialogHeader>
-    <AlertDialogFooter>
-      <AlertDialogCancel>Cancel</AlertDialogCancel>
-      <AlertDialogAction onClick={()=>{setdeleteskillsno(sno);console.log(sno);handleDeleteSkill()}}>Continue</AlertDialogAction>
-    </AlertDialogFooter>
-  </AlertDialogContent>
-</AlertDialog>
-
+                        <AlertDialogTrigger>
+                          <Trash2 size={20} className="text-red-600" />
+                        </AlertDialogTrigger>
+                        <AlertDialogContent>
+                          <AlertDialogHeader>
+                            <AlertDialogTitle>
+                              Are you absolutely sure?
+                            </AlertDialogTitle>
+                            <AlertDialogDescription>
+                              This action cannot be undone. This will
+                              permanently delete skill.
+                            </AlertDialogDescription>
+                          </AlertDialogHeader>
+                          <AlertDialogFooter>
+                            <AlertDialogCancel>Cancel</AlertDialogCancel>
+                            <AlertDialogAction
+                              onClick={() => {
+                                setdeleteskillsno(sno);
+                                console.log(sno);
+                                handleDeleteSkill();
+                              }}
+                            >
+                              Continue
+                            </AlertDialogAction>
+                          </AlertDialogFooter>
+                        </AlertDialogContent>
+                      </AlertDialog>
                     </TableCell>
                   </TableRow>
                 );
@@ -317,12 +341,26 @@ else{
             </TableBody>
           </Table>
           {p}/{pc}
+          <br />
+          {d}-total
           <div>
-          
-        <button onClick={()=>{console.log(p);if(p-1>0)setp(p-1)}}>Previous</button>
-        {p}
-        <button onClick={()=>{if(p+1<=pc)setp(p+1)}}>Next</button>
-      </div>
+            <button
+              onClick={() => {
+                console.log(p);
+                if (p - 1 > 0) setp(p - 1);
+              }}
+            >
+              Previous
+            </button>
+            {p}
+            <button
+              onClick={() => {
+                if (p + 1 <= pc) setp(p + 1);
+              }}
+            >
+              Next
+            </button>
+          </div>
         </div>
       </div>
       {/* <Datatable/> */}
