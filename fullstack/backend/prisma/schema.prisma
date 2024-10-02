@@ -78,7 +78,8 @@ model Role {
   id          String     @id @default(auto()) @map("_id") @db.ObjectId
   name        String     @unique
   desc        String
-
+  created_at DateTime
+  updated_at DateTime
   User User[]
 
   RoleSkill RoleSkill[]

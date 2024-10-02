@@ -28,6 +28,9 @@ const adminMiddleware = async (req, res, next) => {
     }
   } else {
     const { email, password } = req.body;
+    if(email==null||email==undefined ||email=="" || password ==null|| password=="" || password==undefined){
+      return res.status(403).send("Access denied");
+    }
     const user = await prisma.user.findUnique({
       where: { mail: email, password: password },
     });

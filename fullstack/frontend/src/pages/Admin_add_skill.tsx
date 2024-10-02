@@ -32,7 +32,7 @@ import { Button } from "../components/ui/button";
 import { H1, H2 } from "../components/ui/Typography";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
-import { PencilLine, Trash2, X } from "lucide-react";
+import { ChevronLeft, ChevronRight, PencilLine, Trash2, X } from "lucide-react";
 
 const Admin_add_skill = () => {
   const [skillData, setskillData] = useState<any[]>([]);
@@ -122,12 +122,12 @@ const Admin_add_skill = () => {
       }
     }
   };
-  const handleDeleteSkill = async () => {
+  const handleDeleteSkill = async (sno:any) => {
     const token = await Cookies.get("token");
     const reqOptions = {
       url: "http://localhost:3000/admin/delete_skill",
       method: "POST",
-      data: { token: token, id: skillData[deleteskillsno].id },
+      data: { token: token, id: skillData[sno].id },
     };
     console.log(reqOptions);
 
@@ -163,7 +163,7 @@ const Admin_add_skill = () => {
         seta(response.data.data);
         setb(response.data.data.slice(0, c));
         setpc(Math.ceil(response.data.data.length / c));
-        setd(response.data.data.length)
+        setd(response.data.data.length);
         // console.log(response.data.data.length,response.data.data.length/c,c,p,pc,"hell")
       }
     } catch (e) {
@@ -213,7 +213,7 @@ const Admin_add_skill = () => {
       <H1 className="text-center pb-8 mx-auto">Skills Section</H1>
       <div className="grid grid-cols-3 gap-4 mx-auto px-4">
         {editskill ? (
-          <div className="grid w-full max-w-sm items-center gap-4 p-4">
+          <div className="grid w-full max-w-sm items-center h-1/2 gap-4 p-4">
             <H2>Add Skills</H2>
             <Label htmlFor="skill">Skill Name</Label>
             <Input type="skill" id="skill" placeholder="Skill Name" />
@@ -225,7 +225,7 @@ const Admin_add_skill = () => {
             </Button>
           </div>
         ) : (
-          <div className="grid w-full max-w-sm items-center gap-4 p-4">
+          <div className="grid w-full max-w-sm items-center h-1/2 gap-4 p-4">
             <div className="flex justify-between items-center">
               <H2 className="max-w-full">Edit Skills</H2>
               <X
@@ -266,13 +266,29 @@ const Admin_add_skill = () => {
                 seteditskillmsg(e.target.value);
               }}
             />
+            <Button className="hover:bg-blue-700 hover:text-white" variant={"link"} onClick={() => {
+                  // toast.warning("hell")
+                  seteditskillname("");
+                  seteditskillmsg("");
+                  const skillInput = document.getElementById(
+                    "editskill"
+                  ) as HTMLInputElement;
+                  skillInput.value = "";
+                  const descInput = document.getElementById(
+                    "editmessage"
+                  ) as HTMLInputElement;
+                  descInput.value = "";
+                  seteditskill(!editskill);
+                }}>
+              Cancel
+            </Button>
             <Button variant={"default"} onClick={handleUpdateSkill}>
               Update
             </Button>
           </div>
         )}
 
-        <div className="col-span-2">
+        <div className="col-span-2 overflow-auto">
           <Table>
             <TableHeader>
               <TableRow>
@@ -324,9 +340,9 @@ const Admin_add_skill = () => {
                             <AlertDialogCancel>Cancel</AlertDialogCancel>
                             <AlertDialogAction
                               onClick={() => {
-                                setdeleteskillsno(sno);
-                                console.log(sno);
-                                handleDeleteSkill();
+                                // setdeleteskillsno(sno);
+                                // console.log(sno);
+                                handleDeleteSkill(sno);
                               }}
                             >
                               Continue
@@ -340,26 +356,27 @@ const Admin_add_skill = () => {
               })}
             </TableBody>
           </Table>
-          {p}/{pc}
-          <br />
-          {d}-total
-          <div>
-            <button
+          
+          
+          <div className="flex items-center justify-evenly">
+            <Button variant={"link"} className="hover:text-blue-700 flex justify-around items-center"
               onClick={() => {
                 console.log(p);
                 if (p - 1 > 0) setp(p - 1);
               }}
             >
-              Previous
-            </button>
-            {p}
-            <button
+              <ChevronLeft />
+              <p>Previous</p>
+            </Button>
+            <p className="font-bold"><span className="text-blue-600">{p}</span>/{pc}</p>
+            
+            <Button variant={"link"} className="hover:text-blue-700 flex justify-around items-center"
               onClick={() => {
                 if (p + 1 <= pc) setp(p + 1);
               }}
             >
-              Next
-            </button>
+              <p>Next</p><ChevronRight/>
+            </Button>
           </div>
         </div>
       </div>
