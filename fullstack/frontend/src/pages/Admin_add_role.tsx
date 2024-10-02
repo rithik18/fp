@@ -29,7 +29,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Input } from "../components/ui/input";
 import { Label } from "../components/ui/label";
 import { Button } from "../components/ui/button";
-import { H1, H2 } from "../components/ui/Typography";
+import { H2 } from "../components/ui/Typography";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import { ChevronLeft, ChevronRight, PencilLine, Trash2, BriefcaseBusiness, X } from "lucide-react";
@@ -212,7 +212,7 @@ const Admin_add_role = () => {
     <div>
       <ToastContainer />
       <Navbar />
-      <H1 className="text-center pb-8 mx-auto">Roles Section</H1>
+      <p className="text-center scroll-m-20 text-3xl font-extrabold tracking-tight lg:text-4xl pb-8 mx-auto">Roles Section</p>
       <div className="grid grid-cols-3 gap-4 mx-auto px-4">
         {editrole ? (
           <div className="grid w-full max-w-sm items-center h-1/2 gap-4 p-4">

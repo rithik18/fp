@@ -5,6 +5,7 @@ import Admin from "./pages/Admin";
 import Admin_add_user from "./pages/Admin_add_user";
 import Admin_add_role from "./pages/Admin_add_role";
 import Admin_add_skill from "./pages/Admin_add_skill";
+import Admin_add_role_skill from "./pages/Admin_add_role_skill";
 function App() {
 
 
@@ -17,6 +18,7 @@ function App() {
       <Route path="/add_user" element={<Admin_add_user/>}></Route>
       <Route path="/add_role" element={<Admin_add_role/>}></Route>
       <Route path="/add_skill" element={<Admin_add_skill/>}></Route>
+      <Route path="/add_role_skill" element={<Admin_add_role_skill/>}></Route>
     </Routes>
     </BrowserRouter>
   )

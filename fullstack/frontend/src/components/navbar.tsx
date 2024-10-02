@@ -103,7 +103,7 @@ const navbar = () => {
                   <DropdownMenuLabel>Roles Details</DropdownMenuLabel>
                   <DropdownMenuSeparator />
                   <DropdownMenuItem><Link to='/add_role'>Add Role</Link></DropdownMenuItem>
-                  <DropdownMenuItem>Assign Skills for Roles</DropdownMenuItem>
+                  <DropdownMenuItem><Link to='/add_role_skill'>Assign Skills for Roles</Link></DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>
             </li>

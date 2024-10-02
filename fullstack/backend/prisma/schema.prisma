@@ -22,9 +22,8 @@ model User {
   mail String @unique
   created_at DateTime
   updated_at DateTime
-  is_active Boolean
   password String
-  // designation  Designation @default(SOFTWARE_ENGINEER)
+  // @@unique([role_id, department,mail,is_active])
   certification UserCertification[]
   skills  UserSkill[]  
   role     Role    @relation(fields: [role_id], references: [id])
