@@ -32,7 +32,7 @@ import { Button } from "../components/ui/button";
 import { H1, H2 } from "../components/ui/Typography";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
-import { ChevronLeft, ChevronRight, PencilLine, Trash2, X } from "lucide-react";
+import { ChevronLeft, ChevronRight, PencilLine, Trash2, BriefcaseBusiness, X } from "lucide-react";
 
 const Admin_add_role = () => {
   const [roleData, setroleData] = useState<any[]>([]);
@@ -291,6 +291,7 @@ const Admin_add_role = () => {
         )}
 
         <div className="col-span-2 overflow-auto">
+        <p className="flex justify-self-start  text-lg font-bold">{d} Results &nbsp;&nbsp;&nbsp; <BriefcaseBusiness /></p>
           <Table>
             <TableHeader>
               <TableRow>

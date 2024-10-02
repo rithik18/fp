@@ -32,7 +32,7 @@ import { Button } from "../components/ui/button";
 import { H1, H2 } from "../components/ui/Typography";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
-import { ChevronLeft, ChevronRight, PencilLine, Trash2, X } from "lucide-react";
+import { ChevronLeft, ChevronRight, PencilLine, Trash2, UserCog, X } from "lucide-react";
 
 const Admin_add_skill = () => {
   const [skillData, setskillData] = useState<any[]>([]);
@@ -289,6 +289,7 @@ const Admin_add_skill = () => {
         )}
 
         <div className="col-span-2 overflow-auto">
+          <p className="flex justify-self-start  text-lg font-bold">{d} Results &nbsp;&nbsp;&nbsp; <UserCog /></p>
           <Table>
             <TableHeader>
               <TableRow>
