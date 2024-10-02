@@ -54,6 +54,7 @@ model Skill {
   created_at DateTime
   updated_at DateTime
   is_active Boolean
+  desc String
   User UserSkill[] 
 
   RoleSkill RoleSkill[]

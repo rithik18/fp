@@ -20,7 +20,7 @@ const userMiddleware = async (req, res, next) => {
     if (!decoded) {
       return res.status(404).send("User not found");
     }
-    if (decoded && decoded.department !== "ADMIN") {
+    if (decoded && decoded.department?.toUpperCase() !== "ADMIN") {
       req.data = decoded;
       req.token=token
       return next();

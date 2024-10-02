@@ -23,10 +23,10 @@ const Admin_add_skill = () => {
   useEffect(() => {
     validate();
     console.log(Cookies.get("role"));
-    if (Cookies.get("role") === "ADMIN" && Cookies.get("auth") == "true") {
+    if (Cookies.get("role")?.toUpperCase() === "ADMIN" && Cookies.get("auth") == "true") {
       n("/add_skill");
     } else if (
-      Cookies.get("role") !== "ADMIN" &&
+      Cookies.get("role")?.toUpperCase() !== "ADMIN" &&
       Cookies.get("auth") == "true"
     ) {
       n("/user");

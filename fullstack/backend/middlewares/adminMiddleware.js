@@ -21,7 +21,7 @@ const adminMiddleware = async (req, res, next) => {
     if (!decoded) {
       return res.status(404).send("User not found");
     }
-    if (decoded && decoded.department === "ADMIN") {
+    if (decoded && decoded.department?.toUpperCase() === "ADMIN") {
       req.data = decoded;
       req.token=token
       return next();
@@ -35,7 +35,7 @@ const adminMiddleware = async (req, res, next) => {
     if (!user) {
       return res.status(404).send("User not found");
     }
-    if (user && user.department === "ADMIN") {
+    if (user && user.department?.toUpperCase() === "ADMIN") {
       req.data = user;
       return next();
     }

@@ -6,10 +6,10 @@ import Cookies from "js-cookie";
 const User = () => {
   useEffect(() => {
     validate()
-    console.log(Cookies.get('role') )
-    if (Cookies.get('role') === "ADMIN" && Cookies.get('auth')=='true') {
+    console.log(Cookies.get('role'),"hell")
+    if (Cookies.get('role')?.toUpperCase() === "ADMIN" && Cookies.get('auth')=='true') {
      n('/admin')
-   }else if(Cookies.get('role') !== "ADMIN" && Cookies.get('auth')=='true'){
+   }else if(Cookies.get('role')?.toUpperCase() !== "ADMIN" && Cookies.get('auth')=='true'){
      n('/user')
    }else{
      n('/')

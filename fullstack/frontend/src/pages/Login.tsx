@@ -8,10 +8,10 @@ import { validate } from '../utils/validation';
 const Login = () => {
   useEffect(() => {
     console.log(Cookies.get('role'),"cookei role")
-    if (Cookies.get('role') === "ADMIN" && Cookies.get('auth')=='true') {
+    if (Cookies.get('role')?.toUpperCase() === "ADMIN" && Cookies.get('auth')=='true') {
       validate()
       n('/admin')
-    }else if(Cookies.get('role') !== "ADMIN" && Cookies.get('auth')=='true'){
+    }else if(Cookies.get('role')?.toUpperCase() !== "ADMIN" && Cookies.get('auth')=='true'){
       validate()
       n('/user')
     }else{
@@ -39,7 +39,7 @@ const Login = () => {
         // alert(e)
         let reqOptions;
         Cookies.set("role", e.data.department);
-        if (e.data.department === "ADMIN") {
+        if (e.data.department?.toUpperCase() === "ADMIN") {
           reqOptions = {
             url: "http://localhost:3000/admin",
             method: "POST",
@@ -60,7 +60,7 @@ const Login = () => {
       Cookies.set("auth", "true");
       console.log("loggedin")
       toast.success(`Welcome ${response.data.data.name}`);
-      if (Cookies.get("role") === "ADMIN") {
+      if (Cookies.get("role")?.toUpperCase() === "ADMIN") {
         console.log("admin")
         n("/admin");
       } else {

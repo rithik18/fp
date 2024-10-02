@@ -5,8 +5,9 @@ export const validate = async () => {
       const token = await Cookies.get("token");
       const role = await Cookies.get("role");
       var reqOptions = {};
+      console.log(role)
 
-      if (role === "ADMIN") {
+      if (role?.toUpperCase()?.toUpperCase() === "ADMIN" ) {
         reqOptions = {
           url: "http://localhost:3000/admin",
           method: "POST",
@@ -22,8 +23,10 @@ export const validate = async () => {
 
       const response = await axios.request(reqOptions);
       if (response.status == 403) {
+        console.log("first1")
         Cookies.set("auth", "false");
       } else {
+        console.log("first",response.data)
         Cookies.set("auth", response.data.auth);
       }
     } catch (e) {

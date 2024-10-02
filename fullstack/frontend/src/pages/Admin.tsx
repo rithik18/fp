@@ -7,9 +7,9 @@ const Admin = () => {
   useEffect(() => {
     validate()
     console.log(Cookies.get('role') )
-    if (Cookies.get('role') === "ADMIN" && Cookies.get('auth')=='true') {
+    if (Cookies.get('role')?.toUpperCase() === "ADMIN" && Cookies.get('auth')=='true') {
      n('/admin')
-   }else if(Cookies.get('role') !== "ADMIN" && Cookies.get('auth')=='true'){
+   }else if(Cookies.get('role')?.toUpperCase() !== "ADMIN" && Cookies.get('auth')=='true'){
      n('/user')
    }else{
      n('/')
