@@ -3,7 +3,6 @@ import { validate } from "../utils/validation";
 import { useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
 import Navbar from "../components/navbar";
-import Datatable from "../components/datatable";
 import {
   Table,
   TableBody,
