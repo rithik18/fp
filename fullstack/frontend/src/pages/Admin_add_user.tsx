@@ -86,13 +86,35 @@ const Admin_add_user = () => {
       n("/");
     }
   }, []);
-
   const n = useNavigate();
   const [department, setDepartment] = useState("OTHER");
+  const [department1, setDepartment1] = useState("OTHER");
   const [role, setrole] = useState("None");
+  const [role1, setrole1] = useState("None");
   const [fileName, setFileName] = useState("");
   const [latestFile, setLatestFile] = useState(null);
   const fileInputRef = useRef(null);
+  
+  useEffect(() => {
+
+
+const val=roleData.find((e: any) => e.id === role1)?.name
+// console.log(d)
+if(val==undefined||val=="None"||val==""||val==null){
+setsearchuserData(userData)
+}else{
+  const d=userData.filter((e:any)=>{
+    return e.department===department1
+  }).filter((e:any)=>{
+    return e.role_id===role1
+  })
+  setsearchuserData(d)
+}
+
+console.log("hellusesetae")
+
+    
+  }, [department1,role1]);
 
   const handleFileChange = (event: any) => {
     const file = event.target.files[0];
@@ -473,21 +495,89 @@ const Admin_add_user = () => {
         <div className="px-4 col-span-2">
           {latestFile == null ? (
             <div>
+              <div className="grid grid-cols-3 gap-4">
+
               <Input
                 type="text"
                 placeholder={"Search User"}
-                className="w-1/3 p-4 mb-8 rounded-full"
+                className="p-4 mb-8 rounded-full"
                 onChange={(e) => {
                   console.log(e.target.value);
-                  var d :any = userData.filter((item:any) =>
-                    item.name.toLowerCase().includes(
-                      e.target.value.toLowerCase()
-                    )
-                  );
-                  setsearchuserData(d)
-                 
-                }}
+                  if(e.target.value.toLowerCase()==""){
+                    setsearchuserData(userData)
+                  }
+                  else{
+                    var d :any = searchuserData.filter((item:any) =>
+                      item.name.toLowerCase().includes(
+                        e.target.value.toLowerCase()
+                      )
+                    );
+                    setsearchuserData(d)
+                  }
+}}
               />
+              <DropdownMenu>
+                    <DropdownMenuTrigger asChild className="w-full rounded-full">
+                      <Button variant="outline">
+                        {roleData.length != 0 && role1 != "None"
+                          ? roleData.filter((e: any) => e.id === role1)[0]?.name
+                          : role1}
+                        <ChevronDown />
+                      </Button>
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent className="w-56">
+                      <DropdownMenuRadioGroup
+                        value={role1}
+                        onValueChange={setrole1}
+                      >
+                        <DropdownMenuRadioItem value="None">
+                          None
+                        </DropdownMenuRadioItem>
+                        {roleData.length != 0 &&
+                          roleData.map((e: any) => {
+                            // console.log(role1,"jjjj")
+                            return (
+                              <DropdownMenuRadioItem value={e.id}>
+                                {e.name}
+                              </DropdownMenuRadioItem>
+                            );
+                          })}
+                      </DropdownMenuRadioGroup>
+                    </DropdownMenuContent>
+              </DropdownMenu>
+              <DropdownMenu>
+                    <DropdownMenuTrigger asChild className="w-full rounded-full">
+                      <Button variant="outline">
+                        {department1} <ChevronDown />
+                      </Button>
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent>
+                      <DropdownMenuRadioGroup
+                        value={department1}
+                        onValueChange={setDepartment1}
+                      >
+                        <DropdownMenuRadioItem value="ADMIN">
+                          ADMIN
+                        </DropdownMenuRadioItem>
+                        <DropdownMenuRadioItem value="FULL_STACK">
+                          FULL_STACK
+                        </DropdownMenuRadioItem>
+                        <DropdownMenuRadioItem value="DATA_ANALYTICS">
+                          DATA_ANALYTICS
+                        </DropdownMenuRadioItem>
+                        <DropdownMenuRadioItem value="DATA_ENGINEERING">
+                          DATA_ENGINEERING
+                        </DropdownMenuRadioItem>
+                        <DropdownMenuRadioItem value="DEVOPS">
+                          DEVOPS
+                        </DropdownMenuRadioItem>
+                        <DropdownMenuRadioItem value="OTHER">
+                          OTHER
+                        </DropdownMenuRadioItem>
+                      </DropdownMenuRadioGroup>
+                    </DropdownMenuContent>
+                  </DropdownMenu>
+              </div>
               <div className="grid grid-cols-3 gap-4">
                 {searchuserData.map((card:any, index) => {
                   const roles:any=roleData.find((e:any)=>{
