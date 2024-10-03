@@ -304,7 +304,7 @@ const Admin_add_user = () => {
   };
 
   return (
-    <div>
+    <div className="px-2">
       <Navbar />
       <p className="text-center text-3xl font-extrabold tracking-tight lg:text-4xl pb-8 mx-auto">
         User Section

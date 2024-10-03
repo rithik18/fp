@@ -3,12 +3,11 @@ import { validate } from "../utils/validation";
 import { useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
 import Navbar from "../components/navbar";
-import { Switch } from "@/components/ui/switch"
+import { Switch } from "../components/ui/switch"
 
 import {
   Table,
   TableBody,
-  TableCaption,
   TableCell,
   TableHead,
   TableHeader,
@@ -33,14 +32,15 @@ import { Button } from "../components/ui/button";
 import { H2 } from "../components/ui/Typography";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
-import { ChevronLeft, ChevronRight, PencilLine, Trash2, UserCog, X } from "lucide-react";
+import { ChevronLeft, ChevronRight, PencilLine, ShieldCheck, Trash2, UserCog, X,BookOpenCheck} from "lucide-react";
 const Admin_add_certification = () => {
     const [certificationData, setcertificationData] = useState<any[]>([]);
     const [editcertification, seteditcertification] = useState(true);
     const [editcertificationname, seteditcertificationname] = useState("");
     const [editcertificationmsg, seteditcertificationmsg] = useState("");
+    const [editiscertification, seteditiscertification] = useState(false);
     const [editcertificationsno, seteditcertificationsno] = useState(-1);
-    const [deletecertificationsno, setdeletecertificationsno] = useState(-1);
+    const [is_certificate,setis_certificate]=useState(true)
   
     const [a, seta] = useState([]);
     const [b, setb] = useState([]);
@@ -53,13 +53,12 @@ const Admin_add_certification = () => {
       const token = await Cookies.get("token");
       const certificationInput = document.getElementById("certification") as HTMLInputElement;
       const certification = certificationInput.value;
-      const descInput = document.getElementById("message") as HTMLInputElement;
-      const desc = descInput.value;
+      const issued_byInput = document.getElementById("issued_by") as HTMLInputElement;
+      const issued_by = issued_byInput.value;
       var data = {
         name: certification,
-        desc: desc,
-        created_at: new Date().toISOString(),
-        updated_at: new Date().toISOString(),
+        issued_by:issued_by,
+        is_certificate:is_certificate
       };
       const reqOptions = {
         url: "http://localhost:3000/admin/add_certification",
@@ -86,8 +85,8 @@ const Admin_add_certification = () => {
       const token = await Cookies.get("token");
       var data = {
         name: editcertificationname,
-        desc: editcertificationmsg,
-        updated_at: new Date().toISOString(),
+        is_certificate: editiscertification,
+        issued_by:editcertificationmsg
       };
       const reqOptions = {
         url: "http://localhost:3000/admin/edit_certification",
@@ -103,12 +102,13 @@ const Admin_add_certification = () => {
           getAllcertification();
           seteditcertificationname("");
           seteditcertificationmsg("");
+          seteditiscertification(false)
           const certificationInput = document.getElementById(
             "editcertification"
           ) as HTMLInputElement;
           certificationInput.value = "";
           const descInput = document.getElementById(
-            "editmessage"
+            "edit_issued_by"
           ) as HTMLInputElement;
           descInput.value = "";
           seteditcertification(!editcertification);
@@ -188,6 +188,7 @@ const Admin_add_certification = () => {
     }, [c]);
     useEffect(() => {
        validate();
+       getAllcertification();
         console.log(Cookies.get("role"));
         if (
           Cookies.get("role")?.toUpperCase() === "ADMIN" &&
@@ -217,9 +218,12 @@ const Admin_add_certification = () => {
                 <Label htmlFor="certification">Certification Name</Label>
                 <Input type="certification" id="certification" placeholder="certification Name" />
     
-                <Label htmlFor="message">Certification Issuer</Label>
+                <Label htmlFor="issued_by">Certification Issuer</Label>
                 <Input type="issued_by" id="issued_by" placeholder="Issued By" />
-                is_certificate
+
+                <div className="flex justify-around items-center">
+                <Label htmlFor="certificate">Is it a Certification course</Label> <Switch id="certificate" onClick={()=>{setis_certificate(!is_certificate)}} checked={is_certificate} />
+                </div>
                 <Button variant={"default"} onClick={handleAddcertification}>
                   Submit
                 </Button>
@@ -234,12 +238,13 @@ const Admin_add_certification = () => {
                       // toast.warning("hell")
                       seteditcertificationname("");
                       seteditcertificationmsg("");
+                      seteditiscertification(false);
                       const certificationInput = document.getElementById(
                         "editcertification"
                       ) as HTMLInputElement;
                       certificationInput.value = "";
                       const descInput = document.getElementById(
-                        "editmessage"
+                        "edit_issued_by"
                       ) as HTMLInputElement;
                       descInput.value = "";
                       seteditcertification(!editcertification);
@@ -257,25 +262,28 @@ const Admin_add_certification = () => {
                   }}
                 />
     
-                <Label htmlFor="editmessage">Certification Description</Label>
-                <Textarea
-                  placeholder="Type your description here."
-                  id="editmessage"
+                <Label htmlFor="edit_issued_by">Certification Description</Label>
+                <Input
+                  type="edit_issued_by" id="edit_issued_by" placeholder="Issued By"
                   value={editcertificationmsg}
                   onChange={(e: any) => {
                     seteditcertificationmsg(e.target.value);
                   }}
                 />
+                <div className="flex justify-around items-center">
+                <Label htmlFor="certificate">Is it a Certification course</Label> <Switch id="certificate" onClick={()=>{seteditiscertification(!editiscertification)}} checked={editiscertification} />
+                </div>
                 <Button className="hover:bg-blue-700 hover:text-white" variant={"link"} onClick={() => {
                       // toast.warning("hell")
                       seteditcertificationname("");
                       seteditcertificationmsg("");
+                      seteditiscertification(false);
                       const certificationInput = document.getElementById(
                         "editcertification"
                       ) as HTMLInputElement;
                       certificationInput.value = "";
                       const descInput = document.getElementById(
-                        "editmessage"
+                        "edit_issued_by"
                       ) as HTMLInputElement;
                       descInput.value = "";
                       seteditcertification(!editcertification);
@@ -296,19 +304,24 @@ const Admin_add_certification = () => {
                     <TableHead className="text-left">Sno</TableHead>
                     <TableHead>Certification ID</TableHead>
                     <TableHead>Name</TableHead>
-                    <TableHead>Description</TableHead>
+                    <TableHead>Issuer</TableHead>
+                    <TableHead>Is Certification</TableHead>
+                    <TableHead></TableHead>
                     <TableHead></TableHead>
                     <TableHead></TableHead>
                   </TableRow>
                 </TableHeader>
                 <TableBody>
                   {b.map((e: any, sno) => {
+                    console.log(e[0])
                     return (
                       <TableRow key={e.id}>
                         <TableCell className="font-medium">{sno + 1}</TableCell>
                         <TableCell>{e.id}</TableCell>
                         <TableCell>{e.name}</TableCell>
-                        <TableCell>{e.desc}</TableCell>
+                        <TableCell>{e.issued_by}</TableCell>
+                        <TableCell>{`${e.is_certificate}`}</TableCell>
+                        <TableCell>{e.is_certificate?<ShieldCheck />:<BookOpenCheck />}</TableCell>
                         <TableCell>
                           <PencilLine
                             size={20}
@@ -317,7 +330,8 @@ const Admin_add_certification = () => {
                                 seteditcertification(false);
                               }
                               seteditcertificationname(certificationData[sno].name);
-                              seteditcertificationmsg(certificationData[sno].desc);
+                              seteditcertificationmsg(certificationData[sno].issued_by);
+                              seteditiscertification(certificationData[sno].is_certificate);
                               seteditcertificationsno(sno);
                             }}
                           />
