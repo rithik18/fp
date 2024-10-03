@@ -71,15 +71,7 @@ const navbar = () => {
               </Link>
             </li>
             <li>
-              <DropdownMenu>
-                <DropdownMenuTrigger>User</DropdownMenuTrigger>
-                <DropdownMenuContent>
-                  <DropdownMenuLabel>User Details</DropdownMenuLabel>
-                  <DropdownMenuSeparator />
-                  <DropdownMenuItem><Link to={'/add_user'}>Add User</Link></DropdownMenuItem>
-                  <DropdownMenuItem>View User</DropdownMenuItem>
-                </DropdownMenuContent>
-              </DropdownMenu>
+            <Link to={'/add_user'}>User</Link>
             </li>
             <li>
             <Link to='/add_skill'

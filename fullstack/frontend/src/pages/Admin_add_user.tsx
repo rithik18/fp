@@ -16,13 +16,12 @@ import {
 import {
   Table,
   TableBody,
-
   TableCell,
   TableHead,
   TableHeader,
   TableRow,
 } from "../components/ui/table";
-import { ChevronDown } from "lucide-react";
+import { ChevronDown, UserRoundSearch } from "lucide-react";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { format } from "date-fns";
@@ -42,7 +41,8 @@ import { ScrollArea } from "../components/ui/scroll-area";
 
 const Admin_add_user = () => {
   const [roleData, setroleData] = useState([]);
-  const [userData, setuserData] = useState([])
+  const [userData, setuserData] = useState([]);
+  const [searchuserData, setsearchuserData] = useState([]);
   const [date, setDate] = useState<Date>();
   const [data, setData] = useState([]);
   const [header, setHeader] = useState([]);
@@ -161,136 +161,147 @@ const Admin_add_user = () => {
       fileInputRef.current.value = ""; // Clear the input value
     }
   };
-  const formatDateToYYYYMMDD = (date:Date) => {
+  const formatDateToYYYYMMDD = (date: Date) => {
     const year = date.getFullYear();
-    const month = String(date.getMonth() + 1).padStart(2, '0');
-    const day = String(date.getDate()).padStart(2, '0');
-  
+    const month = String(date.getMonth() + 1).padStart(2, "0");
+    const day = String(date.getDate()).padStart(2, "0");
+
     return `${year}-${month}-${day}`;
   };
-const handleSingleSubmit=async()=>{
-  console.log(role,department,formatDateToYYYYMMDD(date))
-  const nameInpput=document.getElementById('name') as HTMLInputElement
-  if(nameInpput.value==""||nameInpput.value==null||nameInpput.value==undefined){
-    toast.warn("Fill Name")
-    return
-  }
-  const emailInpput=document.getElementById('email') as HTMLInputElement
-  if(emailInpput.value==""||emailInpput.value==null||emailInpput.value==undefined){
-    toast.warn("Fill Email")
-    return
-  }
-  const passInpput=document.getElementById('password') as HTMLInputElement
-  if(passInpput.value==""||passInpput.value==null||passInpput.value==undefined){
-    toast.warn("Fill Password")
-    return
-  }
-  const singleData={
-  "name":nameInpput.value,
-  "role_id":role,
-  "joining_date":formatDateToYYYYMMDD(date as Date),
-  "department":department,
-  "mail":emailInpput.value,
-  "created_at" : new Date().toISOString(),
-  "updated_at" : new Date().toISOString(),
-  "password" :passInpput.value
-  }
-  const token=await Cookies.get('token')
-  const reqOptions = {
-    url: "http://localhost:3000/admin/add_user",
-    method: "POST",
-    data: { token: token, data: singleData },
-  };
-  console.log(reqOptions);
-
-  try {
-    const response = await axios.request(reqOptions);
-    if (response.status == 200) {
-      toast.success("User added");
-      getAllUser()
-
+  const handleSingleSubmit = async () => {
+    console.log(role, department, formatDateToYYYYMMDD(date));
+    const nameInpput = document.getElementById("name") as HTMLInputElement;
+    if (
+      nameInpput.value == "" ||
+      nameInpput.value == null ||
+      nameInpput.value == undefined
+    ) {
+      toast.warn("Fill Name");
+      return;
     }
-  } catch (e) {
-    if (e!.status == 403) {
-      toast.error("USer exsist");
-    } else {
-      toast.error(`${e}`);
+    const emailInpput = document.getElementById("email") as HTMLInputElement;
+    if (
+      emailInpput.value == "" ||
+      emailInpput.value == null ||
+      emailInpput.value == undefined
+    ) {
+      toast.warn("Fill Email");
+      return;
     }
-  }
-}
-const getAllUser=async()=>{
-  const token = await Cookies.get("token");
-  const reqOptions = {
-    url: "http://localhost:3000/admin/view_user",
-    method: "POST",
-    data: { token: token },
-  };
-  console.log(reqOptions);
-
-  try {
-    const response = await axios.request(reqOptions);
-    if (response.status == 200) {
-      console.log(response.data.data,"alluser");
-      setuserData(response.data.data)
+    const passInpput = document.getElementById("password") as HTMLInputElement;
+    if (
+      passInpput.value == "" ||
+      passInpput.value == null ||
+      passInpput.value == undefined
+    ) {
+      toast.warn("Fill Password");
+      return;
     }
-  } catch (e) {
-    toast.error(e as String);
-  }
-}
-const handleMultipleSubmit=async()=>{
-  
-  const jsonArray = data.map(item => {
-    return header.reduce((acc:any, key, index) => {
-      if (key === 'joining_date') {
-        // console.log(key, item[index]);
-        acc[key] = convertExcelDateToFormattedDate(item[index]);
-      } else if(key === 'role_id'){
-        // console.log(item[index],roleData,"hell")
-        const val:any=roleData.find((e:any)=>{return e.name===item[index]})
-        acc[key]=val.id
-
-      }else {
-        acc[key] = item[index];
-      }
-      return acc;
-    }, {
+    const singleData = {
+      name: nameInpput.value,
+      role_id: role,
+      joining_date: formatDateToYYYYMMDD(date as Date),
+      department: department,
+      mail: emailInpput.value,
       created_at: new Date().toISOString(),
       updated_at: new Date().toISOString(),
+      password: passInpput.value,
+    };
+    const token = await Cookies.get("token");
+    const reqOptions = {
+      url: "http://localhost:3000/admin/add_user",
+      method: "POST",
+      data: { token: token, data: singleData },
+    };
+    console.log(reqOptions);
+
+    try {
+      const response = await axios.request(reqOptions);
+      if (response.status == 200) {
+        toast.success("User added");
+        getAllUser();
+      }
+    } catch (e) {
+      if (e!.status == 403) {
+        toast.error("USer exsist");
+      } else {
+        toast.error(`${e}`);
+      }
+    }
+  };
+  const getAllUser = async () => {
+    const token = await Cookies.get("token");
+    const reqOptions = {
+      url: "http://localhost:3000/admin/view_user",
+      method: "POST",
+      data: { token: token },
+    };
+    console.log(reqOptions);
+
+    try {
+      const response = await axios.request(reqOptions);
+      if (response.status == 200) {
+        console.log(response.data.data, "alluser");
+        setuserData(response.data.data);
+        setsearchuserData(response.data.data)
+      }
+    } catch (e) {
+      toast.error(e as String);
+    }
+  };
+  const handleMultipleSubmit = async () => {
+    const jsonArray = data.map((item) => {
+      return header.reduce(
+        (acc: any, key, index) => {
+          if (key === "joining_date") {
+            // console.log(key, item[index]);
+            acc[key] = convertExcelDateToFormattedDate(item[index]);
+          } else if (key === "role_id") {
+            // console.log(item[index],"hell")
+            const val: any = roleData.find((e: any) => {
+              return e.name === item[index];
+            });
+            // console.log(val)
+            acc[key] = val.id;
+          } else {
+            acc[key] = item[index];
+          }
+          return acc;
+        },
+        {
+          created_at: new Date().toISOString(),
+          updated_at: new Date().toISOString(),
+        }
+      );
     });
 
-});
+    console.log(jsonArray);
+    const token = await Cookies.get("token");
+    const reqOptions = {
+      url: "http://localhost:3000/admin/bulk_add_user",
+      method: "POST",
+      data: { token: token, data: jsonArray },
+    };
+    console.log(reqOptions);
 
-
-console.log(jsonArray)
-const token=await Cookies.get('token')
-  const reqOptions = {
-    url: "http://localhost:3000/admin/bulk_add_user",
-    method: "POST",
-    data: { token: token, data: jsonArray },
+    try {
+      const response = await axios.request(reqOptions);
+      if (response.status == 200) {
+        toast.success("User added");
+        getAllUser();
+        setLatestFile(null);
+        setFileName("");
+        clearFileInput();
+      }
+    } catch (e) {
+      console.log(e);
+      if (e!.status == 403) {
+        toast.error("User exsist");
+      } else {
+        toast.error(`${e}`);
+      }
+    }
   };
-  console.log(reqOptions);
-
-  try {
-    const response = await axios.request(reqOptions);
-    if (response.status == 200) {
-      toast.success("User added");
-      getAllUser()
-      setLatestFile(null);
-      setFileName("");
-      clearFileInput();
-
-
-    }
-  } catch (e) {
-    console.log(e)
-    if (e!.status == 403) {
-      toast.error("User exsist");
-    } else {
-      toast.error(`${e}`);
-    }
-  }
-
-}
 
   return (
     <div>
@@ -412,8 +423,10 @@ const token=await Cookies.get('token')
                 </div>
               </div>
             </div>
-            <Button variant={"default"} className="w-2/3 mx-auto my-auto"
-            onClick={handleSingleSubmit}
+            <Button
+              variant={"default"}
+              className="w-2/3 mx-auto my-auto"
+              onClick={handleSingleSubmit}
             >
               Submit
             </Button>
@@ -459,21 +472,30 @@ const token=await Cookies.get('token')
         </div>
         <div className="px-4 col-span-2">
           {latestFile == null ? (
-            <div className="grid grid-cols-3 gap-3">
-              <div className="grid grid-rows-3 gap-3">
-                <Cards />
-                <Cards />
-                <Cards />
-              </div>
-              <div className="grid grid-rows-3 gap-3">
-                <Cards />
-                <Cards />
-                <Cards />
-              </div>
-              <div className="grid grid-rows-3 gap-3">
-                <Cards />
-                <Cards />
-                <Cards />
+            <div>
+              <Input
+                type="text"
+                placeholder={"Search User"}
+                className="w-1/3 p-4 mb-8 rounded-full"
+                onChange={(e) => {
+                  console.log(e.target.value);
+                  var d :any = userData.filter((item:any) =>
+                    item.name.toLowerCase().includes(
+                      e.target.value.toLowerCase()
+                    )
+                  );
+                  setsearchuserData(d)
+                 
+                }}
+              />
+              <div className="grid grid-cols-3 gap-4">
+                {searchuserData.map((card:any, index) => {
+                  const roles:any=roleData.find((e:any)=>{
+                    return e.id==card.role_id})
+                    console.log(roles,"first")
+                  return (
+                  <Cards props={card} roles={roles.name} />
+                )})}
               </div>
             </div>
           ) : (
