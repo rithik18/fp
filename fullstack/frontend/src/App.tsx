@@ -7,6 +7,7 @@ import Admin_add_role from "./pages/Admin_add_role";
 import Admin_add_skill from "./pages/Admin_add_skill";
 import Admin_add_role_skill from "./pages/Admin_add_role_skill";
 import Admin_add_certification from "./pages/Admin_add_certification";
+import Admin_verify_certification from "./pages/Admin_verify_certification";
 function App() {
 
 
@@ -21,7 +22,7 @@ function App() {
       <Route path="/add_skill" element={<Admin_add_skill/>}></Route>
       <Route path="/add_role_skill" element={<Admin_add_role_skill/>}></Route>
       <Route path="/add_certification" element={<Admin_add_certification/>}></Route>
-      <Route path="/verify_certification" element={<Admin_add_certification/>}></Route>
+      <Route path="/verify_certification" element={<Admin_verify_certification/>}></Route>
     </Routes>
     </BrowserRouter>
   )

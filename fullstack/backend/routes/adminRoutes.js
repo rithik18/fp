@@ -5,6 +5,7 @@ const  jwt = require('jsonwebtoken');
 const userController=require('../controllers/userController')
 const skillController=require('../controllers/skillController')
 const roleController=require('../controllers/roleController')
+const certificationController=require('../controllers/certificationController')
 
 router.post('/',(req,res)=>{
     if(req.token){
@@ -33,10 +34,10 @@ router.post('/add_role',roleController.add_role)
 router.post('/edit_role',roleController.update_role)
 router.post('/delete_role',roleController.delete_role)
 
-// router.post('/view_certification')
-// router.post('/add_certification')
-// router.post('/edit_certification')
-// router.post('/delete_certification')
+router.post('/view_certification',certificationController.view_certification)
+router.post('/add_certification',certificationController.add_certification)
+router.post('/edit_certification',certificationController.update_certification)
+router.post('/delete_certification',certificationController.delete_certification)
 
 // router.post('/view_role_skill')
 // router.post('/add_role_skill')
