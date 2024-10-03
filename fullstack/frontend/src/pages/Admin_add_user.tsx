@@ -308,21 +308,26 @@ const Admin_add_user = () => {
             <TableHeader>
               <TableRow>
                 <TableHead className="text-left">Sno</TableHead>
-                <TableHead>Skill ID</TableHead>
                 <TableHead>Name</TableHead>
-                <TableHead>Description</TableHead>
-                <TableHead></TableHead>
-                <TableHead></TableHead>
+                <TableHead>Email</TableHead>
+                <TableHead>Department</TableHead>
+                <TableHead>Role</TableHead>
+                <TableHead>Password</TableHead>
+                <TableHead>Joining Date</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
               {data.map((e: any, sno) => {
+                console.log(e)
                 return (
-                  <TableRow key={e.id}>
+                  <TableRow key={e[0]}>
                     <TableCell className="font-medium">{sno + 1}</TableCell>
-                    <TableCell>{e.id}</TableCell>
-                    <TableCell>{e.name}</TableCell>
-                    <TableCell>{e.desc}</TableCell>
+                    <TableCell>{e[0]}</TableCell>
+                    <TableCell>{e[1]}</TableCell>
+                    <TableCell>{e[2]}</TableCell>
+                    <TableCell>{e[3]}</TableCell>
+                    <TableCell>{e[4]}</TableCell>
+                    <TableCell>{e[5]}</TableCell>
                   </TableRow>
                 );
               })}
