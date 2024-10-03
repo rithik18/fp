@@ -19,6 +19,7 @@ router.post('/',(req,res)=>{
 
 router.post('/view_user',userController.view_user)
 router.post('/add_user',userController.add_user)
+router.post('/bulk_add_user',userController.bulk_add_user)
 // router.post('/edit_user')
 // router.post('/delete_user')
 

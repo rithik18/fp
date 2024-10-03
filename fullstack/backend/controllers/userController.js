@@ -13,10 +13,17 @@ const add_user=async(req,res)=>{
     res.send({"msg":"User Added"})
 
 }
+const bulk_add_user=async(req,res)=>{
+    console.log("in bulk addd hell")
+    const resp=await prisma.user.createMany({data:req.body.data})
+    res.send({"msg":"User Added"})
+
+}
 
 
 module.exports = {
     view_user,
-    add_user
+    add_user,
+    bulk_add_user
   };
   

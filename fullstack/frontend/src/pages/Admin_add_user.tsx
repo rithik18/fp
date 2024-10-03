@@ -232,13 +232,64 @@ const getAllUser=async()=>{
     if (response.status == 200) {
       console.log(response.data.data,"alluser");
       setuserData(response.data.data)
-
-
-      // console.log(response.data.data.length,response.data.data.length/c,c,p,pc,"hell")
     }
   } catch (e) {
     toast.error(e as String);
   }
+}
+const handleMultipleSubmit=async()=>{
+  
+  const jsonArray = data.map(item => {
+    return header.reduce((acc:any, key, index) => {
+      if (key === 'joining_date') {
+        // console.log(key, item[index]);
+        acc[key] = convertExcelDateToFormattedDate(item[index]);
+      } else if(key === 'role_id'){
+        // console.log(item[index],roleData,"hell")
+        const val:any=roleData.find((e:any)=>{return e.name===item[index]})
+        acc[key]=val.id
+
+      }else {
+        acc[key] = item[index];
+      }
+      return acc;
+    }, {
+      created_at: new Date().toISOString(),
+      updated_at: new Date().toISOString(),
+    });
+
+});
+
+
+console.log(jsonArray)
+const token=await Cookies.get('token')
+  const reqOptions = {
+    url: "http://localhost:3000/admin/bulk_add_user",
+    method: "POST",
+    data: { token: token, data: jsonArray },
+  };
+  console.log(reqOptions);
+
+  try {
+    const response = await axios.request(reqOptions);
+    if (response.status == 200) {
+      toast.success("User added");
+      getAllUser()
+      setLatestFile(null);
+      setFileName("");
+      clearFileInput();
+
+
+    }
+  } catch (e) {
+    console.log(e)
+    if (e!.status == 403) {
+      toast.error("User exsist");
+    } else {
+      toast.error(`${e}`);
+    }
+  }
+
 }
 
   return (
@@ -459,7 +510,7 @@ const getAllUser=async()=>{
                 </TableBody>
               </Table>
               <div>
-                <Button>Submit</Button>
+                <Button onClick={handleMultipleSubmit}>Submit</Button>
                 <Button
                   className="hover:bg-blue-700 hover:text-white"
                   variant={"link"}
