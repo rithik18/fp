@@ -33,6 +33,7 @@ model Certification{
   name     String
   issued_by String
   is_certificate Boolean
+  @@unique([name,issued_by,is_certificate])
   UserCertification UserCertification[]
 }
 model UserCertification{

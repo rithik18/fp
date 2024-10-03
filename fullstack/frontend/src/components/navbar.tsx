@@ -21,6 +21,7 @@ import { Button } from "../components/ui/button";
 import Cookies from "js-cookie";
 import { toast,ToastContainer } from "react-toastify";
 import { Link, useNavigate } from "react-router-dom";
+import image from '../assets/logo_jman.png'
 
 const navbar = () => {
   const n=useNavigate()
@@ -30,13 +31,11 @@ const navbar = () => {
       <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
         <a href="#" className="flex items-center space-x-3 rtl:space-x-reverse">
           <img
-            src="https://flowbite.com/docs/images/logo.svg"
+            src={image}
             className="h-8"
             alt="Flowbite Logo"
           />
-          <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">
-            Flowbite
-          </span>
+          
         </a>
         <button
           data-collapse-toggle="navbar-dropdown"
