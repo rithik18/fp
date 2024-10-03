@@ -1,24 +1,36 @@
-import { Card, CardContent, CardFooter } from "./ui/card"
-import { Button } from "./ui/button"
-import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar"
-import { Eye, Trash2 } from "lucide-react"
+import { Card, CardContent, CardFooter } from "./ui/card";
+import { Button } from "./ui/button";
+import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
+import { Eye, Trash2 } from "lucide-react";
 import axios from "axios";
 import Cookies from "js-cookie";
 import { toast } from "react-toastify";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "../components/ui/alert-dialog";
 
-export default function Cards({props,roles}:any) {
-  const getShortName = (fullName:any) => {
-
-    const nameParts = fullName.split(' ');
-    const shortName = nameParts.map((part:any) => part.charAt(0).toUpperCase()).join('');
+export default function Cards({ props, roles }: any) {
+  const getShortName = (fullName: any) => {
+    const nameParts = fullName.split(" ");
+    const shortName = nameParts
+      .map((part: any) => part.charAt(0).toUpperCase())
+      .join("");
     return shortName;
   };
-  const handleUserDelete=async()=>{
-    const token =  Cookies.get("token");
+  const handleUserDelete = async () => {
+    const token = Cookies.get("token");
     const reqOptions = {
       url: "http://localhost:3000/admin/delete_user",
       method: "POST",
-      data: { token: token, id: props.id},
+      data: { token: token, id: props.id },
     };
     console.log(reqOptions);
 
@@ -35,13 +47,16 @@ export default function Cards({props,roles}:any) {
         toast.error(`${e}`);
       }
     }
-  }
+  };
   return (
     <Card className="w-full max-w-sm mx-auto">
       <CardContent className="pt-6">
         <div className="flex flex-col items-center space-y-2">
           <Avatar className="w-24 h-24">
-            <AvatarImage src="/placeholder.svg?height=96&width=96" alt="Profile picture" />
+            <AvatarImage
+              src="/placeholder.svg?height=96&width=96"
+              alt="Profile picture"
+            />
             <AvatarFallback>{getShortName(props.name)}</AvatarFallback>
           </Avatar>
           <div className="text-center space-y-2">
@@ -57,12 +72,33 @@ export default function Cards({props,roles}:any) {
           <Eye className="mr-2 h-4 w-4 mx-a" />
           View
         </Button>
-        <Button variant="outline" onClick={handleUserDelete}className="w-2/3 mx-auto">
-          <Trash2 className="mr-2 h-4 w-4 mx-a" />
-          Delete
-        </Button>
-        
+        <div className="w-2/3 mx-auto">
+
+        <AlertDialog>
+          <AlertDialogTrigger className="w-full">
+            <Button variant="outline" className="w-full">
+              <Trash2 className="mr-2 h-4 w-4  text-red-700" />
+              Delete
+            </Button>
+          </AlertDialogTrigger>
+          <AlertDialogContent>
+            <AlertDialogHeader>
+              <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+              <AlertDialogDescription>
+                This action cannot be undone. This will permanently delete
+                User.
+              </AlertDialogDescription>
+            </AlertDialogHeader>
+            <AlertDialogFooter>
+              <AlertDialogCancel>Cancel</AlertDialogCancel>
+              <AlertDialogAction onClick={handleUserDelete}>
+                Continue
+              </AlertDialogAction>
+            </AlertDialogFooter>
+          </AlertDialogContent>
+        </AlertDialog>
+        </div>
       </CardFooter>
     </Card>
-  )
+  );
 }
