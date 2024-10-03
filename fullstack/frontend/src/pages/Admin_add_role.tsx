@@ -3,11 +3,10 @@ import { validate } from "../utils/validation";
 import { useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
 import Navbar from "../components/navbar";
-import Datatable from "../components/datatable";
+
 import {
   Table,
   TableBody,
-  TableCaption,
   TableCell,
   TableHead,
   TableHeader,
@@ -40,7 +39,6 @@ const Admin_add_role = () => {
   const [editrolename, seteditrolename] = useState("");
   const [editrolemsg, seteditrolemsg] = useState("");
   const [editrolesno, seteditrolesno] = useState(-1);
-  const [deleterolesno, setdeleterolesno] = useState(-1);
 
   const [a, seta] = useState([]);
   const [b, setb] = useState([]);
@@ -124,7 +122,6 @@ const Admin_add_role = () => {
   };
   const handleDeleterole = async (sno :any) => {
     const token = await Cookies.get("token");
-    console.log(deleterolesno)
     const reqOptions = {
       url: "http://localhost:3000/admin/delete_role",
       method: "POST",
