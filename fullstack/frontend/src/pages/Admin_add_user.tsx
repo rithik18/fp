@@ -3,9 +3,9 @@ import { validate } from "../utils/validation";
 import { useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
 import Navbar from "../components/navbar";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Button } from "@/components/ui/button";
+import { Input } from "../components/ui/input";
+import { Label } from "../components/ui/label";
+import { Button } from "../components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -14,7 +14,7 @@ import {
   DropdownMenuRadioItem,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+} from "../components/ui/dropdown-menu";
 import {
   Table,
   TableBody,
@@ -23,7 +23,7 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/components/ui/table";
+} from "../components/ui/table";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -34,23 +34,32 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
   AlertDialogTrigger,
-} from "@/components/ui/alert-dialog";
+} from "../components/ui/alert-dialog";
 import { ChevronDown, CircleOff, PencilLine, Trash2 } from "lucide-react";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { format } from "date-fns";
 import { Calendar as CalendarIcon } from "lucide-react";
 
-import { cn } from "@/lib/utils";
-import { Calendar } from "@/components/ui/calendar";
+import { cn } from "../lib/utils";
+import { Calendar } from "../components/ui/calendar";
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from "@/components/ui/popover";
+} from "../components/ui/popover";
 import readXlsxFile from "read-excel-file";
 import { H2, H4 } from "../components/ui/Typography";
 import { ScrollArea } from "../components/ui/scroll-area";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "../components/ui/card"
+
 
 const Admin_add_user = () => {
   const [roleData, setroleData] = useState([]);
@@ -146,6 +155,18 @@ const Admin_add_user = () => {
 
     const dragOverHandler = (ev:any) => {
         ev.preventDefault();
+    };
+    const convertExcelDateToFormattedDate = (serialDate:any) => {
+      const excelEpoch = new Date(1900, 0, 1) as any; // January 1, 1900
+      const daysBetween = Math.floor((new Date(1970, 0, 1) as any - excelEpoch) / (1000 * 60 * 60 * 24)) + 1; // Adjust for leap year in 1900
+      const jsDate = new Date(excelEpoch.getTime() + (serialDate - 1) * 24 * 60 * 60 * 1000); // -1 because Excel starts from 1
+    
+      // Format the date as dd-MM-yyyy
+      const day = String(jsDate.getDate()).padStart(2, '0');
+      const month = String(jsDate.getMonth() + 1).padStart(2, '0'); // Month is 0-based
+      const year = jsDate.getFullYear();
+    
+      return `${day}-${month}-${year}`; // Return formatted date
     };
 
   return (
@@ -310,9 +331,9 @@ const Admin_add_user = () => {
                 <TableHead className="text-left">Sno</TableHead>
                 <TableHead>Name</TableHead>
                 <TableHead>Email</TableHead>
-                <TableHead>Department</TableHead>
-                <TableHead>Role</TableHead>
                 <TableHead>Password</TableHead>
+                <TableHead>Role</TableHead>
+                <TableHead>Department</TableHead>
                 <TableHead>Joining Date</TableHead>
               </TableRow>
             </TableHeader>
@@ -327,7 +348,7 @@ const Admin_add_user = () => {
                     <TableCell>{e[2]}</TableCell>
                     <TableCell>{e[3]}</TableCell>
                     <TableCell>{e[4]}</TableCell>
-                    <TableCell>{e[5]}</TableCell>
+                    <TableCell>{convertExcelDateToFormattedDate(e[5])}</TableCell>
                   </TableRow>
                 );
               })}
