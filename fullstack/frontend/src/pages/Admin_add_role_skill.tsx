@@ -7,7 +7,6 @@ import Navbar from "../components/navbar";
 import {
   Table,
   TableBody,
-  TableCaption,
   TableCell,
   TableHead,
   TableHeader,
@@ -34,15 +33,17 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "../components/ui/alert-dialog";
+import { ScrollArea } from "../components/ui/scroll-area";
 
 import { Textarea } from "../components/ui/textarea";
 import { Input } from "../components/ui/input";
 import { Label } from "../components/ui/label";
 import { Button } from "../components/ui/button";
-import { H1, H2 } from "../components/ui/Typography";
+import { H2 } from "../components/ui/Typography";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import {
+  CheckCheck,
   ChevronDown,
   ChevronLeft,
   ChevronRight,
@@ -51,18 +52,22 @@ import {
   UserCog,
   X,
 } from "lucide-react";
+import { Badge } from "../components/ui/badge";
 
 const Admin_add_role_skill = () => {
   const [department, setDepartment] = useState("OTHER");
   const [role, setrole] = useState("None");
-  const [roleData, setroleData] = useState([]);
+  const [roleData, setroleData] = useState<any[]>([]);
+  const [skillDataDrop, setskillDataDrop] = useState<any[]>([]);
+  const [skillDataDropbool, setskillDataDropbool] = useState<any[]>([]);
+  const [open, setOpen] = useState(false);
+  const selectedSkills = skillDataDrop.filter((_, i) => skillDataDropbool[i]);
 
   const [skillData, setskillData] = useState<any[]>([]);
   const [editskill, seteditskill] = useState(true);
   const [editskillname, seteditskillname] = useState("");
   const [editskillmsg, seteditskillmsg] = useState("");
   const [editskillsno, seteditskillsno] = useState(-1);
-  const [deleteskillsno, setdeleteskillsno] = useState(-1);
 
   const [a, seta] = useState([]);
   const [b, setb] = useState([]);
@@ -92,7 +97,28 @@ const Admin_add_role_skill = () => {
       toast.error(e as String);
     }
   };
+  const getAllSkill = async () => {
+    const token = await Cookies.get("token");
+    const reqOptions = {
+      url: "http://localhost:3000/admin/view_skill",
+      method: "POST",
+      data: { token: token },
+    };
+    console.log(reqOptions);
 
+    try {
+      const response = await axios.request(reqOptions);
+      if (response.status == 200) {
+        console.log(response.data.data);
+        setskillDataDrop(response.data.data);
+        const array = new Array(response.data.data.length).fill(false);
+        setskillDataDropbool(array);
+        // console.log(array)
+      }
+    } catch (e) {
+      toast.error(e as String);
+    }
+  };
   const handleAddSkill = async () => {
     const token = await Cookies.get("token");
     const skillInput = document.getElementById("skill") as HTMLInputElement;
@@ -116,7 +142,7 @@ const Admin_add_role_skill = () => {
       const response = await axios.request(reqOptions);
       if (response.status == 200) {
         toast.success("Skill added");
-        getAllSkill();
+        getAllRoleSkill();
       }
     } catch (e) {
       if (e!.status == 403) {
@@ -144,7 +170,7 @@ const Admin_add_role_skill = () => {
       const response = await axios.request(reqOptions);
       if (response.status == 200) {
         toast.success("Skill Edited");
-        getAllSkill();
+        getAllRoleSkill();
         seteditskillname("");
         seteditskillmsg("");
         const skillInput = document.getElementById(
@@ -179,7 +205,7 @@ const Admin_add_role_skill = () => {
       const response = await axios.request(reqOptions);
       if (response.status == 200) {
         toast.success("Skill Deleted");
-        getAllSkill();
+        getAllRoleSkill();
       }
     } catch (e) {
       if (e!.status == 403) {
@@ -190,7 +216,7 @@ const Admin_add_role_skill = () => {
       }
     }
   };
-  const getAllSkill = async () => {
+  const getAllRoleSkill = async () => {
     const token = await Cookies.get("token");
     const reqOptions = {
       url: "http://localhost:3000/admin/view_role_skill",
@@ -214,6 +240,9 @@ const Admin_add_role_skill = () => {
       toast.error(e as String);
     }
   };
+  const clearAll = () => {
+    setskillDataDropbool(new Array(skillDataDrop.length).fill(false));
+  };
   useEffect(() => {
     const ini = async () => {
       console.log("first");
@@ -232,8 +261,9 @@ const Admin_add_role_skill = () => {
   }, [c]);
   useEffect(() => {
     validate();
-    getAllSkill();
+    getAllRoleSkill();
     getAllrole();
+    getAllSkill();
     console.log(Cookies.get("role"));
     if (
       Cookies.get("role")?.toUpperCase() === "ADMIN" &&
@@ -281,7 +311,7 @@ const Admin_add_role_skill = () => {
           <div className="grid w-full max-w-sm items-center h-1/2 gap-4 p-4">
             <H2>Add Skills</H2>
             <DropdownMenu>
-              <DropdownMenuTrigger asChild className="w-full rounded-full">
+              <DropdownMenuTrigger asChild className="w-full">
                 <Button variant="outline">
                   {roleData.length != 0 && role != "None"
                     ? roleData.filter((e: any) => e.id === role)[0]?.name
@@ -307,7 +337,7 @@ const Admin_add_role_skill = () => {
               </DropdownMenuContent>
             </DropdownMenu>
             <DropdownMenu>
-              <DropdownMenuTrigger asChild className="w-full rounded-full">
+              <DropdownMenuTrigger asChild className="w-full">
                 <Button variant="outline">
                   {department} <ChevronDown />
                 </Button>
@@ -338,34 +368,97 @@ const Admin_add_role_skill = () => {
                 </DropdownMenuRadioGroup>
               </DropdownMenuContent>
             </DropdownMenu>
-            <DropdownMenu>
+            {/* <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <Button>Select Skill</Button>
               </DropdownMenuTrigger>
-              <DropdownMenuContent className="w-56">
+              <DropdownMenuContent className="w-full">
                 <DropdownMenuLabel>Skillset</DropdownMenuLabel>
                 <DropdownMenuSeparator />
-                {skillData.map((e, i) => {
+                <ScrollArea className="h-[200px] w-[350px] rounded-md border p-4">
+                {skillDataDrop.map((e, i) => {
                   return (
                     <>
                       <DropdownMenuCheckboxItem
-                      // checked={showStatusBar[i]}
-                      // onCheckedChange={(f) => {
-                      //   var d = [...showStatusBar];
-                      //   d[i] = f;
-                      //   setShowStatusBar(d);
-                      //   console.log(f, i, d[i]);
-                      // }}
+                      checked={skillDataDropbool[i]}
+                      onCheckedChange={(f) => {
+                        var d = [...skillDataDropbool];
+                        d[i] = f;
+                        setskillDataDropbool(d);
+                        // console.log(f, i, d[i]);
+                      }}
                       >
                         {e.name}
                       </DropdownMenuCheckboxItem>
                     </>
                   );
                 })}
+                </ScrollArea>
+              </DropdownMenuContent>
+            </DropdownMenu> */}
+            {/* Dropdown to selet skill */}
+            <DropdownMenu open={open} onOpenChange={setOpen}>
+              <DropdownMenuTrigger asChild>
+                <Button>Select Skill</Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent
+                className="w-full"
+                onCloseAutoFocus={(e) => e.preventDefault()}
+              >
+                <div className="flex justify-between items-center mb-2">
+                  <DropdownMenuLabel>Skillset</DropdownMenuLabel>
+                  <div className="flex items-center">
+                    <Button
+                      variant="ghost"
+                      size="icon"
+                      onClick={clearAll}
+                      title="Clear All"
+                    >
+                      <Trash2 className="h-4 w-4" />
+                    </Button>
+                    <Button
+                      variant="ghost"
+                      size="icon"
+                      onClick={() => setOpen(false)}
+                      title="Close"
+                    >
+                      <CheckCheck className="h-4 w-4" />
+                    </Button>
+                  </div>
+                </div>
+                <DropdownMenuSeparator />
+                <ScrollArea className="h-[200px] w-[350px] rounded-md border p-4">
+                  {skillDataDrop.map((e, i) => (
+                    <DropdownMenuCheckboxItem
+                      key={i}
+                      checked={skillDataDropbool[i]}
+                      onCheckedChange={(f) => {
+                        const d = [...skillDataDropbool];
+                        d[i] = f;
+                        setskillDataDropbool(d);
+                      }}
+                      onSelect={(event) => event.preventDefault()}
+                    >
+                      {e.name}
+                    </DropdownMenuCheckboxItem>
+                  ))}
+                </ScrollArea>
               </DropdownMenuContent>
             </DropdownMenu>
-            <Label htmlFor="message">Skill Description</Label>
-            <Textarea placeholder="Type your description here." id="message" />
+            {/* Badge to display selected skill */}
+            {selectedSkills.length > 0 && (
+              <div className="flex flex-wrap gap-2">
+                {selectedSkills.map((skill) => (
+                  <Badge
+                    key={skill.id}
+                    variant={"secondary"}
+                    className="bg-gray-100 rounded-full"
+                  >
+                    {skill.name}
+                  </Badge>
+                ))}
+              </div>
+            )}
             <Button variant={"default"} onClick={handleAddSkill}>
               Submit
             </Button>
