@@ -21,7 +21,12 @@ import {
   TableHeader,
   TableRow,
 } from "../components/ui/table";
-import { ChevronDown, UserRoundSearch } from "lucide-react";
+import {
+  ChevronDown,
+  ChevronLeft,
+  UserRoundSearch,
+  ChevronRight,
+} from "lucide-react";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { format } from "date-fns";
@@ -96,7 +101,7 @@ const Admin_add_user = () => {
   const fileInputRef = useRef(null);
   const [a, seta] = useState([]);
   const [b, setb] = useState([]);
-  const [c, setc] = useState(10);
+  const [c, setc] = useState(6);
   const [p, setp] = useState(1);
   const [pc, setpc] = useState(1);
   const [d, setd] = useState(1);
@@ -107,7 +112,7 @@ const Admin_add_user = () => {
       setb(a.slice((p - 1) * c, (p - 1) * c + c));
     };
     ini();
-  }, [p,department1,role1]);
+  }, [p, department1, role1]);
   useEffect(() => {
     const ini = async () => {
       setb(a.slice(0, c));
@@ -115,28 +120,34 @@ const Admin_add_user = () => {
       setp(1);
     };
     ini();
-  }, [c,department1,role1]);
-  
+  }, [c, department1, role1]);
+
   useEffect(() => {
+    const val = roleData.find((e: any) => e.id === role1)?.name;
+    // console.log(d)
+    if (val == undefined || val == "None" || val == "" || val == null) {
+      setsearchuserData(userData);
+      seta(userData);
+      setb(userData.slice(0, c));
+      setpc(Math.ceil(userData.length / c));
+      setd(userData.length);
+    } else {
+      const d = userData
+        .filter((e: any) => {
+          return e.department === department1;
+        })
+        .filter((e: any) => {
+          return e.role_id === role1;
+        });
+      setsearchuserData(d);
+      seta(d);
+      setb(d.slice(0, c));
+      setpc(Math.ceil(d.length / c));
+      setd(d.length);
+    }
 
-
-const val=roleData.find((e: any) => e.id === role1)?.name
-// console.log(d)
-if(val==undefined||val=="None"||val==""||val==null){
-setsearchuserData(userData)
-}else{
-  const d=userData.filter((e:any)=>{
-    return e.department===department1
-  }).filter((e:any)=>{
-    return e.role_id===role1
-  })
-  setsearchuserData(d)
-}
-
-console.log("hellusesetae")
-
-    
-  }, [department1,role1]);
+    console.log("hellusesetae");
+  }, [department1, role1]);
 
   const handleFileChange = (event: any) => {
     const file = event.target.files[0];
@@ -287,7 +298,7 @@ console.log("hellusesetae")
       if (response.status == 200) {
         console.log(response.data.data, "alluser");
         setuserData(response.data.data);
-        setsearchuserData(response.data.data)
+        setsearchuserData(response.data.data);
       }
     } catch (e) {
       toast.error(e as String);
@@ -518,96 +529,121 @@ console.log("hellusesetae")
           {latestFile == null ? (
             <div>
               <div className="grid grid-cols-3 gap-4">
-
-              <Input
-                type="text"
-                placeholder={"Search User"}
-                className="p-4 mb-8 rounded-full"
-                onChange={(e) => {
-                  console.log(e.target.value);
-                  if(e.target.value.toLowerCase()==""){
-                    setsearchuserData(userData)
-                  }
-                  else{
-                    var d :any = searchuserData.filter((item:any) =>
-                      item.name.toLowerCase().includes(
-                        e.target.value.toLowerCase()
-                      )
-                    );
-                    setsearchuserData(d)
-                  }
-}}
-              />
-              <DropdownMenu>
-                    <DropdownMenuTrigger asChild className="w-full rounded-full">
-                      <Button variant="outline">
-                        {roleData.length != 0 && role1 != "None"
-                          ? roleData.filter((e: any) => e.id === role1)[0]?.name
-                          : role1}
-                        <ChevronDown />
-                      </Button>
-                    </DropdownMenuTrigger>
-                    <DropdownMenuContent className="w-56">
-                      <DropdownMenuRadioGroup
-                        value={role1}
-                        onValueChange={setrole1}
-                      >
-                        <DropdownMenuRadioItem value="None">
-                          None
-                        </DropdownMenuRadioItem>
-                        {roleData.length != 0 &&
-                          roleData.map((e: any) => {
-                            // console.log(role1,"jjjj")
-                            return (
-                              <DropdownMenuRadioItem value={e.id}>
-                                {e.name}
-                              </DropdownMenuRadioItem>
-                            );
-                          })}
-                      </DropdownMenuRadioGroup>
-                    </DropdownMenuContent>
-              </DropdownMenu>
-              <DropdownMenu>
-                    <DropdownMenuTrigger asChild className="w-full rounded-full">
-                      <Button variant="outline">
-                        {department1} <ChevronDown />
-                      </Button>
-                    </DropdownMenuTrigger>
-                    <DropdownMenuContent>
-                      <DropdownMenuRadioGroup
-                        value={department1}
-                        onValueChange={setDepartment1}
-                      >
-                        <DropdownMenuRadioItem value="ADMIN">
-                          ADMIN
-                        </DropdownMenuRadioItem>
-                        <DropdownMenuRadioItem value="FULL_STACK">
-                          FULL_STACK
-                        </DropdownMenuRadioItem>
-                        <DropdownMenuRadioItem value="DATA_ANALYTICS">
-                          DATA_ANALYTICS
-                        </DropdownMenuRadioItem>
-                        <DropdownMenuRadioItem value="DATA_ENGINEERING">
-                          DATA_ENGINEERING
-                        </DropdownMenuRadioItem>
-                        <DropdownMenuRadioItem value="DEVOPS">
-                          DEVOPS
-                        </DropdownMenuRadioItem>
-                        <DropdownMenuRadioItem value="OTHER">
-                          OTHER
-                        </DropdownMenuRadioItem>
-                      </DropdownMenuRadioGroup>
-                    </DropdownMenuContent>
-                  </DropdownMenu>
+                <Input
+                  type="text"
+                  placeholder={"Search User"}
+                  className="p-4 mb-8 rounded-full"
+                  onChange={(e) => {
+                    console.log(e.target.value);
+                    if (e.target.value.toLowerCase() == "") {
+                      setsearchuserData(userData);
+                    } else {
+                      var d: any = searchuserData.filter((item: any) =>
+                        item.name
+                          .toLowerCase()
+                          .includes(e.target.value.toLowerCase())
+                      );
+                      setsearchuserData(d);
+                    }
+                  }}
+                />
+                <DropdownMenu>
+                  <DropdownMenuTrigger asChild className="w-full rounded-full">
+                    <Button variant="outline">
+                      {roleData.length != 0 && role1 != "None"
+                        ? roleData.filter((e: any) => e.id === role1)[0]?.name
+                        : role1}
+                      <ChevronDown />
+                    </Button>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent className="w-56">
+                    <DropdownMenuRadioGroup
+                      value={role1}
+                      onValueChange={setrole1}
+                    >
+                      <DropdownMenuRadioItem value="None">
+                        None
+                      </DropdownMenuRadioItem>
+                      {roleData.length != 0 &&
+                        roleData.map((e: any) => {
+                          // console.log(role1,"jjjj")
+                          return (
+                            <DropdownMenuRadioItem value={e.id}>
+                              {e.name}
+                            </DropdownMenuRadioItem>
+                          );
+                        })}
+                    </DropdownMenuRadioGroup>
+                  </DropdownMenuContent>
+                </DropdownMenu>
+                <DropdownMenu>
+                  <DropdownMenuTrigger asChild className="w-full rounded-full">
+                    <Button variant="outline">
+                      {department1} <ChevronDown />
+                    </Button>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent>
+                    <DropdownMenuRadioGroup
+                      value={department1}
+                      onValueChange={setDepartment1}
+                    >
+                      <DropdownMenuRadioItem value="ADMIN">
+                        ADMIN
+                      </DropdownMenuRadioItem>
+                      <DropdownMenuRadioItem value="FULL_STACK">
+                        FULL_STACK
+                      </DropdownMenuRadioItem>
+                      <DropdownMenuRadioItem value="DATA_ANALYTICS">
+                        DATA_ANALYTICS
+                      </DropdownMenuRadioItem>
+                      <DropdownMenuRadioItem value="DATA_ENGINEERING">
+                        DATA_ENGINEERING
+                      </DropdownMenuRadioItem>
+                      <DropdownMenuRadioItem value="DEVOPS">
+                        DEVOPS
+                      </DropdownMenuRadioItem>
+                      <DropdownMenuRadioItem value="OTHER">
+                        OTHER
+                      </DropdownMenuRadioItem>
+                    </DropdownMenuRadioGroup>
+                  </DropdownMenuContent>
+                </DropdownMenu>
               </div>
               <div className="grid grid-cols-3 gap-4">
-                {searchuserData.map((card:any, index) => {
-                  const roles:any=roleData.find((e:any)=>{
-                    return e.id==card.role_id})
-                    console.log(roles,"first")
-                  return (
-                  <Cards props={card} roles={roles.name} />
-                )})}
+                {b.map((card: any, index) => {
+                  const roles: any = roleData.find((e: any) => {
+                    return e.id == card.role_id;
+                  });
+                  console.log(roles, "first");
+                  return <Cards props={card} roles={roles.name} />;
+                })}
+              </div>
+              <div className="flex items-center mt-8 justify-evenly">
+                <Button
+                  variant={"link"}
+                  className="hover:text-blue-700 flex justify-around items-center"
+                  onClick={() => {
+                    console.log(p);
+                    if (p - 1 > 0) setp(p - 1);
+                  }}
+                >
+                  <ChevronLeft />
+                  <p>Previous</p>
+                </Button>
+                <p className="font-bold">
+                  <span className="text-blue-600">{p}</span>/{pc}
+                </p>
+
+                <Button
+                  variant={"link"}
+                  className="hover:text-blue-700 flex justify-around items-center"
+                  onClick={() => {
+                    if (p + 1 <= pc) setp(p + 1);
+                  }}
+                >
+                  <p>Next</p>
+                  <ChevronRight />
+                </Button>
               </div>
             </div>
           ) : (
