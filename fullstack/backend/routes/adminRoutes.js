@@ -41,7 +41,7 @@ router.post('/edit_certification',certificationController.update_certification)
 router.post('/delete_certification',certificationController.delete_certification)
 
 router.post('/view_role_skill',roleskillController.view_role_skill)
-// router.post('/add_role_skill')
+router.post('/add_role_skill',roleskillController.add_role_skill)
 // router.post('/edit_role_skill')
 // router.post('/delete_role_skill')
 

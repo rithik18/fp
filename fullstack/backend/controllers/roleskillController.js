@@ -8,11 +8,22 @@ const view_role_skill = async (req, res) => {
 };
 
 const add_role_skill = async (req, res) => {
-  console.log(req.body.data);
+    const {RoleId,department,skill}=req.body.data
   try {
-    const resp = await prisma.RoleSkill.create({ data: req.body.data });
+    const array=[]
+    skill.forEach(element => {
+        const d={}
+        d["RoleId"]=RoleId
+        d["department"]=department
+        d["skillId"]=element.id
+        array.push(d)
+
+    });
+    console.log(array.length)
+    const resp = await prisma.RoleSkill.createMany({ data: array });
     res.send({ msg: "Skill Added" });
   } catch (e) {
+    console.log(e)
     res.status(403).send({ msg: e });
   }
 };

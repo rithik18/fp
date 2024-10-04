@@ -120,16 +120,14 @@ const Admin_add_role_skill = () => {
     }
   };
   const handleAddSkill = async () => {
+    console.log(role,department,selectedSkills)
+ 
     const token = await Cookies.get("token");
-    const skillInput = document.getElementById("skill") as HTMLInputElement;
-    const skill = skillInput.value;
-    const descInput = document.getElementById("message") as HTMLInputElement;
-    const desc = descInput.value;
+    
     var data = {
-      name: skill,
-      desc: desc,
-      created_at: new Date().toISOString(),
-      updated_at: new Date().toISOString(),
+      RoleId: role,
+      department: department,
+      skill:selectedSkills
     };
     const reqOptions = {
       url: "http://localhost:3000/admin/add_role_skill",
@@ -229,12 +227,33 @@ const Admin_add_role_skill = () => {
       const response = await axios.request(reqOptions);
       if (response.status == 200) {
         console.log(response.data.data);
-        setskillData(response.data.data);
-        seta(response.data.data);
-        setb(response.data.data.slice(0, c));
-        setpc(Math.ceil(response.data.data.length / c));
-        setd(response.data.data.length);
-        // console.log(response.data.data.length,response.data.data.length/c,c,p,pc,"hell")
+        var groupedData = response.data.data.reduce((acc:any, item:any) => {
+          const key = `${item.RoleId}-${item.department}`;
+          if (!acc[key]) {
+              acc[key] = {
+                  RoleId: item.RoleId,
+                  RoleName:roleData.find((e)=>e.id===item.RoleId).name,
+                  department: item.department,
+                  skills: []
+              };
+          }
+          acc[key].skills.push({
+              skillId: item.skillId,
+              SkillName:skillDataDrop.find((e)=>e.id===item.skillId).name
+              // item.skillId
+          });
+          return acc;
+      }, {});
+      
+      console.log(Object.values(groupedData));
+      groupedData=Object.values(groupedData)
+
+        setskillData(groupedData);
+        seta(groupedData);
+        setb(groupedData.slice(0, c));
+        setpc(Math.ceil(groupedData.length / c));
+        setd(groupedData.length);
+
       }
     } catch (e) {
       toast.error(e as String);
@@ -280,23 +299,6 @@ const Admin_add_role_skill = () => {
     }
   }, []);
 
-  useEffect(() => {
-    validate();
-    console.log(Cookies.get("role"));
-    if (
-      Cookies.get("role")?.toUpperCase() === "ADMIN" &&
-      Cookies.get("auth") == "true"
-    ) {
-      n("/add_role_skill");
-    } else if (
-      Cookies.get("role")?.toUpperCase() !== "ADMIN" &&
-      Cookies.get("auth") == "true"
-    ) {
-      n("/user");
-    } else {
-      n("/");
-    }
-  }, []);
 
   const n = useNavigate();
   return (
@@ -368,34 +370,6 @@ const Admin_add_role_skill = () => {
                 </DropdownMenuRadioGroup>
               </DropdownMenuContent>
             </DropdownMenu>
-            {/* <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button>Select Skill</Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent className="w-full">
-                <DropdownMenuLabel>Skillset</DropdownMenuLabel>
-                <DropdownMenuSeparator />
-                <ScrollArea className="h-[200px] w-[350px] rounded-md border p-4">
-                {skillDataDrop.map((e, i) => {
-                  return (
-                    <>
-                      <DropdownMenuCheckboxItem
-                      checked={skillDataDropbool[i]}
-                      onCheckedChange={(f) => {
-                        var d = [...skillDataDropbool];
-                        d[i] = f;
-                        setskillDataDropbool(d);
-                        // console.log(f, i, d[i]);
-                      }}
-                      >
-                        {e.name}
-                      </DropdownMenuCheckboxItem>
-                    </>
-                  );
-                })}
-                </ScrollArea>
-              </DropdownMenuContent>
-            </DropdownMenu> */}
             {/* Dropdown to selet skill */}
             <DropdownMenu open={open} onOpenChange={setOpen}>
               <DropdownMenuTrigger asChild>
@@ -539,9 +513,9 @@ const Admin_add_role_skill = () => {
             <TableHeader>
               <TableRow>
                 <TableHead className="text-left">Sno</TableHead>
-                <TableHead>Skill ID</TableHead>
-                <TableHead>Name</TableHead>
-                <TableHead>Description</TableHead>
+                <TableHead>Role Name</TableHead>
+                <TableHead>Department</TableHead>
+                <TableHead>Skills</TableHead>
                 <TableHead></TableHead>
                 <TableHead></TableHead>
               </TableRow>
@@ -551,9 +525,17 @@ const Admin_add_role_skill = () => {
                 return (
                   <TableRow key={e.id}>
                     <TableCell className="font-medium">{sno + 1}</TableCell>
-                    <TableCell>{e.id}</TableCell>
-                    <TableCell>{e.name}</TableCell>
-                    <TableCell>{e.desc}</TableCell>
+                    <TableCell>{e.RoleName}</TableCell>
+                    <TableCell>{e.department}</TableCell>
+                    <TableCell>
+                    <div className="grid grid-cols-3 gap-2">
+                    {e.skills.map((skill:any) => (
+                    <Badge key={skill.skillId} className="rounded-full justify-center"variant="secondary">
+                      {skill.SkillName}
+                    </Badge>
+                  ))}
+                  </div>
+                    </TableCell>
                     <TableCell>
                       <PencilLine
                         size={20}
