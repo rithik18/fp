@@ -94,6 +94,28 @@ const Admin_add_user = () => {
   const [fileName, setFileName] = useState("");
   const [latestFile, setLatestFile] = useState(null);
   const fileInputRef = useRef(null);
+  const [a, seta] = useState([]);
+  const [b, setb] = useState([]);
+  const [c, setc] = useState(10);
+  const [p, setp] = useState(1);
+  const [pc, setpc] = useState(1);
+  const [d, setd] = useState(1);
+  useEffect(() => {
+    const ini = async () => {
+      console.log("first");
+      console.log((p - 1) * c, (p - 1) * c + c);
+      setb(a.slice((p - 1) * c, (p - 1) * c + c));
+    };
+    ini();
+  }, [p,department1,role1]);
+  useEffect(() => {
+    const ini = async () => {
+      setb(a.slice(0, c));
+      setpc(a.length / c);
+      setp(1);
+    };
+    ini();
+  }, [c,department1,role1]);
   
   useEffect(() => {
 

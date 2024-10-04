@@ -36,7 +36,6 @@ const Login = () => {
         data: { email: email },
       };
       let response = await axios.request(reqOptions).then(async (e) => {
-        // alert(e)
         let reqOptions;
         Cookies.set("role", e.data.department);
         if (e.data.department?.toUpperCase() === "ADMIN") {
@@ -66,8 +65,13 @@ const Login = () => {
       } else {
         n("/user");
       }
-    } catch (e) {
-      toast.error(e as String);
+    } catch (e:any) {
+      // alert(e)
+      if(e.status==404 || e.status==403){
+        toast.error(`User Not Found`);
+      }else{
+        toast.error(`${e}`);
+      }
     }
   };
   return (
