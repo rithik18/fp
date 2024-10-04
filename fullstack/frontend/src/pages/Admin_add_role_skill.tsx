@@ -53,6 +53,7 @@ import {
   X,
 } from "lucide-react";
 import { Badge } from "../components/ui/badge";
+import ClimbingBoxLoader from "react-spinners/ClimbingBoxLoader";
 
 const Admin_add_role_skill = () => {
   const [department, setDepartment] = useState("OTHER");
@@ -76,58 +77,60 @@ const Admin_add_role_skill = () => {
   const [pc, setpc] = useState(1);
   const [d, setd] = useState(1);
 
-  const getAllrole = async () => {
-    const token = await Cookies.get("token");
-    const reqOptions = {
-      url: "http://localhost:3000/admin/view_role",
-      method: "POST",
-      data: { token: token },
-    };
-    console.log(reqOptions);
+  const [loading, setloading] = useState(true)
+  // const getAllrole = async () => {
+  //   const token = await Cookies.get("token");
+  //   const reqOptions = {
+  //     url: "http://localhost:3000/admin/view_role",
+  //     method: "POST",
+  //     data: { token: token },
+  //   };
+  //   console.log(reqOptions);
 
-    try {
-      const response = await axios.request(reqOptions);
-      if (response.status == 200) {
-        console.log(response.data.data);
-        setroleData(response.data.data);
+  //   try {
+  //     const response = await axios.request(reqOptions);
+  //     if (response.status == 200) {
+  //       console.log(response.data.data);
+  //       setroleData(response.data.data);
 
-        // console.log(response.data.data.length,response.data.data.length/c,c,p,pc,"hell")
-      }
-    } catch (e) {
-      toast.error(e as String);
-    }
-  };
-  const getAllSkill = async () => {
-    const token = await Cookies.get("token");
-    const reqOptions = {
-      url: "http://localhost:3000/admin/view_skill",
-      method: "POST",
-      data: { token: token },
-    };
-    console.log(reqOptions);
+  //       // console.log(response.data.data.length,response.data.data.length/c,c,p,pc,"hell")
+  //     }
+  //   } catch (e) {
+  //     toast.error(e as String);
+  //   }
+  // };
 
-    try {
-      const response = await axios.request(reqOptions);
-      if (response.status == 200) {
-        console.log(response.data.data);
-        setskillDataDrop(response.data.data);
-        const array = new Array(response.data.data.length).fill(false);
-        setskillDataDropbool(array);
-        // console.log(array)
-      }
-    } catch (e) {
-      toast.error(e as String);
-    }
-  };
+  // const getAllSkill = async () => {
+  //   const token = await Cookies.get("token");
+  //   const reqOptions = {
+  //     url: "http://localhost:3000/admin/view_skill",
+  //     method: "POST",
+  //     data: { token: token },
+  //   };
+  //   console.log(reqOptions);
+
+  //   try {
+  //     const response = await axios.request(reqOptions);
+  //     if (response.status == 200) {
+  //       console.log(response.data.data);
+  //       setskillDataDrop(response.data.data);
+  //       const array = new Array(response.data.data.length).fill(false);
+  //       setskillDataDropbool(array);
+  //       // console.log(array)
+  //     }
+  //   } catch (e) {
+  //     toast.error(e as String);
+  //   }
+  // };
   const handleAddSkill = async () => {
-    console.log(role,department,selectedSkills)
- 
+    console.log(role, department, selectedSkills);
+
     const token = await Cookies.get("token");
-    
+
     var data = {
       RoleId: role,
       department: department,
-      skill:selectedSkills
+      skill: selectedSkills,
     };
     const reqOptions = {
       url: "http://localhost:3000/admin/add_role_skill",
@@ -140,7 +143,8 @@ const Admin_add_role_skill = () => {
       const response = await axios.request(reqOptions);
       if (response.status == 200) {
         toast.success("Skill added");
-        getAllRoleSkill();
+        // getAllRoleSkill();
+        fetchAllData();
       }
     } catch (e) {
       if (e!.status == 403) {
@@ -168,7 +172,8 @@ const Admin_add_role_skill = () => {
       const response = await axios.request(reqOptions);
       if (response.status == 200) {
         toast.success("Skill Edited");
-        getAllRoleSkill();
+        // getAllRoleSkill();
+        fetchAllData()
         seteditskillname("");
         seteditskillmsg("");
         const skillInput = document.getElementById(
@@ -203,7 +208,8 @@ const Admin_add_role_skill = () => {
       const response = await axios.request(reqOptions);
       if (response.status == 200) {
         toast.success("Skill Deleted");
-        getAllRoleSkill();
+        // getAllRoleSkill();
+        fetchAllData()
       }
     } catch (e) {
       if (e!.status == 403) {
@@ -214,51 +220,62 @@ const Admin_add_role_skill = () => {
       }
     }
   };
-  const getAllRoleSkill = async () => {
-    const token = await Cookies.get("token");
-    const reqOptions = {
-      url: "http://localhost:3000/admin/view_role_skill",
-      method: "POST",
-      data: { token: token },
-    };
-    console.log(reqOptions);
+  // const getAllRoleSkill = async () => {
+  //   const token = Cookies.get("token");
+  //   getAllrole();
+  //   getAllSkill();
+  //   const reqOptions = {
+  //     url: "http://localhost:3000/admin/view_role_skill",
+  //     method: "POST",
+  //     data: { token: token },
+  //   };
+  //   console.log(reqOptions, "hell");
 
-    try {
-      const response = await axios.request(reqOptions);
-      if (response.status == 200) {
-        console.log(response.data.data);
-        var groupedData = response.data.data.reduce((acc:any, item:any) => {
-          const key = `${item.RoleId}-${item.department}`;
-          if (!acc[key]) {
-              acc[key] = {
-                  RoleId: item.RoleId,
-                  RoleName:roleData.find((e)=>e.id===item.RoleId).name,
-                  department: item.department,
-                  skills: []
-              };
-          }
-          acc[key].skills.push({
-              skillId: item.skillId,
-              SkillName:skillDataDrop.find((e)=>e.id===item.skillId).name
-              // item.skillId
-          });
-          return acc;
-      }, {});
-      
-      console.log(Object.values(groupedData));
-      groupedData=Object.values(groupedData)
+  //   try {
+  //     const response = await axios.request(reqOptions);
+  //     if (response.status == 200) {
+  //       console.log(response.data.data);
+  //       setTimeout(() => {
 
-        setskillData(groupedData);
-        seta(groupedData);
-        setb(groupedData.slice(0, c));
-        setpc(Math.ceil(groupedData.length / c));
-        setd(groupedData.length);
+  //         var groupedData = response.data.data.reduce((acc: any, item: any) => {
+  //           const key = `${item.RoleId}-${item.department}`;
+        
+  //           // Always initialize acc[key]
+  //           if (!acc[key]) {
+  //               console.log("in get all roles skill3");
+  //               acc[key] = {
+  //                   RoleId: item.RoleId,
+  //                   RoleName: roleData.find((e) => e.id === item.RoleId)?.name,
+  //                   department: item.department,
+  //                   skills: [], // Initialize skills array
+  //               };
+  //           }
+        
+  //           console.log("in get all roles skill5");
+  //           // Now it's safe to push into skills
+  //           acc[key].skills.push({
+  //               skillId: item.skillId,
+  //               SkillName: skillDataDrop.find((e) => e.id === item.skillId)?.name,
+  //           });
+        
+  //           return acc;
+  //       }, {});
+  //         console.log(Object.values(groupedData));
+  //         groupedData = Object.values(groupedData);
 
-      }
-    } catch (e) {
-      toast.error(e as String);
-    }
-  };
+  //         setskillData(groupedData);
+  //         seta(groupedData);
+  //         setb(groupedData.slice(0, c));
+  //         setpc(Math.ceil(groupedData.length / c));
+  //         setd(groupedData.length);
+  //         console.log("in get all roles skill1");
+  //         setloading(false)
+  //       }, 5000);
+  //     }
+  //   } catch (e) {
+  //     toast.error(e as String);
+  //   }
+  // };
   const clearAll = () => {
     setskillDataDropbool(new Array(skillDataDrop.length).fill(false));
   };
@@ -278,11 +295,92 @@ const Admin_add_role_skill = () => {
     };
     ini();
   }, [c]);
+  const fetchAllData = async () => {
+    const token = Cookies.get("token");
+  
+    // Prepare requests
+    const requests = [
+      axios.post("http://localhost:3000/admin/view_role", { token }),
+      axios.post("http://localhost:3000/admin/view_skill", { token }),
+      axios.post("http://localhost:3000/admin/view_role_skill", { token }),
+    ];
+  
+    try {
+      // Execute requests in parallel
+      const [roleResponse, skillResponse, roleSkillResponse] = await Promise.all(requests);
+  
+      // Handle role data
+      if (roleResponse.status === 200) {
+        console.log(roleResponse.data.data);
+        setroleData(roleResponse.data.data);
+      }
+  
+      // Handle skill data
+      if (skillResponse.status === 200) {
+        console.log(skillResponse.data.data);
+        setskillDataDrop(skillResponse.data.data);
+        const array = new Array(skillResponse.data.data.length).fill(false);
+        setskillDataDropbool(array);
+      }
+  
+      // Handle role skill data
+      if (roleSkillResponse.status === 200) {
+        console.log(roleSkillResponse.data.data);
+        
+        const groupedData = roleSkillResponse.data.data.reduce((acc: any, item: any) => {
+          const key = `${item.RoleId}-${item.department}`;
+          
+          // Always initialize acc[key]
+          if (!acc[key]) {
+            console.log("in get all roles skill3");
+            acc[key] = {
+              RoleId: item.RoleId,
+              RoleName: roleResponse.data.data.find((e:any) => e.id === item.RoleId)?.name,
+              department: item.department,
+              skills: [],
+            };
+          }
+          
+          console.log("in get all roles skill5");
+          acc[key].skills.push({
+            skillId: item.skillId,
+            SkillName: skillResponse.data.data.find((e:any) => e.id === item.skillId)?.name,
+          });
+          
+          return acc;
+        }, {});
+  
+        console.log(Object.values(groupedData));
+        const skillDataArray:any = Object.values(groupedData);
+        setskillData(skillDataArray);
+        seta(skillDataArray);
+        setb(skillDataArray.slice(0, c));
+        setpc(Math.ceil(skillDataArray.length / c));
+        setd(skillDataArray.length);
+        console.log("in get all roles skill1");
+        setloading(false);
+      }
+    } catch (e) {
+      toast.error(e as String);
+    }
+  };
+  
+  // Call this function in your useEffect
   useEffect(() => {
+    setloading(true); // Start loading
+    fetchAllData(); // Fetch all data
+  }, []);
+  
+  useEffect(() => {
+    console.log("in use effect");
+    // const ini=async()=>{
+    //   await getAllrole();
+    //   await getAllSkill();
+    // }
+    // ini();
+    // getAllRoleSkill();
+    fetchAllData();
     validate();
-    getAllRoleSkill();
-    getAllrole();
-    getAllSkill();
     console.log(Cookies.get("role"));
     if (
       Cookies.get("role")?.toUpperCase() === "ADMIN" &&
@@ -298,7 +396,6 @@ const Admin_add_role_skill = () => {
       n("/");
     }
   }, []);
-
 
   const n = useNavigate();
   return (
@@ -504,7 +601,10 @@ const Admin_add_role_skill = () => {
             </Button>
           </div>
         )}
-
+        {
+          loading?
+          <ClimbingBoxLoader className="mx-auto col-span-2  my-auto" />
+          :
         <div className="col-span-2 overflow-auto">
           <p className="flex justify-self-start  text-lg font-bold">
             {d} Results &nbsp;&nbsp;&nbsp; <UserCog />
@@ -528,13 +628,17 @@ const Admin_add_role_skill = () => {
                     <TableCell>{e.RoleName}</TableCell>
                     <TableCell>{e.department}</TableCell>
                     <TableCell>
-                    <div className="grid grid-cols-3 gap-2">
-                    {e.skills.map((skill:any) => (
-                    <Badge key={skill.skillId} className="rounded-full justify-center"variant="secondary">
-                      {skill.SkillName}
-                    </Badge>
-                  ))}
-                  </div>
+                      <div className="grid grid-cols-3 gap-2">
+                        {e.skills.map((skill: any) => (
+                          <Badge
+                            key={skill.skillId}
+                            className="rounded-full justify-center"
+                            variant="secondary"
+                          >
+                            {skill.SkillName}
+                          </Badge>
+                        ))}
+                      </div>
                     </TableCell>
                     <TableCell>
                       <PencilLine
@@ -613,6 +717,7 @@ const Admin_add_role_skill = () => {
             </Button>
           </div>
         </div>
+        }
       </div>
       {/* <Datatable/> */}
     </div>

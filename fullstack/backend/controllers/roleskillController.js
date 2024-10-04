@@ -22,6 +22,7 @@ const add_role_skill = async (req, res) => {
     console.log(array.length)
     const resp = await prisma.RoleSkill.createMany({ data: array });
     res.send({ msg: "Skill Added" });
+    console.log("hell")
   } catch (e) {
     console.log(e)
     res.status(403).send({ msg: e });
