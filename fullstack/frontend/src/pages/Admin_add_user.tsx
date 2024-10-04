@@ -514,7 +514,7 @@ const Admin_add_user = () => {
               ref={fileInputRef}
             />
             <Button
-              className="hover:bg-blue-700 hover:text-white w-2/5"
+              className="hover:bg-red-700 hover:text-white w-2/5"
               variant={"link"}
               onClick={() => {
                 setLatestFile(null);
@@ -696,7 +696,7 @@ const Admin_add_user = () => {
               <div>
                 <Button onClick={handleMultipleSubmit}>Submit</Button>
                 <Button
-                  className="hover:bg-blue-700 hover:text-white"
+                  className="hover:bg-red-700 hover:text-white"
                   variant={"link"}
                   onClick={() => {
                     setLatestFile(null);

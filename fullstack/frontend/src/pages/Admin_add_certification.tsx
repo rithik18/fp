@@ -273,7 +273,7 @@ const Admin_add_certification = () => {
                 <div className="flex justify-around items-center">
                 <Label htmlFor="certificate">Is it a Certification course</Label> <Switch id="certificate" onClick={()=>{seteditiscertification(!editiscertification)}} checked={editiscertification} />
                 </div>
-                <Button className="hover:bg-blue-700 hover:text-white" variant={"link"} onClick={() => {
+                <Button className="hover:bg-red-700 hover:text-white" variant={"link"} onClick={() => {
                       // toast.warning("hell")
                       seteditcertificationname("");
                       seteditcertificationmsg("");

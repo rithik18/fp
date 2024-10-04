@@ -21,7 +21,7 @@ const add_role_skill = async (req, res) => {
     });
     console.log(array.length)
     const resp = await prisma.RoleSkill.createMany({ data: array });
-    res.send({ msg: "Skill Added" });
+    res.send({ msg: "Roles's Skill Added" });
     console.log("hell")
   } catch (e) {
     console.log(e)
@@ -32,22 +32,40 @@ const update_role_skill = async (req, res) => {
   console.log(req.body.data);
   try {
     const resp = await prisma.RoleSkill.update({ where: { id: req.body.id },data:{...req.body.data} });
-    res.send({ msg: "Skill Updated" });
+    res.send({ msg: "Roles's Skill Updated" });
   } catch (e) {
     console.log(e);
     res.status(403).send({ msg: e });
   }
 };
 const delete_role_skill = async (req, res) => {
-    console.log(req.body.data);
+    const { RoleId, department, skills } = req.body.data;
+  
     try {
-      const resp = await prisma.RoleSkill.delete({ where: { id: req.body.id }});
-      res.send({ msg: "Skill Deleted" });
+      const deletePromises = skills.map(async (element) => {
+        return prisma.RoleSkill.delete({
+          where: {
+            RoleId_skillId_department: {
+              RoleId: RoleId,
+              skillId: element.skillId,
+              department: department,
+            },
+          },
+        });
+      });
+  
+      // Wait for all delete operations to complete
+      await Promise.all(deletePromises);
+  
+      res.send({ msg: "Skills deleted successfully" });
+      console.log("Deletion completed");
     } catch (e) {
       console.log(e);
-      res.status(403).send({ msg: e });
+      res.status(403).send({ msg: e.message || "An error occurred during deletion" });
     }
   };
+  
+  
 module.exports = {
   view_role_skill,
   add_role_skill,

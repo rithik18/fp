@@ -265,7 +265,7 @@ const Admin_add_role = () => {
                 seteditrolemsg(e.target.value);
               }}
             />
-            <Button className="hover:bg-blue-700 hover:text-white" variant={"link"} onClick={() => {
+            <Button className="hover:bg-red-700 hover:text-white" variant={"link"} onClick={() => {
                   // toast.warning("hell")
                   seteditrolename("");
                   seteditrolemsg("");

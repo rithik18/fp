@@ -197,10 +197,11 @@ const Admin_add_role_skill = () => {
   };
   const handleDeleteSkill = async (sno: any) => {
     const token = await Cookies.get("token");
+    console.log(skillData[sno],sno,"indelete")
     const reqOptions = {
       url: "http://localhost:3000/admin/delete_role_skill",
       method: "POST",
-      data: { token: token, id: skillData[sno].id },
+      data: { token: token, data:skillData[sno] },
     };
     console.log(reqOptions);
 
@@ -577,7 +578,7 @@ const Admin_add_role_skill = () => {
               }}
             />
             <Button
-              className="hover:bg-blue-700 hover:text-white"
+              className="hover:bg-red-700 hover:text-white"
               variant={"link"}
               onClick={() => {
                 // toast.warning("hell")
