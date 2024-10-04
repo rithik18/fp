@@ -26,6 +26,7 @@ import {
   ChevronLeft,
   UserRoundSearch,
   ChevronRight,
+  UserRoundCheck,
 } from "lucide-react";
 import axios from "axios";
 import { toast } from "react-toastify";
@@ -299,6 +300,11 @@ const Admin_add_user = () => {
         console.log(response.data.data, "alluser");
         setuserData(response.data.data);
         setsearchuserData(response.data.data);
+        setsearchuserData(userData);
+        seta(response.data.data);
+        setb(response.data.data.slice(0, c));
+        setpc(Math.ceil(response.data.data.length / c));
+        setd(response.data.data.length);
       }
     } catch (e) {
       toast.error(e as String);
@@ -528,7 +534,8 @@ const Admin_add_user = () => {
         <div className="px-4 col-span-2">
           {latestFile == null ? (
             <div>
-              <div className="grid grid-cols-3 gap-4">
+              {/* Search bar with dropdown,usercount */}
+              <div className="grid grid-cols-4 gap-4 content-center justify-items-center">
                 <Input
                   type="text"
                   placeholder={"Search User"}
@@ -608,7 +615,13 @@ const Admin_add_user = () => {
                     </DropdownMenuRadioGroup>
                   </DropdownMenuContent>
                 </DropdownMenu>
+                <div className="flex justify-evenly gap-4">
+                <p><span className="text-center text-lg font-extrabold tracking-tight lg:text-xl pb-8 mx-auto">{d}</span><span>&nbsp;&nbsp;-&nbsp;&nbsp;User</span></p>
+                <div><UserRoundCheck/></div>
+                </div>
+
               </div>
+              {/* Profile Card */}
               <div className="grid grid-cols-3 gap-4">
                 {b.map((card: any, index) => {
                   const roles: any = roleData.find((e: any) => {
@@ -618,6 +631,7 @@ const Admin_add_user = () => {
                   return <Cards props={card} roles={roles.name} />;
                 })}
               </div>
+              {/* Pagination */}
               <div className="flex items-center mt-8 justify-evenly">
                 <Button
                   variant={"link"}
