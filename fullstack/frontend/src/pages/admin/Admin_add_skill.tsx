@@ -1,17 +1,17 @@
 import { useEffect, useState } from "react";
-import { validate } from "../utils/validation";
+import { validate } from "../../utils/validation";
 import { useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
-import Navbar from "../components/navbar";
-
+import Navbar from "../../components/navbar";
 import {
   Table,
   TableBody,
+  TableCaption,
   TableCell,
   TableHead,
   TableHeader,
   TableRow,
-} from "../components/ui/table";
+} from "../../components/ui/table";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -22,23 +22,24 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
   AlertDialogTrigger,
-} from "../components/ui/alert-dialog";
+} from "../../components/ui/alert-dialog";
 
-import { Textarea } from "../components/ui/textarea";
-import { Input } from "../components/ui/input";
-import { Label } from "../components/ui/label";
-import { Button } from "../components/ui/button";
-import { H2 } from "../components/ui/Typography";
+import { Textarea } from "../../components/ui/textarea";
+import { Input } from "../../components/ui/input";
+import { Label } from "../../components/ui/label";
+import { Button } from "../../components/ui/button";
+import { H2 } from "../../components/ui/Typography";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
-import { ChevronLeft, ChevronRight, PencilLine, Trash2, BriefcaseBusiness, X } from "lucide-react";
+import { ChevronLeft, ChevronRight, PencilLine, Trash2, UserCog, X } from "lucide-react";
 
-const Admin_add_role = () => {
-  const [roleData, setroleData] = useState<any[]>([]);
-  const [editrole, seteditrole] = useState(true);
-  const [editrolename, seteditrolename] = useState("");
-  const [editrolemsg, seteditrolemsg] = useState("");
-  const [editrolesno, seteditrolesno] = useState(-1);
+const Admin_add_skill = () => {
+  const [skillData, setskillData] = useState<any[]>([]);
+  const [editskill, seteditskill] = useState(true);
+  const [editskillname, seteditskillname] = useState("");
+  const [editskillmsg, seteditskillmsg] = useState("");
+  const [editskillsno, seteditskillsno] = useState(-1);
+  const [deleteskillsno, setdeleteskillsno] = useState(-1);
 
   const [a, seta] = useState([]);
   const [b, setb] = useState([]);
@@ -47,20 +48,20 @@ const Admin_add_role = () => {
   const [pc, setpc] = useState(1);
   const [d, setd] = useState(1);
 
-  const handleAddrole = async () => {
+  const handleAddSkill = async () => {
     const token = await Cookies.get("token");
-    const roleInput = document.getElementById("role") as HTMLInputElement;
-    const role = roleInput.value;
+    const skillInput = document.getElementById("skill") as HTMLInputElement;
+    const skill = skillInput.value;
     const descInput = document.getElementById("message") as HTMLInputElement;
     const desc = descInput.value;
     var data = {
-      name: role,
+      name: skill,
       desc: desc,
       created_at: new Date().toISOString(),
       updated_at: new Date().toISOString(),
     };
     const reqOptions = {
-      url: "http://localhost:3000/admin/add_role",
+      url: "http://localhost:3000/admin/add_skill",
       method: "POST",
       data: { token: token, data: data },
     };
@@ -69,85 +70,85 @@ const Admin_add_role = () => {
     try {
       const response = await axios.request(reqOptions);
       if (response.status == 200) {
-        toast.success("role added");
-        getAllrole();
+        toast.success("Skill added");
+        getAllSkill();
       }
     } catch (e) {
       if (e!.status == 403) {
-        toast.error("role exsist");
+        toast.error("Skill exsist");
       } else {
         toast.error(`${e}`);
       }
     }
   };
-  const handleUpdaterole = async () => {
+  const handleUpdateSkill = async () => {
     const token = await Cookies.get("token");
     var data = {
-      name: editrolename,
-      desc: editrolemsg,
+      name: editskillname,
+      desc: editskillmsg,
       updated_at: new Date().toISOString(),
     };
     const reqOptions = {
-      url: "http://localhost:3000/admin/edit_role",
+      url: "http://localhost:3000/admin/edit_skill",
       method: "POST",
-      data: { token: token, data: data, id: roleData[editrolesno].id },
+      data: { token: token, data: data, id: skillData[editskillsno].id },
     };
     console.log(reqOptions);
 
     try {
       const response = await axios.request(reqOptions);
       if (response.status == 200) {
-        toast.success("role Edited");
-        getAllrole();
-        seteditrolename("");
-        seteditrolemsg("");
-        const roleInput = document.getElementById(
-          "editrole"
+        toast.success("Skill Edited");
+        getAllSkill();
+        seteditskillname("");
+        seteditskillmsg("");
+        const skillInput = document.getElementById(
+          "editskill"
         ) as HTMLInputElement;
-        roleInput.value = "";
+        skillInput.value = "";
         const descInput = document.getElementById(
           "editmessage"
         ) as HTMLInputElement;
         descInput.value = "";
-        seteditrole(!editrole);
+        seteditskill(!editskill);
       }
     } catch (e) {
       if (e!.status == 403) {
         console.log(e);
-        toast.error("role exsist");
+        toast.error("Skill exsist");
       } else {
         toast.error(`${e}`);
       }
     }
   };
-  const handleDeleterole = async (sno :any) => {
+  const handleDeleteSkill = async (sno:any) => {
     const token = await Cookies.get("token");
     const reqOptions = {
-      url: "http://localhost:3000/admin/delete_role",
+      url: "http://localhost:3000/admin/delete_skill",
       method: "POST",
-      data: { token: token, id: roleData[sno].id },
+      data: { token: token, id: skillData[sno].id },
     };
     console.log(reqOptions);
 
     try {
       const response = await axios.request(reqOptions);
       if (response.status == 200) {
-        toast.success("role Deleted");
-        getAllrole();
+        toast.success("Skill Deleted");
+        getAllSkill();
       }
     } catch (e) {
       if (e!.status == 403) {
         console.log(e);
-        toast.error("role exsist");
+        toast.error("Skill exsist");
       } else {
         toast.error(`${e}`);
       }
     }
   };
-  const getAllrole = async () => {
+  const getAllSkill = async () => {
     const token = await Cookies.get("token");
     const reqOptions = {
-      url: "http://localhost:3000/admin/view_role",
+      url: "http://localhost:3000/admin/view_skill",
       method: "POST",
       data: { token: token },
     };
@@ -157,7 +158,7 @@ const Admin_add_role = () => {
       const response = await axios.request(reqOptions);
       if (response.status == 200) {
         console.log(response.data.data);
-        setroleData(response.data.data);
+        setskillData(response.data.data);
         seta(response.data.data);
         setb(response.data.data.slice(0, c));
         setpc(Math.ceil(response.data.data.length / c));
@@ -186,14 +187,13 @@ const Admin_add_role = () => {
   }, [c]);
   useEffect(() => {
     validate();
-    getAllrole();
+    getAllSkill();
     console.log(Cookies.get("role"));
     if (
       Cookies.get("role")?.toUpperCase() === "ADMIN" &&
       Cookies.get("auth") == "true"
     ) {
-      // alert("hell")
-      n("/add_role");
+      n("/add_skill");
     } else if (
       Cookies.get("role")?.toUpperCase() !== "ADMIN" &&
       Cookies.get("auth") == "true"
@@ -209,91 +209,91 @@ const Admin_add_role = () => {
     <div>
       <ToastContainer />
       <Navbar />
-      <p className="text-center scroll-m-20 text-3xl font-extrabold tracking-tight lg:text-4xl pb-8 mx-auto">Roles Section</p>
+      <p className="text-center scroll-m-20 text-3xl font-extrabold tracking-tight lg:text-4xl pb-8 mx-auto">Skills Section</p>
       <div className="grid grid-cols-3 gap-4 mx-auto px-4">
-        {editrole ? (
+        {editskill ? (
           <div className="grid w-full max-w-sm items-center h-1/2 gap-4 p-4">
-            <H2>Add Roles</H2>
-            <Label htmlFor="role">Role Name</Label>
-            <Input type="role" id="role" placeholder="Role Name" />
+            <H2>Add Skills</H2>
+            <Label htmlFor="skill">Skill Name</Label>
+            <Input type="skill" id="skill" placeholder="Skill Name" />
 
-            <Label htmlFor="message">Role Description</Label>
+            <Label htmlFor="message">Skill Description</Label>
             <Textarea placeholder="Type your description here." id="message" />
-            <Button variant={"default"} onClick={handleAddrole}>
+            <Button variant={"default"} onClick={handleAddSkill}>
               Submit
             </Button>
           </div>
         ) : (
           <div className="grid w-full max-w-sm items-center h-1/2 gap-4 p-4">
             <div className="flex justify-between items-center">
-              <H2 className="max-w-full">Edit Roles</H2>
+              <H2 className="max-w-full">Edit Skills</H2>
               <X
                 size={20}
                 onClick={() => {
                   // toast.warning("hell")
-                  seteditrolename("");
-                  seteditrolemsg("");
-                  const roleInput = document.getElementById(
-                    "editrole"
+                  seteditskillname("");
+                  seteditskillmsg("");
+                  const skillInput = document.getElementById(
+                    "editskill"
                   ) as HTMLInputElement;
-                  roleInput.value = "";
+                  skillInput.value = "";
                   const descInput = document.getElementById(
                     "editmessage"
                   ) as HTMLInputElement;
                   descInput.value = "";
-                  seteditrole(!editrole);
+                  seteditskill(!editskill);
                 }}
               />
             </div>
-            <Label htmlFor="editrole">Role Name</Label>
+            <Label htmlFor="editskill">Skill Name</Label>
             <Input
-              type="editrole"
-              id="editrole"
-              placeholder="Edit Role Name"
-              value={editrolename}
+              type="editskill"
+              id="editskill"
+              placeholder="edit Skill Name"
+              value={editskillname}
               onChange={(e: any) => {
-                seteditrolename(e.target.value);
+                seteditskillname(e.target.value);
               }}
             />
 
-            <Label htmlFor="editmessage">Role Description</Label>
+            <Label htmlFor="editmessage">Skill Description</Label>
             <Textarea
               placeholder="Type your description here."
               id="editmessage"
-              value={editrolemsg}
+              value={editskillmsg}
               onChange={(e: any) => {
-                seteditrolemsg(e.target.value);
+                seteditskillmsg(e.target.value);
               }}
             />
             <Button className="hover:bg-red-700 hover:text-white" variant={"link"} onClick={() => {
                   // toast.warning("hell")
-                  seteditrolename("");
-                  seteditrolemsg("");
-                  const roleInput = document.getElementById(
-                    "editrole"
+                  seteditskillname("");
+                  seteditskillmsg("");
+                  const skillInput = document.getElementById(
+                    "editskill"
                   ) as HTMLInputElement;
-                  roleInput.value = "";
+                  skillInput.value = "";
                   const descInput = document.getElementById(
                     "editmessage"
                   ) as HTMLInputElement;
                   descInput.value = "";
-                  seteditrole(!editrole);
+                  seteditskill(!editskill);
                 }}>
               Cancel
             </Button>
-            <Button variant={"default"} onClick={handleUpdaterole}>
+            <Button variant={"default"} onClick={handleUpdateSkill}>
               Update
             </Button>
           </div>
         )}
 
         <div className="col-span-2 overflow-auto">
-        <p className="flex justify-self-start  text-lg font-bold">{d} Results &nbsp;&nbsp;&nbsp; <BriefcaseBusiness /></p>
+          <p className="flex justify-self-start  text-lg font-bold">{d} Results &nbsp;&nbsp;&nbsp; <UserCog /></p>
           <Table>
             <TableHeader>
               <TableRow>
                 <TableHead className="text-left">Sno</TableHead>
-                <TableHead>Role ID</TableHead>
+                <TableHead>Skill ID</TableHead>
                 <TableHead>Name</TableHead>
                 <TableHead>Description</TableHead>
                 <TableHead></TableHead>
@@ -312,12 +312,12 @@ const Admin_add_role = () => {
                       <PencilLine
                         size={20}
                         onClick={() => {
-                          if (editrole) {
-                            seteditrole(false);
+                          if (editskill) {
+                            seteditskill(false);
                           }
-                          seteditrolename(roleData[sno].name);
-                          seteditrolemsg(roleData[sno].desc);
-                          seteditrolesno(sno);
+                          seteditskillname(skillData[sno].name);
+                          seteditskillmsg(skillData[sno].desc);
+                          seteditskillsno(sno);
                         }}
                       />
                     </TableCell>
@@ -333,18 +333,16 @@ const Admin_add_role = () => {
                             </AlertDialogTitle>
                             <AlertDialogDescription>
                               This action cannot be undone. This will
-                              permanently delete role.
+                              permanently delete skill.
                             </AlertDialogDescription>
                           </AlertDialogHeader>
                           <AlertDialogFooter>
                             <AlertDialogCancel>Cancel</AlertDialogCancel>
                             <AlertDialogAction
                               onClick={() => {
-                                handleDeleterole(sno)
-                                // setdeleterolesno(sno);
+                                // setdeleteskillsno(sno);
                                 // console.log(sno);
-                                // setTimeout(()=>{handleDeleterole();},1000)
-                                
+                                handleDeleteSkill(sno);
                               }}
                             >
                               Continue
@@ -387,4 +385,4 @@ const Admin_add_role = () => {
   );
 };
 
-export default Admin_add_role;
+export default Admin_add_skill;

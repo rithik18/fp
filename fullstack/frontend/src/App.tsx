@@ -1,13 +1,13 @@
 import { BrowserRouter,Routes,Route} from "react-router-dom";
 import Login from './pages/Login'
-import User from "./pages/User";
-import Admin from "./pages/Admin";
-import Admin_add_user from "./pages/Admin_add_user";
-import Admin_add_role from "./pages/Admin_add_role";
-import Admin_add_skill from "./pages/Admin_add_skill";
-import Admin_add_role_skill from "./pages/Admin_add_role_skill";
-import Admin_add_certification from "./pages/Admin_add_certification";
-import Admin_verify_certification from "./pages/Admin_verify_certification";
+import User from "./pages/user/User";
+import Admin from "./pages/admin/Admin";
+import Admin_add_user from "./pages/admin/Admin_add_user";
+import Admin_add_role from "./pages/admin/Admin_add_role";
+import Admin_add_skill from "./pages/admin/Admin_add_skill";
+import Admin_add_role_skill from "./pages/admin/Admin_add_role_skill";
+import Admin_add_certification from "./pages/admin/Admin_add_certification";
+import Admin_verify_certification from "./pages/admin/Admin_verify_certification";
 function App() {
 
 

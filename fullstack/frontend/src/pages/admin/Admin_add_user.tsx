@@ -1,18 +1,18 @@
 import { useEffect, useRef, useState } from "react";
-import { validate } from "../utils/validation";
+import { validate } from "../../utils/validation";
 import { useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
-import Navbar from "../components/navbar";
-import { Input } from "../components/ui/input";
-import { Label } from "../components/ui/label";
-import { Button } from "../components/ui/button";
+import Navbar from "../../components/navbar";
+import { Input } from "../../components/ui/input";
+import { Label } from "../../components/ui/label";
+import { Button } from "../../components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuRadioGroup,
   DropdownMenuRadioItem,
   DropdownMenuTrigger,
-} from "../components/ui/dropdown-menu";
+} from "../../components/ui/dropdown-menu";
 import {
   Table,
   TableBody,
@@ -20,7 +20,7 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "../components/ui/table";
+} from "../../components/ui/table";
 import {
   ChevronDown,
   ChevronLeft,
@@ -33,17 +33,17 @@ import { toast } from "react-toastify";
 import { format } from "date-fns";
 import { Calendar as CalendarIcon } from "lucide-react";
 
-import { cn } from "../lib/utils";
-import { Calendar } from "../components/ui/calendar";
-import Cards from "../components/Cards";
+import { cn } from "../../lib/utils";
+import { Calendar } from "../../components/ui/calendar";
+import Cards from "../../components/Cards";
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from "../components/ui/popover";
+} from "../../components/ui/popover";
 import readXlsxFile from "read-excel-file";
-import { H2, H4 } from "../components/ui/Typography";
-import { ScrollArea } from "../components/ui/scroll-area";
+import { H2, H4 } from "../../components/ui/Typography";
+import { ScrollArea } from "../../components/ui/scroll-area";
 
 const Admin_add_user = () => {
   const [roleData, setroleData] = useState([]);

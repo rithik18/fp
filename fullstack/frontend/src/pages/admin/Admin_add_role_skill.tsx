@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import { validate } from "../utils/validation";
+import { validate } from "../../utils/validation";
 import { useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
-import Navbar from "../components/navbar";
+import Navbar from "../../components/navbar";
 
 import {
   Table,
@@ -11,7 +11,7 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "../components/ui/table";
+} from "../../components/ui/table";
 import {
   DropdownMenu,
   DropdownMenuCheckboxItem,
@@ -21,7 +21,7 @@ import {
   DropdownMenuRadioItem,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "../components/ui/dropdown-menu";
+} from "../../components/ui/dropdown-menu";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -32,14 +32,14 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
   AlertDialogTrigger,
-} from "../components/ui/alert-dialog";
-import { ScrollArea } from "../components/ui/scroll-area";
+} from "../../components/ui/alert-dialog";
+import { ScrollArea } from "../../components/ui/scroll-area";
 
-import { Textarea } from "../components/ui/textarea";
-import { Input } from "../components/ui/input";
-import { Label } from "../components/ui/label";
-import { Button } from "../components/ui/button";
-import { H2 } from "../components/ui/Typography";
+import { Textarea } from "../../components/ui/textarea";
+import { Input } from "../../components/ui/input";
+import { Label } from "../../components/ui/label";
+import { Button } from "../../components/ui/button";
+import { H2 } from "../../components/ui/Typography";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import {
@@ -52,7 +52,7 @@ import {
   UserCog,
   X,
 } from "lucide-react";
-import { Badge } from "../components/ui/badge";
+import { Badge } from "../../components/ui/badge";
 import ClimbingBoxLoader from "react-spinners/ClimbingBoxLoader";
 
 const Admin_add_role_skill = () => {

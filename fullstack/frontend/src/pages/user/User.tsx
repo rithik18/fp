@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import { validate } from '../utils/validation';
+import { validate } from '../../utils/validation';
 import { useNavigate } from 'react-router-dom';
 import Cookies from "js-cookie";
 

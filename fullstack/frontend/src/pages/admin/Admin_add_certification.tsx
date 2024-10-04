@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
-import { validate } from "../utils/validation";
+import { validate } from "../../utils/validation";
 import { useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
-import Navbar from "../components/navbar";
-import { Switch } from "../components/ui/switch"
+import Navbar from "../../components/navbar";
+import { Switch } from "../../components/ui/switch"
 
 import {
   Table,
@@ -12,7 +12,7 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "../components/ui/table";
+} from "../../components/ui/table";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -23,13 +23,13 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
   AlertDialogTrigger,
-} from "../components/ui/alert-dialog";
+} from "../../components/ui/alert-dialog";
 
-import { Textarea } from "../components/ui/textarea";
-import { Input } from "../components/ui/input";
-import { Label } from "../components/ui/label";
-import { Button } from "../components/ui/button";
-import { H2 } from "../components/ui/Typography";
+import { Textarea } from "../../components/ui/textarea";
+import { Input } from "../../components/ui/input";
+import { Label } from "../../components/ui/label";
+import { Button } from "../../components/ui/button";
+import { H2 } from "../../components/ui/Typography";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import { ChevronLeft, ChevronRight, PencilLine, ShieldCheck, Trash2, UserCog, X,BookOpenCheck} from "lucide-react";
