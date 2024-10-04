@@ -62,6 +62,7 @@ model UserSkill {
   id      String   @id @default(auto()) @map("_id") @db.ObjectId 
   userId String @db.ObjectId
   skillId String @db.ObjectId
+  score Float
   department Department @default(OTHER)
   user   User   @relation(fields: [userId], references: [id])
   skill  Skill  @relation(fields: [skillId], references: [id])
