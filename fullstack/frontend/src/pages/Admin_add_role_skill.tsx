@@ -57,12 +57,17 @@ import ClimbingBoxLoader from "react-spinners/ClimbingBoxLoader";
 
 const Admin_add_role_skill = () => {
   const [department, setDepartment] = useState("OTHER");
+  const [department1, setDepartment1] = useState("OTHER");
   const [role, setrole] = useState("None");
+  const [role1, setrole1] = useState("None");
   const [roleData, setroleData] = useState<any[]>([]);
   const [skillDataDrop, setskillDataDrop] = useState<any[]>([]);
   const [skillDataDropbool, setskillDataDropbool] = useState<any[]>([]);
+  const [skillDataDropbool1, setskillDataDropbool1] = useState<any[]>([]);
   const [open, setOpen] = useState(false);
+  const [open1, setOpen1] = useState(false);
   const selectedSkills = skillDataDrop.filter((_, i) => skillDataDropbool[i]);
+  const selectedSkills1 = skillDataDrop.filter((_, i) => skillDataDropbool1[i]);
 
   const [skillData, setskillData] = useState<any[]>([]);
   const [editskill, seteditskill] = useState(true);
@@ -123,7 +128,11 @@ const Admin_add_role_skill = () => {
   //   }
   // };
   const handleAddSkill = async () => {
-    console.log(role, department, selectedSkills);
+    if(selectedSkills.length > 0){
+      toast.error("Select Atleast 1 skill")
+      return
+    }
+    console.log(role, department1, selectedSkills);
 
     const token = await Cookies.get("token");
 
@@ -157,34 +166,21 @@ const Admin_add_role_skill = () => {
   const handleUpdateSkill = async () => {
     const token = await Cookies.get("token");
     var data = {
-      name: editskillname,
-      desc: editskillmsg,
-      updated_at: new Date().toISOString(),
+      RoleId: role1,
+      department: department1,
+      skill: selectedSkills1,
     };
     const reqOptions = {
       url: "http://localhost:3000/admin/edit_role_skill",
       method: "POST",
-      data: { token: token, data: data, id: skillData[editskillsno].id },
+      data: { token: token, data: data },
     };
-    console.log(reqOptions);
-
+    console.log(selectedSkills1);
     try {
       const response = await axios.request(reqOptions);
       if (response.status == 200) {
         toast.success("Skill Edited");
-        // getAllRoleSkill();
         fetchAllData()
-        seteditskillname("");
-        seteditskillmsg("");
-        const skillInput = document.getElementById(
-          "editskill"
-        ) as HTMLInputElement;
-        skillInput.value = "";
-        const descInput = document.getElementById(
-          "editmessage"
-        ) as HTMLInputElement;
-        descInput.value = "";
-        seteditskill(!editskill);
       }
     } catch (e) {
       if (e!.status == 403) {
@@ -280,6 +276,9 @@ const Admin_add_role_skill = () => {
   const clearAll = () => {
     setskillDataDropbool(new Array(skillDataDrop.length).fill(false));
   };
+  const clearAll1 = () => {
+    setskillDataDropbool1(new Array(skillDataDrop.length).fill(false));
+  };
   useEffect(() => {
     const ini = async () => {
       console.log("first");
@@ -367,13 +366,14 @@ const Admin_add_role_skill = () => {
   };
   
   // Call this function in your useEffect
-  useEffect(() => {
-    setloading(true); // Start loading
-    fetchAllData(); // Fetch all data
-  }, []);
+  // useEffect(() => {
+  //   setloading(true); // Start loading
+  //   fetchAllData(); // Fetch all data
+  // }, []);
   
   useEffect(() => {
     console.log("in use effect");
+    setloading(true);
     // const ini=async()=>{
     //   await getAllrole();
     //   await getAllSkill();
@@ -468,7 +468,7 @@ const Admin_add_role_skill = () => {
                 </DropdownMenuRadioGroup>
               </DropdownMenuContent>
             </DropdownMenu>
-            {/* Dropdown to selet skill */}
+            {/* Dropdown to select skill */}
             <DropdownMenu open={open} onOpenChange={setOpen}>
               <DropdownMenuTrigger asChild>
                 <Button>Select Skill</Button>
@@ -543,56 +543,148 @@ const Admin_add_role_skill = () => {
                 size={20}
                 onClick={() => {
                   // toast.warning("hell")
-                  seteditskillname("");
-                  seteditskillmsg("");
-                  const skillInput = document.getElementById(
-                    "editskill"
-                  ) as HTMLInputElement;
-                  skillInput.value = "";
-                  const descInput = document.getElementById(
-                    "editmessage"
-                  ) as HTMLInputElement;
-                  descInput.value = "";
                   seteditskill(!editskill);
                 }}
               />
             </div>
-            <Label htmlFor="editskill">Skill Name</Label>
-            <Input
-              type="editskill"
-              id="editskill"
-              placeholder="edit Skill Name"
-              value={editskillname}
-              onChange={(e: any) => {
-                seteditskillname(e.target.value);
-              }}
-            />
-
-            <Label htmlFor="editmessage">Skill Description</Label>
-            <Textarea
-              placeholder="Type your description here."
-              id="editmessage"
-              value={editskillmsg}
-              onChange={(e: any) => {
-                seteditskillmsg(e.target.value);
-              }}
-            />
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild className="w-full">
+                <Button variant="outline">
+                  {roleData.length != 0 && role1 != "None"
+                    ? roleData.filter((e: any) => e.id === role1)[0]?.name
+                    : role1}
+                  <ChevronDown />
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent className="w-56">
+                <DropdownMenuRadioGroup value={role1} onValueChange={setrole1}>
+                  <DropdownMenuRadioItem value="None">
+                    None
+                  </DropdownMenuRadioItem>
+                  {roleData.length != 0 &&
+                    roleData.map((e: any) => {
+                      // console.log(role1,"jjjj")
+                      return (
+                        <DropdownMenuRadioItem value={e.id}>
+                          {e.name}
+                        </DropdownMenuRadioItem>
+                      );
+                    })}
+                </DropdownMenuRadioGroup>
+              </DropdownMenuContent>
+            </DropdownMenu>
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild className="w-full">
+                <Button variant="outline">
+                  {department1} <ChevronDown />
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent>
+                <DropdownMenuRadioGroup
+                  value={department1}
+                  onValueChange={setDepartment1}
+                >
+                  <DropdownMenuRadioItem value="ADMIN">
+                    ADMIN
+                  </DropdownMenuRadioItem>
+                  <DropdownMenuRadioItem value="FULL_STACK">
+                    FULL_STACK
+                  </DropdownMenuRadioItem>
+                  <DropdownMenuRadioItem value="DATA_ANALYTICS">
+                    DATA_ANALYTICS
+                  </DropdownMenuRadioItem>
+                  <DropdownMenuRadioItem value="DATA_ENGINEERING">
+                    DATA_ENGINEERING
+                  </DropdownMenuRadioItem>
+                  <DropdownMenuRadioItem value="DEVOPS">
+                    DEVOPS
+                  </DropdownMenuRadioItem>
+                  <DropdownMenuRadioItem value="OTHER">
+                    OTHER
+                  </DropdownMenuRadioItem>
+                </DropdownMenuRadioGroup>
+              </DropdownMenuContent>
+            </DropdownMenu>
+            {/* Dropdown to edit skill */}
+            <DropdownMenu open={open1} onOpenChange={setOpen1}>
+              <DropdownMenuTrigger asChild>
+                <Button>Select Skill</Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent
+                className="w-full"
+                onCloseAutoFocus={(e) => e.preventDefault()}
+              >
+                <div className="flex justify-between items-center mb-2">
+                  <DropdownMenuLabel>Skillset</DropdownMenuLabel>
+                  <div className="flex items-center">
+                    <Button
+                      variant="ghost"
+                      size="icon"
+                      onClick={clearAll1}
+                      title="Clear All"
+                    >
+                      <Trash2 className="h-4 w-4" />
+                    </Button>
+                    <Button
+                      variant="ghost"
+                      size="icon"
+                      onClick={() => setOpen1(false)}
+                      title="Close"
+                    >
+                      <CheckCheck className="h-4 w-4" />
+                    </Button>
+                  </div>
+                </div>
+                <DropdownMenuSeparator />
+                <ScrollArea className="h-[200px] w-[350px] rounded-md border p-4">
+                  {skillDataDrop.map((e, i) => (
+                    <DropdownMenuCheckboxItem
+                      key={i}
+                      checked={skillDataDropbool1[i]}
+                      onCheckedChange={(f) => {
+                        const d = [...skillDataDropbool1];
+                        d[i] = f;
+                        setskillDataDropbool1(d);
+                      }}
+                      onSelect={(event) => event.preventDefault()}
+                    >
+                      {e.name}
+                    </DropdownMenuCheckboxItem>
+                  ))}
+                </ScrollArea>
+              </DropdownMenuContent>
+            </DropdownMenu>
+            {/* Badge to display selected skill */}
+            {selectedSkills1.length > 0 && (
+              <div className="flex flex-wrap gap-2">
+                {selectedSkills1.map((skill) => (
+                  <Badge
+                    key={skill.id}
+                    variant={"secondary"}
+                    className="bg-gray-100 rounded-full"
+                  >
+                    {skill.name}
+                  </Badge>
+                ))}
+              </div>
+            )}
+            
             <Button
               className="hover:bg-red-700 hover:text-white"
               variant={"link"}
               onClick={() => {
-                // toast.warning("hell")
-                seteditskillname("");
-                seteditskillmsg("");
-                const skillInput = document.getElementById(
-                  "editskill"
-                ) as HTMLInputElement;
-                skillInput.value = "";
-                const descInput = document.getElementById(
-                  "editmessage"
-                ) as HTMLInputElement;
-                descInput.value = "";
-                seteditskill(!editskill);
+
+                // seteditskillname("");
+                // seteditskillmsg("");
+                // const skillInput = document.getElementById(
+                //   "editskill"
+                // ) as HTMLInputElement;
+                // skillInput.value = "";
+                // const descInput = document.getElementById(
+                //   "editmessage"
+                // ) as HTMLInputElement;
+                // descInput.value = "";
+                // seteditskill(!editskill);
               }}
             >
               Cancel
@@ -648,9 +740,9 @@ const Admin_add_role_skill = () => {
                           if (editskill) {
                             seteditskill(false);
                           }
-                          seteditskillname(skillData[sno].name);
-                          seteditskillmsg(skillData[sno].desc);
-                          seteditskillsno(sno);
+                          seteditskillsno(sno)
+                          setrole1(e.RoleId)
+                          setDepartment1(e.department)
                         }}
                       />
                     </TableCell>
