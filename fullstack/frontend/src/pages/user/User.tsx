@@ -3,6 +3,7 @@ import { validate } from '../../utils/validation';
 import { useNavigate } from 'react-router-dom';
 import Cookies from "js-cookie";
 import UserNav from '../../components/UserNav';
+import Dashboard from '../../components/dashboard';
 
 const User = () => {
   useEffect(() => {
@@ -22,6 +23,7 @@ const User = () => {
     <div>
       <UserNav/>
       <div>User</div>
+      <Dashboard/>
     </div>
   )
 }

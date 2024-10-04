@@ -36,10 +36,22 @@ const delete_user = async (req, res) => {
       res.send(error);
     }
   };
+// const view_single_user=async(req,res)=>{
+//   try {
+//     const resp = await prisma.user.find({where:{
+
+//     }});
+//     console.log(resp.length);
+//     res.send({ data: resp });
+//   } catch (error) {
+//     res.send(error);
+//   }
+// }
 
 module.exports = {
   view_user,
   add_user,
   bulk_add_user,
-  delete_user
+  delete_user,
+  // view_single_user
 };

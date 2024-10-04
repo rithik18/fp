@@ -55,9 +55,10 @@ const Login = () => {
         return await axios.request(reqOptions);
       });
       Cookies.set("token", response.data.token);
-      Cookies.set("data", response.data.data);
+      Cookies.set("data", JSON.stringify(response.data.data));
       Cookies.set("auth", "true");
       console.log("loggedin")
+      console.log(JSON.parse(Cookies.get('data')??""))
       toast.success(`Welcome ${response.data.data.name}`);
       if (Cookies.get("role")?.toUpperCase() === "ADMIN") {
         console.log("admin")
