@@ -83,50 +83,7 @@ const Admin_add_role_skill = () => {
   const [d, setd] = useState(1);
 
   const [loading, setloading] = useState(true)
-  // const getAllrole = async () => {
-  //   const token = await Cookies.get("token");
-  //   const reqOptions = {
-  //     url: "http://localhost:3000/admin/view_role",
-  //     method: "POST",
-  //     data: { token: token },
-  //   };
-  //   console.log(reqOptions);
 
-  //   try {
-  //     const response = await axios.request(reqOptions);
-  //     if (response.status == 200) {
-  //       console.log(response.data.data);
-  //       setroleData(response.data.data);
-
-  //       // console.log(response.data.data.length,response.data.data.length/c,c,p,pc,"hell")
-  //     }
-  //   } catch (e) {
-  //     toast.error(e as String);
-  //   }
-  // };
-
-  // const getAllSkill = async () => {
-  //   const token = await Cookies.get("token");
-  //   const reqOptions = {
-  //     url: "http://localhost:3000/admin/view_skill",
-  //     method: "POST",
-  //     data: { token: token },
-  //   };
-  //   console.log(reqOptions);
-
-  //   try {
-  //     const response = await axios.request(reqOptions);
-  //     if (response.status == 200) {
-  //       console.log(response.data.data);
-  //       setskillDataDrop(response.data.data);
-  //       const array = new Array(response.data.data.length).fill(false);
-  //       setskillDataDropbool(array);
-  //       // console.log(array)
-  //     }
-  //   } catch (e) {
-  //     toast.error(e as String);
-  //   }
-  // };
   const handleAddSkill = async () => {
     if(selectedSkills.length > 0){
       toast.error("Select Atleast 1 skill")
@@ -181,6 +138,10 @@ const Admin_add_role_skill = () => {
       if (response.status == 200) {
         toast.success("Skill Edited");
         fetchAllData()
+        setskillDataDropbool1([])
+        setrole1("None")
+        seteditskill(!editskill)
+        setDepartment1("OTHER")
       }
     } catch (e) {
       if (e!.status == 403) {
@@ -217,62 +178,7 @@ const Admin_add_role_skill = () => {
       }
     }
   };
-  // const getAllRoleSkill = async () => {
-  //   const token = Cookies.get("token");
-  //   getAllrole();
-  //   getAllSkill();
-  //   const reqOptions = {
-  //     url: "http://localhost:3000/admin/view_role_skill",
-  //     method: "POST",
-  //     data: { token: token },
-  //   };
-  //   console.log(reqOptions, "hell");
-
-  //   try {
-  //     const response = await axios.request(reqOptions);
-  //     if (response.status == 200) {
-  //       console.log(response.data.data);
-  //       setTimeout(() => {
-
-  //         var groupedData = response.data.data.reduce((acc: any, item: any) => {
-  //           const key = `${item.RoleId}-${item.department}`;
-        
-  //           // Always initialize acc[key]
-  //           if (!acc[key]) {
-  //               console.log("in get all roles skill3");
-  //               acc[key] = {
-  //                   RoleId: item.RoleId,
-  //                   RoleName: roleData.find((e) => e.id === item.RoleId)?.name,
-  //                   department: item.department,
-  //                   skills: [], // Initialize skills array
-  //               };
-  //           }
-        
-  //           console.log("in get all roles skill5");
-  //           // Now it's safe to push into skills
-  //           acc[key].skills.push({
-  //               skillId: item.skillId,
-  //               SkillName: skillDataDrop.find((e) => e.id === item.skillId)?.name,
-  //           });
-        
-  //           return acc;
-  //       }, {});
-  //         console.log(Object.values(groupedData));
-  //         groupedData = Object.values(groupedData);
-
-  //         setskillData(groupedData);
-  //         seta(groupedData);
-  //         setb(groupedData.slice(0, c));
-  //         setpc(Math.ceil(groupedData.length / c));
-  //         setd(groupedData.length);
-  //         console.log("in get all roles skill1");
-  //         setloading(false)
-  //       }, 5000);
-  //     }
-  //   } catch (e) {
-  //     toast.error(e as String);
-  //   }
-  // };
+  
   const clearAll = () => {
     setskillDataDropbool(new Array(skillDataDrop.length).fill(false));
   };
