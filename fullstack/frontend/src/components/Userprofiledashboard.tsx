@@ -1,22 +1,15 @@
-import { useEffect } from 'react'
-import { validate } from '../../utils/validation';
-import { useNavigate } from 'react-router-dom';
-import Cookies from "js-cookie";
-import UserNav from '../../components/UserNav';
-
 import { useState } from "react"
-import image from '../../assets/react.svg'
-import { Button } from "../../components/ui/button"
-import { Input } from "../../components/ui/input"
-import { Label } from "../../components/ui/label"
-import { Badge } from "../../components/ui/badge"
-import { cn } from '../../lib/utils'
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "../../components/ui/card"
+import image from '../assets/react.svg'
+import { Button } from "../components/ui/button"
+import { Input } from "../components/ui/input"
+import { Label } from "../components/ui/label"
+import { Badge } from "../components/ui/badge"
+import { cn } from '../lib/utils'
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "../components/ui/card"
 import { Pencil, Check, X, MapPin, Briefcase, Award, Book, Zap, ChevronLeft, ChevronRight } from "lucide-react"
-import { Progress } from "../../components/ui/progress"
+import { Progress } from "./ui/progress"
 
-const User = () => {
-
+export default function UserProfileDashboard() {
   const [isEditing, setIsEditing] = useState(false)
   const [currentCertIndex, setCurrentCertIndex] = useState(0)
   const [user, setUser] = useState({
@@ -69,39 +62,8 @@ const User = () => {
     setCurrentCertIndex((prevIndex) => (prevIndex - 1 + user.certifications.length) % user.certifications.length)
   }
 
-  useEffect(() => {
-    const timer = setInterval(() => {
-      nextCertification()
-    }, 3000) // Change certification every 3 seconds
-
-    return () => clearInterval(timer)
-  }, [])
-
-  useEffect(() => {
-    validate()
-    const init= async() => {
-      const token=await Cookies.get('token')
-      const data:any=await JSON.parse(Cookies.get('data')??"")
-      console.log(data)
-      
-    }
-    init()
-    console.log(Cookies.get('role'),"hell")
-    if (Cookies.get('role')?.toUpperCase() === "ADMIN" && Cookies.get('auth')=='true') {
-     n('/admin')
-   }else if(Cookies.get('role')?.toUpperCase() !== "ADMIN" && Cookies.get('auth')=='true'){
-     n('/user')
-   }else{
-     n('/')
-   }
-   }, []);
- 
-   const n = useNavigate();
   return (
-    <div className='w-full'>
-      <UserNav/>
-    
-    <div className="container mx-auto p-4 ">
+    <div className="container mx-auto p-4">
       <Card className="w-full max-w-6xl mx-auto">
         <CardHeader>
           <CardTitle className="text-2xl font-bold">User Profile</CardTitle>
@@ -313,7 +275,7 @@ const User = () => {
             </div>
           </div>
         </CardContent>
-        <CardFooter className="flex justify-start space-x-2">
+        <CardFooter className="flex justify-end space-x-2">
           {isEditing ? (
             <>
               <Button onClick={handleSave} className="flex items-center">
@@ -331,8 +293,5 @@ const User = () => {
         </CardFooter>
       </Card>
     </div>
-    </div>
   )
 }
-
-export default User
