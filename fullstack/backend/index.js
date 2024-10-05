@@ -1,5 +1,6 @@
 const express = require("express");
 const cors = require("cors");
+const bodyParser = require('body-parser')
 const { PrismaClient } = require("@prisma/client");
 const { adminMiddleware } = require("./middlewares/adminMiddleware");
 const { userMiddleware } = require("./middlewares/userMiddleware");
@@ -11,7 +12,7 @@ const adminRoutes = require("./routes/adminRoutes");
 const app = express();
 const PORT = 3000;
 
-
+app.use(bodyParser({limit: '50mb'}));
 app.use(cors({
   origin: 'http://localhost:5173', // Or the domain where your frontend is hosted
   methods: ['GET', 'POST'],

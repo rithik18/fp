@@ -65,16 +65,16 @@ const Login = () => {
           }
           
           // Retrieve and log the stored cookies
-          for (const key in response.data.data) {
-            const value = Cookies.get(key);
-            console.log(`${key}: ${value}`);
-          }
+          // for (const key in response.data.data) {
+          //   const value = Cookies.get(key);
+            // console.log(`${key}: ${value}`);
+          // }
           Cookies.set("auth", "true");
         });
       });
       
       
-      console.log(Cookies.get('profileImage'),"159")
+      console.log(localStorage.getItem('profileImage'),"159")
       // toast.success(`Welcome ${data.name}`);
       if (Cookies.get("role")?.toUpperCase() === "ADMIN") {
         console.log("admin")
