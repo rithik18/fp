@@ -48,16 +48,16 @@ const User = () => {
   const [isEditing, setIsEditing] = useState(false);
   const [currentCertIndex, setCurrentCertIndex] = useState(0);
   const [user, setUser] = useState({
-    id: "66fe81770b5205e064c2aed5",
-    name: "emp1",
-    role_id: "66fd540a30450c2a76ac020f",
-    joining_date: "11-01-2023",
-    department: "FULL_STACK",
-    mail: "emp1@gmail.com",
-    created_at: "2024-10-03T11:35:19.205Z",
-    updated_at: "2024-10-03T11:35:19.205Z",
-    password: "Abcd@1234",
-    profileImage: "",
+    id: "",
+    name: "",
+    role_id: "",
+    joining_date: "",
+    department: "",
+    mail: "",
+    created_at: "",
+    updated_at: "",
+    password: "",
+    profileImage: ""
   });
   const [skills, setskills] = useState([
     { name: "React", score: 90 },
@@ -100,10 +100,39 @@ const User = () => {
         }
       });
     } catch (e: any) {
+      const init=async()=>{
+        const keysToStore = [
+        "id",
+        "name",
+        "role_id",
+        "joining_date",
+        "department",
+        "mail",
+        "profileImage",
+        "updated_at",
+        "created_at",
+        "password",
+      ];
+      var data_old: any = {};
+
+      keysToStore.forEach((key) => {
+        if (key == "profileImage") {
+          data_old[key] = localStorage.getItem(key);
+        } else {
+          data_old[key] = Cookies.get(key);
+        }
+      });
+      setUser(data);
+      console.log(data, "data");
+    }
       if (e.status == 403) {
         toast.error("Error");
+        init()
+        return
       } else {
         toast.error(e);
+        init()
+        return
       }
     }
     setUser(data);
@@ -196,7 +225,7 @@ const User = () => {
   const n = useNavigate();
   return (
     <div className="w-full">
-      <UserNav />
+      <UserNav/>
       <ToastContainer />
 
       <div className="container mx-auto p-4 ">

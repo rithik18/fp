@@ -23,8 +23,22 @@ import { toast,ToastContainer } from "react-toastify";
 import { Link, useNavigate } from "react-router-dom";
 import image from '../assets/logo_jman.png'
 import { SquareMenu } from "lucide-react";
-
+import { cn } from "../lib/utils";
+import defaultimg from '../assets/react.svg'
+import { useEffect, useState } from "react";
 const navbar = () => {
+  const [img, setimg] = useState<any>("")
+  const [name, setname] = useState<any>("")
+  useEffect(() => {
+    
+  
+    const init= () => {
+      setimg(localStorage.getItem('profileImage'))
+      setname(Cookies.get('name'))
+    }
+    init()
+  }, [])
+  
   const n=useNavigate()
   return (
     <nav className="bg-white border-gray-200 dark:bg-gray-900 dark:border-gray-700">
@@ -88,8 +102,61 @@ const navbar = () => {
                 </DropdownMenuContent>
               </DropdownMenu>
             </li>
-            <li className="px-16">
-              {/* <p onClick={()=>{}}>Logout</p> */}
+            <li className="relative w-12 h-12">
+  <DropdownMenu>
+    <DropdownMenuTrigger>
+      <img
+        src={img ?? defaultimg}
+        alt="Profile"
+        className={cn("object-cover w-full h-full border-2 rounded-full")}
+      />
+    </DropdownMenuTrigger>
+    <DropdownMenuContent>
+      <DropdownMenuLabel>Welcome {name}</DropdownMenuLabel>
+      <DropdownMenuSeparator />
+      <DropdownMenuItem onSelect={(e) => e.preventDefault()}>  {/* Prevent default close */}
+        <AlertDialog>
+          <AlertDialogTrigger asChild>
+            <Button
+              variant="destructive"
+              className="bg-red-700 w-full mx-auto"
+            >
+              Logout
+            </Button>
+          </AlertDialogTrigger>
+          <AlertDialogContent>
+            <AlertDialogHeader>
+              <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+              <AlertDialogDescription>
+                Do You want to Logout
+              </AlertDialogDescription>
+            </AlertDialogHeader>
+            <AlertDialogFooter>
+              <AlertDialogCancel>Cancel</AlertDialogCancel>
+              <AlertDialogAction
+                onClick={async () => {
+                  Cookies.remove('auth');
+                  Cookies.remove('role');
+                  Cookies.remove('token');
+                  Cookies.remove('data');
+                  toast.success("Logged Out Successfully");
+
+    // Navigate to the login page after a slight delay (to let the toast message show)
+    setTimeout(() => {
+      n('/');  // Use navigate to redirect to the login page
+    }, 500);
+                }}
+              >
+                Continue
+              </AlertDialogAction>
+            </AlertDialogFooter>
+          </AlertDialogContent>
+        </AlertDialog>
+      </DropdownMenuItem>
+    </DropdownMenuContent>
+  </DropdownMenu>
+</li>
+            {/* <li className="">
               <AlertDialog>
                 <AlertDialogTrigger>
                   <Button variant="destructive" className="bg-red-700">
@@ -118,7 +185,7 @@ const navbar = () => {
                   </AlertDialogFooter>
                 </AlertDialogContent>
               </AlertDialog>
-            </li>
+            </li> */}
           </ul>
         </div>
       </div>

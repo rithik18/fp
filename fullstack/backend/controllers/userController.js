@@ -43,7 +43,13 @@ const update_user_data = async (req, res) => {
   console.log("in user");
   const { data } = req.body;
   try {
-    console.log(data.id,data.name,data.mail,data.profileImage.slice(0,50));
+    const user=await prisma.user.findMany({where:{
+      mail:data.mail
+    }})
+    if(user.length>0){
+      res.status(403).send({"msg":"MailId Exsist"})
+      return
+    }
     const resp = await prisma.user.update(
       {where:{
         id:data.id

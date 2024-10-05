@@ -3,8 +3,11 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Cookies from "js-cookie";
 import { useNavigate } from "react-router-dom";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { validate } from '../utils/validation';
+import LoadingOverlay from 'react-loading-overlay'
+import BounceLoader from 'react-spinners/BounceLoader'
+
 const Login = () => {
   useEffect(() => {
     console.log(Cookies.get('role'),"cookei role")
@@ -20,7 +23,9 @@ const Login = () => {
   }, []);
 
   const n = useNavigate();
+  const [loading, setloading] = useState(false)
   const handleLogin = async () => {
+    setloading(true)
     try {
       const emailInput = document.getElementById("email") as HTMLInputElement;
       const email = emailInput.value;
@@ -35,7 +40,7 @@ const Login = () => {
         method: "POST",
         data: { email: email },
       };
-      let response = await axios.request(reqOptions).then(async (e) => {
+      await axios.request(reqOptions).then(async (e) => {
         let reqOptions;
         Cookies.set("role", e.data.department);
         if (e.data.department?.toUpperCase() === "ADMIN") {
@@ -74,16 +79,18 @@ const Login = () => {
       });
       
       
-      console.log(localStorage.getItem('profileImage'),"159")
+      // console.log(localStorage.getItem('profileImage'),"159")
       // toast.success(`Welcome ${data.name}`);
       if (Cookies.get("role")?.toUpperCase() === "ADMIN") {
         console.log("admin")
+        setloading(false)
         n("/admin");
       } else {
         n("/user");
       }
     } catch (e:any) {
       // alert(e)
+      setloading(false)
       if(e.status==404 || e.status==403){
         toast.error(`User Not Found`);
       }else{
@@ -92,9 +99,18 @@ const Login = () => {
     }
   };
   return (
-    <div>
+    <div className="relative w-full h-screen">
       <ToastContainer />
-      <section className="bg-gray-50 dark:bg-gray-900">
+
+      {loading && <div className="fixed inset-0 bg-black bg-opacity-25  flex justify-center items-center backdrop-blur-md z-50">
+
+      <LoadingOverlay
+      active={loading}
+      spinner={<BounceLoader />}
+    ></LoadingOverlay>
+</div>}
+
+      <section className="bg-gray-50 w-full dark:bg-gray-900 z-0">
         <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
           <div className="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
             <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
