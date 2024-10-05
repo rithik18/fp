@@ -54,9 +54,12 @@ const Login = () => {
 
         return await axios.request(reqOptions).then((response)=>{
           Cookies.set("token", response.data.token);
+          console.log("data",response.data.data)
           // Cookies.set("data", JSON.stringify(response.data.data));
           for (const key in response.data.data) {
-            if (response.data.data.hasOwnProperty(key)) {
+            if(key=='profileImage'){
+              localStorage.setItem(key, response.data.data[key].toString());
+            }else{
               Cookies.set(key, response.data.data[key]);
             }
           }
@@ -71,7 +74,7 @@ const Login = () => {
       });
       
       
-    
+      console.log(Cookies.get('profileImage'),"159")
       // toast.success(`Welcome ${data.name}`);
       if (Cookies.get("role")?.toUpperCase() === "ADMIN") {
         console.log("admin")

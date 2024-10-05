@@ -102,7 +102,11 @@ profileImage: "",
       var data:any={}
     
       keysToStore.forEach((key) => {
-          data[key]=Cookies.get(key);
+        if(key=='profileImage'){
+          data[key]=localStorage.getItem(key);
+        }else{
+            data[key]=Cookies.get(key);
+        }
       });
       // const data:any=await JSON.parse(Cookies.get('data')??"")
       setUser(data)
