@@ -97,7 +97,7 @@ import { useEffect, useState } from "react";
                 </DropdownMenu> */}
               </li>
               
-              <li className="relative w-12 h-12">
+              <li className="relative w-12 h-12 flex items-center">
   <DropdownMenu>
     <DropdownMenuTrigger>
       <img

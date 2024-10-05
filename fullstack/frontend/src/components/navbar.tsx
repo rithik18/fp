@@ -102,7 +102,7 @@ const navbar = () => {
                 </DropdownMenuContent>
               </DropdownMenu>
             </li>
-            <li className="relative w-12 h-12">
+            <li className="relative w-12 h-12 flex items-center">
   <DropdownMenu>
     <DropdownMenuTrigger>
       <img
@@ -114,6 +114,7 @@ const navbar = () => {
     <DropdownMenuContent>
       <DropdownMenuLabel>Welcome {name}</DropdownMenuLabel>
       <DropdownMenuSeparator />
+      <DropdownMenuItem>Edit Profile</DropdownMenuItem>
       <DropdownMenuItem onSelect={(e) => e.preventDefault()}>  {/* Prevent default close */}
         <AlertDialog>
           <AlertDialogTrigger asChild>
