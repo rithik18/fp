@@ -16,7 +16,7 @@ router.post('/',(req,res)=>{
     const token= jwt.sign({id,email,password,department}, process.env.JWT_SECRET, {
         expiresIn: process.env.JWT_EXPIRES_IN, // Set expiration time from env
       });
-      return res.json({token,'auth':'true',data:req.data})//return jwt token
+      return res.send({token,auth:'true',data:req.data})//return jwt token
 })
 
 router.post('/view_user',userController.view_user)

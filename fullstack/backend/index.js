@@ -11,7 +11,12 @@ const adminRoutes = require("./routes/adminRoutes");
 const app = express();
 const PORT = 3000;
 
-app.use(cors());
+
+app.use(cors({
+  origin: 'http://localhost:5173', // Or the domain where your frontend is hosted
+  methods: ['GET', 'POST'],
+  allowedHeaders: ['Content-Type', 'Authorization']
+}));
 app.use(express.json());
 
 // Login Route

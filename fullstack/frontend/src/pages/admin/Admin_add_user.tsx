@@ -75,8 +75,10 @@ const Admin_add_user = () => {
   };
   useEffect(() => {
     validate();
-    getAllrole();
-    getAllUser();
+    // getAllrole();
+    // getAllUser();
+    getAllData()
+    
     console.log(Cookies.get("role"));
     if (
       Cookies.get("role")?.toUpperCase() === "ADMIN" &&
@@ -275,7 +277,9 @@ const Admin_add_user = () => {
       const response = await axios.request(reqOptions);
       if (response.status == 200) {
         toast.success("User added");
-        getAllUser();
+        // getAllUser();
+        getAllData()
+
       }
     } catch (e) {
       if (e!.status == 403) {
@@ -349,7 +353,9 @@ const Admin_add_user = () => {
       const response = await axios.request(reqOptions);
       if (response.status == 200) {
         toast.success("User added");
-        getAllUser();
+        // getAllUser();
+        getAllData()
+
         setLatestFile(null);
         setFileName("");
         clearFileInput();
@@ -363,6 +369,41 @@ const Admin_add_user = () => {
       }
     }
   };
+
+
+const getAllData = async () => {
+  const token = await Cookies.get("token");
+
+  // Create an array of promises for both API calls
+  const requests = [
+    axios.post("http://localhost:3000/admin/view_role", { token }),
+    axios.post("http://localhost:3000/admin/view_user", { token }),
+  ];
+
+  try {
+    // Wait for both requests to resolve
+    const [roleResponse, userResponse] = await Promise.all(requests);
+
+    // Check the status of the role response
+    if (roleResponse.status === 200) {
+      console.log(roleResponse.data.data);
+      setroleData(roleResponse.data.data);
+    }
+
+    // Check the status of the user response
+    if (userResponse.status === 200) {
+      console.log(userResponse.data.data, "alluser");
+      setuserData(userResponse.data.data);
+      setsearchuserData(userResponse.data.data);
+      seta(userResponse.data.data);
+      setb(userResponse.data.data.slice(0, c));
+      setpc(Math.ceil(userResponse.data.data.length / c));
+      setd(userResponse.data.data.length);
+    }
+  } catch (e) {
+    toast.error(e as string);
+  }
+};
 
   return (
     <div className="px-2">

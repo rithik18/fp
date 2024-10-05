@@ -52,14 +52,27 @@ const Login = () => {
           };
         }
 
-        return await axios.request(reqOptions);
+        return await axios.request(reqOptions).then((response)=>{
+          Cookies.set("token", response.data.token);
+          // Cookies.set("data", JSON.stringify(response.data.data));
+          for (const key in response.data.data) {
+            if (response.data.data.hasOwnProperty(key)) {
+              Cookies.set(key, response.data.data[key]);
+            }
+          }
+          
+          // Retrieve and log the stored cookies
+          for (const key in response.data.data) {
+            const value = Cookies.get(key);
+            console.log(`${key}: ${value}`);
+          }
+          Cookies.set("auth", "true");
+        });
       });
-      Cookies.set("token", response.data.token);
-      Cookies.set("data", JSON.stringify(response.data.data));
-      Cookies.set("auth", "true");
-      console.log("loggedin")
-      console.log(JSON.parse(Cookies.get('data')??""))
-      toast.success(`Welcome ${response.data.data.name}`);
+      
+      
+    
+      // toast.success(`Welcome ${data.name}`);
       if (Cookies.get("role")?.toUpperCase() === "ADMIN") {
         console.log("admin")
         n("/admin");
