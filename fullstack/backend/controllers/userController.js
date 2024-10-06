@@ -42,10 +42,18 @@ const delete_user = async (req, res) => {
 const update_user_data = async (req, res) => {
   console.log("in user");
   const { data } = req.body;
+  // console.log(data)
   try {
-    const user=await prisma.user.findMany({where:{
-      mail:data.mail
-    }})
+    const user = await prisma.user.findMany({
+      where: {
+        mail: data.mail,
+        NOT: {
+          id: data.id,
+        },
+      },
+    });
+  
+  console.log(user.length)
     if(user.length>0){
       res.status(403).send({"msg":"MailId Exsist"})
       return
@@ -57,13 +65,15 @@ const update_user_data = async (req, res) => {
     data:{
       mail:data.mail,
       name:data.name,
-      profileImage:data.profileImage
+      profileImage:data.profileImage,
+      updated_at:new Date().toISOString()
     }}
     )
     res.send({"msg":"Updated successfully","status":resp.status});
   } catch (error) {
     console.log("in error")
-    res.send(error);
+    console.log(error)
+    res.status(403).send(error);
   }
 };
 
