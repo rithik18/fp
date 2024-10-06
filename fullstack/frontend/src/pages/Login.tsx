@@ -57,7 +57,7 @@ const Login = () => {
           };
         }
 
-        return await axios.request(reqOptions).then((response)=>{
+        return await axios.request(reqOptions).then(async (response)=>{
           Cookies.set("token", response.data.token);
           console.log("data",response.data.data)
           // Cookies.set("data", JSON.stringify(response.data.data));
@@ -68,12 +68,22 @@ const Login = () => {
               Cookies.set(key, response.data.data[key]);
             }
           }
-          
-          // Retrieve and log the stored cookies
-          // for (const key in response.data.data) {
-          //   const value = Cookies.get(key);
-            // console.log(`${key}: ${value}`);
-          // }
+          if (e.data.department?.toUpperCase() === "ADMIN") {
+            Cookies.set('role_name','ADMIN')
+        }else{
+          const token = Cookies.get("token");
+          const role_id= Cookies.get('role_id')
+          console.log(role_id)
+          const reqOptions1 = {
+            url: "http://localhost:3000/user/get_role",
+            method: "POST",
+            data: { token,id:role_id},
+          };
+          console.log(reqOptions1)
+          await axios.request(reqOptions1).then((e)=>{
+            Cookies.set('role_name',e.data.role)
+          })
+        }
           Cookies.set("auth", "true");
         });
       });

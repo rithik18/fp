@@ -3,6 +3,7 @@ const router = express.Router();
 const  jwt = require('jsonwebtoken');
 
 const userController=require('../controllers/userController')
+const roleController=require('../controllers/roleController')
 
 router.post('/',(req,res)=>{
     if(req.token){
@@ -15,5 +16,7 @@ router.post('/',(req,res)=>{
       return res.send({token,'auth':'true',data:req.data})//return jwt token
 })
 router.post('/update_user_data',userController.update_user_data)
+
+router.post('/get_role',roleController.get_role)
 
 module.exports = router;

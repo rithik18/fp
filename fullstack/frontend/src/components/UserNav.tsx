@@ -30,6 +30,8 @@ import { useEffect, useState } from "react";
   const navbar = () => {
     const [img, setimg] = useState<any>("")
     const [name, setname] = useState<any>("")
+    const [dept, setdept] = useState(Cookies.get('department'))
+    const [role, setRole] = useState(Cookies.get('role_name'))
     useEffect(() => {
       
     
@@ -108,6 +110,8 @@ import { useEffect, useState } from "react";
     </DropdownMenuTrigger>
     <DropdownMenuContent>
       <DropdownMenuLabel>Welcome {name}</DropdownMenuLabel>
+      <DropdownMenuLabel>{role}</DropdownMenuLabel>
+      <DropdownMenuLabel>{dept}</DropdownMenuLabel>
       <DropdownMenuSeparator />
       <DropdownMenuItem onSelect={(e) => e.preventDefault()}>  {/* Prevent default close */}
         <AlertDialog>

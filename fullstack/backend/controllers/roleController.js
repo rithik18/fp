@@ -36,9 +36,27 @@ const delete_role = async (req, res) => {
       res.status(403).send({ msg: e });
     }
   };
+  const get_role=async(req,res)=>{
+    const { id } = req.body;
+    console.log("in getrole")
+    try {
+      const role = await prisma.role.findUnique({
+        where: {
+          id: id,
+        },
+      });
+      console.log(role)
+      res.send({"role":role.name})
+    }catch(error){
+      console.log("in error")
+      console.log(error)
+      res.status(403).send(error);
+    }
+  }
 module.exports = {
   view_role,
   add_role,
   update_role,
-  delete_role
+  delete_role,
+  get_role
 };

@@ -16,6 +16,8 @@ const Admin = () => {
     password: "",
     profileImage: ""
   });
+  const [dept, setdept] = useState(Cookies.get('department'))
+  const [role, setRole] = useState(Cookies.get('role_name'))
   useEffect(() => {
     const init = async () => {
       // const token=await Cookies.get('token')
@@ -60,6 +62,7 @@ const Admin = () => {
   return (
     <div>
       <Navbar/>
+      <h2 className="text-2xl font-bold mb-4">Welcome for {dept} - {role}</h2>
     </div>
   )
 }
