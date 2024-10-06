@@ -17,11 +17,14 @@ import {
   TableHeader,
   TableRow,
 } from "../../components/ui/table"
-import { toast } from "../../components/ui/use-toast"
 import { Calendar } from "../../components/ui/calendar"
 import { Popover, PopoverContent, PopoverTrigger } from "../../components/ui/popover"
 import { format } from "date-fns"
 import { CalendarIcon, Upload } from "lucide-react"
+import UserNav from "../../components/UserNav"
+import Cookies from "js-cookie";
+import axios from "axios"
+import { ToastContainer ,toast} from "react-toastify"
 
 type Certification = {
   id: string
@@ -39,15 +42,9 @@ type UserCertification = {
   isVerified: boolean
 }
 
-// Mock data for predefined certifications (in a real app, this would come from an API)
-const predefinedCertifications: Certification[] = [
-  { id: "1", name: "AWS Certified Solutions Architect" },
-  { id: "2", name: "Certified Information Systems Security Professional (CISSP)" },
-  { id: "3", name: "Project Management Professional (PMP)" },
-  { id: "4", name: "Certified Information Systems Auditor (CISA)" },
-]
 
 export default function UserAddCertification() {
+  const [predefinedCertifications,setpredefinedCertifications] = useState<Certification[]>([])
   const [userCertifications, setUserCertifications] = useState<UserCertification[]>([])
   const [selectedCertification, setSelectedCertification] = useState<string>("")
   const [startDate, setStartDate] = useState<Date | undefined>(new Date())
@@ -74,7 +71,27 @@ export default function UserAddCertification() {
       ]
       setUserCertifications(mockUserCertifications)
     }
-
+    const fetchCertifications = async () => {
+      const token = await Cookies.get("token");
+      const reqOptions = {
+        url: "http://localhost:3000/user/view_certification",
+        method: "POST",
+        data: { token: token },
+      };
+      console.log(reqOptions);
+  
+      try {
+        const response = await axios.request(reqOptions);
+        if (response.status == 200) {
+          console.log(response.data.data);
+          setpredefinedCertifications(response.data.data);
+          
+        }
+      } catch (e) {
+        toast.error(e as String);
+      }
+    }
+    fetchCertifications()
     fetchUserCertifications()
   }, [])
 
@@ -87,11 +104,10 @@ export default function UserAddCertification() {
   const handleAddCertification = async (e: React.FormEvent) => {
     e.preventDefault()
     if (!selectedCertification || !startDate || !imageFile) {
-      toast({
-        title: "Error",
-        description: "Please fill in all required fields and upload an image.",
-        variant: "destructive",
-      })
+      toast.error(
+"Please fill in all required fields and upload an image."
+
+      )
       return
     }
 
@@ -115,10 +131,7 @@ export default function UserAddCertification() {
 
     // In a real application, you would send this data to your API
     setUserCertifications([...userCertifications, newCertification])
-    toast({
-      title: "Success",
-      description: "Certification added successfully. Awaiting admin verification.",
-    })
+    toast.success( "Certification added successfully. Awaiting admin verification.")
 
     // Reset form
     setSelectedCertification("")
@@ -129,7 +142,10 @@ export default function UserAddCertification() {
   }
 
   return (
-    <div className="max-w-4xl mx-auto p-6 space-y-8">
+    <div>
+      <UserNav/>
+      <ToastContainer/>
+      <div className="max-w-4xl mx-auto p-6 space-y-8">
       <section>
         <h2 className="text-2xl font-bold mb-4">Add New Certification</h2>
         <form onSubmit={handleAddCertification} className="space-y-4">
@@ -266,5 +282,7 @@ export default function UserAddCertification() {
         </Table>
       </section>
     </div>
+    </div>
+    
   )
 }

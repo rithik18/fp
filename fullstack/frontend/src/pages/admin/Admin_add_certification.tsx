@@ -25,7 +25,6 @@ import {
   AlertDialogTrigger,
 } from "../../components/ui/alert-dialog";
 
-import { Textarea } from "../../components/ui/textarea";
 import { Input } from "../../components/ui/input";
 import { Label } from "../../components/ui/label";
 import { Button } from "../../components/ui/button";
@@ -73,8 +72,8 @@ const Admin_add_certification = () => {
           toast.success("certification added");
           getAllcertification();
         }
-      } catch (e) {
-        if (e!.status == 403) {
+      } catch (e:any) {
+        if (e.status == 403) {
           toast.error("certification exsist");
         } else {
           toast.error(`${e}`);
@@ -113,7 +112,7 @@ const Admin_add_certification = () => {
           descInput.value = "";
           seteditcertification(!editcertification);
         }
-      } catch (e) {
+      } catch (e:any) {
         if (e!.status == 403) {
           console.log(e);
           toast.error("certification exsist");
@@ -137,7 +136,7 @@ const Admin_add_certification = () => {
           toast.success("certification Deleted");
           getAllcertification();
         }
-      } catch (e) {
+      } catch (e:any) {
         if (e!.status == 403) {
           console.log(e);
           toast.error("certification exsist");

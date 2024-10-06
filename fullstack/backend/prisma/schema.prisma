@@ -106,5 +106,6 @@ enum Department {
 enum competency {
   BEGINNER
   INTERMEDIATED
-  PRO
+  ADVANCED
+  EXPERT
 }
