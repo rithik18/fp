@@ -4,6 +4,8 @@ const  jwt = require('jsonwebtoken');
 
 const userController=require('../controllers/userController')
 const roleController=require('../controllers/roleController')
+const skillController=require('../controllers/skillController')
+const roleskillController=require('../controllers/roleskillController')
 
 router.post('/',(req,res)=>{
     if(req.token){
@@ -18,5 +20,8 @@ router.post('/',(req,res)=>{
 router.post('/update_user_data',userController.update_user_data)
 
 router.post('/get_role',roleController.get_role)
+
+router.post('/view_skill',skillController.view_skill)
+router.post('/view_user_role_skill',roleskillController.view_user_role_skill)
 
 module.exports = router;

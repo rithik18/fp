@@ -26,7 +26,6 @@ import { ContactRound, IdCard, SquareMenu } from "lucide-react";
 import { cn } from "../lib/utils";
 import defaultimg from "../assets/react.svg";
 import { useEffect, useState } from "react";
-import { Label } from "./ui/label";
 
 const navbar = () => {
   const [img, setimg] = useState<any>("");

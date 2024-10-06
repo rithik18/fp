@@ -41,18 +41,18 @@ const update_role_skill = async (req, res) => {
     const resp = await prisma.RoleSkill.findMany({
       where: { RoleId: RoleId, department: department },
     });
-
+    
     const difference1 = array.filter(
       (item) => !resp.some((respItem) => respItem.skillId === item.skillId)
     );
     const difference2 = resp.filter(
       (item) => !array.some((arrayItem) => arrayItem.skillId === item.skillId)
     );
-
+    
     const uniqueItems = [...difference1, ...difference2];
-
+    
     console.log(uniqueItems, uniqueItems.length, "hell");
-
+    
     if (uniqueItems.length > 0) {
       // If there are unique items, we need to decide to add or delete
       if (array.length > resp.length) {
@@ -85,7 +85,7 @@ const update_role_skill = async (req, res) => {
     } else {
       console.log("No changes needed.");
     }
-
+    
     res.send({ msg: "Roles's Skill updated successfully" });
     console.log("hell1");
   } catch (e) {
@@ -95,7 +95,7 @@ const update_role_skill = async (req, res) => {
 };
 const delete_role_skill = async (req, res) => {
   const { RoleId, department, skills } = req.body.data;
-
+  
   try {
     const deletePromises = skills.map(async (element) => {
       return prisma.RoleSkill.delete({
@@ -108,10 +108,10 @@ const delete_role_skill = async (req, res) => {
         },
       });
     });
-
+    
     // Wait for all delete operations to complete
     await Promise.all(deletePromises);
-
+    
     res.send({ msg: "Skills deleted successfully" });
     console.log("Deletion completed");
   } catch (e) {
@@ -119,12 +119,24 @@ const delete_role_skill = async (req, res) => {
     res
       .status(403)
       .send({ msg: e.message || "An error occurred during deletion" });
-  }
-};
-
-module.exports = {
-  view_role_skill,
-  add_role_skill,
-  update_role_skill,
+    }
+  };
+  
+  const view_user_role_skill = async (req, res) => {
+    console.log("inroleskill")
+    const {role_id,department}=req.body
+    console.log(role_id,department)
+    const resp = await prisma.RoleSkill.findMany({where:{
+      RoleId:role_id,
+      department:department
+    }});
+    console.log(resp.length);
+    res.send({ data: resp });
+  };
+  module.exports = {
+    view_role_skill,
+    add_role_skill,
+    update_role_skill,
   delete_role_skill,
+  view_user_role_skill
 };

@@ -5,7 +5,6 @@ import Cookies from "js-cookie";
 import UserNav from "../../components/UserNav";
 
 import { useState } from "react";
-import image from "../../assets/react.svg";
 import { Button } from "../../components/ui/button";
 import { Input } from "../../components/ui/input";
 import { Label } from "../../components/ui/label";
@@ -23,11 +22,6 @@ import {
   Pencil,
   Check,
   X,
-  MapPin,
-  Briefcase,
-  Award,
-  Book,
-  Zap,
   ChevronLeft,
   ChevronRight,
   FileBadge,
@@ -40,7 +34,6 @@ import {
   ALargeSmall,
 } from "lucide-react";
 import { Progress } from "../../components/ui/progress";
-import { H3, H4, P } from "../../components/ui/Typography";
 import axios from "axios";
 import { toast, ToastContainer } from "react-toastify";
 

@@ -85,7 +85,8 @@ const Admin_add_role_skill = () => {
   const [loading, setloading] = useState(true)
 
   const handleAddSkill = async () => {
-    if(selectedSkills.length > 0){
+    console.log(selectedSkills)
+    if(selectedSkills.length == 0){
       toast.error("Select Atleast 1 skill")
       return
     }
