@@ -33,6 +33,9 @@ router.post('/get_user_skill',userkillController.get_user_skill)
 
 
 router.post('/view_certification',certificationController.view_certification)
+
+router.post('/add_certification',usercertificationController.add_certification)
+router.post('/get_certification',usercertificationController.get_certification)
 // router.post('/update_user_skill',usercertificationController.)
 
 module.exports = router;

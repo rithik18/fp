@@ -10,11 +10,13 @@ import Admin_add_certification from "./pages/admin/Admin_add_certification";
 import Admin_verify_certification from "./pages/admin/Admin_verify_certification";
 import UserAddSkill from "./pages/user/UserAddSkill";
 import UserAddCertification from "./pages/user/UserAddCertification";
+import { ToastContainer } from "react-toastify"
 function App() {
 
 
   return (
     <BrowserRouter>
+    <ToastContainer/>
     <Routes>
       <Route path="/" element={<Login/>}></Route>
       <Route path="/admin" element={<Admin/>}></Route>

@@ -41,9 +41,12 @@ model UserCertification{
   id      String   @id @default(auto()) @map("_id") @db.ObjectId 
   userId String @db.ObjectId
   certificationId String @db.ObjectId
+  certificationName String
   started_at DateTime
   completed_at DateTime
   competency competency @default(BEGINNER)
+  isVerified Boolean @default(false)
+  imageData String
   user   User   @relation(fields: [userId], references: [id])
   certification  Certification  @relation(fields: [certificationId], references: [id])
   @@unique([userId, certificationId])
@@ -95,14 +98,6 @@ enum Department {
   DEVOPS
   OTHER
 }
-// enum Designation {
-//   ADMIN
-//   SOFTWARE_ENGINEER
-//   SENIOR_SOFTWARE_ENGINEER
-//   SOLUTION_ENABLER
-//   SOLUTION_CONSULTANT
-//   PRINCIPAL_ARCHITECT
-// }
 enum competency {
   BEGINNER
   INTERMEDIATED
