@@ -38,7 +38,7 @@ model Certification{
   UserCertification UserCertification[]
 }
 model UserCertification{
-id      String   @id @default(auto()) @map("_id") @db.ObjectId 
+  id      String   @id @default(auto()) @map("_id") @db.ObjectId 
   userId String @db.ObjectId
   certificationId String @db.ObjectId
   started_at DateTime
