@@ -12,7 +12,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from "../../components/ui/select"
-import Cookies from "js-cookie";
 import axios from "axios"
 import { toast, ToastContainer } from "react-toastify"
 import UserNav from "../../components/UserNav"
@@ -31,7 +30,7 @@ import {
 import { ScrollArea } from "../../components/ui/scroll-area"
 import LoadingOverlay from "react-loading-overlay"
 import CircleLoader from "react-spinners/CircleLoader"
-
+import Cookies from "js-cookie";
 
 
 
@@ -61,10 +60,11 @@ export default function UserAddSkill() {
   }
 
   const removeSkill = (skillList: any[], setSkillList: React.Dispatch<React.SetStateAction<any[]>>, skillName: string,i:number) => {
-    console.log(skillList.filter(skill => skill.name !== skillName),i)
+    // console.log(skillList.filter(skill => skill.name !== skillName),i)
     const d = [...skillDataDropbool];
     d[i] = false;
     setskillDataDropbool(d);
+    console.log(skillList.filter(skill => skill.name !== skillName),"list")
     setSkillList(skillList.filter(skill => skill.name !== skillName))
   }
 
@@ -72,6 +72,11 @@ export default function UserAddSkill() {
     setSkillList(skillList.map(skill => 
       skill.name === skillName ? { ...skill, score: newScore } : skill
     ))
+    console.log(
+      skillList.map(skill => 
+        skill.name === skillName ? { ...skill, score: newScore } : skill
+      )
+    )
   }
 
   const addCustomSkill = () => {
@@ -89,13 +94,14 @@ export default function UserAddSkill() {
     const requests = [
       axios.post("http://localhost:3000/user/view_skill", { token }),
       axios.post("http://localhost:3000/user/view_user_role_skill", { token,role_id:role_id,department:dept }),
+      axios.post("http://localhost:3000/user/get_user_skill", { token,id:Cookies.get('id')}),
     ];
   
     try {
-      const [skillResponse,roleskillResponse] = await Promise.all(requests);
+      const [skillResponse,roleskillResponse,userskillResponse] = await Promise.all(requests);
   
       // Check the status of the role response
-      if (roleskillResponse.status === 200 && skillResponse.status==200) {
+      if (roleskillResponse.status === 200 && skillResponse.status===200 && userskillResponse.status===200) {
         const d=roleskillResponse.data.data
         d.map((e:any)=>{
           const matchedSkill=skillResponse.data.data.find((m:any)=>m.id===e.skillId)
@@ -122,6 +128,23 @@ export default function UserAddSkill() {
         console.log(uniqueItems);
         // setRoleBasedSkills(roleBasedSkillOptions.filter((_, i) => skillDataDropbool[i]))
         setotherSkillOptions(uniqueItems)
+        
+        const user_skill_data:any=[]
+        userskillResponse.data.data.map((e:any)=>{
+          const d:any={}
+          const matchedSkill=skillResponse.data.data.find((m:any)=>m.id===e.skillId)
+          if (matchedSkill) {
+          d['skillId']=e.skillId
+          d['name']=matchedSkill.name
+          d['score']=e.score
+          // console.log(roleskillResponse.data.data)
+          // console.log(userskillResponse.data.data)
+          skillDataDropbool[roleskillResponse.data.data.findIndex((f:any)=>f.skillId==e.skillId)]=true
+          user_skill_data.push(d)
+          }
+      })
+      setskillDataDropbool(skillDataDropbool)
+      setselectedSkills(user_skill_data)
         setloading(false)
         // console.log(roleBasedSkills)
         
@@ -133,6 +156,30 @@ export default function UserAddSkill() {
       toast.error(e as string);
     }
   };
+  const handlesubmit= async()=>{
+    const token = await Cookies.get("token");
+    const reqOptions = {
+      url: "http://localhost:3000/user/add_user_skill",
+      method: "POST",
+      data: { token: token ,data:selectedSkills,id:Cookies.get('id')},
+    };
+    console.log(reqOptions);
+
+    try {
+      const response = await axios.request(reqOptions);
+      if (response.status == 200) {
+        toast.success("Skill added");
+        getAllData()
+      }
+    } catch (e:any) {
+      if (e.status == 403) {
+        toast.error("Skill exsist");
+      } else {
+        toast.error(`${e}`);
+      }
+    }
+
+  }
   useEffect(() => {
     getAllData();
   }, [])
@@ -207,7 +254,7 @@ spinner={<CircleLoader/>}
                 </ScrollArea>
               </DropdownMenuContent>
             </DropdownMenu>
-            {/* {selectedSkills.length} */}
+            {selectedSkills.map((e)=>(<>{e.score}{e.name}</>))}
           {selectedSkills.length >0 && 
           (selectedSkills.map((skill) => (
             // <div key={skill.name} className="flex items-center space-x-2">
@@ -217,7 +264,7 @@ spinner={<CircleLoader/>}
                 min={0}
                 max={100}
                 step={1}
-                defaultValue={[0]}
+                defaultValue={[skill.score??0]}
                 onValueChange={([newScore]) => updateSkillScore(selectedSkills, setselectedSkills, skill.name, newScore)}
                 className="flex-grow"
               />
@@ -231,6 +278,11 @@ spinner={<CircleLoader/>}
               </Button>
             </div>
           )))}
+        </div>
+        <div className="flex justify-end w-full">
+
+
+        <Button variant={'default'} className="flex justify-end  mt-4" onClick={handlesubmit}>Update</Button>
         </div>
       </section>
 

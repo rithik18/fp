@@ -6,6 +6,7 @@ const userController=require('../controllers/userController')
 const roleController=require('../controllers/roleController')
 const skillController=require('../controllers/skillController')
 const roleskillController=require('../controllers/roleskillController')
+const userkillController=require('../controllers/userskillController')
 
 router.post('/',(req,res)=>{
     if(req.token){
@@ -22,6 +23,11 @@ router.post('/update_user_data',userController.update_user_data)
 router.post('/get_role',roleController.get_role)
 
 router.post('/view_skill',skillController.view_skill)
+
 router.post('/view_user_role_skill',roleskillController.view_user_role_skill)
+
+router.post('/add_user_skill',userkillController.add_user_skill)
+router.post('/get_user_skill',userkillController.get_user_skill)
+// router.post('/update_user_skill',userkillController.)
 
 module.exports = router;

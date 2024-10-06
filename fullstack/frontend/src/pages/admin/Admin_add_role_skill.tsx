@@ -35,9 +35,6 @@ import {
 } from "../../components/ui/alert-dialog";
 import { ScrollArea } from "../../components/ui/scroll-area";
 
-import { Textarea } from "../../components/ui/textarea";
-import { Input } from "../../components/ui/input";
-import { Label } from "../../components/ui/label";
 import { Button } from "../../components/ui/button";
 import { H2 } from "../../components/ui/Typography";
 import axios from "axios";
@@ -71,8 +68,6 @@ const Admin_add_role_skill = () => {
 
   const [skillData, setskillData] = useState<any[]>([]);
   const [editskill, seteditskill] = useState(true);
-  const [editskillname, seteditskillname] = useState("");
-  const [editskillmsg, seteditskillmsg] = useState("");
   const [editskillsno, seteditskillsno] = useState(-1);
 
   const [a, seta] = useState([]);
@@ -113,8 +108,8 @@ const Admin_add_role_skill = () => {
         // getAllRoleSkill();
         fetchAllData();
       }
-    } catch (e) {
-      if (e!.status == 403) {
+    } catch (e:any) {
+      if (e.status == 403) {
         toast.error("Skill exsist");
       } else {
         toast.error(`${e}`);
@@ -144,8 +139,8 @@ const Admin_add_role_skill = () => {
         seteditskill(!editskill)
         setDepartment1("OTHER")
       }
-    } catch (e) {
-      if (e!.status == 403) {
+    } catch (e:any) {
+      if (e.status == 403) {
         console.log(e);
         toast.error("Skill exsist");
       } else {
@@ -170,8 +165,8 @@ const Admin_add_role_skill = () => {
         // getAllRoleSkill();
         fetchAllData()
       }
-    } catch (e) {
-      if (e!.status == 403) {
+    } catch (e:any) {
+      if (e.status == 403) {
         console.log(e);
         toast.error("Skill exsist");
       } else {
