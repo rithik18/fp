@@ -29,12 +29,9 @@ import {
   X,
 } from "lucide-react";
 import { ScrollArea } from "../../components/ui/scroll-area"
-type Skill = {
-  name: string
-  score:number
-  // userId: string
-  // skillId: string
-}
+import LoadingOverlay from "react-loading-overlay"
+import CircleLoader from "react-spinners/CircleLoader"
+
 
 
 
@@ -45,27 +42,33 @@ export default function UserAddSkill() {
   const [otherSkillOptions,setotherSkillOptions] = useState<any[]>([])
   const [dept, setdept] = useState(Cookies.get('department'))
   const [role, setRole] = useState(Cookies.get('role_name'))
-  const [roleBasedSkills, setRoleBasedSkills] = useState<Skill[]>([])
-  const [otherSkills, setOtherSkills] = useState<Skill[]>([])
+  // const [roleBasedSkills, setRoleBasedSkills] = useState<any[]>([])
+  const [otherSkills, setOtherSkills] = useState<any[]>([])
   const [newCustomSkill, setNewCustomSkill] = useState("")
   const [skillDataDropbool, setskillDataDropbool] = useState<any[]>([]);
+  const [selectedSkills,setselectedSkills]= useState<any[]>([]);
   const [open, setOpen] = useState(false);
+  const [loading, setloading] = useState(false);
 
   const clearAll = () => {
     setskillDataDropbool(new Array(roleBasedSkillOptions.length).fill(false));
   };
 
-  const addSkill = (skillList: Skill[], setSkillList: React.Dispatch<React.SetStateAction<Skill[]>>, skillName: string) => {
+  const addSkill = (skillList: any[], setSkillList: React.Dispatch<React.SetStateAction<any[]>>, skillName: string) => {
     if (!skillList.some(skill => skill.name === skillName)) {
       setSkillList([...skillList, { name: skillName, score: 50 }])
     }
   }
 
-  const removeSkill = (skillList: Skill[], setSkillList: React.Dispatch<React.SetStateAction<Skill[]>>, skillName: string) => {
+  const removeSkill = (skillList: any[], setSkillList: React.Dispatch<React.SetStateAction<any[]>>, skillName: string,i:number) => {
+    console.log(skillList.filter(skill => skill.name !== skillName),i)
+    const d = [...skillDataDropbool];
+    d[i] = false;
+    setskillDataDropbool(d);
     setSkillList(skillList.filter(skill => skill.name !== skillName))
   }
 
-  const updateSkillScore = (skillList: Skill[], setSkillList: React.Dispatch<React.SetStateAction<Skill[]>>, skillName: string, newScore: number) => {
+  const updateSkillScore = (skillList: any[], setSkillList: React.Dispatch<React.SetStateAction<any[]>>, skillName: string, newScore: number) => {
     setSkillList(skillList.map(skill => 
       skill.name === skillName ? { ...skill, score: newScore } : skill
     ))
@@ -78,6 +81,7 @@ export default function UserAddSkill() {
     }
   }
   const getAllData = async () => {
+    setloading(true)
     const token = await Cookies.get("token");
     const role_id=await Cookies.get('role_id')
     console.log(role_id)
@@ -116,26 +120,39 @@ export default function UserAddSkill() {
         );   
         const uniqueItems = [...difference1, ...difference2];
         console.log(uniqueItems);
-        setRoleBasedSkills(roleBasedSkillOptions.filter((_, i) => skillDataDropbool[i]))
+        // setRoleBasedSkills(roleBasedSkillOptions.filter((_, i) => skillDataDropbool[i]))
         setotherSkillOptions(uniqueItems)
-        
+        setloading(false)
+        // console.log(roleBasedSkills)
         
       }
   
     
     } catch (e) {
+      setloading(false)
       toast.error(e as string);
     }
   };
   useEffect(() => {
     getAllData();
   }, [])
+  useEffect(() => {
+    setselectedSkills(roleBasedSkillOptions.filter((_, i) => skillDataDropbool[i]))
+  }, [skillDataDropbool])
+
   
 
   return (
     <div>
       <UserNav/>
       <ToastContainer />
+      {loading && <div className="fixed inset-0 bg-black bg-opacity-25  flex justify-center items-center backdrop-blur-md z-50">
+
+<LoadingOverlay
+active={loading}
+spinner={<CircleLoader/>}
+></LoadingOverlay>
+</div>}
     <div className="max-w-2xl mx-auto p-6 space-y-8">
       <section>
         <h2 className="text-2xl font-bold mb-4">Role-Based Skills for {dept} - {role}</h2>
@@ -190,28 +207,30 @@ export default function UserAddSkill() {
                 </ScrollArea>
               </DropdownMenuContent>
             </DropdownMenu>
-          {roleBasedSkills.map((skill) => (
+            {/* {selectedSkills.length} */}
+          {selectedSkills.length >0 && 
+          (selectedSkills.map((skill) => (
             // <div key={skill.name} className="flex items-center space-x-2">
             <div  className="flex items-center space-x-2">
-              {/* <Label className="w-1/3">{skill.name}</Label> */}
+              <Label className="w-1/3">{skill.name}</Label>
               <Slider
                 min={0}
                 max={100}
                 step={1}
-                // value={[skill.score]}
-                onValueChange={([newScore]) => updateSkillScore(roleBasedSkills, setRoleBasedSkills, skill.name, newScore)}
+                defaultValue={[0]}
+                onValueChange={([newScore]) => updateSkillScore(selectedSkills, setselectedSkills, skill.name, newScore)}
                 className="flex-grow"
               />
               <span className="w-12 text-right">{skill.score}%</span>
               <Button
                 variant="ghost"
                 size="icon"
-                onClick={() => removeSkill(roleBasedSkills, setRoleBasedSkills, skill.name)}
+                onClick={() => removeSkill(selectedSkills, setselectedSkills, skill.name,roleBasedSkillOptions.findIndex((e)=>e.id==skill.id))}
               >
                 <X className="h-4 w-4" />
               </Button>
             </div>
-          ))}
+          )))}
         </div>
       </section>
 
@@ -241,7 +260,7 @@ export default function UserAddSkill() {
               <Plus className="h-4 w-4 mr-2" /> Add
             </Button>
           </div>
-          {otherSkills.map((skill) => (
+          {otherSkills.map((skill,i) => (
             <div key={skill.name} className="flex items-center space-x-2">
               <Label className="w-1/3">{skill.name}</Label>
               <Slider
@@ -256,7 +275,7 @@ export default function UserAddSkill() {
               <Button
                 variant="ghost"
                 size="icon"
-                onClick={() => removeSkill(otherSkills, setOtherSkills, skill.name)}
+                onClick={() => removeSkill(otherSkills, setOtherSkills, skill.name,i)}
               >
                 <X className="h-4 w-4" />
               </Button>
