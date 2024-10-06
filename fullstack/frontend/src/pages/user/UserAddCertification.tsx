@@ -24,7 +24,19 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "@/components/ui/dialog"
+} from "../../components/ui/dialog"
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "../../components/ui/alert-dialog"
+
 import { Calendar } from "../../components/ui/calendar"
 import { Popover, PopoverContent, PopoverTrigger } from "../../components/ui/popover"
 import { format } from "date-fns"
@@ -33,8 +45,11 @@ import UserNav from "../../components/UserNav"
 import Cookies from "js-cookie";
 import axios from "axios"
 import { ToastContainer ,toast} from "react-toastify"
+import { cn } from "../../lib/utils"
+import { ScrollArea } from "../../components/ui/scroll-area"
 
 type Certification = {
+  certificationId: string
   id: string
   name: string
   issued_by:String,
@@ -57,55 +72,58 @@ export default function UserAddCertification() {
   const [predefinedCertifications,setpredefinedCertifications] = useState<Certification[]>([])
   const [userCertifications, setUserCertifications] = useState<UserCertification[]>([])
   const [selectedCertification, setSelectedCertification] = useState<string>("")
+  const [editCertificationname, seteditCertificationname] = useState<string>("")
   const [startDate, setStartDate] = useState<Date | undefined>(new Date())
+  const [startDateedit, setStartDateedit] = useState<Date | undefined>(new Date())
   const [completionDate, setCompletionDate] = useState<Date | undefined>()
+  const [completionDateedit, setCompletionDateedit] = useState<Date | undefined>()
   const [competency, setCompetency] = useState<UserCertification['competency']>('BEGINNER')
+  const [competencyedit, setCompetencyedit] = useState<UserCertification['competency']>('BEGINNER')
   const [imageFile, setImageFile] = useState<File | null>(null)
+  const [imageFileedit, setImageFileedit] = useState<File | null>(null)
 
-  // In a real application, you would fetch user certifications from an API
-  useEffect(() => {
-    // Simulating API call
-    const fetchUserCertifications = async () => {
-      const token = await Cookies.get("token");
-      const reqOptions = {
-        url: "http://localhost:3000/user/get_certification",
-        method: "POST",
-        data: { token: token,id:Cookies.get('id') },
-      };
-      console.log(reqOptions);
-  
-      try {
-        const response = await axios.request(reqOptions);
-        if (response.status == 200) {
-          console.log(response.data.data);
-          setUserCertifications(response.data.data);
-          
-        }
-      } catch (e) {
-        toast.error(e as String);
+  const fetchUserCertifications = async () => {
+    const token = await Cookies.get("token");
+    const reqOptions = {
+      url: "http://localhost:3000/user/get_certification",
+      method: "POST",
+      data: { token: token,id:Cookies.get('id') },
+    };
+    console.log(reqOptions);
+
+    try {
+      const response = await axios.request(reqOptions);
+      if (response.status == 200) {
+        console.log(response.data.data,"data");
+        setUserCertifications(response.data.data);
+        
       }
-      
+    } catch (e) {
+      toast.error(e as String);
     }
-    const fetchCertifications = async () => {
-      const token = await Cookies.get("token");
-      const reqOptions = {
-        url: "http://localhost:3000/user/view_certification",
-        method: "POST",
-        data: { token: token },
-      };
-      console.log(reqOptions);
-  
-      try {
-        const response = await axios.request(reqOptions);
-        if (response.status == 200) {
-          console.log(response.data.data);
-          setpredefinedCertifications(response.data.data);
-          
-        }
-      } catch (e) {
-        toast.error(e as String);
+    
+  }
+  const fetchCertifications = async () => {
+    const token = await Cookies.get("token");
+    const reqOptions = {
+      url: "http://localhost:3000/user/view_certification",
+      method: "POST",
+      data: { token: token },
+    };
+    console.log(reqOptions);
+
+    try {
+      const response = await axios.request(reqOptions);
+      if (response.status == 200) {
+        console.log(response.data.data);
+        setpredefinedCertifications(response.data.data);
+        
       }
+    } catch (e) {
+      toast.error(e as String);
     }
+  }
+  useEffect(() => {  
     fetchCertifications()
     fetchUserCertifications()
   }, [])
@@ -113,6 +131,11 @@ export default function UserAddCertification() {
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
       setImageFile(e.target.files[0])
+    }
+  }
+  const handleImageChangeedit = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files[0]) {
+      setImageFileedit(e.target.files[0])
     }
   }
 
@@ -165,15 +188,13 @@ export default function UserAddCertification() {
       const response = await axios.request(reqOptions);
       if (response.status == 200) {
         console.log(response.data.data);
-        toast.success("Certification Added Successfully \nAdmin verification is pending")
+        toast.success( "Certification added successfully. Awaiting admin verification.")
+        fetchUserCertifications()
       }
     } catch (e) {
       toast.error(e as String);
     }
-
-    // In a real application, you would send this data to your API
-    setUserCertifications([...userCertifications, newCertification])
-    toast.success( "Certification added successfully. Awaiting admin verification.")
+    // toast.success( "Certification added successfully. Awaiting admin verification.")
 
     // Reset form
     setSelectedCertification("")
@@ -349,7 +370,125 @@ export default function UserAddCertification() {
                   )}
                 </TableCell>
                 <TableCell>
-                  <Pencil className="w-4 h-4"/>
+                <AlertDialog>
+  <AlertDialogTrigger onClick={()=>{
+    setCompetencyedit(cert.competency)
+    seteditCertificationname(cert.certificationName)
+        // Check if the preset value exists in predefinedCertifications
+        const isValidPreset = predefinedCertifications.some(cert => cert.id === cert.certificationId);
+        
+        if (isValidPreset) {
+            seteditCertificationname(cert.certificationId);
+        }
+
+    setCompletionDateedit( new Date(cert.completed_at.toString()))
+    setStartDateedit(new Date(cert.started_at.toString()))
+  }}><Pencil className="w-4 h-4"/></AlertDialogTrigger>
+  <AlertDialogContent>
+    <AlertDialogHeader>
+      <AlertDialogTitle>Edit Details</AlertDialogTitle>
+      <AlertDialogDescription>
+        <ScrollArea>
+      <section className="flex flex-col justify-evenly gap-4 mx-auto w-full">
+      <img src={cert.imageData||""} alt="" className={cn(
+                      "mx-auto object-cover w-24 h-24 border-2 rounded-full"
+                    )}/>
+          <div>
+            
+            <Label htmlFor="certification">Certification</Label>
+            <Select value={editCertificationname} onValueChange={seteditCertificationname}>
+              <SelectTrigger id="certification">
+                <SelectValue placeholder={editCertificationname} />
+              </SelectTrigger>
+              <SelectContent>
+                {predefinedCertifications.map((cert) => (
+                  <SelectItem key={cert.id} value={cert.id}>
+                    {cert.name}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          </div>
+          <div>
+            <Label htmlFor="startDate">Start Date</Label>
+            <Popover>
+              <PopoverTrigger asChild>
+                <Button
+                  variant={"outline"}
+                  className={`w-full justify-start text-left font-normal ${!startDateedit && "text-muted-foreground"}`}
+                >
+                  <CalendarIcon className="mr-2 h-4 w-4" />
+                  {startDateedit ? format(startDateedit, "PPP") : <span>Pick a date</span>}
+                </Button>
+              </PopoverTrigger>
+              <PopoverContent className="w-auto p-0">
+                <Calendar
+                  mode="single"
+                  selected={startDateedit}
+                  onSelect={setStartDateedit}
+                  initialFocus
+                />
+              </PopoverContent>
+            </Popover>
+          </div>
+          <div>
+            <Label htmlFor="completionDate">Completion Date</Label>
+            <Popover>
+              <PopoverTrigger asChild>
+                <Button
+                  variant={"outline"}
+                  className={`w-full justify-start text-left font-normal ${!completionDateedit && "text-muted-foreground"}`}
+                >
+                  <CalendarIcon className="mr-2 h-4 w-4" />
+                  {completionDateedit ? format(completionDateedit, "PPP") : <span>Pick a date</span>}
+                </Button>
+              </PopoverTrigger>
+              <PopoverContent className="w-auto p-0">
+                <Calendar
+                  mode="single"
+                  selected={completionDateedit}
+                  onSelect={setCompletionDateedit}
+                  initialFocus
+                />
+              </PopoverContent>
+            </Popover>
+          </div>
+          <div>
+            <Label htmlFor="competency">Competency</Label>
+            <Select value={competencyedit} onValueChange={(value) => setCompetencyedit(value as UserCertification['competency'])}>
+              <SelectTrigger id="competency">
+                <SelectValue placeholder="Select competency level" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="BEGINNER">Beginner</SelectItem>
+                <SelectItem value="INTERMEDIATE">Intermediate</SelectItem>
+                <SelectItem value="ADVANCED">Advanced</SelectItem>
+                <SelectItem value="EXPERT">Expert</SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
+          <div>
+            <Label htmlFor="certificationImage">Certification Image</Label>
+            <Input
+              id="certificationImage"
+              type="file"
+              accept="image/*"
+              onChange={handleImageChangeedit}
+              className="cursor-pointer"
+            />
+          </div>
+      </section>
+      </ScrollArea>
+      </AlertDialogDescription>
+    </AlertDialogHeader>
+    <AlertDialogFooter>
+      <AlertDialogCancel>Cancel</AlertDialogCancel>
+      <AlertDialogAction>Continue</AlertDialogAction>
+    </AlertDialogFooter>
+  </AlertDialogContent>
+</AlertDialog>
+
+                  
                 </TableCell>
               </TableRow>
             ))}
