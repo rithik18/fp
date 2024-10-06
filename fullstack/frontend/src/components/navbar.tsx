@@ -22,13 +22,16 @@ import Cookies from "js-cookie";
 import { toast,ToastContainer } from "react-toastify";
 import { Link, useNavigate } from "react-router-dom";
 import image from '../assets/logo_jman.png'
-import { SquareMenu } from "lucide-react";
+import { IdCard, SquareMenu } from "lucide-react";
 import { cn } from "../lib/utils";
 import defaultimg from '../assets/react.svg'
 import { useEffect, useState } from "react";
+import { Label } from "./ui/label";
 const navbar = () => {
   const [img, setimg] = useState<any>("")
   const [name, setname] = useState<any>("")
+  const [dept, setdept] = useState(Cookies.get("department"));
+  const [role, setRole] = useState(Cookies.get("role_name"));
   useEffect(() => {
     
   
@@ -102,59 +105,78 @@ const navbar = () => {
                 </DropdownMenuContent>
               </DropdownMenu>
             </li>
-            <li className="relative w-12 h-12 flex items-center">
+            <li className="relative flex items-center">
   <DropdownMenu>
     <DropdownMenuTrigger>
       <img
         src={img ?? defaultimg}
         alt="Profile"
-        className={cn("object-cover w-full h-full border-2 rounded-full")}
+        className={cn("object-cover w-12 h-12 border-2 rounded-full")}
       />
     </DropdownMenuTrigger>
-    <DropdownMenuContent>
-      <DropdownMenuLabel>Welcome {name}</DropdownMenuLabel>
-      <DropdownMenuSeparator />
-      <DropdownMenuItem>Edit Profile</DropdownMenuItem>
-      <DropdownMenuItem onSelect={(e) => e.preventDefault()}>  {/* Prevent default close */}
-        <AlertDialog>
-          <AlertDialogTrigger asChild>
-            <Button
-              variant="destructive"
-              className="bg-red-700 w-full mx-auto"
-            >
-              Logout
-            </Button>
-          </AlertDialogTrigger>
-          <AlertDialogContent>
-            <AlertDialogHeader>
-              <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
-              <AlertDialogDescription>
-                Do You want to Logout
-              </AlertDialogDescription>
-            </AlertDialogHeader>
-            <AlertDialogFooter>
-              <AlertDialogCancel>Cancel</AlertDialogCancel>
-              <AlertDialogAction
-                onClick={async () => {
-                  Cookies.remove('auth');
-                  Cookies.remove('role');
-                  Cookies.remove('token');
-                  Cookies.remove('data');
-                  toast.success("Logged Out Successfully");
-
-    // Navigate to the login page after a slight delay (to let the toast message show)
-    setTimeout(() => {
-      n('/');  // Use navigate to redirect to the login page
-    }, 500);
-                }}
-              >
-                Continue
-              </AlertDialogAction>
-            </AlertDialogFooter>
-          </AlertDialogContent>
-        </AlertDialog>
-      </DropdownMenuItem>
-    </DropdownMenuContent>
+    <DropdownMenuContent className="w-[200px] flex flex-col justify-evenly items-start">
+                  <DropdownMenuLabel className="flex gap-2 items-center scroll-m-20  pb-2 tracking-tight first:mt-0">Welcome {name}</DropdownMenuLabel>
+                  
+                  <DropdownMenuLabel
+                    id="role"
+                    className=" flex gap-2 items-center scroll-m-20  pb-2 text-xs font-semibold tracking-tight first:mt-0"
+                  >
+                    
+                    <IdCard className="w-4 h-4 mr-2 text-muted-foreground" />
+                    {role}
+                  </DropdownMenuLabel>
+                  {/* <Label
+                    htmlFor="dept"
+                    className="scroll-m-20  px-2 text-sm font-semibold tracking-tight first:mt-0 text-gray-500"
+                  >
+                    Department
+                  </Label>
+                  <DropdownMenuLabel className="scroll-m-20  pb-2 text-xs font-semibold tracking-tight first:mt-0">
+                    {dept}
+                  </DropdownMenuLabel> */}
+                  <DropdownMenuSeparator className="mx-auto w-full bg-gray-300" />
+                  <DropdownMenuItem className="scroll-m-20 mx-auto  pb-2 text-base font-semibold tracking-tight first:mt-0">Edit Profile</DropdownMenuItem>
+                  <DropdownMenuItem className="mx-auto"  onSelect={(e) => e.preventDefault()}>
+                    {" "}
+                    <AlertDialog>
+                      <AlertDialogTrigger asChild>
+                        <Button
+                          variant="destructive"
+                          className="bg-red-700 w-full mx-auto"
+                        >
+                          Logout
+                        </Button>
+                      </AlertDialogTrigger>
+                      <AlertDialogContent>
+                        <AlertDialogHeader>
+                          <AlertDialogTitle>
+                            Are you absolutely sure?
+                          </AlertDialogTitle>
+                          <AlertDialogDescription>
+                            Do You want to Logout
+                          </AlertDialogDescription>
+                        </AlertDialogHeader>
+                        <AlertDialogFooter>
+                          <AlertDialogCancel>Cancel</AlertDialogCancel>
+                          <AlertDialogAction
+                            onClick={async () => {
+                              Cookies.remove("auth");
+                              Cookies.remove("role");
+                              Cookies.remove("token");
+                              Cookies.remove("data");
+                              toast.success("Logged Out Successfully");
+                              setTimeout(() => {
+                                n("/"); // Use navigate to redirect to the login page
+                              }, 500);
+                            }}
+                          >
+                            Continue
+                          </AlertDialogAction>
+                        </AlertDialogFooter>
+                      </AlertDialogContent>
+                    </AlertDialog>
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
   </DropdownMenu>
 </li>
             {/* <li className="">

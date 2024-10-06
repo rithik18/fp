@@ -320,7 +320,7 @@ const User = () => {
                 <div>
                   <Label
                     htmlFor="location"
-                    className="scroll-m-20 border-b pb-2 text-base font-semibold tracking-tight first:mt-0 text-gray-500"
+                    className="scroll-m-20  pb-2 text-base font-semibold tracking-tight first:mt-0 text-gray-500"
                   >
                     COE
                   </Label>
@@ -334,21 +334,21 @@ const User = () => {
                 <div>
                   <Label
                     htmlFor="jobTitle"
-                    className="scroll-m-20 border-b pb-2 text-base font-semibold tracking-tight first:mt-0 text-gray-500"
+                    className="scroll-m-20  pb-2 text-base font-semibold tracking-tight first:mt-0 text-gray-500"
                   >
                     Job Title
                   </Label>
                   <div className="flex items-center">
                     <IdCard className="w-4 h-4 mr-2 text-muted-foreground" />
                     <p className="scroll-m-20 text-sm font-semibold tracking-tight">
-                      {isEditing ? editedUser.role_id : user.role_id}
+                      {Cookies.get('role_name')}
                     </p>
                   </div>
                 </div>
                 <div>
                   <Label
                     htmlFor="Joining_Date"
-                    className="scroll-m-20 border-b pb-2 text-base font-semibold tracking-tight first:mt-0 text-gray-500"
+                    className="scroll-m-20  pb-2 text-base font-semibold tracking-tight first:mt-0 text-gray-500"
                   >
                     Joining Date
                   </Label>

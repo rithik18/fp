@@ -15,7 +15,8 @@ import {
 import { Plus, X } from "lucide-react"
 import Cookies from "js-cookie";
 import axios from "axios"
-import { toast } from "react-toastify"
+import { toast, ToastContainer } from "react-toastify"
+import UserNav from "../../components/UserNav"
 
 type Skill = {
   name: string
@@ -96,6 +97,9 @@ export default function UserAddSkill() {
   }
 
   return (
+    <div>
+      <UserNav/>
+      <ToastContainer />
     <div className="max-w-2xl mx-auto p-6 space-y-8">
       <section>
         <h2 className="text-2xl font-bold mb-4">Role-Based Skills for {dept} - {role}</h2>
@@ -185,6 +189,7 @@ export default function UserAddSkill() {
           ))}
         </div>
       </section>
+    </div>
     </div>
   )
 }
