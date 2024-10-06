@@ -2,38 +2,170 @@ const { PrismaClient, Role } = require("@prisma/client");
 const prisma = new PrismaClient();
 
 
-const add_user_skill=async(req,res)=>{
-    console.log("in add_user_skill")
-    const {id,data} =req.body
-    console.log(id)
+// const add_user_skill=async(req,res)=>{
+//     console.log("in add_user_skill")
+//     const {id,data} =req.body
+//     console.log(id)
     
-  try {
-    const array = [];
-    data.forEach((element) => {
-      const d = {};
-      d["userId"] = id;
-      d["skillId"] = element.skillId;
-      d['score']=element.score
-      array.push(d);
-    });
-    console.log(array);
-    console.log(array);
-    const data=await prisma.UserSkill.findMany({where:{userId:id}})
-    if(data.length>0){
+//   try {
+//     const array = [];
+//     data.forEach((element) => {
+//       const d = {};
+//       d["userId"] = id;
+//       d["skillId"] = element.skillId;
+//       d['score']=element.score
+//       array.push(d);
+//     });
+//     console.log(array);
+//     console.log(array);
+//     const data=await prisma.UserSkill.findMany({where:{userId:id}})
+//     if(data.length>0){
+//         const difference1 = array.filter(
+//             (item) => !data.some((respItem) => respItem.skillId === item.skillId)
+//           );
+//           const difference2 = data.filter(
+//             (item) => !array.some((arrayItem) => arrayItem.skillId === item.skillId)
+//           );
+          
+//           const uniqueItems = [...difference1, ...difference2];
+          
+//           console.log(uniqueItems, uniqueItems.length, "hell");
+          
+//           if (uniqueItems.length > 0) {
+//             // If there are unique items, we need to decide to add or delete
+//             if (array.length > data.length) {
+//               // Add new skills to the database
+//               await Promise.all(
+//                 difference1.map(async (element) => {
+//                   await prisma.UserSkill.create({
+//                     data: {
+//                         userId: element.userId,
+//                       score: element.score,
+//                       skillId: element.skillId, // Assuming you want to add this field
+//                     },
+//                   });
+//                 })
+//               );
+//               console.log("Added new skills.");
+//             } else {
+//               // Delete skills from the database
+//               await Promise.all(
+//                 difference2.map(async (element) => {
+//                   await prisma.UserSkill.delete({
+//                     where: {
+//                       id: element.id, // Ensure `id` exists in the element
+//                     },
+//                   });
+//                 })
+//               );
+//               console.log("Deleted skills.");
+//             }
+//           } else {
+//             console.log("No changes needed.");
+//           }
 
-    }else{
-        const resp = await prisma.UserSkill.updateMany({ data: array });
-    res.send({ msg: "User's Skill Added" });
-    console.log("hell");
+//     }else{
+//         const resp = await prisma.UserSkill.createMany({ data: array });
+//     res.send({ msg: "User's Skill Added" });
+//     console.log("hell");
 
+//     }
+
+    
+//   } catch (e) {
+//     console.log(e);
+//     res.status(403).send({ msg: e });
+//   }
+// }
+const add_user_skill = async (req, res) => {
+    console.log("in add_user_skill");
+    const { id, data } = req.body;
+    console.log(id);
+  
+    try {
+      const array = [];
+      data.forEach((element) => {
+        const d = {};
+        d["userId"] = id;
+        d["skillId"] = element.skillId;
+        d['score'] = element.score;
+        array.push(d);
+      });
+      console.log(array);
+  
+      // Fetch existing skills for the user from the database
+      const existingData = await prisma.UserSkill.findMany({ where: { userId: id } });
+  
+      if (existingData.length > 0) {
+        // Step 1: Filter out new skills that need to be added and skills to be deleted
+        const difference1 = array.filter(
+          (item) => !existingData.some((respItem) => respItem.skillId === item.skillId)
+        );
+        const difference2 = existingData.filter(
+          (item) => !array.some((arrayItem) => arrayItem.skillId === item.skillId)
+        );
+  
+        // Step 2: Update score for skills that already exist
+        await Promise.all(
+          array.map(async (element) => {
+            const existingSkill = existingData.find((respItem) => respItem.skillId === element.skillId);
+            if (existingSkill) {
+              // Update score if the skill exists
+              await prisma.UserSkill.update({
+                where: { id: existingSkill.id },
+                data: { score: element.score },
+              });
+              console.log(`Updated score for skillId: ${element.skillId}`);
+            }
+          })
+        );
+  
+        // Step 3: Handle adding new skills or deleting removed skills
+        if (difference1.length > 0) {
+          // Add new skills to the database
+          await Promise.all(
+            difference1.map(async (element) => {
+              await prisma.UserSkill.create({
+                data: {
+                  userId: element.userId,
+                  score: element.score,
+                  skillId: element.skillId,
+                },
+              });
+            })
+          );
+          console.log("Added new skills.");
+        }
+  
+        if (difference2.length > 0) {
+          // Delete skills from the database
+          await Promise.all(
+            difference2.map(async (element) => {
+              await prisma.UserSkill.delete({
+                where: {
+                  id: element.id,
+                },
+              });
+            })
+          );
+          console.log("Deleted skills.");
+        }
+  
+        res.send({ msg: "User skills updated successfully" });
+  
+      } else {
+        // If the user has no skills, add them as new
+        const resp = await prisma.UserSkill.createMany({ data: array });
+        res.send({ msg: "User's Skill Added" });
+        console.log("Added skills for new user.");
+      }
+  
+    } catch (e) {
+      console.log(e);
+      res.status(403).send({ msg: e });
     }
-
-    
-  } catch (e) {
-    console.log(e);
-    res.status(403).send({ msg: e });
-  }
-}
+  };
+  
 
 const get_user_skill=async(req,res)=>{
     console.log("in get_user_skill")

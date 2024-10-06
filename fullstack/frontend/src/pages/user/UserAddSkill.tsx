@@ -184,9 +184,19 @@ export default function UserAddSkill() {
     getAllData();
   }, [])
   useEffect(() => {
-    setselectedSkills(roleBasedSkillOptions.filter((_, i) => skillDataDropbool[i]))
-  }, [skillDataDropbool])
-
+    const updatedSelectedSkills = roleBasedSkillOptions
+      .filter((_, i) => skillDataDropbool[i])  // Only selected skills
+      .map((skill) => {
+        // Check if the skill already exists in selectedSkills
+        const existingSkill = selectedSkills.find((s) => s.name === skill.name);
+        
+        // If the skill exists, keep its current score, otherwise initialize it with default score
+        return existingSkill ? existingSkill : { ...skill, score: 0 }; // Use default score (can be 0 if preferred)
+      });
+  
+    setselectedSkills(updatedSelectedSkills);
+  }, [skillDataDropbool, roleBasedSkillOptions]);
+  
   
 
   return (
@@ -255,7 +265,7 @@ spinner={<CircleLoader/>}
               </DropdownMenuContent>
             </DropdownMenu>
             {selectedSkills.map((e)=>(<>{e.score}{e.name}</>))}
-          {selectedSkills.length >0 && 
+          {/* {selectedSkills.length >0 && 
           (selectedSkills.map((skill) => (
             // <div key={skill.name} className="flex items-center space-x-2">
             <div  className="flex items-center space-x-2">
@@ -277,7 +287,33 @@ spinner={<CircleLoader/>}
                 <X className="h-4 w-4" />
               </Button>
             </div>
-          )))}
+          )))} */}
+          {selectedSkills.map((skill) => (
+  <div key={skill.name} className="flex items-center space-x-2">
+    <Label className="w-1/3">{skill.name}</Label>
+    
+    {/* Use the value prop to bind the slider to the current score */}
+    <Slider
+      min={0}
+      max={100}
+      step={1}
+      value={[skill.score]} // Bind to the dynamic score from selectedSkills
+      onValueChange={([newScore]) => updateSkillScore(selectedSkills, setselectedSkills, skill.name, newScore)}
+      className="flex-grow"
+    />
+    
+    <span className="w-12 text-right">{skill.score}%</span>
+    
+    <Button
+      variant="ghost"
+      size="icon"
+      onClick={() => removeSkill(selectedSkills, setselectedSkills, skill.name, roleBasedSkillOptions.findIndex((e) => e.id === skill.id))}
+    >
+      <X className="h-4 w-4" />
+    </Button>
+  </div>
+))}
+
         </div>
         <div className="flex justify-end w-full">
 
