@@ -101,7 +101,7 @@ const Admin_add_user = () => {
   const [role1, setrole1] = useState("None");
   const [fileName, setFileName] = useState("");
   const [latestFile, setLatestFile] = useState(null);
-  const fileInputRef = useRef(null);
+  const fileInputRef = useRef<any>(null);
   const [a, seta] = useState([]);
   const [b, setb] = useState([]);
   const [c, setc] = useState(6);
@@ -219,7 +219,7 @@ const Admin_add_user = () => {
       fileInputRef.current.value = ""; // Clear the input value
     }
   };
-  const formatDateToYYYYMMDD = (date: Date) => {
+  const formatDateToYYYYMMDD = (date: any) => {
     const year = date.getFullYear();
     const month = String(date.getMonth() + 1).padStart(2, "0");
     const day = String(date.getDate()).padStart(2, "0");
@@ -281,7 +281,7 @@ const Admin_add_user = () => {
         getAllData()
 
       }
-    } catch (e) {
+    } catch (e:any) {
       if (e!.status == 403) {
         toast.error("USer exsist");
       } else {
@@ -315,9 +315,9 @@ const Admin_add_user = () => {
     }
   };
   const handleMultipleSubmit = async () => {
-    const jsonArray = data.map((item) => {
+    const jsonArray = data.map((item:any) => {
       return header.reduce(
-        (acc: any, key, index) => {
+        (acc: any, key:any, index:any) => {
           if (key === "joining_date") {
             // console.log(key, item[index]);
             acc[key] = convertExcelDateToFormattedDate(item[index]);
@@ -360,7 +360,7 @@ const Admin_add_user = () => {
         setFileName("");
         clearFileInput();
       }
-    } catch (e) {
+    } catch (e:any) {
       console.log(e);
       if (e!.status == 403) {
         toast.error("User exsist");
@@ -434,7 +434,8 @@ const getAllData = async () => {
               <div className="grid-rows-3 px-4">
                 <div className="grid w-full max-w-sm items-center gap-3 py-2">
                   <Label htmlFor="dept">Department</Label>
-                  <DropdownMenu id="dept">
+                  {/* id="dept" */}
+                  <DropdownMenu >
                     <DropdownMenuTrigger asChild className="w-full">
                       <Button variant="outline">
                         {department} <ChevronDown />
@@ -469,7 +470,7 @@ const getAllData = async () => {
                 </div>
                 <div className="grid w-full max-w-sm items-center gap-3 py-2">
                   <Label htmlFor="role">Role</Label>
-                  <DropdownMenu id="role">
+                  <DropdownMenu >
                     <DropdownMenuTrigger asChild className="w-full">
                       <Button variant="outline">
                         {roleData.length != 0 && role != "None"
@@ -500,7 +501,8 @@ const getAllData = async () => {
                 </div>
                 <div className="grid w-full max-w-sm items-center gap-3 py-2">
                   <Label htmlFor="join">Joining Date</Label>
-                  <Popover id="join">
+                  {/* id="join" */}
+                  <Popover >
                     <PopoverTrigger asChild>
                       <Button
                         variant={"outline"}
@@ -716,7 +718,7 @@ const getAllData = async () => {
                   </TableRow>
                 </TableHeader>
                 <TableBody>
-                  {data.map((e: any, sno) => {
+                  {data.map((e: any, sno:number) => {
                     console.log(e);
                     return (
                       <TableRow key={e[0]}>
