@@ -3,7 +3,7 @@ import random
 import csv
 from enum import Enum
 from datetime import datetime
-
+import uuid
 # Initialize Faker
 fake = Faker()
 
@@ -26,7 +26,7 @@ class Competency(Enum):
 # Function to create fake users
 def create_fake_user():
     return {
-        "id": fake.uuid4(),
+        "_id": fake.uuid4(),
         "name": fake.name(),
         "role_id": fake.uuid4(),
         "joining_date": fake.date_time_this_decade().isoformat(),  # Use date_time instead
@@ -35,13 +35,13 @@ def create_fake_user():
         "created_at": fake.date_time_this_decade().isoformat(),
         "updated_at": fake.date_time_this_decade().isoformat(),
         "password": fake.password(),
-        "profileImage": None,  # Default or random image URL
+        "profileImage": fake.image_url(),  # Default or random image URL
     }
 
 # Function to create fake certifications
 def create_fake_certification():
     return {
-        "id": fake.uuid4(),
+        "_id": fake.uuid4(),
         "name": fake.company(),
         "issued_by": fake.company_suffix(),
         "is_certificate": random.choice([True, False]),
@@ -50,7 +50,7 @@ def create_fake_certification():
 # Function to create fake skills
 def create_fake_skill():
     return {
-        "id": fake.uuid4(),
+        "_id": fake.uuid4(),
         "name": fake.word(),
         "created_at": fake.date_time_this_decade().isoformat(),
         "updated_at": fake.date_time_this_decade().isoformat(),
@@ -60,7 +60,7 @@ def create_fake_skill():
 # Function to create fake user certifications
 def create_fake_user_certification(user_id, certification_id):
     return {
-        "id": fake.uuid4(),
+        "_id": fake.uuid4(),
         "userId": user_id,
         "certificationId": certification_id,
         "certificationName": fake.company(),
@@ -74,7 +74,7 @@ def create_fake_user_certification(user_id, certification_id):
 # Function to create fake user skills
 def create_fake_user_skill(user_id, skill_id):
     return {
-        "id": fake.uuid4(),
+        "_id": fake.uuid4(),
         "userId": user_id,
         "skillId": skill_id,
         "score": random.randint(1, 100),
@@ -83,13 +83,19 @@ def create_fake_user_skill(user_id, skill_id):
 # Function to create fake roles
 def create_fake_role():
     return {
-        "id": fake.uuid4(),
+        "_id": fake.uuid4(),
         "name": fake.word(),
         "desc": fake.sentence(),
         "created_at": fake.date_time_this_decade().isoformat(),
         "updated_at": fake.date_time_this_decade().isoformat(),
     }
-
+def create_fake_role_skill(role_id, skill_id):
+    return {
+        "_id": str(uuid.uuid4()),  # Generate a new UUID
+        "RoleId": role_id,
+        "skillId": skill_id,
+        "department": random.choice(list(Department)).value,  # Randomly select a department
+    }
 # Generate fake data
 num_users = 10000
 num_certifications = 100
@@ -104,13 +110,17 @@ roles = [create_fake_role() for _ in range(num_roles)]
 
 # Create user certifications and user skills with the generated IDs
 user_certifications = [
-    create_fake_user_certification(user["id"], random.choice(certifications)["id"])
+    create_fake_user_certification(user["_id"], random.choice(certifications)["_id"])
     for user in users
 ]
 
 user_skills = [
-    create_fake_user_skill(user["id"], random.choice(skills)["id"])
+    create_fake_user_skill(user["_id"], random.choice(skills)["_id"])
     for user in users
+]
+role_skills = [
+    create_fake_role_skill(role["_id"], random.choice(skills)["_id"])
+    for role in roles
 ]
 
 # Function to write data to CSV
@@ -127,5 +137,6 @@ write_to_csv(skills, 'skills.csv', skills[0].keys())
 write_to_csv(roles, 'roles.csv', roles[0].keys())
 write_to_csv(user_certifications, 'user_certifications.csv', user_certifications[0].keys())
 write_to_csv(user_skills, 'user_skills.csv', user_skills[0].keys())
+write_to_csv(role_skills, 'role_skills.csv', role_skills[0].keys())
 
 print("Data has been written to CSV files.")

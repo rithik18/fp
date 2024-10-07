@@ -1,0 +1,105 @@
+_id,name,issued_by,is_certificate
+66febe5eca0ebab04690f2ac,ReactJS,Coursera,True
+66febfabca0ebab04690f2b1,ExpressJS,Udemy,False
+66fec6e2ca0ebab04690f2b2,Other,Other,False
+66fec6e8ca0ebab04690f2b3,Other,Other,True
+8170f955-7125-4b04-8208-3ce645567c71,Scott Group,and Sons,False
+a3f89df1-3943-4760-ac35-5e865c20aa13,Davenport-Gonzalez,PLC,False
+58f06aba-85e7-43c1-a3e5-1d9497d611a5,Jones-Jordan,Ltd,True
+bda871cb-f40f-4782-9447-4cfb7b40adbb,"Allison, Thompson and White",LLC,True
+a61d4b52-a807-453c-8ea9-93b6d7bd8416,"King, Miller and Hodge",PLC,False
+98828044-194b-464e-b94d-482f5ca63f58,Carter-Banks,Group,False
+8797103d-48f8-48fe-885e-503e408d3149,"Valentine, Jones and Reyes",Ltd,True
+8e0a766f-c867-40c1-94ae-eb63ca095d37,"Gonzalez, Shaffer and Leon",Inc,True
+fe324b13-4dce-4305-866a-62dee0c9ce4a,Gonzales Inc,PLC,True
+a9679412-f6a4-43f0-830b-59d4af97372f,"Wells, Gonzalez and Calderon",Ltd,True
+f41d9075-1d0c-4fbf-af73-ff5910068190,Hunter-Yang,PLC,False
+8e57d694-3261-4ae6-bdb4-dc670dee5006,Fisher PLC,PLC,False
+74626c4c-00ca-42da-beed-24a51c95523d,Woods Ltd,PLC,True
+8388efd5-8603-4b3a-bc6d-519b5fb73eb8,Ruiz-Chang,LLC,False
+f4ff84c2-d459-46f2-933b-44feef25934c,"Rocha, Short and Jackson",LLC,False
+c2571cce-2929-4e8d-a96e-4797dacc4dd6,Riley Ltd,Ltd,True
+47bcba44-53e5-4d8c-9f76-13be1abaa6cc,Herrera-Brown,PLC,False
+bc018edf-fb14-415f-a029-bef652144ba3,Bentley Inc,LLC,True
+ac67e38f-ad3f-42e2-a4b0-ac05e51aa990,Harris-Wagner,LLC,True
+43ff89eb-2a07-4b59-8595-f81713943d8c,"Harris, Cruz and Watkins",Group,True
+68e67cce-ac59-4eeb-8fa6-f6d7843ba24e,"Cohen, Gonzalez and Lucas",and Sons,True
+4c85d706-1aba-4118-9b6d-5b4d12ee1796,"Cooley, Parker and Mack",PLC,True
+56af8b18-935a-45de-8cb6-a77061c126c2,"Lindsey, Washington and Woods",Ltd,True
+084c3a5b-be58-4bcf-b5db-f71b6bf4bce8,"Villa, Barnett and Gamble",Ltd,True
+cd6bf471-c6be-44dd-bce6-57472123267f,Lucas Ltd,LLC,True
+bf1ee61a-d46b-4de8-b15e-cc64cf313fc9,"Johnson, Vaughn and Clark",and Sons,True
+d9954975-8b1c-44e2-b804-96073b524462,Brown-Graves,Ltd,True
+5799a91c-0b86-481e-a5c4-ec926ba16bf1,Jones-Sparks,LLC,True
+547168a9-7cc5-4f20-9c70-d87d18a81421,Singh-Hernandez,Ltd,False
+e36ff544-4c7a-4774-b426-b63cc773fda3,Walker LLC,LLC,False
+6f4b13a8-31ec-4144-b7d1-9c101376ef59,Vega-Hunter,Inc,False
+c6fd204b-9630-4318-b9a4-5e7613aff892,"Wise, Solomon and Hampton",Ltd,False
+e1980406-3eac-44a9-bd3b-f7538a30e2c0,Ali Group,Group,False
+916e8dcf-2392-4cb0-9be7-46d04aaa3d83,"Alvarado, Smith and Ramirez",Group,True
+53c64600-3570-4353-a939-ff9c84f590ac,Sullivan-Matthews,Group,True
+a9f7043d-27d1-4f9e-abb1-f1ffdefa1731,Flores-Flores,Group,True
+6c09a5d8-4c15-4896-ba48-34c66c859ae0,Donovan-Howard,and Sons,False
+222aba74-c418-499a-913d-f7fe9604b274,"Cole, Cline and Paul",and Sons,True
+d1f5bf30-c0fa-4815-a9c3-2a5119e6ed77,Price-Bradshaw,and Sons,True
+1d7167b5-4ef9-4b57-b47e-a44119a80d1a,Martinez-Scott,Inc,True
+7388c793-7350-425d-8569-729d4a476418,"Williamson, Long and Valdez",and Sons,True
+54fa88c8-8f6f-405b-95fb-2ab85287d2f7,"Brooks, Taylor and Prince",and Sons,False
+546e81dd-0795-4139-a503-64c5ed7d135f,"Nichols, Austin and Hunt",PLC,False
+df11d03e-a500-4675-96b7-55b38bec0d67,Montoya-Parrish,LLC,False
+c1662177-38fb-4020-b3ea-552482f7497d,Heath-Ortiz,Inc,False
+eb93a62e-5376-4c24-8255-724f36ae0067,Wise-Brown,PLC,False
+e4bf8219-aa09-4c4b-96eb-ade969a0a381,"Johnston, Salinas and Kelly",and Sons,False
+484a1fec-8d9e-455d-8e98-b401b2aa85aa,Hayes-Johnson,Inc,True
+49026907-4e24-4ee6-8eab-91fc57ba473d,"Pratt, Espinoza and Hodge",LLC,False
+7ec4b4b0-a6e6-4210-8ee4-9d8541e2648e,Gross-Rivera,Ltd,True
+68c066f1-4006-40c6-81d7-e409fb3583bf,Perry Inc,Inc,False
+f007aeab-6d41-4ba5-8076-f08814d55647,Kennedy-Garcia,Group,True
+671c78f5-dbb4-4e5e-bced-f42c1e08d213,Meadows Inc,Group,False
+09645136-d63e-48ab-8a71-2c75763686a3,Bailey LLC,LLC,True
+466fe9e9-db45-471b-8846-864928afb09d,Ellison LLC,Group,True
+de49bf60-fd3a-486a-8526-ac36c3898c1d,"Pratt, Cook and Burton",Ltd,False
+153a7c0d-3799-42b2-97e4-3a52e32a5a79,Mcintyre-Brooks,Group,False
+ccdd9189-0cbd-4f40-9b3e-2f6b6d448b2c,"Elliott, Landry and Parrish",Ltd,False
+7ad1e79d-3229-430d-b7ed-e1bd20a6ae40,Poole Inc,PLC,False
+8058bf80-b91c-4bd5-a111-72db0375972d,Thomas-Berry,Inc,True
+26a0deb2-dad5-4432-a28e-cfe9e40317b1,Johnson-Hill,Inc,False
+b50afe8f-6890-49cc-8d22-61fd8031c926,Gomez Group,PLC,True
+9df813a0-e4b3-4cb1-b9f6-3030a2e8ff15,Davenport Ltd,LLC,True
+7b9b2ef0-716c-481a-a28a-87db33947d07,"Rubio, Brown and Meyer",Group,True
+7a4ce060-96cf-4be0-850e-7712517ad56c,Garrett Group,and Sons,True
+2bad53d5-721b-4f91-aea0-09fdbc1146b2,Obrien and Sons,Ltd,True
+7db018db-2d54-4d4d-962f-aaea38ae98e1,Parker-Thomas,and Sons,True
+03dd5846-f57e-4c4c-a21b-05e1c86890ec,Franco-Turner,and Sons,False
+5b7cfcf1-68a8-444a-af76-ad5d1390951d,"Johnson, Floyd and Keith",and Sons,True
+35027db3-5878-435b-a8cd-e9ad85f6fbce,Williams-Yang,Ltd,True
+ced97c17-7f87-4b45-afa7-265af8cd1dfb,Hall-Flores,Group,False
+55583867-c66b-4c16-bf3b-d99eb7ef9b0d,Diaz PLC,LLC,False
+c09034be-302c-443d-886e-dabb8ab2ad10,Hughes-Gregory,Group,False
+d5c3b1c9-ccfa-474e-9c7c-dd12815e4300,"Hunt, Lambert and Palmer",LLC,True
+105cd18b-5f5b-45c0-bfe7-e45694525e4c,Hopkins LLC,LLC,True
+01b53cf2-de77-4cc0-bcb9-ca4db700053b,Jones and Sons,and Sons,True
+23d9b412-f207-47b2-ba37-b09ec1504354,"Price, White and Obrien",LLC,True
+6ddcf9ff-7527-4fc8-9e86-5078e4be8569,"Wright, Ellison and Nichols",Inc,False
+13a72915-b284-4237-9fcd-416a525f5be4,Copeland-Lopez,and Sons,False
+630d0b60-a3c5-4adb-8277-87cb4f9d84c2,Villarreal Inc,Group,True
+d9f48854-605a-475f-bf7f-ce183fcbe53f,"Price, Howard and Flynn",Group,True
+d91eb834-0521-4263-8f15-301f9bebb539,Oliver-Stewart,Ltd,True
+1cad071b-3e6a-4783-9b01-a9a76ad1e292,"Aguilar, Carr and Fox",PLC,False
+d639063b-c350-48a0-b82f-193b3905b71f,"Barnett, Flynn and Allen",LLC,False
+68db2fd7-fd83-4992-bd6a-3a821f49a542,"Robles, Smith and Marsh",Ltd,False
+c11701eb-ff98-4496-85a6-f8fcbc263af0,"Smith, Sullivan and Walsh",LLC,True
+47b8dedf-f525-492d-8128-216fa16c0c89,Johnson Group,and Sons,False
+7e3273cd-7ded-4963-b7f8-22341d8f4240,"Jones, Duncan and Gonzalez",Group,True
+2c165a58-3934-404b-b21f-e664b61ae42c,"Powell, Atkinson and Jenkins",Inc,False
+3313c09d-bdc2-4ff2-b63c-7344ec8aa39c,"Lam, Chavez and Meyer",Group,True
+08fb0d7d-7c15-45e8-bbf6-0d799590462b,White Group,and Sons,False
+6f0e37d4-2231-4eed-83f8-9aeed3cc922f,Thomas-Torres,Ltd,True
+b3697e59-4e7b-4a1e-a24d-e17d81300268,"Prince, Simmons and Garner",and Sons,True
+0d0e7a1a-e36e-4e3b-bc15-d516d1db1153,Brown-Weaver,Ltd,True
+a0cac991-72cd-4365-bc44-407ade91083f,Hill PLC,Inc,True
+ccb8a6c2-5a95-4c00-831b-9aa1f3523945,Walters Ltd,PLC,True
+8ff0fb38-552a-49ac-9e8f-f6b3acc1a38b,Hicks-Oneal,PLC,True
+6b074c95-88ed-4b5e-93ce-83b58491cd14,Christian Inc,and Sons,False
+ad18ceda-6607-41dc-a3f0-5fe6250b113f,Casey-Chase,PLC,False
+8125a223-9cd3-4c01-9f95-5107eb6b9a30,"Williams, Rivera and Thompson",and Sons,True
