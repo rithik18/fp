@@ -7,6 +7,7 @@ const skillController=require('../controllers/skillController')
 const roleController=require('../controllers/roleController')
 const certificationController=require('../controllers/certificationController')
 const roleskillController=require('../controllers/roleskillController')
+const usercertificationController=require('../controllers/usercertificationController')
 
 router.post('/',(req,res)=>{
     if(req.token){
@@ -44,6 +45,10 @@ router.post('/view_role_skill',roleskillController.view_role_skill)
 router.post('/add_role_skill',roleskillController.add_role_skill)
 router.post('/edit_role_skill',roleskillController.update_role_skill)
 router.post('/delete_role_skill',roleskillController.delete_role_skill)
+
+router.post('/get_admin_certification',usercertificationController.get_admin_certification)
+router.post('/verify',usercertificationController.verify)
+router.post('/reject',usercertificationController.reject)
 
 
 module.exports = router;

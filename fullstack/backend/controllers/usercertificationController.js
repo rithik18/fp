@@ -35,6 +35,16 @@ const get_certification = async (req, res) => {
       res.status(403).send({ msg: e });
     }
   };
+const get_admin_certification = async (req, res) => {
+    console.log("in get_certificate");  
+    try {
+     const resp=await prisma.userCertification.findMany({where:{isVerified:false}})
+     res.send({data:resp})
+    } catch (e) {
+      console.log(e);
+      res.status(403).send({ msg: e });
+    }
+  };
 const get_course_count = async (req, res) => {
     console.log("in get_certificate");
     const { id } = req.body;
@@ -133,6 +143,36 @@ async function getTotalDuration(req,res) {
     res.status(403).send({ msg: e });
   }
   }
+  const verify=async(req,res)=>{
+    console.log("verify")
+    const { data } = req.body;
+  try {
+    const resp = await prisma.userCertification.update({ where: { userId_certificationId_competency: {
+      userId: data.userId,
+      certificationId: data.certificationId,
+      competency: data.competency
+    }},data:{isVerified:true} });
+    res.send({ msg: "Role Updated" });
+  } catch (e) {
+    console.log(e);
+    res.status(403).send({ msg: e });
+  }
+  }
+  const reject=async(req,res)=>{
+    console.log("reject")
+    const { data } = req.body;
+  try {
+    const resp = await prisma.userCertification.delete({ where: { userId_certificationId_competency: {
+      userId: data.userId,
+      certificationId: data.certificationId,
+      competency: data.competency
+    }}});
+    res.send({ msg: "Certificate Rejected" });
+  } catch (e) {
+    console.log(e);
+    res.status(403).send({ msg: e });
+  }
+  }
   
   module.exports={
     add_certification,
@@ -140,5 +180,8 @@ async function getTotalDuration(req,res) {
     update_certification,
     get_certification_count,
     get_course_count,
-    getTotalDuration
+    getTotalDuration,
+    get_admin_certification,
+    verify,
+    reject
   }
