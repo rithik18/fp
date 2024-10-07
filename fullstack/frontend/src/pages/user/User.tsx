@@ -28,7 +28,7 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
   AlertDialogTrigger,
-} from "../../components/ui/alert-dialog"
+} from "../../components/ui/alert-dialog";
 
 import {
   Pencil,
@@ -47,6 +47,7 @@ import {
   CalendarCheck2,
   Shield,
   ShieldAlert,
+  Award,
 } from "lucide-react";
 import { Progress } from "../../components/ui/progress";
 import axios from "axios";
@@ -68,17 +69,17 @@ const User = () => {
     created_at: "",
     updated_at: "",
     password: "",
-    profileImage: ""
+    profileImage: "",
   });
   const [skills, setskills] = useState<any>([]);
   const [allskills, setallskills] = useState<any>([]);
   const [certifications, setcertifications] = useState<any>([]);
 
   const [coursesCompleted, setcoursesCompleted] = useState<number>(0);
-  const [certificationCompleted, setcertificationCompleted] = useState(0)
-  const [learningHours, setlearningHours] = useState<number>(120);
+  const [certificationCompleted, setcertificationCompleted] = useState(0);
+  const [learningHours, setlearningHours] = useState<number>(0);
   const [editedUser, setEditedUser] = useState(user);
-  const [loading, setloading] = useState(false)
+  const [loading, setloading] = useState(false);
 
   const handleEdit = () => {
     setIsEditing(true);
@@ -102,39 +103,39 @@ const User = () => {
         }
       });
     } catch (e: any) {
-      const init=async()=>{
+      const init = async () => {
         const keysToStore = [
-        "id",
-        "name",
-        "role_id",
-        "joining_date",
-        "department",
-        "mail",
-        "profileImage",
-        "updated_at",
-        "created_at",
-        "password",
-      ];
-      var data_old: any = {};
+          "id",
+          "name",
+          "role_id",
+          "joining_date",
+          "department",
+          "mail",
+          "profileImage",
+          "updated_at",
+          "created_at",
+          "password",
+        ];
+        var data_old: any = {};
 
-      keysToStore.forEach((key) => {
-        if (key == "profileImage") {
-          data_old[key] = localStorage.getItem(key);
-        } else {
-          data_old[key] = Cookies.get(key);
-        }
-      });
-      setUser(data);
-      console.log(data, "data");
-    }
+        keysToStore.forEach((key) => {
+          if (key == "profileImage") {
+            data_old[key] = localStorage.getItem(key);
+          } else {
+            data_old[key] = Cookies.get(key);
+          }
+        });
+        setUser(data);
+        console.log(data, "data");
+      };
       if (e.status == 403) {
         toast.error("Error");
-        init()
-        return
+        init();
+        return;
       } else {
         toast.error(e);
-        init()
-        return
+        init();
+        return;
       }
     }
     setUser(data);
@@ -172,11 +173,10 @@ const User = () => {
   };
 
   useEffect(() => {
- 
     const timer = setInterval(() => {
-      if(certifications.length>0){
-      nextCertification();
-    }
+      if (certifications.length > 0) {
+        nextCertification();
+      }
     }, 3000); // Change certification every 3 seconds
 
     return () => clearInterval(timer);
@@ -229,71 +229,97 @@ const User = () => {
   }, []);
 
   const fetchAllData = async () => {
-    setloading(true)
+    setloading(true);
     const token = Cookies.get("token");
-    const id=Cookies.get('id')
-  
+    const id = Cookies.get("id");
+
     // Prepare requests
     const requests = [
-      axios.post("http://localhost:3000/user/get_certification_count", { token,id }),
-      axios.post("http://localhost:3000/user/get_course_count", { token,id }),
-      axios.post("http://localhost:3000/user/get_certification", { token,id }),
+      axios.post("http://localhost:3000/user/get_certification_count", {
+        token,
+        id,
+      }),
+      axios.post("http://localhost:3000/user/get_course_count", { token, id }),
+      axios.post("http://localhost:3000/user/get_certification", { token, id }),
       axios.post("http://localhost:3000/user/get_user_skill", {
         token,
-        id:id,
+        id: id,
       }),
       axios.post("http://localhost:3000/user/view_skill", { token }),
+      axios.post("http://localhost:3000/user/get_total_duration", { token,id }),
     ];
-  
+
     try {
-      const [get_certification_count_Response, get_course_count_Response,user_Certification_Response,user_skill_Response,all_skill_response] = await Promise.all(requests);
-     
+      const [
+        get_certification_count_Response,
+        get_course_count_Response,
+        user_Certification_Response,
+        user_skill_Response,
+        all_skill_response,
+        duration_Response
+      ] = await Promise.all(requests);
+
       if (get_certification_count_Response.status === 200) {
-        console.log(get_certification_count_Response.data.data); 
+        console.log(get_certification_count_Response.data.data);
       }
       if (get_course_count_Response.status === 200) {
-        console.log(get_course_count_Response.data.data,"course"); 
-        setcoursesCompleted(get_course_count_Response.data.data) 
+        console.log(get_course_count_Response.data.data, "course");
+        setcoursesCompleted(get_course_count_Response.data.data);
       }
       if (get_certification_count_Response.status === 200) {
-        console.log(get_certification_count_Response.data.data,"certification");
-        setcertificationCompleted(get_certification_count_Response.data.data)
+        console.log(
+          get_certification_count_Response.data.data,
+          "certification"
+        );
+        setcertificationCompleted(get_certification_count_Response.data.data);
       }
       if (user_Certification_Response.status == 200) {
-        console.log(user_Certification_Response.data.data,"data1");
+        console.log(user_Certification_Response.data.data, "data1");
         setcertifications(user_Certification_Response.data.data);
       }
-      if(all_skill_response.status==200){
-        console.log(all_skill_response.data.data,"data3");
+      if (duration_Response.status == 200) {
+        console.log(duration_Response.data.data, "data1");
+        setlearningHours(duration_Response.data.data);
+      }
+      if (all_skill_response.status == 200) {
+        console.log(all_skill_response.data.data, "data3");
         setallskills(all_skill_response.data.data);
       }
-      if(user_skill_Response.status == 200){
-        console.log(user_skill_Response.data.data,"data2");
-        setskills(user_skill_Response.data.data.map((e: any) => {
-          const matchedSkill = all_skill_response.data.data.find(
-            (m: any) => m.id === e.skillId
-          );
-          if (matchedSkill) {
-            e["name"] = matchedSkill.name;
-          } else {
-            console.warn(`No matching skill found for id ${e.id}`);
-          }
-          return e;
-        }));
+      if (user_skill_Response.status == 200) {
+        console.log(user_skill_Response.data.data, "data2");
+        setskills(
+          user_skill_Response.data.data.map((e: any) => {
+            const matchedSkill = all_skill_response.data.data.find(
+              (m: any) => m.id === e.skillId
+            );
+            if (matchedSkill) {
+              e["name"] = matchedSkill.name;
+            } else {
+              console.warn(`No matching skill found for id ${e.id}`);
+            }
+            return e;
+          })
+        );
         // setskills(user_skill_Response.data.data);
       }
-      if(get_certification_count_Response.status === 200 &&get_course_count_Response.status === 200&&user_Certification_Response.status == 200 &&user_skill_Response.status==200&&all_skill_response.status==200){
-        setloading(false)
+      if (
+        get_certification_count_Response.status === 200 &&
+        get_course_count_Response.status === 200 &&
+        user_Certification_Response.status == 200 &&
+        user_skill_Response.status == 200 &&
+        all_skill_response.status == 200
+      ) {
+        setloading(false);
       }
     } catch (e) {
       toast.error(e as String);
-      setloading(false)
+      setloading(false);
     }
   };
   const n = useNavigate();
   return (
     <div className="w-full">
-      <UserNav/>
+      <UserNav />
       <ToastContainer />
       {loading && (
         <div className="fixed inset-0 bg-black bg-opacity-25  flex justify-center items-center backdrop-blur-md z-50">
@@ -416,7 +442,7 @@ const User = () => {
                   <div className="flex items-center">
                     <IdCard className="w-4 h-4 mr-2 text-muted-foreground" />
                     <p className="scroll-m-20 text-sm font-semibold tracking-tight">
-                      {Cookies.get('role_name')}
+                      {Cookies.get("role_name")}
                     </p>
                   </div>
                 </div>
@@ -434,25 +460,31 @@ const User = () => {
                     </p>
                   </div>
                   <div className="mt-10 flex justify-start space-x-2">
-            {isEditing ? (
-              <>
-                <Button onClick={handleSave} className="flex items-center">
-                  <Check className="mr-2 h-4 w-4" /> Save
-                </Button>
-                <Button
-                  onClick={handleCancel}
-                  variant="outline"
-                  className="flex items-center"
-                >
-                  <X className="mr-2 h-4 w-4" /> Cancel
-                </Button>
-              </>
-            ) : (
-              <Button onClick={handleEdit} className="flex items-center">
-                <Pencil className="mr-2 h-4 w-4" /> Edit Profile
-              </Button>
-            )}
-          </div>
+                    {isEditing ? (
+                      <>
+                        <Button
+                          onClick={handleSave}
+                          className="flex items-center"
+                        >
+                          <Check className="mr-2 h-4 w-4" /> Save
+                        </Button>
+                        <Button
+                          onClick={handleCancel}
+                          variant="outline"
+                          className="flex items-center"
+                        >
+                          <X className="mr-2 h-4 w-4" /> Cancel
+                        </Button>
+                      </>
+                    ) : (
+                      <Button
+                        onClick={handleEdit}
+                        className="flex items-center"
+                      >
+                        <Pencil className="mr-2 h-4 w-4" /> Edit Profile
+                      </Button>
+                    )}
+                  </div>
                 </div>
               </div>
 
@@ -510,40 +542,45 @@ const User = () => {
                   </Card>
                 </div>
                 {/*Skill Carousel*/}
-                <AlertDialog >
-  <AlertDialogTrigger className="w-full">
-    <Button variant={'default'} className="w-full">View Skill</Button>
-  </AlertDialogTrigger>
-  <AlertDialogContent>
-    <AlertDialogHeader>
-      <AlertDialogTitle>Skills</AlertDialogTitle>
-      <AlertDialogDescription>
-                <ScrollArea>
-                  <h3 className="text-lg font-semibold mb-2">Skills</h3>
-                  <div className="grid grid-cols-1 gap-4">
-                    {skills.map((skill:any, index:number) => (
-                      <div key={index} className="flex items-center">
-                        <Badge
-                          variant="outline"
-                          className="mr-2 line-clamp-1 w-1/3 text-center justify-center rounded-full"
-                        >
-                          {skill.name}
-                        </Badge>
-                        <Progress value={skill.score} className="flex-grow" />
-                        <span className="ml-2 text-sm font-medium">
-                          {skill.score}%
-                        </span>
-                      </div>
-                    ))}
-                  </div>
-                </ScrollArea>
-      </AlertDialogDescription>
-    </AlertDialogHeader>
-    <AlertDialogFooter>
-      <AlertDialogCancel>Close</AlertDialogCancel>
-    </AlertDialogFooter>
-  </AlertDialogContent>
-</AlertDialog>
+                <AlertDialog>
+                  <AlertDialogTrigger className="w-full">
+                    <Button variant={"default"} className="w-full">
+                      View Skill
+                    </Button>
+                  </AlertDialogTrigger>
+                  <AlertDialogContent>
+                    <AlertDialogHeader>
+                      <AlertDialogTitle>Skills</AlertDialogTitle>
+                      <AlertDialogDescription>
+                        <ScrollArea>
+                          <h3 className="text-lg font-semibold mb-2">Skills</h3>
+                          <div className="grid grid-cols-1 gap-4">
+                            {skills.map((skill: any, index: number) => (
+                              <div key={index} className="flex items-center">
+                                <Badge
+                                  variant="outline"
+                                  className="mr-2 line-clamp-1 w-1/3 text-center justify-center rounded-full"
+                                >
+                                  {skill.name}
+                                </Badge>
+                                <Progress
+                                  value={skill.score}
+                                  className="flex-grow"
+                                />
+                                <span className="ml-2 text-sm font-medium">
+                                  {skill.score}%
+                                </span>
+                              </div>
+                            ))}
+                          </div>
+                        </ScrollArea>
+                      </AlertDialogDescription>
+                    </AlertDialogHeader>
+                    <AlertDialogFooter>
+                      <AlertDialogCancel>Close</AlertDialogCancel>
+                    </AlertDialogFooter>
+                  </AlertDialogContent>
+                </AlertDialog>
 
                 {/* <div>
                   <h3 className="text-lg font-semibold mb-2">Skills</h3>
@@ -565,77 +602,95 @@ const User = () => {
                   </div>
                 </div> */}
                 {/*Certification Carousel*/}
-                {certifications.length>0?
-                <div>
-                  <h3 className="text-lg font-semibold mb-2">Certifications</h3>
-                  <Card>
-                    <CardContent className="p-6">
-                      <div className="flex items-center justify-between">
-                        <Button
-                          variant="outline"
-                          size="icon"
-                          onClick={prevCertification}
-                        >
-                          <ChevronLeft className="h-4 w-4" />
-                        </Button>
-                        <div className="text-center w-full">
-                          
-                          <div className="relative w-11/12 mx-auto h-48 bg-gray-100 rounded-lg overflow-hidden">
-                        <img
-                          src={certifications[currentCertIndex]?.imageData}
-                          alt={certifications[currentCertIndex]?.name}
-                          className="absolute inset-0 w-full h-full object-contain"
-                        />
-                      </div>
-                      <h4 className="font-semibold mt-10">
-                            {certifications[currentCertIndex]?.certificationName}
-                          </h4>
-                          <div className="mt-2 flex items-center justify-center space-x-2">
-                          <Badge variant="secondary" className="rounded-full">
-                            {certifications[currentCertIndex].competency}
-                          </Badge>
-                          {certifications[currentCertIndex].isVerified ? (
-                            <Badge variant="default" className="bg-green-500 rounded-full">
-                              <Shield className="w-3 h-3 mr-1" />
-                              Verified
-                            </Badge>
-                          ) : (
-                            <Badge variant="outline" className="text-yellow-500 border-yellow-500  rounded-full">
-                              <ShieldAlert className="w-3 h-3 mr-1"/>
-                              Pending Verification
-                            </Badge>
-                          )}
-                        </div>
-                          {/* <img src={certifications[currentCertIndex]?.imageData} alt="" className="w-64 h-32"/> */}
-                          <div className="flex items-center justify-center gap-8 mt-5">
-
-                          <p className="flex text-sm text-muted-foreground">
-                          <CalendarFold className="w-4 h-4"/>
-                            {new Date(
-                              certifications[currentCertIndex]?.started_at
-                            ).toLocaleDateString()}
-                          </p>
-                          <p className="flex text-sm text-muted-foreground">
-                          <CalendarCheck2  className="w-4 h-4" />
-                            {new Date(
-                              certifications[currentCertIndex]?.completed_at
-                            ).toLocaleDateString()}
-                          </p>
+                {certifications.length > 0 ? (
+                  <div>
+                    <h3 className="text-lg font-semibold mb-2">
+                      Certifications
+                    </h3>
+                    <Card>
+                      <CardContent className="p-6">
+                        <div className="flex items-center justify-between">
+                          <Button
+                            variant="outline"
+                            size="icon"
+                            onClick={prevCertification}
+                          >
+                            <ChevronLeft className="h-4 w-4" />
+                          </Button>
+                          <div className="text-center w-full">
+                            <div className="relative w-11/12 mx-auto h-48 bg-gray-100 rounded-lg overflow-hidden">
+                              <img
+                                src={
+                                  certifications[currentCertIndex]?.imageData
+                                }
+                                alt={certifications[currentCertIndex]?.name}
+                                className="absolute inset-0 w-full h-full object-contain"
+                              />
+                            </div>
+                            <h4 className="font-semibold mt-10">
+                              {
+                                certifications[currentCertIndex]
+                                  ?.certificationName
+                              }
+                            </h4>
+                            <div className="mt-2 flex items-center justify-center space-x-2">
+                              <Badge
+                                variant="secondary"
+                                className="rounded-full"
+                              >
+                                {certifications[currentCertIndex].competency}
+                              </Badge>
+                              {certifications[currentCertIndex].isVerified ? (
+                                <Badge
+                                  variant="default"
+                                  className="bg-green-500 rounded-full"
+                                >
+                                  <Shield className="w-3 h-3 mr-1" />
+                                  Verified
+                                </Badge>
+                              ) : (
+                                <Badge
+                                  variant="outline"
+                                  className="text-yellow-500 border-yellow-500  rounded-full"
+                                >
+                                  <ShieldAlert className="w-3 h-3 mr-1" />
+                                  Pending Verification
+                                </Badge>
+                              )}
+                            </div>
+                            {/* <img src={certifications[currentCertIndex]?.imageData} alt="" className="w-64 h-32"/> */}
+                            <div className="flex items-center justify-center gap-8 mt-5">
+                              <p className="flex text-sm text-muted-foreground">
+                                <CalendarFold className="w-4 h-4" />
+                                {new Date(
+                                  certifications[currentCertIndex]?.started_at
+                                ).toLocaleDateString()}
+                              </p>
+                              <p className="flex text-sm text-muted-foreground">
+                                <CalendarCheck2 className="w-4 h-4" />
+                                {new Date(
+                                  certifications[currentCertIndex]?.completed_at
+                                ).toLocaleDateString()}
+                              </p>
+                            </div>
                           </div>
+                          <Button
+                            variant="outline"
+                            size="icon"
+                            onClick={nextCertification}
+                          >
+                            <ChevronRight className="h-4 w-4" />
+                          </Button>
                         </div>
-                        <Button
-                          variant="outline"
-                          size="icon"
-                          onClick={nextCertification}
-                        >
-                          <ChevronRight className="h-4 w-4" />
-                        </Button>
-                      </div>
-                    </CardContent>
-                  </Card>
-                </div>:
-                <p>{"Empty"}</p>
-                }
+                      </CardContent>
+                    </Card>
+                  </div>
+                ) : (
+                  <p className="text-2xl font-bold flex justify-evenly items-center">
+                    <Award />
+                    No certifications
+                  </p>
+                )}
               </div>
             </div>
           </CardContent>

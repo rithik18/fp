@@ -79,7 +79,7 @@ export default function UserAddCertification() {
   const [competency, setCompetency] = useState<Competency>(Competency.BEGINNER)
   const [competencyedit, setCompetencyedit] = useState<Competency>(Competency.BEGINNER)
   const [imageFile, setImageFile] = useState<File | null>(null)
-  const [imageFileedit, setImageFileedit] = useState<File | null>(null)
+  const [imageFileedit, setImageFileedit] = useState<File|string | null>(null)
   const [loading, setloading] = useState(false)
   
 
@@ -204,11 +204,13 @@ export default function UserAddCertification() {
       }
     } catch (e) {
       toast.error(e as String);
+      fetchUserCertifications()
     }
     // toast.success( "Certification added successfully. Awaiting admin verification.")
 
     // Reset form
     setSelectedCertification("")
+    fetchUserCertifications()
     setStartDate(new Date())
     setCompletionDate(undefined)
     setCompetency(Competency.BEGINNER)
@@ -234,23 +236,29 @@ export default function UserAddCertification() {
       return
     }
     const imageData = await new Promise<string>((resolve) => {
-      const reader = new FileReader()
-      reader.onloadend = () => resolve(reader.result as string)
-      reader.readAsDataURL(imageFileedit)
-    })
+      const reader = new FileReader();
+      
+      // If imageFileedit is already a byte string, resolve the Promise immediately
+      if (typeof imageFileedit === 'string') {
+        resolve(imageFileedit); // Correct: resolve the Promise with the byte string
+      } else if (imageFileedit instanceof File) {
+        reader.onloadend = () => resolve(reader.result as string); // Resolve with the file data as string
+        reader.readAsDataURL(imageFileedit); // Read the file as a Data URL
+      }
+    });
     
 
     const newCertification: UserCertification = {
       userId:Cookies.get('id')??"",
       certificationId: editCertificationname,
       certificationName: predefinedCertifications.find(c => c.id === editCertificationname)?.name || "",
-      started_at: startDateedit.toISOString(),
-      completed_at: completionDateedit?.toISOString() ?? "",
+      started_at: new Date(startDateedit.toDateString()).toISOString(),
+      completed_at:new Date(completionDateedit.toDateString()).toISOString(),
       competency: competencyedit,
       imageData: imageData,
       isVerified: false
     }
-    console.log(newCertification)
+    // console.log(startDateedit.toISOString(),completionDateedit.toISOString(),s,"new")
     const token = await Cookies.get("token");
     const reqOptions = {
       url: "http://localhost:3000/user/update_certification",
@@ -268,8 +276,10 @@ export default function UserAddCertification() {
       }
     } catch (e) {
       toast.error(e as String);
+      fetchUserCertifications()
     }
-
+    fetchUserCertifications()
+    setedit(false)
     // Reset form
     // setSelectedCertification("")
     // setStartDate(new Date())
@@ -531,7 +541,7 @@ export default function UserAddCertification() {
                 {/* <TableCell>{format(cert.started_at, "PPP")}</TableCell> */}
                 <TableCell>{cert.started_at.split('T')[0]}</TableCell>
                 {/* <TableCell>{cert.completed_at ? format(cert.completed_at, "PPP") : "In Progress"}</TableCell> */}
-                <TableCell>{cert.completed_at?.trim()==""||cert.completed_at==null||cert.completed_at==undefined ? cert.completed_at?.split('T')[0] : "In Progress"}</TableCell>
+                <TableCell>{cert.completed_at?.split('T')[0]}</TableCell>
                 <TableCell>{cert.competency}</TableCell>
                 <TableCell>
                   {cert.imageData ? (
@@ -573,6 +583,7 @@ export default function UserAddCertification() {
 
     <Pencil className="w-4 h-4" onClick={async()=>{
       setcerti(cert)
+      setImageFileedit(cert.imageData)
       setCompetencyedit(cert.competency as UserCertification['competency']);
       seteditCertificationname(cert.certificationId);
       setCompletionDateedit(new Date(cert.completed_at.toString()));
