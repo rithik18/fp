@@ -52,27 +52,6 @@ const Admin_add_user = () => {
   const [date, setDate] = useState<Date>();
   const [data, setData] = useState<any>([]);
   const [header, setHeader] = useState<any>([]);
-  const getAllrole = async () => {
-    const token = await Cookies.get("token");
-    const reqOptions = {
-      url: "http://localhost:3000/admin/view_role",
-      method: "POST",
-      data: { token: token },
-    };
-    console.log(reqOptions);
-
-    try {
-      const response = await axios.request(reqOptions);
-      if (response.status == 200) {
-        console.log(response.data.data);
-        setroleData(response.data.data);
-
-        // console.log(response.data.data.length,response.data.data.length/c,c,p,pc,"hell")
-      }
-    } catch (e) {
-      toast.error(e as String);
-    }
-  };
   useEffect(() => {
     validate();
     // getAllrole();
@@ -287,31 +266,6 @@ const Admin_add_user = () => {
       } else {
         toast.error(`${e}`);
       }
-    }
-  };
-  const getAllUser = async () => {
-    const token = await Cookies.get("token");
-    const reqOptions = {
-      url: "http://localhost:3000/admin/view_user",
-      method: "POST",
-      data: { token: token },
-    };
-    console.log(reqOptions);
-
-    try {
-      const response = await axios.request(reqOptions);
-      if (response.status == 200) {
-        console.log(response.data.data, "alluser");
-        setuserData(response.data.data);
-        setsearchuserData(response.data.data);
-        setsearchuserData(userData);
-        seta(response.data.data);
-        setb(response.data.data.slice(0, c));
-        setpc(Math.ceil(response.data.data.length / c));
-        setd(response.data.data.length);
-      }
-    } catch (e) {
-      toast.error(e as String);
     }
   };
   const handleMultipleSubmit = async () => {
