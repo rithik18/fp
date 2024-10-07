@@ -53,6 +53,7 @@ enum Competency {
   EXPERT = "EXPERT",
 }
 const Admin_verify_certification = () => {
+  const [userData, setuserData] = useState<any>([])
   const [userCertifications, setUserCertifications] = useState<
     UserCertification[]
   >([]);
@@ -60,6 +61,33 @@ const Admin_verify_certification = () => {
     Certification[]
   >([]);
   const [loading, setloading] = useState(false);
+  const getAllData = async () => {
+    setloading(true)
+    const token = await Cookies.get("token");
+  
+    // Create an array of promises for both API calls
+    const requests = [
+      axios.post("http://localhost:3000/admin/view_user", { token }),
+    ];
+  
+    try {
+      // Wait for both requests to resolve
+      const [userResponse] = await Promise.all(requests);
+  
+  
+      // Check the status of the user response
+      if (userResponse.status === 200) {
+        console.log(userResponse.data.data, "alluser");
+        setuserData(userResponse.data.data);
+        setloading(false)
+        
+      }
+    } catch (e) {
+      toast.error(e as string);
+      setloading(false)
+    }
+  };
+  
   const fetchUserCertifications = async () => {
     setloading(true);
     const token = await Cookies.get("token");
@@ -106,6 +134,7 @@ const Admin_verify_certification = () => {
     setloading(true);
     fetchCertifications();
     fetchUserCertifications();
+    getAllData();
     setloading(false);
     console.log(Cookies.get("role"));
     if (
@@ -216,7 +245,7 @@ const Admin_verify_certification = () => {
                     ?.find((e) => e?.id === cert.certificationId)
                     ?.issued_by?.toString() || ""}
                 </TableCell>
-                <TableCell>{cert.userId}</TableCell>
+                <TableCell>{userData.find((e:any)=>e.id===cert.userId)?.name}</TableCell>
 
                 {/* <TableCell>{predefinedCertifications.find((e)=>e?.id===cert.certificationId).is_certificate.toString()??""}</TableCell> */}
                 {/* <TableCell>{format(cert.started_at, "PPP")}</TableCell> */}

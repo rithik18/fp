@@ -46,12 +46,12 @@ import { H2, H4 } from "../../components/ui/Typography";
 import { ScrollArea } from "../../components/ui/scroll-area";
 
 const Admin_add_user = () => {
-  const [roleData, setroleData] = useState([]);
-  const [userData, setuserData] = useState([]);
-  const [searchuserData, setsearchuserData] = useState([]);
+  const [roleData, setroleData] = useState<any>([]);
+  const [userData, setuserData] = useState<any>([]);
+  const [searchuserData, setsearchuserData] = useState<any>([]);
   const [date, setDate] = useState<Date>();
-  const [data, setData] = useState([]);
-  const [header, setHeader] = useState([]);
+  const [data, setData] = useState<any>([]);
+  const [header, setHeader] = useState<any>([]);
   const getAllrole = async () => {
     const token = await Cookies.get("token");
     const reqOptions = {
