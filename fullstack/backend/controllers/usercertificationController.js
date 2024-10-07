@@ -35,7 +35,30 @@ const get_certification = async (req, res) => {
       res.status(403).send({ msg: e });
     }
   };
+  const update_certification=async(req,res)=>{
+    console.log("in_update")
+    const { data } = req.body;
+    if (!Object.values(competency).includes(data.competency)) {
+      console.log(data.competency)
+      console.log("Available competencies:", Object.values(competency));
+      console.log("Received competency:", competency);
+      return res.status(400).send('Invalid competency level');
+    }
+    console.log(data.userId,data.certificationId,data.competency)
+  try {
+    const resp = await prisma.userCertification.update({ where: { userId_certificationId_competency: {
+      userId: data.userId,
+      certificationId: data.certificationId,
+      competency: data.competency
+    }},data:{imageData:data.imageData,started_at:data.started_at,completed_at:data.completed_at} });
+    res.send({ msg: "Role Updated" });
+  } catch (e) {
+    console.log(e);
+    res.status(403).send({ msg: e });
+  }
+  }
   module.exports={
     add_certification,
-    get_certification
+    get_certification,
+    update_certification
   }
