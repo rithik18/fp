@@ -1,4 +1,4 @@
-const { PrismaClient, Role } = require("@prisma/client");
+const { PrismaClient, competency } = require("@prisma/client");
 const { response } = require("express");
 const prisma = new PrismaClient();
 
@@ -8,7 +8,12 @@ const add_certification = async (req, res) => {
     console.log("in add_certificate");
     const { data } = req.body;
     console.log(data.userId);
-  
+    if (!Object.values(competency).includes(data.competency)) {
+      console.log(data.competency)
+      console.log("Available competencies:", Object.values(competency));
+      console.log("Received competency:", competency);
+      return res.status(400).send('Invalid competency level');
+    }
     try {
      const resp=await prisma.userCertification.create({data:data})
      res.send({"msg":"Certificate Added successfully"})

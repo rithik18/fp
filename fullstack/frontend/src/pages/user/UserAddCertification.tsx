@@ -64,12 +64,17 @@ type UserCertification = {
   certificationName: string
   started_at: String
   completed_at: String 
-  competency: 'BEGINNER' | 'INTERMEDIATE' | 'ADVANCED' | 'EXPERT'
+  competency: Competency
   imageData: string | null
   isVerified: boolean,
 }
 
-
+enum Competency {
+  BEGINNER = 'BEGINNER',
+  INTERMEDIATE = 'INTERMEDIATE',
+  ADVANCED = 'ADVANCED',
+  EXPERT = 'EXPERT',
+}
 export default function UserAddCertification() {
   const [predefinedCertifications,setpredefinedCertifications] = useState<Certification[]>([])
   const [userCertifications, setUserCertifications] = useState<UserCertification[]>([])
@@ -79,8 +84,8 @@ export default function UserAddCertification() {
   const [startDateedit, setStartDateedit] = useState<Date | undefined>(new Date())
   const [completionDate, setCompletionDate] = useState<Date | undefined>()
   const [completionDateedit, setCompletionDateedit] = useState<Date | undefined>()
-  const [competency, setCompetency] = useState<UserCertification['competency']>('BEGINNER')
-  const [competencyedit, setCompetencyedit] = useState<UserCertification['competency']>('BEGINNER')
+  const [competency, setCompetency] = useState<Competency>(Competency.BEGINNER)
+  const [competencyedit, setCompetencyedit] = useState<Competency>(Competency.BEGINNER)
   const [imageFile, setImageFile] = useState<File | null>(null)
   const [imageFileedit, setImageFileedit] = useState<File | null>(null)
   const [loading, setloading] = useState(false)
@@ -153,7 +158,7 @@ export default function UserAddCertification() {
     e.preventDefault()
     if (!selectedCertification||!competency || !startDate || !imageFile || !completionDate) {
       console.log(!selectedCertification,"cert")
-      console.log(!startDate,"strst" )
+      console.log(!startDate,startDate,"strst" )
       console.log(!imageFile,"img" )
       console.log(!completionDate,"end")
       toast.error(
@@ -186,7 +191,7 @@ export default function UserAddCertification() {
       started_at: startDate.toISOString(),
       completed_at: completionDate?.toISOString() ?? "",
       competency: competency,
-      imageData: imageData,
+      imageData: "imageData",
       isVerified: false
     }
     console.log(newCertification)
@@ -214,7 +219,7 @@ export default function UserAddCertification() {
     setSelectedCertification("")
     setStartDate(new Date())
     setCompletionDate(undefined)
-    setCompetency('BEGINNER')
+    setCompetency(Competency.BEGINNER)
     setImageFile(null)
   }
 
@@ -295,15 +300,22 @@ export default function UserAddCertification() {
           </div>
           <div>
             <Label htmlFor="competency">Competency</Label>
-            <Select value={competency} onValueChange={(value) => setCompetency(value as UserCertification['competency'])}>
+            <Select value={competency} onValueChange={(value) => {
+              if (value in Competency) { // Type guard
+                setCompetency(value as UserCertification['competency']);
+                console.log(value);
+              } else {
+                console.error('Invalid competency value:', value);
+              }
+              }}>
               <SelectTrigger id="competency">
                 <SelectValue placeholder="Select competency level" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="BEGINNER">Beginner</SelectItem>
-                <SelectItem value="INTERMEDIATE">Intermediate</SelectItem>
-                <SelectItem value="ADVANCED">Advanced</SelectItem>
-                <SelectItem value="EXPERT">Expert</SelectItem>
+                <SelectItem value={Competency.BEGINNER}>Beginner</SelectItem>
+                <SelectItem value={Competency.INTERMEDIATE}>Intermediate</SelectItem>
+                <SelectItem value={Competency.ADVANCED}>Advanced</SelectItem>
+                <SelectItem value={Competency.EXPERT}>Expert</SelectItem>
               </SelectContent>
             </Select>
           </div>
