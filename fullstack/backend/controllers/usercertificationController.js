@@ -35,6 +35,42 @@ const get_certification = async (req, res) => {
       res.status(403).send({ msg: e });
     }
   };
+const get_course_count = async (req, res) => {
+    console.log("in get_certificate");
+    const { id } = req.body;
+    console.log(id);
+  
+    try {
+      const resp = await prisma.userCertification.findMany({
+        where: {
+          userId: id,
+          certification: {
+            is_certificate: false, // Filter for is_certificate: false
+          },
+        },
+        include: {
+          certification: true, // Include certification details if needed
+        },
+      });
+     res.send({data:resp.length})
+    } catch (e) {
+      console.log(e);
+      res.status(403).send({ msg: e });
+    }
+  };
+const get_certification_count = async (req, res) => {
+    console.log("in get_certificate");
+    const { id } = req.body;
+    console.log(id);
+  
+    try {
+     const resp=await prisma.userCertification.findMany({where:{userId:id}})
+     res.send({data:resp.length})
+    } catch (e) {
+      console.log(e);
+      res.status(403).send({ msg: e });
+    }
+  };
   const update_certification=async(req,res)=>{
     console.log("in_update")
     const { data } = req.body;
@@ -60,5 +96,7 @@ const get_certification = async (req, res) => {
   module.exports={
     add_certification,
     get_certification,
-    update_certification
+    update_certification,
+    get_certification_count,
+    get_course_count
   }

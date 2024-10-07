@@ -36,6 +36,8 @@ router.post('/view_certification',certificationController.view_certification)
 
 router.post('/add_certification',usercertificationController.add_certification)
 router.post('/get_certification',usercertificationController.get_certification)
+router.post('/get_certification_count',usercertificationController.get_certification_count)
+router.post('/get_course_count',usercertificationController.get_course_count)
 router.post('/update_certification',usercertificationController.update_certification)
 
 module.exports = router;

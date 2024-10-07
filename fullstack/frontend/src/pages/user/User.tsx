@@ -19,6 +19,18 @@ import {
   CardTitle,
 } from "../../components/ui/card";
 import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "../../components/ui/alert-dialog"
+
+import {
   Pencil,
   Check,
   X,
@@ -32,10 +44,16 @@ import {
   ContactRound,
   Mail,
   ALargeSmall,
+  CalendarCheck2,
+  Shield,
+  ShieldAlert,
 } from "lucide-react";
 import { Progress } from "../../components/ui/progress";
 import axios from "axios";
 import { toast, ToastContainer } from "react-toastify";
+import LoadingOverlay from "react-loading-overlay";
+import CircleLoader from "react-spinners/CircleLoader";
+import { ScrollArea } from "../../components/ui/scroll-area";
 
 const User = () => {
   const [isEditing, setIsEditing] = useState(false);
@@ -52,24 +70,15 @@ const User = () => {
     password: "",
     profileImage: ""
   });
-  const [skills, setskills] = useState([
-    { name: "React", score: 90 },
-    { name: "Node.js", score: 80 },
-    { name: "Python", score: 75 },
-    { name: "TypeScript", score: 85 },
-  ]);
-  const [certifications, setcertifications] = useState([
-    { name: "AWS Certified Developer", date: "2023-05-15" },
-    { name: "Google Cloud Professional Developer", date: "2022-11-30" },
-    {
-      name: "Microsoft Certified: Azure Developer Associate",
-      date: "2023-02-10",
-    },
-  ]);
+  const [skills, setskills] = useState<any>([]);
+  const [allskills, setallskills] = useState<any>([]);
+  const [certifications, setcertifications] = useState<any>([]);
 
-  const [projectsCompleted, setprojectsCompleted] = useState<number>(12);
+  const [coursesCompleted, setcoursesCompleted] = useState<number>(0);
+  const [certificationCompleted, setcertificationCompleted] = useState(0)
   const [learningHours, setlearningHours] = useState<number>(120);
   const [editedUser, setEditedUser] = useState(user);
+  const [loading, setloading] = useState(false)
 
   const handleEdit = () => {
     setIsEditing(true);
@@ -163,8 +172,11 @@ const User = () => {
   };
 
   useEffect(() => {
+ 
     const timer = setInterval(() => {
+      if(certifications.length>0){
       nextCertification();
+    }
     }, 3000); // Change certification every 3 seconds
 
     return () => clearInterval(timer);
@@ -172,6 +184,7 @@ const User = () => {
 
   useEffect(() => {
     validate();
+    fetchAllData();
     const init = async () => {
       // const token=await Cookies.get('token')
       const keysToStore = [
@@ -215,12 +228,81 @@ const User = () => {
     }
   }, []);
 
+  const fetchAllData = async () => {
+    setloading(true)
+    const token = Cookies.get("token");
+    const id=Cookies.get('id')
+  
+    // Prepare requests
+    const requests = [
+      axios.post("http://localhost:3000/user/get_certification_count", { token,id }),
+      axios.post("http://localhost:3000/user/get_course_count", { token,id }),
+      axios.post("http://localhost:3000/user/get_certification", { token,id }),
+      axios.post("http://localhost:3000/user/get_user_skill", {
+        token,
+        id:id,
+      }),
+      axios.post("http://localhost:3000/user/view_skill", { token }),
+    ];
+  
+    try {
+      const [get_certification_count_Response, get_course_count_Response,user_Certification_Response,user_skill_Response,all_skill_response] = await Promise.all(requests);
+     
+      if (get_certification_count_Response.status === 200) {
+        console.log(get_certification_count_Response.data.data); 
+      }
+      if (get_course_count_Response.status === 200) {
+        console.log(get_course_count_Response.data.data,"course"); 
+        setcoursesCompleted(get_course_count_Response.data.data) 
+      }
+      if (get_certification_count_Response.status === 200) {
+        console.log(get_certification_count_Response.data.data,"certification");
+        setcertificationCompleted(get_certification_count_Response.data.data)
+      }
+      if (user_Certification_Response.status == 200) {
+        console.log(user_Certification_Response.data.data,"data1");
+        setcertifications(user_Certification_Response.data.data);
+      }
+      if(all_skill_response.status==200){
+        console.log(all_skill_response.data.data,"data3");
+        setallskills(all_skill_response.data.data);
+      }
+      if(user_skill_Response.status == 200){
+        console.log(user_skill_Response.data.data,"data2");
+        setskills(user_skill_Response.data.data.map((e: any) => {
+          const matchedSkill = all_skill_response.data.data.find(
+            (m: any) => m.id === e.skillId
+          );
+          if (matchedSkill) {
+            e["name"] = matchedSkill.name;
+          } else {
+            console.warn(`No matching skill found for id ${e.id}`);
+          }
+          return e;
+        }));
+        // setskills(user_skill_Response.data.data);
+      }
+      if(get_certification_count_Response.status === 200 &&get_course_count_Response.status === 200&&user_Certification_Response.status == 200 &&user_skill_Response.status==200&&all_skill_response.status==200){
+        setloading(false)
+      }
+    } catch (e) {
+      toast.error(e as String);
+      setloading(false)
+    }
+  };
   const n = useNavigate();
   return (
     <div className="w-full">
       <UserNav/>
       <ToastContainer />
-
+      {loading && (
+        <div className="fixed inset-0 bg-black bg-opacity-25  flex justify-center items-center backdrop-blur-md z-50">
+          <LoadingOverlay
+            active={loading}
+            spinner={<CircleLoader />}
+          ></LoadingOverlay>
+        </div>
+      )}
       <div className="container mx-auto p-4 ">
         <Card className="w-full max-w-6xl mx-auto">
           <CardHeader>
@@ -351,11 +433,32 @@ const User = () => {
                       {isEditing ? editedUser.joining_date : user.joining_date}
                     </p>
                   </div>
+                  <div className="mt-10 flex justify-start space-x-2">
+            {isEditing ? (
+              <>
+                <Button onClick={handleSave} className="flex items-center">
+                  <Check className="mr-2 h-4 w-4" /> Save
+                </Button>
+                <Button
+                  onClick={handleCancel}
+                  variant="outline"
+                  className="flex items-center"
+                >
+                  <X className="mr-2 h-4 w-4" /> Cancel
+                </Button>
+              </>
+            ) : (
+              <Button onClick={handleEdit} className="flex items-center">
+                <Pencil className="mr-2 h-4 w-4" /> Edit Profile
+              </Button>
+            )}
+          </div>
                 </div>
               </div>
 
               {/* Insights Section */}
               <div className="space-y-6">
+                {/* Cards section */}
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                   <Card className="bg-primary/5">
                     <CardHeader className="pb-2">
@@ -370,7 +473,7 @@ const User = () => {
                     </CardHeader>
                     <CardContent>
                       <div className="text-3xl font-bold">
-                        {certifications.length}
+                        {certificationCompleted}
                       </div>
                       <p className="text-sm text-muted-foreground">Achieved</p>
                     </CardContent>
@@ -386,7 +489,7 @@ const User = () => {
                     </CardHeader>
                     <CardContent>
                       <div className="text-3xl font-bold">
-                        {projectsCompleted}
+                        {coursesCompleted}
                       </div>
                       <p className="text-sm text-muted-foreground">Completed</p>
                     </CardContent>
@@ -406,50 +509,46 @@ const User = () => {
                     </CardContent>
                   </Card>
                 </div>
-                {/* Circular Progress Indicator */}
-                {/* <div>
-                <h3 className="text-lg font-semibold mb-2">Skills</h3>
-                <div className="grid grid-cols-2 gap-4">
-                  {user.skills.map((skill, index) => (
-                    <div key={index} className="flex flex-col items-center">
-                      <div className="relative w-20 h-20">
-                        <svg className="w-20 h-20" viewBox="0 0 100 100">
-                          <circle
-                            className="text-muted stroke-current"
-                            strokeWidth="10"
-                            cx="50"
-                            cy="50"
-                            r="40"
-                            fill="transparent"
-                          ></circle>
-                          <circle
-                            className="text-primary stroke-current"
-                            strokeWidth="10"
-                            strokeLinecap="round"
-                            cx="50"
-                            cy="50"
-                            r="40"
-                            fill="transparent"
-                            strokeDasharray={`${skill.score * 2.51327}, 251.327`}
-                            transform="rotate(-90 50 50)"
-                          ></circle>
-                        </svg>
-                        <div className="absolute inset-0 flex items-center justify-center">
-                          <span className="text-lg font-semibold">{skill.score}%</span>
-                        </div>
-                      </div>
-                      <Badge variant="outline" className="mt-2">
-                        {skill.name}
-                      </Badge>
-                    </div>
-                  ))}
-                </div>
-              </div> */}
-                {/*Certification Carousel*/}
-                <div>
+                {/*Skill Carousel*/}
+                <AlertDialog >
+  <AlertDialogTrigger className="w-full">
+    <Button variant={'default'} className="w-full">View Skill</Button>
+  </AlertDialogTrigger>
+  <AlertDialogContent>
+    <AlertDialogHeader>
+      <AlertDialogTitle>Skills</AlertDialogTitle>
+      <AlertDialogDescription>
+                <ScrollArea>
                   <h3 className="text-lg font-semibold mb-2">Skills</h3>
                   <div className="grid grid-cols-1 gap-4">
-                    {skills.map((skill, index) => (
+                    {skills.map((skill:any, index:number) => (
+                      <div key={index} className="flex items-center">
+                        <Badge
+                          variant="outline"
+                          className="mr-2 line-clamp-1 w-1/3 text-center justify-center rounded-full"
+                        >
+                          {skill.name}
+                        </Badge>
+                        <Progress value={skill.score} className="flex-grow" />
+                        <span className="ml-2 text-sm font-medium">
+                          {skill.score}%
+                        </span>
+                      </div>
+                    ))}
+                  </div>
+                </ScrollArea>
+      </AlertDialogDescription>
+    </AlertDialogHeader>
+    <AlertDialogFooter>
+      <AlertDialogCancel>Close</AlertDialogCancel>
+    </AlertDialogFooter>
+  </AlertDialogContent>
+</AlertDialog>
+
+                {/* <div>
+                  <h3 className="text-lg font-semibold mb-2">Skills</h3>
+                  <div className="grid grid-cols-1 gap-4">
+                    {skills.map((skill:any, index:number) => (
                       <div key={index} className="flex items-center">
                         <Badge
                           variant="outline"
@@ -464,7 +563,9 @@ const User = () => {
                       </div>
                     ))}
                   </div>
-                </div>
+                </div> */}
+                {/*Certification Carousel*/}
+                {certifications.length>0?
                 <div>
                   <h3 className="text-lg font-semibold mb-2">Certifications</h3>
                   <Card>
@@ -477,15 +578,50 @@ const User = () => {
                         >
                           <ChevronLeft className="h-4 w-4" />
                         </Button>
-                        <div className="text-center">
-                          <h4 className="font-semibold">
-                            {certifications[currentCertIndex].name}
+                        <div className="text-center w-full">
+                          
+                          <div className="relative w-11/12 mx-auto h-48 bg-gray-100 rounded-lg overflow-hidden">
+                        <img
+                          src={certifications[currentCertIndex]?.imageData}
+                          alt={certifications[currentCertIndex]?.name}
+                          className="absolute inset-0 w-full h-full object-contain"
+                        />
+                      </div>
+                      <h4 className="font-semibold mt-10">
+                            {certifications[currentCertIndex]?.certificationName}
                           </h4>
-                          <p className="text-sm text-muted-foreground">
+                          <div className="mt-2 flex items-center justify-center space-x-2">
+                          <Badge variant="secondary" className="rounded-full">
+                            {certifications[currentCertIndex].competency}
+                          </Badge>
+                          {certifications[currentCertIndex].isVerified ? (
+                            <Badge variant="default" className="bg-green-500 rounded-full">
+                              <Shield className="w-3 h-3 mr-1" />
+                              Verified
+                            </Badge>
+                          ) : (
+                            <Badge variant="outline" className="text-yellow-500 border-yellow-500  rounded-full">
+                              <ShieldAlert className="w-3 h-3 mr-1"/>
+                              Pending Verification
+                            </Badge>
+                          )}
+                        </div>
+                          {/* <img src={certifications[currentCertIndex]?.imageData} alt="" className="w-64 h-32"/> */}
+                          <div className="flex items-center justify-center gap-8 mt-5">
+
+                          <p className="flex text-sm text-muted-foreground">
+                          <CalendarFold className="w-4 h-4"/>
                             {new Date(
-                              certifications[currentCertIndex].date
+                              certifications[currentCertIndex]?.started_at
                             ).toLocaleDateString()}
                           </p>
+                          <p className="flex text-sm text-muted-foreground">
+                          <CalendarCheck2  className="w-4 h-4" />
+                            {new Date(
+                              certifications[currentCertIndex]?.completed_at
+                            ).toLocaleDateString()}
+                          </p>
+                          </div>
                         </div>
                         <Button
                           variant="outline"
@@ -497,11 +633,13 @@ const User = () => {
                       </div>
                     </CardContent>
                   </Card>
-                </div>
+                </div>:
+                <p>{"Empty"}</p>
+                }
               </div>
             </div>
           </CardContent>
-          <CardFooter className="flex justify-start space-x-2">
+          {/* <CardFooter className="flex justify-start space-x-2">
             {isEditing ? (
               <>
                 <Button onClick={handleSave} className="flex items-center">
@@ -520,7 +658,7 @@ const User = () => {
                 <Pencil className="mr-2 h-4 w-4" /> Edit Profile
               </Button>
             )}
-          </CardFooter>
+          </CardFooter> */}
         </Card>
       </div>
     </div>
