@@ -49,7 +49,7 @@ model UserCertification{
   imageData String
   user   User   @relation(fields: [userId], references: [id])
   certification  Certification  @relation(fields: [certificationId], references: [id])
-  @@unique([userId, certificationId])
+  @@unique([userId, certificationId,competency])
 
 }
 model Skill {

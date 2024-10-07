@@ -47,6 +47,8 @@ import axios from "axios"
 import { ToastContainer ,toast} from "react-toastify"
 import { cn } from "../../lib/utils"
 import { ScrollArea } from "../../components/ui/scroll-area"
+import LoadingOverlay from "react-loading-overlay";
+import CircleLoader from "react-spinners/CircleLoader";
 
 type Certification = {
   certificationId: string
@@ -81,8 +83,11 @@ export default function UserAddCertification() {
   const [competencyedit, setCompetencyedit] = useState<UserCertification['competency']>('BEGINNER')
   const [imageFile, setImageFile] = useState<File | null>(null)
   const [imageFileedit, setImageFileedit] = useState<File | null>(null)
+  const [loading, setloading] = useState(false)
+  
 
   const fetchUserCertifications = async () => {
+    setloading(true)
     const token = await Cookies.get("token");
     const reqOptions = {
       url: "http://localhost:3000/user/get_certification",
@@ -96,14 +101,17 @@ export default function UserAddCertification() {
       if (response.status == 200) {
         console.log(response.data.data,"data");
         setUserCertifications(response.data.data);
+        setloading(false)
         
       }
     } catch (e) {
+      setloading(false)
       toast.error(e as String);
     }
     
   }
   const fetchCertifications = async () => {
+    setloading(true)
     const token = await Cookies.get("token");
     const reqOptions = {
       url: "http://localhost:3000/user/view_certification",
@@ -117,10 +125,12 @@ export default function UserAddCertification() {
       if (response.status == 200) {
         console.log(response.data.data);
         setpredefinedCertifications(response.data.data);
-        
+        setloading(false)
       }
     } catch (e) {
+      setloading(false)
       toast.error(e as String);
+      
     }
   }
   useEffect(() => {  
@@ -141,7 +151,11 @@ export default function UserAddCertification() {
 
   const handleAddCertification = async (e: React.FormEvent) => {
     e.preventDefault()
-    if (!selectedCertification || !startDate || !imageFile || !completionDate) {
+    if (!selectedCertification||!competency || !startDate || !imageFile || !completionDate) {
+      console.log(!selectedCertification,"cert")
+      console.log(!startDate,"strst" )
+      console.log(!imageFile,"img" )
+      console.log(!completionDate,"end")
       toast.error(
 "Please fill in all required fields and upload an image."
 
@@ -208,6 +222,14 @@ export default function UserAddCertification() {
     <div>
       <UserNav/>
       <ToastContainer/>
+      {loading && (
+        <div className="fixed inset-0 bg-black bg-opacity-25  flex justify-center items-center backdrop-blur-md z-50">
+          <LoadingOverlay
+            active={loading}
+            spinner={<CircleLoader />}
+          ></LoadingOverlay>
+        </div>
+      )}
       <div className="max-w-4xl mx-auto p-6 space-y-8">
       <section>
         <h2 className="text-2xl font-bold mb-4">Add New Certification</h2>
