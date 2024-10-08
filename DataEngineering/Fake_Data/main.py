@@ -281,11 +281,21 @@ user_skills = [
     create_fake_user_skill(user["_id"], random.choice(skills)["_id"])
     for user in users
 ]
+skills_per_role = 10  # Set minimum skills per role
+total_skills = len(skills)
+role_skills = []
 
-role_skills = [
-    create_fake_role_skill(role["_id"], random.choice(skills)["_id"])
-    for role in roles
-]
+for role in roles:
+    assigned_skills = random.sample(skills, min(skills_per_role, total_skills))  # Get 10 unique skills
+    for skill in assigned_skills:
+        role_skills.append(create_fake_role_skill(role["_id"], skill["_id"]))
+
+# If you want to fill up the remaining skills (if there are less than 200 entries), continue assigning
+while len(role_skills) < 200:
+    role = random.choice(roles)  # Pick a random role
+    assigned_skills = random.sample(skills, min(skills_per_role, total_skills))  # Get another 10 unique skills
+    for skill in assigned_skills:
+        role_skills.append(create_fake_role_skill(role["_id"], skill["_id"]))
 
 # Function to write data to CSV
 def write_to_csv(data, filename, fieldnames):
