@@ -39,7 +39,7 @@ export default function Cards({ props, roles }: any) {
       if (response.status == 200) {
         toast.success("Skill Deleted");
       }
-    } catch (e) {
+    } catch (e:any) {
       if (e!.status == 403) {
         console.log(e);
         toast.error("Skill exsist");
@@ -54,7 +54,7 @@ export default function Cards({ props, roles }: any) {
         <div className="flex flex-col items-center space-y-2">
           <Avatar className="w-24 h-24">
             <AvatarImage
-              src="/placeholder.svg?height=96&width=96"
+              src={props.profileImage}
               alt="Profile picture"
             />
             <AvatarFallback>{getShortName(props.name)}</AvatarFallback>

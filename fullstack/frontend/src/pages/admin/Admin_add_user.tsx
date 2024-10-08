@@ -624,7 +624,7 @@ const getAllData = async () => {
                   const roles: any = roleData.find((e: any) => {
                     return e.id == card.role_id;
                   });
-                  console.log(roles, "first");
+                  console.log(card, "first");
                   return <Cards props={card} roles={roles.name} />;
                 })}
               </div>
