@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import { validate } from '../utils/validation';
 import LoadingOverlay from 'react-loading-overlay'
 import BounceLoader from 'react-spinners/BounceLoader'
+import img from "../assets/logo_jman.png"
 
 const Login = () => {
   useEffect(() => {
@@ -124,6 +125,10 @@ const Login = () => {
 
       <section className="bg-gray-50 w-full dark:bg-gray-900 z-0">
         <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
+          {/* <p className="flex items-center text-lg font-semibold text-gray-900 dark:text-white">
+            <img src={img} className="w-64 h-28 mx-auto" alt="logo"/>
+           
+          </p> */}
           <div className="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
             <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
               <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
