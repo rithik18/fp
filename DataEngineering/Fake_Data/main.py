@@ -141,6 +141,7 @@
 
 # print("Data has been written to CSV files.")
 from faker import Faker
+from datetime import timedelta
 import random
 import csv
 from enum import Enum
@@ -201,14 +202,21 @@ def create_fake_skill():
     }
 
 # Function to create fake user certifications
-def create_fake_user_certification(user_id, certification_id):
+def create_fake_user_certification(user_id, certification_id, certification_name):
+    # Generate the started_at date
+    started_at = fake.date_time_this_decade()
+
+    # Generate a random duration between 1 day and 5 years
+    duration = random.randint(1, 365 * 5)  # Adjust the range as needed
+    completed_at = started_at + timedelta(days=duration)
+
     return {
         "_id": fake.uuid4(),
         "userId": user_id,
         "certificationId": certification_id,
-        "certificationName": fake.company(),
-        "started_at": fake.date_time_this_decade().isoformat(),
-        "completed_at": fake.date_time_this_decade().isoformat(),
+        "certificationName": certification_name,
+        "started_at": started_at.isoformat(),
+        "completed_at": completed_at.isoformat(),
         "competency": random.choice(list(Competency)).value,
         "isVerified": random.choice([True, False]),
         "imageData": fake.image_url(),
@@ -242,7 +250,7 @@ def create_fake_role_skill(role_id, skill_id):
     }
 
 # Generate fake data
-num_users = 10000
+num_users = 30000
 num_certifications = 100
 num_skills = 100
 num_roles = 20
@@ -260,8 +268,13 @@ skills = [create_fake_skill() for _ in range(num_skills)]
 
 # Create user certifications and user skills with the generated IDs
 user_certifications = [
-    create_fake_user_certification(user["_id"], random.choice(certifications)["_id"])
+    create_fake_user_certification(
+        user["_id"],
+        cert["_id"],
+        cert["name"]
+    )
     for user in users
+    for cert in random.sample(certifications, k=min(5, len(certifications)))
 ]
 
 user_skills = [
