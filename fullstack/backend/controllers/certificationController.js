@@ -2,9 +2,15 @@ const { PrismaClient, Role } = require("@prisma/client");
 const prisma = new PrismaClient();
 
 const view_certification = async (req, res) => {
-  const resp = await prisma.certification.findMany();
-  console.log(resp.length);
+  console.log("in_view_certification")
+  try {
+    const resp = await prisma.certification.findMany();
+  console.log(resp.length,"in_view_certification");
   res.send({ data: resp });
+  } catch (error) {
+    res.status(403).send({"msg":e})
+  }
+  
 };
 
 const add_certification = async (req, res) => {

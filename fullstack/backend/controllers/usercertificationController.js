@@ -36,9 +36,10 @@ const get_certification = async (req, res) => {
     }
   };
 const get_admin_certification = async (req, res) => {
-    console.log("in get_certificate");  
+    console.log("in get_admin_certificate");  
     try {
      const resp=await prisma.userCertification.findMany({where:{isVerified:false}})
+     console.log(resp.length,"in get_admin_certificate")
      res.send({data:resp})
     } catch (e) {
       console.log(e);

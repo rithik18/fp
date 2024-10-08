@@ -3,9 +3,10 @@ const { response } = require("express");
 const prisma = new PrismaClient();
 
 const view_user = async (req, res) => {
+  console.log("in_get_all_user")
   try {
     const resp = await prisma.user.findMany();
-    console.log(resp.length);
+    console.log(resp.length,"in_get_all_user");
     res.send({ data: resp });
   } catch (error) {
     res.send(error);

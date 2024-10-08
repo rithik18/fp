@@ -129,13 +129,52 @@ const Admin_verify_certification = () => {
       toast.error(e as String);
     }
   };
+  const fetchAllData = async () => {
+    // setloading(true);
+    console.log("in fetch data")
+    const token = await Cookies.get("token");
+  
+    // Create an array of all the API requests
+    const requests = [
+      axios.post("http://localhost:3000/admin/view_user", { token:token }), // getAllData
+      axios.post("http://localhost:3000/admin/get_admin_certification", { token:token, id: Cookies.get("id") }), // fetchUserCertifications
+      axios.post("http://localhost:3000/admin/view_certification", { token:token }) // fetchCertifications
+    ];
+    console.log("axios")
+  
+    try {
+      // Await for all requests to resolve
+      console.log("try")
+      const [userResponse, userCertificationsResponse, predefinedCertificationsResponse] = await Promise.all(requests);
+      console.log("data")
+      // Check the status of each response
+      if (userResponse.status === 200) {
+        console.log(userResponse.data.data, "alluser");
+        setuserData(userResponse.data.data);
+      }
+  
+      if (userCertificationsResponse.status === 200) {
+        console.log(userCertificationsResponse.data.data, "user certifications");
+        setUserCertifications(userCertificationsResponse.data.data);
+      }
+  
+      if (predefinedCertificationsResponse.status === 200) {
+        console.log(predefinedCertificationsResponse.data.data, "predefined certifications");
+        setpredefinedCertifications(predefinedCertificationsResponse.data.data);
+      }
+      if(predefinedCertificationsResponse.status === 200 && userCertificationsResponse.status === 200 && userResponse.status === 200){
+        console.log("get_all_data")
+        setloading(false);
+      }
+    } catch (e) {
+      toast.error(e as string);
+      setloading(false);
+    }
+  };
+  
   useEffect(() => {
     validate();
-    setloading(true);
-    fetchCertifications();
-    fetchUserCertifications();
-    getAllData();
-    setloading(false);
+    fetchAllData()
     console.log(Cookies.get("role"));
     if (
       Cookies.get("role")?.toUpperCase() === "ADMIN" &&
@@ -164,13 +203,11 @@ const Admin_verify_certification = () => {
       const response = await axios.request(reqOptions);
       if (response.status == 200) {
         console.log(response.data.data);
-        fetchUserCertifications()
-        fetchCertifications()
+        fetchAllData()
       }
     } catch (e) {
       toast.error(e as String);
-      fetchUserCertifications()
-        fetchCertifications()
+      fetchAllData()
     }
   };
   const onReject=async(data:any)=>{
@@ -186,13 +223,11 @@ const Admin_verify_certification = () => {
       const response = await axios.request(reqOptions);
       if (response.status == 200) {
         console.log(response.data.data);
-        fetchUserCertifications()
-        fetchCertifications()
+        fetchAllData()
       }
     } catch (e) {
       toast.error(e as String);
-      fetchUserCertifications()
-      fetchCertifications()
+      fetchAllData()
     }
   };
   
@@ -230,7 +265,7 @@ const Admin_verify_certification = () => {
         </TableHeader>
         <TableBody>
           {predefinedCertifications.length > 0 &&
-            userCertifications.length > 0 &&
+            userCertifications.length > 0 && userData.length >0 &&
             userCertifications.map((cert) => (
               // <TableRow key={cert.id}>
               <TableRow>
@@ -315,7 +350,8 @@ const Admin_verify_certification = () => {
                   </div>
                 </TableCell>
               </TableRow>
-            ))}
+            ))
+            }
         </TableBody>
       </Table>
     </div>
