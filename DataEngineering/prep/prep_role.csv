@@ -1,27 +1,24 @@
-,_id,name,desc,created_at,updated_at
-0,66fd540a30450c2a76ac020f,Senior Software Engineer,Senior Software Engineer,2024-10-02,2024-10-02
-1,66fd541a30450c2a76ac0210,Senior Consultant,Senior Consultant,2024-10-02,2024-10-02
-2,66fd544630450c2a76ac0211,Solution Enabler,Solution Enabler,2024-10-02,2024-10-02
-3,66fd545930450c2a76ac0212,Principal Architect,Principal Architect,2024-10-02,2024-10-02
-4,66fd595030450c2a76ac0219,Software Engineer,Software Engineer,2024-10-02,2024-10-02
-5,66fe345174c62caaf765f1a0,ADMIN,ADMIN,2024-10-03,2024-10-03
-6,ab04f326-4048-4b80-bacc-a57ada9df3d3,budget,Mouth per believe difference anyone position.,2022-03-23,2020-07-05
-7,9bde7d21-ec16-476f-83d1-5fb8cc80b429,policy,Discover mean address much.,2020-09-10,2020-11-21
-8,badac142-82c7-4b4b-bed3-796873e206ed,heavy,Majority job leave indicate hope account tend eat.,2023-09-21,2023-07-18
-9,95c5e3f2-b07f-4564-b327-e9ec2ec7458f,society,This hard time animal visit.,2023-04-20,2022-10-30
-10,b5b1665a-7d83-4034-a623-5c752adff66c,more,Choice debate just focus.,2021-08-21,2021-06-29
-11,58d3d191-867b-4e93-90bb-f56579e1f656,full,Like rest purpose space talk available.,2020-11-04,2023-12-13
-12,b26e9fe5-a12a-4bbd-94ca-b6de9b24ed41,keep,Community husband nature here.,2020-01-23,2022-02-02
-13,4e2d1418-0c83-48a2-9a93-6b50ac26e040,management,Television guess just street economic.,2021-10-28,2023-01-07
-14,15eccef0-3ddf-4abb-8255-dfb5dd1629a4,huge,Hand man business sign take close send indicate.,2022-06-09,2021-09-29
-15,ee19d957-7fb3-473c-9840-73d7a2b38247,mention,Lawyer project offer game near work.,2023-05-20,2024-05-18
-16,5057cb20-bd33-4194-90e1-fe3153bd9411,college,Drop thank rate how name board forget.,2023-07-09,2024-08-31
-17,82f3e2ab-fee2-427c-b06e-23562476999f,talk,Left beat share happen.,2021-04-21,2022-12-22
-18,cc848d0b-5ac9-4f0a-98c0-3d0979c3c9a1,forward,Speak from maintain consider.,2022-05-29,2023-02-27
-19,dc67d28b-38f4-4844-99a9-bc47fb26308c,understand,Congress hand win.,2024-08-05,2021-07-29
-20,89597b8d-073f-4250-b712-1bb4abda8d52,quality,Ever window may improve.,2020-12-01,2022-07-11
-21,8f37445a-fdda-4cc8-b3e3-1471fe7f218a,tax,Phone beautiful history site.,2020-07-22,2023-12-17
-22,642f662c-67dc-4fbb-9049-2eced614b67b,coach,Research gun stand hand.,2024-01-09,2020-09-21
-23,948a80f9-77ba-480d-ab12-ce6e153a7593,somebody,Find order themselves buy experience deal feeling.,2021-11-11,2023-11-04
-24,ca6d9b79-81fc-431b-a0bb-85d1f2f99447,staff,Fill star market.,2023-07-27,2021-03-23
-25,048bb997-92d8-4698-bb29-58976f05d262,individual,Character they positive professional offer experience far.,2022-10-13,2020-03-01
+,_id,name,desc,created_at,updated_at,RoleId,user_count
+0,66fd540a30450c2a76ac020f,Senior Software Engineer,Senior Software Engineer,2024-10-02,2024-10-02,66fd540a30450c2a76ac020f,6
+1,66fd544630450c2a76ac0211,Solution Enabler,Solution Enabler,2024-10-02,2024-10-02,66fd544630450c2a76ac0211,7
+2,66fd595030450c2a76ac0219,Software Engineer,Software Engineer,2024-10-02,2024-10-02,66fd595030450c2a76ac0219,5
+3,ab04f326-4048-4b80-bacc-a57ada9df3d3,budget,Mouth per believe difference anyone position.,2022-03-23,2020-07-05,ab04f326-4048-4b80-bacc-a57ada9df3d3,1
+4,9bde7d21-ec16-476f-83d1-5fb8cc80b429,policy,Discover mean address much.,2020-09-10,2020-11-21,9bde7d21-ec16-476f-83d1-5fb8cc80b429,1
+5,badac142-82c7-4b4b-bed3-796873e206ed,heavy,Majority job leave indicate hope account tend eat.,2023-09-21,2023-07-18,badac142-82c7-4b4b-bed3-796873e206ed,1
+6,95c5e3f2-b07f-4564-b327-e9ec2ec7458f,society,This hard time animal visit.,2023-04-20,2022-10-30,95c5e3f2-b07f-4564-b327-e9ec2ec7458f,1
+7,b5b1665a-7d83-4034-a623-5c752adff66c,more,Choice debate just focus.,2021-08-21,2021-06-29,b5b1665a-7d83-4034-a623-5c752adff66c,1
+8,58d3d191-867b-4e93-90bb-f56579e1f656,full,Like rest purpose space talk available.,2020-11-04,2023-12-13,58d3d191-867b-4e93-90bb-f56579e1f656,1
+9,b26e9fe5-a12a-4bbd-94ca-b6de9b24ed41,keep,Community husband nature here.,2020-01-23,2022-02-02,b26e9fe5-a12a-4bbd-94ca-b6de9b24ed41,1
+10,4e2d1418-0c83-48a2-9a93-6b50ac26e040,management,Television guess just street economic.,2021-10-28,2023-01-07,4e2d1418-0c83-48a2-9a93-6b50ac26e040,1
+11,15eccef0-3ddf-4abb-8255-dfb5dd1629a4,huge,Hand man business sign take close send indicate.,2022-06-09,2021-09-29,15eccef0-3ddf-4abb-8255-dfb5dd1629a4,1
+12,ee19d957-7fb3-473c-9840-73d7a2b38247,mention,Lawyer project offer game near work.,2023-05-20,2024-05-18,ee19d957-7fb3-473c-9840-73d7a2b38247,1
+13,5057cb20-bd33-4194-90e1-fe3153bd9411,college,Drop thank rate how name board forget.,2023-07-09,2024-08-31,5057cb20-bd33-4194-90e1-fe3153bd9411,1
+14,82f3e2ab-fee2-427c-b06e-23562476999f,talk,Left beat share happen.,2021-04-21,2022-12-22,82f3e2ab-fee2-427c-b06e-23562476999f,1
+15,cc848d0b-5ac9-4f0a-98c0-3d0979c3c9a1,forward,Speak from maintain consider.,2022-05-29,2023-02-27,cc848d0b-5ac9-4f0a-98c0-3d0979c3c9a1,1
+16,dc67d28b-38f4-4844-99a9-bc47fb26308c,understand,Congress hand win.,2024-08-05,2021-07-29,dc67d28b-38f4-4844-99a9-bc47fb26308c,1
+17,89597b8d-073f-4250-b712-1bb4abda8d52,quality,Ever window may improve.,2020-12-01,2022-07-11,89597b8d-073f-4250-b712-1bb4abda8d52,1
+18,8f37445a-fdda-4cc8-b3e3-1471fe7f218a,tax,Phone beautiful history site.,2020-07-22,2023-12-17,8f37445a-fdda-4cc8-b3e3-1471fe7f218a,1
+19,642f662c-67dc-4fbb-9049-2eced614b67b,coach,Research gun stand hand.,2024-01-09,2020-09-21,642f662c-67dc-4fbb-9049-2eced614b67b,1
+20,948a80f9-77ba-480d-ab12-ce6e153a7593,somebody,Find order themselves buy experience deal feeling.,2021-11-11,2023-11-04,948a80f9-77ba-480d-ab12-ce6e153a7593,1
+21,ca6d9b79-81fc-431b-a0bb-85d1f2f99447,staff,Fill star market.,2023-07-27,2021-03-23,ca6d9b79-81fc-431b-a0bb-85d1f2f99447,1
+22,048bb997-92d8-4698-bb29-58976f05d262,individual,Character they positive professional offer experience far.,2022-10-13,2020-03-01,048bb997-92d8-4698-bb29-58976f05d262,1
