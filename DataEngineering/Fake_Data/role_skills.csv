@@ -1,0 +1,91 @@
+roleId,skillId,name
+Software Engineer,b2780056-9703-4c9a-91a2-f0a14dcac2a6,Java
+Software Engineer,733b90fc-9f19-4a81-bcf2-6250b683fc02,Python
+Software Engineer,f619c86e-f085-480f-978a-d86b945455a3,C#
+Software Engineer,014e1698-6d93-4bfb-a835-b77ad2271f08,JavaScript
+Software Engineer,273d1c01-d465-4814-9406-443a480674d1,React
+Software Engineer,7e5f0b1d-d979-4428-a12f-905e5c43599b,Node.js
+Software Engineer,eb7234d0-6aea-43bb-9da7-b4324523a356,SQL
+Software Engineer,c6d05706-eea7-482d-8dd9-ce802a837ef7,HTML/CSS
+Software Engineer,2dac9ca8-f3b4-48ac-81e7-347941a00472,Git
+Software Engineer,4bf9974f-d64a-449b-858a-e075556700dc,Agile Methodologies
+Data Scientist,1f6aa54b-25c2-4aae-b7f0-9a5e6846fb5a,Python
+Data Scientist,3bb057b5-4c7c-4e15-85cc-1fcc0312306a,R
+Data Scientist,053f8377-0495-492c-b66b-4b589e587014,SQL
+Data Scientist,2d513e39-23d4-41c0-aea0-9ade9bb923e1,Machine Learning
+Data Scientist,e5904739-f46b-43f3-b2e4-9a226445ab30,Statistics
+Data Scientist,e813b1b7-8b79-459d-901c-36a45b169cdb,Data Visualization
+Data Scientist,ab02b821-abc9-43d8-b41f-31484ea5b12b,Big Data Technologies
+Data Scientist,63119e08-a91e-4110-924a-689e61e88ca8,Data Wrangling
+Data Scientist,3ed1c77a-a55c-4b78-9a00-98b1759f19a1,Deep Learning
+Data Scientist,32b2eba8-f899-4d19-bef0-139c62398b12,Data Mining
+DevOps Engineer,1162d17d-de3c-4a02-806c-42a8cfac2620,Docker
+DevOps Engineer,cf70b6bd-aa40-45e2-ae12-d8d000359219,Kubernetes
+DevOps Engineer,0f1d3460-ea77-46dc-859b-dc9ce542fd55,CI/CD
+DevOps Engineer,f682ace9-6274-4dfa-9dc5-1f5a7a78650f,Cloud Computing
+DevOps Engineer,5c1f9fd3-139c-4eb7-b757-b3033bffed34,Infrastructure as Code
+DevOps Engineer,c9db6e17-a149-4ea1-b062-3084e5cfd3b8,Linux
+DevOps Engineer,c0d0b544-8545-4bcd-817e-d7dd65bce4b9,Scripting
+DevOps Engineer,fcb9e387-5ac1-43ab-a127-3e77fe185269,Monitoring
+DevOps Engineer,ab9139e6-352a-4e85-b455-3497937873f2,Agile Methodologies
+DevOps Engineer,9aa196b9-ca3f-4c25-b42d-18454715bd29,Networking
+Frontend Developer,7c70474f-ff24-4d64-ba36-8de90e99b0ef,HTML
+Frontend Developer,fb7f2d22-829b-48e2-b531-8ceb2ca2eb94,CSS
+Frontend Developer,db66db22-d105-4c36-a825-f1fba8a592a4,JavaScript
+Frontend Developer,82ffc361-84f5-4c12-92a4-a592de26c702,React
+Frontend Developer,0a66070c-3dd4-431a-825b-bf8ca733b8ac,Angular
+Frontend Developer,f2d4104a-4bbf-49f8-9a81-13878a05cd1b,Vue.js
+Frontend Developer,56e6aaab-d046-4edb-a2c2-b42fdd1840ee,Responsive Design
+Frontend Developer,5d165274-b073-4354-96ef-448a093f5c36,Cross-browser Compatibility
+Frontend Developer,2abe61e1-12f2-41bc-8fc5-bb3a38b75e0f,Version Control/Git
+Frontend Developer,c7e1d26d-f46c-48b7-b6dd-ea34bea3d288,Web Performance Optimization
+Backend Developer,912c2445-41dc-478b-9ed7-e8818d20d9ad,Node.js
+Backend Developer,6ffcc80b-2558-4008-b084-ae3b8940bfc3,Java
+Backend Developer,39da59ad-dceb-4813-a41e-fc3f41894b97,Python
+Backend Developer,076f37f0-58ce-4f15-b4d7-e7c7086ee2c1,Ruby
+Backend Developer,c7edf858-eb42-4f08-ab46-deedf24d41df,PHP
+Backend Developer,89051593-2c5c-4f26-a806-53f0342e038e,SQL
+Backend Developer,8647b4f8-0528-4ecd-8570-46f7b1bdbdb2,NoSQL
+Backend Developer,b0681a23-1908-477f-a5ea-cdc0522d5462,API Development
+Backend Developer,802c7b79-060c-45ec-9f5f-1eabd891a85c,Microservices
+Backend Developer,2a1cd660-6957-4ba4-bce4-8aaf0aec8a3b,Security Best Practices
+Full Stack Developer,74504986-e8b9-42e1-9ab6-8a15d3646fa7,JavaScript
+Full Stack Developer,4ffd1c78-dc40-4c41-a900-af8326e80439,Node.js
+Full Stack Developer,d9ae728c-7aa5-48c8-b150-d472cbfc43ea,React
+Full Stack Developer,4eafa144-e580-4b4c-9096-19f64aa2aebc,HTML/CSS
+Full Stack Developer,018701c7-53ed-4cf8-ac07-91f637c01fd5,SQL
+Full Stack Developer,2c94b709-3e9e-484e-af94-1810370da18d,RESTful APIs
+Full Stack Developer,ef2646ae-6547-4c04-90ec-bd0905ec2846,Git
+Full Stack Developer,c3fd3f98-b755-4e17-a1f2-57fd05b785f2,Agile Methodologies
+Full Stack Developer,d8b92035-1dfd-43ac-8338-4ba31ff1cab4,Testing/Debugging
+Full Stack Developer,44fe7801-77a7-4285-adf7-6e44c52d42fc,DevOps Practices
+Business Analyst,79d68e14-91f6-425a-ace0-b64ee2a29b5b,Business Analysis
+Business Analyst,29beeb66-8b0c-42ef-8a40-d1b20ae69a10,Requirements Gathering
+Business Analyst,4c33bf29-e492-489c-9944-0485403e39b9,Data Analysis
+Business Analyst,4af1eac3-d34a-45b2-8605-66bac0049be8,Stakeholder Management
+Business Analyst,0c2173a4-5ed0-4360-b22f-02c71ca268ce,Process Mapping
+Business Analyst,7f5725c4-c486-46f9-8cd2-82f6400cd654,Project Management
+Business Analyst,43e170b9-7520-4674-9755-daed0e9d5e1e,Agile Methodologies
+Business Analyst,cddfc2af-5533-47ac-999f-02e384ee2f22,Communication Skills
+Business Analyst,f06a5a19-0f83-4faf-9876-e8d1c5019420,Problem-Solving
+Business Analyst,3d1f825c-8878-4f3e-b660-16d7105103f7,SQL
+Quality Assurance Engineer,a675b2b0-8f4f-4297-940f-c7831b6f0391,Testing
+Quality Assurance Engineer,b4c47bcc-90ca-465a-80a9-336ffd843ce8,Automation Testing
+Quality Assurance Engineer,0bef82b4-fc5a-4839-a66f-843011e4bde2,Manual Testing
+Quality Assurance Engineer,0fe401bf-eb67-4247-9ea6-8175d2a910d6,Performance Testing
+Quality Assurance Engineer,abcda4c9-a5a5-4c62-9d05-cf35d9fcd165,Agile Methodologies
+Quality Assurance Engineer,742f265f-3f6f-47c9-a61d-d700d1cc73eb,Defect Tracking
+Quality Assurance Engineer,4150b140-0efd-4603-a0e2-f2b45bb72e15,Test Automation Tools
+Quality Assurance Engineer,2e69c3f0-257d-4e43-95a5-ad9e4a5cf150,Test Planning
+Quality Assurance Engineer,adf71c45-6a3d-4342-a0e0-64792aef3ae3,Version Control/Git
+Quality Assurance Engineer,fe362873-26a1-43db-ba7b-df874cbb4257,Risk Management
+Technical Writer,61d3b0de-c015-47e8-9ebe-e5209932a1fa,Technical Writing
+Technical Writer,695e6be0-2042-45a4-9336-d6e820d1e414,Documentation
+Technical Writer,a6eed375-6d77-4807-a736-757fd1419455,Content Creation
+Technical Writer,3a98dd0d-9354-4570-ac66-76117fe13c7e,Editing
+Technical Writer,bf04108d-cc76-4349-9067-67246b074e98,SEO Writing
+Technical Writer,7a94ab57-2691-4627-87f9-f807128b3446,Research Skills
+Technical Writer,99392fbf-2619-4ab7-ab37-1afa98a79267,Agile Methodologies
+Technical Writer,a600dbca-ebd8-4d6b-a7cd-0599566468ba,Communication Skills
+Technical Writer,68dbb4cd-04eb-4015-9436-92dd21c7cd98,User Documentation
+Technical Writer,967c94ea-b037-4a5d-9218-74e28ab6da18,Graphic Design
