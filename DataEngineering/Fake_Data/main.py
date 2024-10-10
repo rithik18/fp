@@ -417,6 +417,77 @@ role_skills_schema = {
         {"skillId": fake.uuid4(), "name": "Communication Skills", "RoleId": "Technical Writer"},
         {"skillId": fake.uuid4(), "name": "User Documentation", "RoleId": "Technical Writer"},
         {"skillId": fake.uuid4(), "name": "Graphic Design", "RoleId": "Technical Writer"},
+    ],"Data Analyst": [
+        {"skillId": fake.uuid4(), "name": "SQL", "RoleId": "Data Analyst"},
+        {"skillId": fake.uuid4(), "name": "Excel", "RoleId": "Data Analyst"},
+        {"skillId": fake.uuid4(), "name": "Data Visualization", "RoleId": "Data Analyst"},
+        {"skillId": fake.uuid4(), "name": "Python", "RoleId": "Data Analyst"},
+        {"skillId": fake.uuid4(), "name": "Data Cleaning", "RoleId": "Data Analyst"},
+        {"skillId": fake.uuid4(), "name": "Data Analysis", "RoleId": "Data Analyst"},
+        {"skillId": fake.uuid4(), "name": "Statistics", "RoleId": "Data Analyst"},
+        {"skillId": fake.uuid4(), "name": "Reporting", "RoleId": "Data Analyst"},
+        {"skillId": fake.uuid4(), "name": "Business Intelligence", "RoleId": "Data Analyst"},
+        {"skillId": fake.uuid4(), "name": "Data Mining", "RoleId": "Data Analyst"},
+    ],
+    "Cybersecurity Analyst": [
+        {"skillId": fake.uuid4(), "name": "Network Security", "RoleId": "Cybersecurity Analyst"},
+        {"skillId": fake.uuid4(), "name": "Firewalls", "RoleId": "Cybersecurity Analyst"},
+        {"skillId": fake.uuid4(), "name": "Intrusion Detection", "RoleId": "Cybersecurity Analyst"},
+        {"skillId": fake.uuid4(), "name": "Penetration Testing", "RoleId": "Cybersecurity Analyst"},
+        {"skillId": fake.uuid4(), "name": "Incident Response", "RoleId": "Cybersecurity Analyst"},
+        {"skillId": fake.uuid4(), "name": "Risk Assessment", "RoleId": "Cybersecurity Analyst"},
+        {"skillId": fake.uuid4(), "name": "Security Compliance", "RoleId": "Cybersecurity Analyst"},
+        {"skillId": fake.uuid4(), "name": "Encryption", "RoleId": "Cybersecurity Analyst"},
+        {"skillId": fake.uuid4(), "name": "Vulnerability Management", "RoleId": "Cybersecurity Analyst"},
+        {"skillId": fake.uuid4(), "name": "Security Auditing", "RoleId": "Cybersecurity Analyst"},
+    ],
+    "Machine Learning Engineer": [
+        {"skillId": fake.uuid4(), "name": "Python", "RoleId": "Machine Learning Engineer"},
+        {"skillId": fake.uuid4(), "name": "TensorFlow", "RoleId": "Machine Learning Engineer"},
+        {"skillId": fake.uuid4(), "name": "PyTorch", "RoleId": "Machine Learning Engineer"},
+        {"skillId": fake.uuid4(), "name": "Scikit-Learn", "RoleId": "Machine Learning Engineer"},
+        {"skillId": fake.uuid4(), "name": "Machine Learning Algorithms", "RoleId": "Machine Learning Engineer"},
+        {"skillId": fake.uuid4(), "name": "Data Preprocessing", "RoleId": "Machine Learning Engineer"},
+        {"skillId": fake.uuid4(), "name": "Model Deployment", "RoleId": "Machine Learning Engineer"},
+        {"skillId": fake.uuid4(), "name": "NLP", "RoleId": "Machine Learning Engineer"},
+        {"skillId": fake.uuid4(), "name": "Deep Learning", "RoleId": "Machine Learning Engineer"},
+        {"skillId": fake.uuid4(), "name": "Big Data Technologies", "RoleId": "Machine Learning Engineer"},
+    ],
+    "Cloud Engineer": [
+        {"skillId": fake.uuid4(), "name": "AWS", "RoleId": "Cloud Engineer"},
+        {"skillId": fake.uuid4(), "name": "Azure", "RoleId": "Cloud Engineer"},
+        {"skillId": fake.uuid4(), "name": "Google Cloud", "RoleId": "Cloud Engineer"},
+        {"skillId": fake.uuid4(), "name": "Cloud Security", "RoleId": "Cloud Engineer"},
+        {"skillId": fake.uuid4(), "name": "Infrastructure as Code", "RoleId": "Cloud Engineer"},
+        {"skillId": fake.uuid4(), "name": "Networking", "RoleId": "Cloud Engineer"},
+        {"skillId": fake.uuid4(), "name": "CI/CD Pipelines", "RoleId": "Cloud Engineer"},
+        {"skillId": fake.uuid4(), "name": "Containerization", "RoleId": "Cloud Engineer"},
+        {"skillId": fake.uuid4(), "name": "Serverless Architectures", "RoleId": "Cloud Engineer"},
+        {"skillId": fake.uuid4(), "name": "DevOps Practices", "RoleId": "Cloud Engineer"},
+    ],
+    "UX/UI Designer": [
+        {"skillId": fake.uuid4(), "name": "User Research", "RoleId": "UX/UI Designer"},
+        {"skillId": fake.uuid4(), "name": "Wireframing", "RoleId": "UX/UI Designer"},
+        {"skillId": fake.uuid4(), "name": "Prototyping", "RoleId": "UX/UI Designer"},
+        {"skillId": fake.uuid4(), "name": "Adobe XD", "RoleId": "UX/UI Designer"},
+        {"skillId": fake.uuid4(), "name": "Figma", "RoleId": "UX/UI Designer"},
+        {"skillId": fake.uuid4(), "name": "UI Design", "RoleId": "UX/UI Designer"},
+        {"skillId": fake.uuid4(), "name": "User Testing", "RoleId": "UX/UI Designer"},
+        {"skillId": fake.uuid4(), "name": "Responsive Design", "RoleId": "UX/UI Designer"},
+        {"skillId": fake.uuid4(), "name": "Interaction Design", "RoleId": "UX/UI Designer"},
+        {"skillId": fake.uuid4(), "name": "Design Systems", "RoleId": "UX/UI Designer"},
+    ],
+    "Product Manager": [
+        {"skillId": fake.uuid4(), "name": "Product Roadmap", "RoleId": "Product Manager"},
+        {"skillId": fake.uuid4(), "name": "Stakeholder Management", "RoleId": "Product Manager"},
+        {"skillId": fake.uuid4(), "name": "User Research", "RoleId": "Product Manager"},
+        {"skillId": fake.uuid4(), "name": "Agile Methodologies", "RoleId": "Product Manager"},
+        {"skillId": fake.uuid4(), "name": "Data-Driven Decision Making", "RoleId": "Product Manager"},
+        {"skillId": fake.uuid4(), "name": "Wireframing", "RoleId": "Product Manager"},
+        {"skillId": fake.uuid4(), "name": "Market Research", "RoleId": "Product Manager"},
+        {"skillId": fake.uuid4(), "name": "Product Lifecycle Management", "RoleId": "Product Manager"},
+        {"skillId": fake.uuid4(), "name": "Communication Skills", "RoleId": "Product Manager"},
+        {"skillId": fake.uuid4(), "name": "Leadership", "RoleId": "Product Manager"},
     ],
 }
 
@@ -520,12 +591,21 @@ def get_role_id(role_name, roles):
             return role  # Assuming the Role ID is the same as the Role Name in this context
     return None  # Return None if the role is not found
 
-# Example usage
-roles_list = list(role_skills_schema.keys())
-for i in role_skills_schema.keys():
-  for j in role_skills_schema[i]:
-    role_id = get_role_id(j['RoleId'], roles_list)
-    j['RoleId']=role_id
+def find_key_value(json_array, key, value):
+      
+    for item in json_array:
+        if key in item and item[key] == value:
+            # print(key,item,value)
+            return item['_id']
+    return None
+
+
+for j in role_skills_schema.keys():
+  
+    # print(j)
+    role_id = find_key_value(roles,'name',j)
+    for i in role_skills_schema[j]:
+      i['roleId']=role_id
 # Generate skills
 skills = create_fake_skill()
 # skills = [create_fake_skill() for _ in range(num_skills)]
@@ -566,7 +646,7 @@ for role in role_names:
         skills_for_role = role_skills_schema[role]
         for skill in skills_for_role:
             role_skills.append({
-                "roleId": role,
+                "roleId": role_skills_schema[role][0]['roleId'],
                 "skillId": skill["skillId"],
                 "name": skill["name"],
             })
@@ -591,7 +671,7 @@ def write_to_csv(data, filename, fieldnames):
         writer = csv.DictWriter(file, fieldnames=fieldnames)
         writer.writeheader()
         writer.writerows(data)
-
+print(len(role_skills))
 write_to_csv(users, 'users.csv', users[0].keys())
 write_to_csv(user_certifications, 'user_certifications.csv', user_certifications[0].keys())
 write_to_csv(roles, 'roles.csv', roles[0].keys())
