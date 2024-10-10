@@ -1,116 +1,91 @@
 _id,name,created_at,updated_at,desc
-66fd116e959f8b790f412908,Database,2024-10-02 09:25:02.367000,2024-10-02 09:25:02.367000,DB
-66fd1182959f8b790f412909,Data Cleaning,2024-10-02 09:25:22.104000,2024-10-02 09:25:22.104000,Data Cleaning
-66fd1190959f8b790f41290a,Data Analysis,2024-10-02 09:25:36.038000,2024-10-02 09:25:36.038000,Data Analysis
-66fd11aa959f8b790f41290b,Data Science,2024-10-02 09:26:02.267000,2024-10-02 09:26:02.267000,Data Scientist
-66fd11be959f8b790f41290c,Data Engineering,2024-10-02 09:26:22.399000,2024-10-02 09:26:22.399000,Data Engg
-66fd11d6959f8b790f41290d,Analytical Engineering,2024-10-02 09:26:46.206000,2024-10-02 14:36:34.207000,Data Engg And Analysis
-66fd11e4959f8b790f41290e,Analysis ,2024-10-02 09:27:00.017000,2024-10-02 09:27:00.017000,Data  Analysis
-66fd1200959f8b790f41290f,Data Process,2024-10-02 09:27:28.007000,2024-10-02 09:27:28.007000,Data  processing
-66fd1210959f8b790f412910,Data Governance,2024-10-02 09:27:44.708000,2024-10-02 09:27:44.708000,Data  Governing
-66fd122c959f8b790f412911,Communication,2024-10-02 09:28:12.760000,2024-10-02 09:28:12.760000,Communicate
-66ff7be7d1312483599a8dd8,Frontend,2024-10-04 05:23:51.619000,2024-10-04 05:23:51.619000,Frontend
-66ff7bf4d1312483599a8dd9,Backend,2024-10-04 05:24:04.787000,2024-10-04 05:24:04.787000,Backend
-66ff7bffd1312483599a8dda,Middleware,2024-10-04 05:24:15.651000,2024-10-04 05:24:15.651000,Middleware
-66ff7c1ed1312483599a8ddb,UI/UX,2024-10-04 05:24:45.995000,2024-10-04 05:24:45.995000,UI/UX Design
-66ff7c46d1312483599a8ddc,Q&A,2024-10-04 05:25:26.291000,2024-10-04 05:25:26.291000,Quality Assurance
-79e0ecd9-a547-462a-acb5-533722940278,share,2022-11-05T05:48:29,2023-06-24T20:19:00,Where site modern modern.
-13a5c2e9-7cb8-4fc5-8ea1-04d6ac88edd7,out,2020-12-05T12:36:53,2022-10-26T08:13:18,Too piece military million yet cultural.
-0baa0362-9abc-45ef-8da2-468fd7f19fb4,cut,2023-10-10T09:54:39,2021-09-27T19:32:17,Energy test trial hundred system no.
-2b183a7f-f589-4eb3-aa63-14de745086ac,material,2023-07-19T11:20:25,2020-09-14T10:13:54,Read speech risk remember responsibility whose forget.
-5021883f-185b-496f-97c5-b271c305a6cf,suddenly,2021-12-29T22:46:09,2021-02-09T08:27:10,Bill response camera country happy.
-4916df42-5e4f-47b6-8be3-8cfcec34375b,pattern,2022-11-21T06:30:44,2021-12-25T19:48:11,South describe system degree blue city.
-ead6ef0d-e239-4fb7-99a4-45720a1532f5,ahead,2024-08-07T11:52:13,2022-03-22T20:29:21,Figure identify first present matter low.
-ea2ef5c4-4e9c-4d08-b232-d94be9df5e12,get,2020-10-24T15:21:19,2024-04-05T07:48:12,Recognize seem expert rather.
-85ec13bc-ad24-44a3-b1cb-7c854d6bb57d,item,2023-04-21T08:46:18,2023-08-21T10:53:44,Travel effect sister become.
-0e5f1767-2df8-49b5-b470-5f7d3efaa991,who,2020-07-25T07:22:24,2020-12-05T08:03:11,Peace stay explain worker many they.
-717bbb51-d0c4-4a9e-9f31-45e73e3688e8,decade,2023-05-14T03:28:12,2020-04-26T23:22:36,Word bag program share clearly very cut.
-f286d7a2-7728-41a1-9f77-9230942b8500,forward,2021-10-25T06:35:22,2020-07-01T00:21:09,Interesting create husband kind trade three.
-207e2621-75eb-4d82-84ad-c1045a136373,free,2023-11-22T04:46:23,2022-03-01T21:23:44,Modern effort pick but down.
-6823e5b7-852c-4b67-83e8-a42dcbb9effd,writer,2023-10-02T10:08:50,2022-07-04T06:57:52,Sister wide assume financial that finally.
-6016f682-2876-45fd-8431-1b9a48c41dff,leave,2024-07-30T14:48:36,2023-12-14T06:28:09,Lay question push.
-e577910d-3caf-4fe3-9e04-65e0130c1206,ball,2024-08-03T02:15:09,2023-07-24T10:34:02,Pretty catch thing pressure.
-4beafb0e-0466-469f-bd8c-c9144a8990f4,study,2021-03-18T17:54:36,2024-01-11T20:29:51,Foot available power.
-e8b00141-8ef9-4901-8809-85ad3d7d292a,miss,2022-01-20T10:11:56,2020-10-20T03:23:22,Within little sound modern.
-c2e38a4b-c57d-40f8-ada5-1767e0f9a34d,vote,2020-05-23T20:21:35,2020-08-14T10:22:33,Hot want store.
-a0b6f899-39c1-4c9f-afe7-1582c5ab3d9b,issue,2020-06-11T16:57:01,2022-12-06T05:51:51,Most success moment.
-32a6285c-7ba3-4e1e-9016-7ed6e858e90c,anyone,2023-12-02T19:09:06,2022-04-11T16:01:50,Role soldier perform person risk market challenge.
-ba9b6172-9cb7-42e1-9372-2cfbc6b1ab4a,bar,2024-03-31T11:21:02,2020-01-28T14:04:20,Already natural social laugh hear theory data.
-6408bc6b-41b9-468a-84a6-61c2813cf89e,majority,2022-10-08T12:21:44,2021-02-28T14:35:10,Consumer although walk teach.
-646710b2-fde0-484c-95f5-4029e822d5c5,information,2022-06-26T14:06:35,2021-03-01T10:04:26,Money argue standard message explain as short able.
-b8f7fca7-116b-4c81-b18b-81d7103753ac,letter,2020-09-15T23:21:41,2023-12-18T06:22:39,Whose into drop.
-1b0fdc49-ddf2-4d49-bc95-f2fe291b2be0,despite,2021-12-21T11:52:44,2024-01-29T01:53:14,Kind modern hot them face letter.
-4ee5d51c-21eb-48ee-b495-11cd199379c4,future,2022-09-15T13:20:24,2021-02-15T02:11:10,Artist argue this population.
-729f525e-87cf-4007-8ede-b5068fdb0402,finally,2023-07-20T14:01:43,2020-05-15T03:53:39,Quickly charge account available alone attack goal bag.
-1088365d-247f-4f17-9410-14ac171cb5fb,fast,2024-07-27T20:50:19,2023-04-24T14:55:26,Young raise front better available evening authority.
-494337fd-1dbc-4b23-8559-8ccaba26b07a,writer,2023-08-27T15:47:45,2024-04-23T18:01:17,Save front term develop.
-415de666-b68c-4dd8-865c-59ef0cfc8aec,positive,2021-03-04T07:13:58,2020-07-16T06:49:07,Answer radio military act.
-34d7a673-c27f-4bf5-9a07-2618ad071b65,help,2020-09-10T23:00:02,2024-08-19T10:31:43,People just might certainly prepare somebody college industry.
-40f233f6-a718-4bb7-899e-64f4200d7e3e,investment,2020-12-07T19:10:37,2020-05-20T09:01:03,Attack eye staff four must traditional life.
-1bf01921-d7a5-491f-9d5a-8a190bf4bb9a,fill,2020-07-31T17:42:30,2021-02-23T03:50:47,Without course brother.
-51245ef9-240d-4f84-a00d-54121fc8e032,but,2024-07-09T23:53:27,2024-05-26T10:57:45,Trial court speech hour author drug job down.
-1f759b07-cc50-4d9d-bb7a-e271a38f20ac,race,2021-01-14T21:57:07,2020-12-04T18:58:32,Strong toward theory fight business.
-313b2cb8-c780-4ee2-8aa9-d6b52cd061fa,choice,2023-09-27T07:37:46,2023-10-04T00:24:16,Join good able history media.
-397ad7a0-f5a7-4646-a4c7-31823ae48d65,night,2023-08-26T15:59:04,2023-06-17T23:43:30,History cultural hour bill.
-085a5cd5-fb32-465a-bb00-9cdd65278c97,feeling,2024-09-20T06:10:28,2024-08-17T21:57:36,Story resource play budget old color.
-fc819e29-8d7c-44a8-ae38-91dc0a39a0e5,because,2024-07-23T16:45:04,2023-06-07T15:17:56,Explain free continue night.
-ce1dcad0-f18b-4258-aca7-9fdb2b6f7d7e,individual,2024-04-18T20:13:35,2022-01-23T21:22:30,Help land stock law summer past writer.
-21e5e00f-0edb-4a5e-87f5-5cc46302dfe6,important,2023-03-18T04:51:10,2023-10-24T15:57:07,Spring we young low.
-8d839f31-660c-492a-889e-a1f0e80eacf8,hair,2020-10-25T13:41:49,2023-05-13T16:45:45,Business beyond pick north crime bit.
-be33d2b5-057f-467b-83f6-7f45cfa3b8f7,sell,2023-05-12T18:50:46,2020-08-09T12:28:01,Court certain be personal able late security.
-80499c04-d247-4936-9b1b-a3e6b06c424a,result,2020-01-10T05:10:24,2024-08-01T08:53:05,Feel question century.
-8d1a6d02-f0e1-4696-bd42-bb250d641927,break,2022-12-13T04:34:57,2020-04-26T03:43:17,Ready include woman scene item.
-11f8e7bb-8e5b-41f0-a8cc-39dbfc7792ba,reality,2023-01-14T05:53:11,2024-04-16T06:35:42,Enjoy trouble firm.
-f38d0944-88e9-4f35-9e9a-658edf765424,country,2022-05-13T16:14:14,2023-08-31T03:17:20,Old scene too effect.
-74e1426d-a067-4e70-88bb-310fe6fd61b1,activity,2021-08-21T08:38:43,2024-03-03T01:26:22,Already party then.
-51b7e2ff-8b1a-4fd7-966d-45d2ec1b5c23,support,2021-05-29T22:56:19,2021-09-02T09:12:44,Walk whose teacher.
-167b30bc-8c6d-4222-845f-6bcd9226f72f,race,2024-05-12T17:44:42,2020-10-14T01:03:06,Method color college writer.
-a36056c5-1fb2-47d4-bbde-35144714a74b,station,2021-05-09T22:17:23,2020-03-04T00:44:50,Ago thousand deal air different tough north.
-7cfe19a6-9751-42e0-a9b6-a8ec8c358f8a,expect,2022-02-28T03:06:38,2024-01-12T09:11:15,Doctor fire share well play blood resource.
-4fa82c0b-765a-4177-9fd6-aa869d7b2e11,cut,2023-06-16T06:27:18,2020-05-07T23:45:44,Simple attorney add fast star.
-0b94551b-a857-4c15-8834-7fbb7f87b766,learn,2024-03-31T00:39:41,2021-05-16T00:27:33,Develop bed successful.
-e0addd64-3466-4742-8609-b4e5e3b45ea4,data,2024-01-01T20:26:58,2021-10-30T03:51:41,Else half pretty recognize.
-f23342cb-757b-4719-9c14-13405a9efb93,season,2020-05-07T20:02:15,2020-09-08T08:46:18,Teach little change even in catch central.
-497ab4cb-e895-43d7-9d5d-e356fb5ccdbb,weight,2021-10-15T10:38:28,2024-08-13T02:57:06,Room hair very team take guy.
-ba0260b4-4cf0-42a4-bbc3-10ed99ad5726,fill,2020-12-19T05:24:03,2023-02-04T05:38:07,Month work music break thing night together.
-61117b2a-bb70-4dd8-9513-d1c6fbba2be9,big,2024-03-22T16:08:48,2023-09-24T02:57:15,West room get baby.
-3a113b8a-f485-4c4d-b32f-80cbd4c06621,four,2024-01-21T19:27:28,2022-08-14T22:08:50,Cause future work like person tax.
-b4a0be34-3f68-4323-92b1-e553f9eebee2,baby,2024-03-23T22:08:01,2022-05-02T16:17:27,Dream cut member trial their study learn develop.
-e9ba9fa1-d3a4-40a7-9d8d-7164a9c24571,drive,2021-11-26T07:00:40,2022-01-25T00:14:07,Audience mission design ready until miss single Mrs.
-d6285f23-09d4-4b1f-9cec-9356d91868e5,song,2021-02-17T17:46:30,2021-09-17T21:58:56,Throughout build government.
-66126a5d-859e-4c0a-86fd-1e85a07e0e77,goal,2020-11-17T17:07:36,2021-05-19T07:55:28,Dinner know serve then window cup participant.
-3ab82c57-6c5b-45f9-976a-e6691ea87602,decision,2021-01-29T01:33:20,2020-07-14T16:21:32,Product member open suffer son.
-95e6743a-c690-4b08-914c-da0f8abfdd0f,score,2021-04-14T12:27:44,2021-12-22T19:20:27,Degree west someone ever number yes garden.
-49f3d6df-1c4c-41d4-86da-6b00b078753b,thousand,2020-07-02T09:11:31,2020-04-06T22:59:53,Spring up tough.
-1f2a51aa-b89c-4e30-a388-e85ca80ab532,evidence,2023-09-03T03:07:11,2020-07-18T22:01:55,Present try share woman.
-f206899d-4b4f-434e-9e80-adccc3b3b0f8,human,2024-02-05T04:06:16,2024-09-12T10:44:41,Rock body under difference officer.
-2f5d0461-98a5-4415-bed9-d188e10b699c,similar,2022-10-26T22:16:37,2021-05-28T20:23:17,Thought one news least kind hospital blue.
-0830c0ce-958a-4df0-8073-8857d9805530,religious,2021-12-07T19:57:50,2024-06-26T16:17:49,Else person wide work.
-2f987dd3-3343-4ead-821f-d95b2fde8907,store,2020-10-31T08:59:42,2020-05-16T07:33:38,Now operation Mrs join foreign beautiful.
-318a5960-4df1-4d72-b7cf-25ebe740e081,professional,2021-03-12T10:20:47,2021-02-27T02:35:04,Police whole reach listen discuss bring life.
-5dcc1cf8-ae27-40d4-9305-315ee7621cb5,player,2024-01-02T06:39:31,2020-05-04T08:17:08,But grow song successful.
-ab73952a-e229-47c7-a5fc-efa709406749,next,2024-03-27T02:04:18,2020-06-21T00:37:19,Deal safe pay glass.
-c52ae16e-94e5-424c-9aa4-84c9881238e0,possible,2020-07-29T16:55:11,2023-08-24T04:03:14,Care leg where.
-663c72e8-a447-4084-8a97-d1a922d049fc,give,2021-07-28T04:20:59,2020-05-25T01:45:37,Several against billion example either.
-b1d4a62f-e7fb-4d62-9c27-447cf9c4c446,beautiful,2021-06-27T18:34:42,2020-12-17T20:30:45,Issue manager but into.
-839226f4-3d99-40a2-a373-92fa9490c725,account,2023-07-15T06:34:21,2020-10-09T14:58:48,Tree interview experience.
-ae15134d-c3b0-4700-87ef-8ce079398c3c,green,2020-04-08T15:19:01,2024-02-14T01:32:51,Cell statement contain service.
-256b983f-a103-43f8-8b40-45f20f1e31b7,job,2022-04-20T11:56:51,2022-07-09T07:45:54,Artist leg rich house.
-a106f45f-1c5e-4dfc-ad09-b7cd4f497998,impact,2021-12-05T09:36:02,2020-05-11T12:45:15,So approach those artist experience small major.
-35790fba-18cb-43dc-8211-47a75e91ed08,figure,2021-07-14T12:31:46,2022-09-18T07:17:52,Whom long agree focus discuss.
-2aaa8a0a-c5ee-447f-b0bc-8660e7ece4b4,population,2021-03-04T01:09:17,2022-01-21T04:02:35,Environmental health window television mother decade office.
-69038d1a-6bea-4966-9f09-9e5cf799c364,case,2021-01-12T07:49:00,2020-06-04T11:31:32,Model artist act when deal student civil.
-e35fe67a-133e-4e32-a288-31cecea1d905,summer,2021-02-25T02:14:17,2024-03-15T10:34:55,Central under free help some note receive responsibility.
-6d0413c5-cd76-42de-88ae-530e70b00641,investment,2022-04-22T06:49:34,2023-06-16T06:53:05,Bring speak day simple.
-d1d53aef-6fc2-448b-aad3-88dd3515bde7,prepare,2020-04-14T00:39:16,2024-07-19T10:00:34,Much assume player dog city relate.
-77f54e32-4aaf-4f42-8b50-5d4ae4674804,technology,2023-09-28T11:52:52,2022-12-13T04:31:27,Finally debate what lead eight somebody.
-41c92930-fe69-4c34-80e8-66ab07a1dc6c,sell,2023-04-19T17:38:16,2023-03-02T19:58:00,Wife writer seem onto organization.
-5110964c-2b48-46b7-a73a-38b10b8c0b9e,group,2021-08-24T20:26:01,2021-07-26T16:21:32,Former fire never candidate democratic will.
-e0166a1a-1f6d-4fa4-87e5-322de31a397a,store,2022-10-05T05:34:49,2020-01-20T12:44:40,Memory national build paper assume follow quickly.
-ee7b681b-22d4-4db4-b3dc-c163618ab328,staff,2022-07-27T08:59:07,2021-03-20T17:49:56,Break establish within rich carry house than couple.
-1d7e5ae5-afc9-4665-8b48-6316c3cc1442,car,2024-09-24T19:16:22,2022-08-27T04:41:43,Economy pattern bag total agreement who low.
-022e1aef-26df-439d-b59c-3b0f162c2a64,summer,2021-12-29T17:36:26,2022-06-19T10:43:47,Imagine heart specific personal address something.
-58462e8f-5fc1-4c97-8a74-1b974c825a5d,run,2021-07-14T02:23:17,2022-09-30T20:17:29,Large thought career see find professional edge radio.
-38ca10cd-980d-4494-90a7-780de5b20e30,science,2021-02-24T19:04:42,2021-10-02T13:43:43,Pretty result series save visit understand six seek.
-12519c93-eb5c-4a32-9078-8b5657052517,reach,2020-07-23T19:35:24,2020-12-19T15:39:20,Class work voice.
-00572a05-abf5-4888-acea-6a58732d107f,arm,2023-12-18T16:09:45,2022-03-16T06:15:06,Trouble plan work today prepare in about individual.
+b2780056-9703-4c9a-91a2-f0a14dcac2a6,Java,2023-02-01T04:26:21,2021-12-12T19:44:40,Java
+733b90fc-9f19-4a81-bcf2-6250b683fc02,Python,2023-08-05T02:18:59,2022-06-20T14:25:26,Python
+f619c86e-f085-480f-978a-d86b945455a3,C#,2020-04-25T05:47:04,2020-08-15T00:41:34,C#
+014e1698-6d93-4bfb-a835-b77ad2271f08,JavaScript,2021-11-24T17:56:36,2023-08-15T13:02:25,JavaScript
+273d1c01-d465-4814-9406-443a480674d1,React,2021-09-07T18:17:41,2024-08-12T17:12:16,React
+7e5f0b1d-d979-4428-a12f-905e5c43599b,Node.js,2023-06-06T16:29:25,2021-03-19T15:29:27,Node.js
+eb7234d0-6aea-43bb-9da7-b4324523a356,SQL,2021-09-02T07:05:42,2024-07-20T22:19:26,SQL
+c6d05706-eea7-482d-8dd9-ce802a837ef7,HTML/CSS,2024-08-05T22:17:52,2024-06-10T16:34:23,HTML/CSS
+2dac9ca8-f3b4-48ac-81e7-347941a00472,Git,2020-11-29T21:42:59,2024-01-14T16:13:05,Git
+4bf9974f-d64a-449b-858a-e075556700dc,Agile Methodologies,2023-08-11T04:07:35,2022-01-13T04:20:20,Agile Methodologies
+1f6aa54b-25c2-4aae-b7f0-9a5e6846fb5a,Python,2024-06-21T23:23:02,2023-09-25T03:24:45,Python
+3bb057b5-4c7c-4e15-85cc-1fcc0312306a,R,2022-09-27T22:43:45,2021-02-07T12:31:45,R
+053f8377-0495-492c-b66b-4b589e587014,SQL,2022-04-16T10:57:33,2023-11-23T05:07:51,SQL
+2d513e39-23d4-41c0-aea0-9ade9bb923e1,Machine Learning,2021-03-07T16:19:39,2021-02-05T09:58:05,Machine Learning
+e5904739-f46b-43f3-b2e4-9a226445ab30,Statistics,2024-02-03T22:02:39,2021-11-18T06:06:12,Statistics
+e813b1b7-8b79-459d-901c-36a45b169cdb,Data Visualization,2020-05-08T04:53:06,2021-07-18T22:07:54,Data Visualization
+ab02b821-abc9-43d8-b41f-31484ea5b12b,Big Data Technologies,2023-08-09T17:10:14,2023-08-04T04:02:43,Big Data Technologies
+63119e08-a91e-4110-924a-689e61e88ca8,Data Wrangling,2021-06-23T04:30:08,2023-07-02T00:33:38,Data Wrangling
+3ed1c77a-a55c-4b78-9a00-98b1759f19a1,Deep Learning,2020-03-09T00:14:44,2020-02-24T04:32:09,Deep Learning
+32b2eba8-f899-4d19-bef0-139c62398b12,Data Mining,2022-04-28T15:48:17,2024-03-12T17:09:55,Data Mining
+1162d17d-de3c-4a02-806c-42a8cfac2620,Docker,2021-04-29T09:11:03,2024-09-08T08:34:38,Docker
+cf70b6bd-aa40-45e2-ae12-d8d000359219,Kubernetes,2020-11-02T02:48:58,2024-06-24T14:46:27,Kubernetes
+0f1d3460-ea77-46dc-859b-dc9ce542fd55,CI/CD,2020-08-04T00:03:12,2023-11-08T10:02:05,CI/CD
+f682ace9-6274-4dfa-9dc5-1f5a7a78650f,Cloud Computing,2023-08-28T03:48:47,2021-10-26T22:37:32,Cloud Computing
+5c1f9fd3-139c-4eb7-b757-b3033bffed34,Infrastructure as Code,2020-02-14T07:16:10,2022-07-30T08:33:50,Infrastructure as Code
+c9db6e17-a149-4ea1-b062-3084e5cfd3b8,Linux,2021-03-10T21:10:34,2022-03-15T05:55:06,Linux
+c0d0b544-8545-4bcd-817e-d7dd65bce4b9,Scripting,2024-08-11T08:32:57,2021-04-23T17:51:58,Scripting
+fcb9e387-5ac1-43ab-a127-3e77fe185269,Monitoring,2024-09-16T11:30:55,2021-11-05T07:12:05,Monitoring
+ab9139e6-352a-4e85-b455-3497937873f2,Agile Methodologies,2024-07-14T15:07:02,2022-07-12T05:43:11,Agile Methodologies
+9aa196b9-ca3f-4c25-b42d-18454715bd29,Networking,2022-04-06T09:40:00,2020-11-19T11:37:25,Networking
+7c70474f-ff24-4d64-ba36-8de90e99b0ef,HTML,2021-05-21T16:49:02,2023-12-16T10:43:26,HTML
+fb7f2d22-829b-48e2-b531-8ceb2ca2eb94,CSS,2021-09-22T14:07:21,2021-01-13T09:54:28,CSS
+db66db22-d105-4c36-a825-f1fba8a592a4,JavaScript,2024-08-11T03:46:02,2023-09-09T07:56:47,JavaScript
+82ffc361-84f5-4c12-92a4-a592de26c702,React,2023-10-01T22:05:50,2020-01-18T19:18:43,React
+0a66070c-3dd4-431a-825b-bf8ca733b8ac,Angular,2024-05-22T00:09:22,2022-04-02T11:04:46,Angular
+f2d4104a-4bbf-49f8-9a81-13878a05cd1b,Vue.js,2024-06-09T04:48:22,2023-07-10T21:00:53,Vue.js
+56e6aaab-d046-4edb-a2c2-b42fdd1840ee,Responsive Design,2020-09-11T11:07:33,2023-09-22T16:59:49,Responsive Design
+5d165274-b073-4354-96ef-448a093f5c36,Cross-browser Compatibility,2024-09-13T22:11:33,2020-12-11T18:37:45,Cross-browser Compatibility
+2abe61e1-12f2-41bc-8fc5-bb3a38b75e0f,Version Control/Git,2024-06-26T18:39:33,2023-04-26T10:06:43,Version Control/Git
+c7e1d26d-f46c-48b7-b6dd-ea34bea3d288,Web Performance Optimization,2022-01-11T23:00:33,2020-08-08T04:29:00,Web Performance Optimization
+912c2445-41dc-478b-9ed7-e8818d20d9ad,Node.js,2022-07-18T06:31:07,2024-05-05T01:46:58,Node.js
+6ffcc80b-2558-4008-b084-ae3b8940bfc3,Java,2020-01-31T20:48:19,2020-05-15T00:05:48,Java
+39da59ad-dceb-4813-a41e-fc3f41894b97,Python,2021-07-30T16:30:35,2020-10-31T09:19:09,Python
+076f37f0-58ce-4f15-b4d7-e7c7086ee2c1,Ruby,2024-01-22T21:01:34,2020-06-04T10:54:13,Ruby
+c7edf858-eb42-4f08-ab46-deedf24d41df,PHP,2021-06-21T08:47:23,2021-02-21T15:51:09,PHP
+89051593-2c5c-4f26-a806-53f0342e038e,SQL,2020-11-14T12:16:14,2024-10-03T21:11:48,SQL
+8647b4f8-0528-4ecd-8570-46f7b1bdbdb2,NoSQL,2023-10-05T01:31:39,2023-02-02T13:20:07,NoSQL
+b0681a23-1908-477f-a5ea-cdc0522d5462,API Development,2022-11-30T09:56:12,2023-08-13T10:47:11,API Development
+802c7b79-060c-45ec-9f5f-1eabd891a85c,Microservices,2020-08-09T18:09:43,2020-06-14T05:10:15,Microservices
+2a1cd660-6957-4ba4-bce4-8aaf0aec8a3b,Security Best Practices,2024-01-26T11:05:00,2022-04-03T11:10:22,Security Best Practices
+74504986-e8b9-42e1-9ab6-8a15d3646fa7,JavaScript,2021-10-10T14:40:21,2021-09-09T21:13:15,JavaScript
+4ffd1c78-dc40-4c41-a900-af8326e80439,Node.js,2023-03-12T05:01:52,2022-12-15T16:51:14,Node.js
+d9ae728c-7aa5-48c8-b150-d472cbfc43ea,React,2024-03-21T18:49:23,2024-08-16T08:04:04,React
+4eafa144-e580-4b4c-9096-19f64aa2aebc,HTML/CSS,2022-01-26T03:44:50,2023-03-15T23:06:13,HTML/CSS
+018701c7-53ed-4cf8-ac07-91f637c01fd5,SQL,2022-02-20T15:25:48,2023-08-19T10:33:59,SQL
+2c94b709-3e9e-484e-af94-1810370da18d,RESTful APIs,2020-07-03T18:26:40,2020-03-11T01:28:53,RESTful APIs
+ef2646ae-6547-4c04-90ec-bd0905ec2846,Git,2022-06-30T05:34:59,2023-09-19T17:30:33,Git
+c3fd3f98-b755-4e17-a1f2-57fd05b785f2,Agile Methodologies,2024-09-08T18:47:54,2021-08-24T23:02:32,Agile Methodologies
+d8b92035-1dfd-43ac-8338-4ba31ff1cab4,Testing/Debugging,2022-01-26T19:52:42,2024-05-29T21:01:32,Testing/Debugging
+44fe7801-77a7-4285-adf7-6e44c52d42fc,DevOps Practices,2020-07-25T21:07:33,2020-07-16T04:24:20,DevOps Practices
+79d68e14-91f6-425a-ace0-b64ee2a29b5b,Business Analysis,2023-09-11T14:53:06,2021-04-14T05:46:56,Business Analysis
+29beeb66-8b0c-42ef-8a40-d1b20ae69a10,Requirements Gathering,2020-05-09T13:28:12,2022-12-02T06:19:57,Requirements Gathering
+4c33bf29-e492-489c-9944-0485403e39b9,Data Analysis,2021-09-27T19:28:46,2021-07-01T14:31:49,Data Analysis
+4af1eac3-d34a-45b2-8605-66bac0049be8,Stakeholder Management,2020-12-18T00:37:21,2023-09-03T03:23:12,Stakeholder Management
+0c2173a4-5ed0-4360-b22f-02c71ca268ce,Process Mapping,2022-04-09T17:03:50,2022-03-19T13:31:03,Process Mapping
+7f5725c4-c486-46f9-8cd2-82f6400cd654,Project Management,2022-05-02T07:58:39,2023-09-02T02:17:53,Project Management
+43e170b9-7520-4674-9755-daed0e9d5e1e,Agile Methodologies,2023-03-07T08:29:00,2022-12-30T04:52:12,Agile Methodologies
+cddfc2af-5533-47ac-999f-02e384ee2f22,Communication Skills,2021-07-22T11:59:48,2023-03-06T10:48:27,Communication Skills
+f06a5a19-0f83-4faf-9876-e8d1c5019420,Problem-Solving,2021-05-24T16:02:16,2022-08-11T14:42:55,Problem-Solving
+3d1f825c-8878-4f3e-b660-16d7105103f7,SQL,2021-08-12T15:50:36,2021-12-20T12:07:49,SQL
+a675b2b0-8f4f-4297-940f-c7831b6f0391,Testing,2022-10-06T07:42:15,2023-12-24T13:59:17,Testing
+b4c47bcc-90ca-465a-80a9-336ffd843ce8,Automation Testing,2022-07-29T00:12:32,2022-11-16T05:02:03,Automation Testing
+0bef82b4-fc5a-4839-a66f-843011e4bde2,Manual Testing,2024-03-22T17:58:35,2020-11-16T12:15:21,Manual Testing
+0fe401bf-eb67-4247-9ea6-8175d2a910d6,Performance Testing,2020-12-25T08:14:46,2022-11-21T20:44:44,Performance Testing
+abcda4c9-a5a5-4c62-9d05-cf35d9fcd165,Agile Methodologies,2020-09-11T17:48:20,2020-07-28T05:03:55,Agile Methodologies
+742f265f-3f6f-47c9-a61d-d700d1cc73eb,Defect Tracking,2020-03-02T12:02:58,2022-07-28T02:50:47,Defect Tracking
+4150b140-0efd-4603-a0e2-f2b45bb72e15,Test Automation Tools,2023-10-02T21:02:38,2024-03-31T04:52:08,Test Automation Tools
+2e69c3f0-257d-4e43-95a5-ad9e4a5cf150,Test Planning,2022-03-03T07:38:42,2021-03-30T21:32:22,Test Planning
+adf71c45-6a3d-4342-a0e0-64792aef3ae3,Version Control/Git,2022-12-30T01:02:18,2023-04-11T23:54:15,Version Control/Git
+fe362873-26a1-43db-ba7b-df874cbb4257,Risk Management,2023-05-11T15:38:24,2020-01-19T09:01:51,Risk Management
+61d3b0de-c015-47e8-9ebe-e5209932a1fa,Technical Writing,2021-03-17T18:12:26,2022-03-16T08:39:24,Technical Writing
+695e6be0-2042-45a4-9336-d6e820d1e414,Documentation,2024-02-29T03:24:26,2020-08-26T14:51:38,Documentation
+a6eed375-6d77-4807-a736-757fd1419455,Content Creation,2022-09-16T06:49:13,2023-02-16T12:29:22,Content Creation
+3a98dd0d-9354-4570-ac66-76117fe13c7e,Editing,2021-06-30T17:06:00,2023-05-14T13:59:53,Editing
+bf04108d-cc76-4349-9067-67246b074e98,SEO Writing,2022-05-19T16:06:58,2021-04-16T05:02:33,SEO Writing
+7a94ab57-2691-4627-87f9-f807128b3446,Research Skills,2022-04-29T16:38:46,2024-01-11T13:56:15,Research Skills
+99392fbf-2619-4ab7-ab37-1afa98a79267,Agile Methodologies,2021-11-22T21:41:43,2021-03-20T16:44:02,Agile Methodologies
+a600dbca-ebd8-4d6b-a7cd-0599566468ba,Communication Skills,2021-12-12T15:28:21,2023-09-20T20:47:33,Communication Skills
+68dbb4cd-04eb-4015-9436-92dd21c7cd98,User Documentation,2023-10-19T17:40:23,2021-09-05T11:59:45,User Documentation
+967c94ea-b037-4a5d-9218-74e28ab6da18,Graphic Design,2022-04-09T10:06:28,2021-05-15T18:44:57,Graphic Design

@@ -1,114 +1,233 @@
-_id,name,issued_by,is_certificate
-66febe5eca0ebab04690f2ac,ReactJS,Coursera,True
-66febfabca0ebab04690f2b1,ExpressJS,Udemy,False
-66fec6e2ca0ebab04690f2b2,Other,Other,False
-66fec6e8ca0ebab04690f2b3,Other,Other,True
-6703c17c5b1d1e7f98a9a94f,Mongo DB,Mongo DB,True
-6703c1915b1d1e7f98a9a950,Prisma,Coursera,False
-6703c19c5b1d1e7f98a9a951,DBT,DBT,True
-6703c1a95b1d1e7f98a9a952,ADF,Microsoft,True
-6703c1c75b1d1e7f98a9a953,Python,Coursera,True
-6703c1cf5b1d1e7f98a9a954,Java,Coursera,True
-6703c1d35b1d1e7f98a9a955,Cpp,Coursera,True
-6703c1ea5b1d1e7f98a9a956,JavaScript,Youtube,False
-6703c20b5b1d1e7f98a9a957,Web Scrapping using Python,Youtube,False
-06175455-0648-440c-831b-da0720445658,Brown-Adams,Inc,True
-35a91966-51a5-444a-854a-660ef3137495,Rodgers-Bryant,Group,False
-a24caf05-f9b1-4972-9116-4042ac30120a,"Sanders, Clark and Clark",and Sons,False
-26b14cc9-f530-4e71-8f84-6b56fe0307a5,Barton and Sons,PLC,False
-1ff79076-2af6-49c5-a41f-9bd9a33ffded,"Spencer, Lee and Sanders",Ltd,True
-da12077c-f8e1-421e-bd87-e6261da9d6ef,Lopez LLC,Ltd,True
-56381246-b8ce-4fa0-941c-81e13454be24,Porter-Butler,Inc,True
-ae34f371-d592-421c-9725-74fc190b4d5d,Ward-Becker,Inc,False
-5d091305-a129-4a0d-8f0b-9e12ffaa94c4,Baldwin-Craig,Group,False
-c8fa0d94-5381-47b1-b6be-2e0eca17d3c3,"Patel, Tanner and Oliver",Group,False
-a6e75c04-5160-495d-b0eb-168e3d03e530,Baker and Sons,and Sons,False
-715a6a8b-680a-468e-aa51-815f529fe178,Goodman-Moore,Inc,False
-e323974d-22b0-448c-960c-3445a0e4a472,Gardner-Mcfarland,and Sons,True
-4e9daa29-6cf9-40f9-8f0b-66336003c796,"Buck, Klein and Brown",Ltd,True
-7a0eab80-1b3a-41fe-9ae4-2ef9ec0f27d9,"Crawford, Roberts and Hunter",PLC,True
-ef009f4b-f1b7-410e-85d0-ef333d0e58fa,"Barrett, Morgan and Moore",and Sons,False
-b6f75176-d20a-46d7-b650-adabb8b81d60,Clayton-Armstrong,and Sons,False
-ec3f341e-ec67-48c1-aea4-58ce47a93913,"Humphrey, Castillo and Roman",and Sons,False
-1a174d59-0038-4634-9ff0-68c9eb369d92,Walsh-Larson,and Sons,True
-d28cac4c-090e-4a54-a057-7b6ab0802f88,"Simon, Reyes and Scott",Ltd,False
-63d40bbd-6d95-4a4a-b86c-5ea2d8fb6ac3,"Spencer, Schultz and Lutz",LLC,False
-a53c37ce-a0ff-4c03-9e26-e0688b50eee0,Carey Group,PLC,False
-34721ef3-f736-4f41-b969-c5ffdc6ade6b,Cooper LLC,Inc,False
-95f9709a-488c-455e-aed2-42ff9b9a3b0c,Berger Inc,and Sons,False
-b525e905-2023-4650-8699-5f813a94efe3,Black LLC,PLC,False
-7a92d7c7-c78f-4293-b823-8ef2d334061c,"Rodriguez, Wolf and Harris",LLC,True
-dd9ee5a0-d2e6-4319-ab96-8989d23fdfca,Brown and Sons,PLC,False
-d9a9d8d0-12e6-4c5a-b7cc-23f4defa6dd2,Lopez and Sons,Ltd,True
-6b7b25dd-5170-4c50-b896-564a06de42eb,Garcia and Sons,LLC,False
-be4b7186-bd3b-49d2-af77-e4b15b4d6b21,Miller and Sons,PLC,True
-c1ce3646-dcc9-4576-88ea-c209777603ad,Williams-Simon,LLC,False
-e47e696f-854b-4bf6-a58c-9c577a7c9b85,"Barrera, Scott and Mckinney",Group,True
-d89f5ba3-d8e0-4935-976f-6c0b5bb86673,Flores-Brown,Inc,False
-3bc03f90-781b-4d34-bbb3-ed58337da081,Watkins-Haney,Inc,False
-07c47fb8-1b77-4186-b70a-3cb309927c65,Buchanan-Chambers,Group,False
-cd5ef72e-5e48-4330-b92b-a43c7de1aab7,"Boyd, Mahoney and Brown",Inc,False
-6d38daae-7e5c-43ae-9cc2-402befaf84b0,Saunders PLC,PLC,False
-c1dd2f2b-7d7d-469c-b941-702b662ac313,Ortiz-Rasmussen,Inc,False
-b063070d-ee43-4824-ba30-b6b773cfb23a,Singh Inc,PLC,True
-8c3c03a1-2630-405f-8e66-f78453be33c3,Griffin-Thornton,PLC,True
-2416623a-cc1d-4dbe-afb7-1b6b5ee62c32,Ferguson PLC,and Sons,True
-a1212d6a-b524-49d4-beb0-31fd604e57a4,Freeman Inc,and Sons,True
-8cfd5b99-0ed9-4f7a-bcde-c03e88cbd8af,Robertson-Mccarthy,and Sons,True
-f3556535-2a2d-46fb-b527-0483d5ea13df,Mcmillan LLC,Inc,True
-862558f2-4642-4177-8f9a-4d07bf12a360,"Martin, Hardy and Steele",Ltd,False
-fb3f39a5-99ad-4a90-b8dc-2232f5206483,Lawrence-Torres,LLC,True
-e6d819c7-efdd-45cd-8b63-dcaea0cf8886,Johnson-White,Inc,True
-538e74b5-550a-4c77-a322-c1ef65e2a06e,Young Group,Ltd,True
-9c0d15e2-a2ef-4e06-95ac-e0b28d236d3a,Zhang-Brooks,LLC,True
-a96819b5-d514-4a2f-b564-754dd3e98ebe,"Lee, Ross and Smith",Inc,True
-8132bbf2-36b4-40ea-bc49-2363b4eeec62,"Conner, Haas and Jensen",LLC,True
-45225e51-0dde-4cb3-b752-28eb75398924,Lee-Olson,Ltd,True
-1a64e0ba-72b7-4c87-9d68-83f307e55f05,Waters-Wheeler,Ltd,True
-53f1a0f2-07bc-4423-93f3-19837b806e6c,"Stephens, Rodriguez and Russell",PLC,False
-4af16aa7-5d3c-4ad2-908f-7611e59fae2e,Collins and Sons,and Sons,True
-ca616bcf-bf52-4a2c-9de8-ec6eddca17f1,Lam-Hood,Group,True
-8b760b9b-4278-48b1-afce-c2409465685c,Mejia and Sons,Inc,True
-fcbc25a7-db9d-4d1d-954d-1c821aef04f0,"Smith, Rojas and Dominguez",and Sons,False
-622ac591-8c43-498b-be12-1cb6cdd87aa6,Sanchez-Nash,and Sons,False
-29bbb5d9-6650-4fe8-b3bf-1590c4bed117,"Miller, Gallegos and Johnson",PLC,True
-a8f6b291-b039-42fe-a6f5-446dc7ce3c16,Jenkins and Sons,Ltd,False
-8c4ef2d7-1563-41b6-af16-c1a5ad370cac,Waller-Smith,PLC,True
-5a05ea95-6bcb-4ec4-aab8-f122d73d3288,Richardson Inc,Inc,True
-bff00893-dfa4-42b5-be0b-ed44c8d0408f,Ponce-Shaffer,Ltd,False
-99ebe993-e041-42c5-8782-e682e528dff5,Reynolds-Price,PLC,False
-eb6683a6-ddb6-4997-a0dd-c336d514a730,"Ibarra, Gibson and Smith",Group,True
-29a4b5bf-e17e-4340-9fa6-1a93ffede4e4,Hall PLC,and Sons,True
-44ccf2aa-265a-4e26-897d-740e61548fcb,Hill Ltd,and Sons,False
-f3f25d51-ef68-4cee-9d3b-855cf4a12213,Harmon LLC,and Sons,True
-9b8e8cab-1c8d-487b-830b-81256d978fc6,White-Hill,Inc,True
-157da0cd-35d1-4a83-a753-26ccb375a275,"Newman, Ward and Rodriguez",Group,True
-33d830da-10d2-474d-b60a-5cafe0a3c823,Hendricks Group,PLC,False
-32ab4786-6fd2-4f67-8dc3-8aee7b193643,"Clark, Bradford and White",Ltd,True
-f170a88d-813f-43b5-a157-70827e1c9a81,Dawson-Johnson,and Sons,False
-b42500f1-d562-4bd2-a97d-bbbc803ee78f,Reed and Sons,Group,True
-73e736e1-72ae-42b4-a209-880658dbb1fb,"Greene, Collier and Taylor",and Sons,False
-4aebf225-fb80-4bc3-8830-be97c6324fbf,"Ruiz, Hernandez and Kim",Group,True
-b1696195-c27a-4b80-a91c-7d692a13438e,"Padilla, Proctor and Bright",Ltd,True
-a41e39cb-f091-4ca6-894f-309984ff680c,Adams Ltd,PLC,False
-37c5fe82-da18-436b-b7ba-00672b941231,"Silva, Flores and Bird",LLC,True
-c4e40c3b-9c11-4963-a4f2-9df53d45d8b9,Gibbs and Sons,Group,True
-13c8c33a-1d2e-434e-9738-bcfc8e0c2ef8,Fowler Inc,Group,False
-a757f1cf-f5a8-45c1-b751-4eebbd9cdae9,Ramirez and Sons,and Sons,True
-06eb7177-62c0-4398-a2ad-1d1a90166021,"Ortiz, Alexander and Hines",PLC,True
-43ba2d8c-f80f-4fa2-b01b-2b316fa46294,Hawkins Ltd,LLC,False
-cde34d10-8fc2-431c-a61c-ff68d7696c3b,Frost Group,Group,False
-83c7637f-194a-4f77-a5f5-f5f4122c6705,Larson-Davis,Group,True
-983af46a-154a-4164-a881-d79595cdcea6,"Rubio, Hernandez and Floyd",and Sons,True
-a0f72e0e-f1ee-44fc-ac01-36dfcada550f,Simpson LLC,PLC,True
-eff29cbb-6170-4ae7-a6b6-a113985f762f,Williams-Hernandez,Ltd,False
-16599648-a5cc-4384-a757-4bc25ab89d0c,Richardson-Day,Inc,False
-16f92240-d072-4dce-8c69-622976847952,"Hughes, Mclaughlin and Morrison",Inc,True
-7b827439-d9db-4e04-9da8-86f450986c7f,Shaw-Peterson,PLC,False
-174d69ea-a195-4607-9da5-bf84692e990d,White LLC,Group,False
-5534d3a0-e6a8-46b8-a0e3-ae3217d77940,"Gibson, Baxter and Daniel",LLC,True
-c1d6be59-a29f-477d-9c48-cfaf618b3cb2,"Rivera, Donaldson and Fisher",PLC,True
-80879bfe-4753-445e-b92a-4d82da8cb0f8,Malone and Sons,PLC,True
-77abd478-4921-47de-94c0-b21860cbeee6,"Shea, Sandoval and Smith",Inc,False
-3ba063f7-14ea-4f0d-a8a3-e5ad0412b627,Mclaughlin Group,Ltd,False
-4873aed4-1344-471c-93dd-bc8d48679f04,"Pearson, Fuller and Day",PLC,False
+_id,name,issued_by,is_certificate,role
+736373e4-9f56-43b1-babe-77bf1d4d225d,AWS Certified Solutions Architect,Hebert and Sons,True,Software Engineer
+d1b007ef-92f7-44d3-b666-7b2fa74fc770,Microsoft Certified: Azure Developer Associate,Ramirez-Ray,True,Software Engineer
+3900d0dc-f038-4dca-b52a-6f7ce78caeb5,Certified Ethical Hacker,"Bailey, Pittman and Byrd",True,Software Engineer
+88ad2a25-409c-402b-be32-be32539559c0,Certified ScrumMaster,"Edwards, Wood and Salazar",True,Software Engineer
+1b28edd3-9679-4285-adc4-709a01eeb17e,AWS Certified Developer - Associate,"Hunt, Guerra and Hudson",True,Software Engineer
+baa99073-7ecd-4b71-98d3-c030ef45f137,Certified Information Systems Security Professional,"Lopez, Payne and Stevens",True,Software Engineer
+088985ca-edf9-4a86-be19-aab01ac43c37,Certified in Risk and Information Systems Control,Morales Group,True,Software Engineer
+f339096d-44d5-4f55-9dc7-f116ff409ad1,CompTIA Security+,"Klein, Lewis and Wagner",True,Software Engineer
+41c305bf-37c4-4a6b-9219-0ea44462fd03,Certified Kubernetes Administrator,"Ray, Kelly and Rodriguez",True,Software Engineer
+c49e2f3b-3746-4268-a38b-6df78207a01d,Google Cloud Professional Developer,"Roy, Clay and Castro",True,Software Engineer
+40fd3adb-0cfd-464a-a210-3fd0c5ae2bd2,IBM Certified Data Scientist,Dominguez Group,True,Data Scientist
+949b55ea-afee-4000-8c66-6ea69839941e,Google Data Analytics Professional Certificate,Knox Group,True,Data Scientist
+210d671c-b910-4c91-b2aa-fc6dca0b1901,Microsoft Certified: Azure Data Scientist Associate,Jordan-Tran,True,Data Scientist
+f467a328-2eb6-416b-a94b-2488d3265cc0,Certified Analytics Professional,Garcia-Knapp,True,Data Scientist
+6c31608e-8c8a-420f-831e-7bc839c0a874,Google Professional Data Engineer,Manning Group,True,Data Scientist
+6dbc5314-2247-4ab1-aa35-568f849bffbb,AWS Certified Machine Learning - Specialty,"Smith, Townsend and Olson",True,Data Scientist
+fce7bf3d-dad7-458d-8aaf-9d2879a98af2,Certified Ethical Hacker,Freeman LLC,True,Data Scientist
+8ae13f20-529e-4b78-9fd1-3c19bb9e682f,Certified Business Analysis Professional,Newman-Ortiz,True,Data Scientist
+b34fd6fe-95cc-43f9-a273-4482234c07ad,CompTIA Cybersecurity Analyst,"Atkins, Macdonald and Allen",True,Data Scientist
+6c0bd9af-b5f2-40b7-a586-1597f296ff21,AWS Certified Developer - Associate,"Dunn, Walker and Washington",True,Data Scientist
+49d8bbfb-0421-4dda-a4b5-502732b7a413,AWS Certified DevOps Engineer,"Conley, Norris and Cannon",True,DevOps Engineer
+67c2c966-a90d-4e4e-a2c1-874d26c367ed,Microsoft Certified: Azure DevOps Engineer Expert,Gray-Chang,True,DevOps Engineer
+cfd965d6-9289-44ba-b2d2-aea580a30920,Certified Ethical Hacker,Meadows Ltd,True,DevOps Engineer
+a1c228d8-b74a-4821-8fa1-effc621a74e6,Certified Cloud Security Professional,Doyle and Sons,True,DevOps Engineer
+4ba6c146-9204-41c1-bef6-9906d2f7891e,Certified Kubernetes Administrator,"Estrada, Silva and George",True,DevOps Engineer
+05e5c6b8-781e-451a-9d7c-ec43e5e2c1c1,AWS Certified Developer - Associate,Hopkins-Jones,True,DevOps Engineer
+5bc40757-3d9d-4cc4-9720-0a10e34cabd7,CompTIA Security+,Haynes-Phillips,True,DevOps Engineer
+8868aca4-533f-4191-befc-60da2a8c5b77,Certified Information Systems Auditor,"Mason, Garcia and Cobb",True,DevOps Engineer
+4ddcfd25-247e-421f-9791-215af8143ec1,Certified Agile Leadership,Robinson Group,True,DevOps Engineer
+0d2a75c0-169b-4e6a-8f48-8b42ed3f42eb,Google Professional Cloud Architect,Ford PLC,True,DevOps Engineer
+53482d08-ad2a-4e27-a243-7224392715a1,Certified Front-End Web Developer,"Mayer, Garner and Miller",True,Frontend Developer
+51835ef5-8839-4433-98f9-46a20efe54b9,React JS Certification,Moore Group,True,Frontend Developer
+09aae74a-ee6d-48bf-98b9-e0026beca2dd,HTML5 and CSS3 Certification,"Shields, Schmidt and Mason",True,Frontend Developer
+4c6cb8b4-5fc1-4d28-926d-ac1ccdb2e918,JavaScript Developer Certification,Jacobson-Fitzgerald,True,Frontend Developer
+724defc2-4036-4ff2-a70e-45304cb68410,Certified User Experience Professional,Evans-Powers,True,Frontend Developer
+1a0d7d4d-04b0-4bfb-adf8-4d4b8c5302ae,Google Mobile Web Specialist,"Gonzalez, Johnson and Wright",True,Frontend Developer
+dce08949-cbb5-4a3a-81a1-8a258f507001,Microsoft Certified: Azure Developer Associate,King Group,True,Frontend Developer
+1affbf93-829c-42c7-8cea-3b89844e0766,Certified ScrumMaster,Rivera-Huynh,True,Frontend Developer
+1a14da21-56e5-452b-aa00-80ae78430c34,AWS Certified Developer - Associate,Hodges-Calhoun,True,Frontend Developer
+bd0f2f0b-a92e-4078-bd7c-659d76c140bd,Google Data Analytics Professional Certificate,Lucas-Torres,True,Frontend Developer
+43d65c60-2571-4470-8202-3d31020c43b8,Certified Ethical Hacker,Gonzalez-Peterson,True,Frontend Developer
+ea910da7-3847-41ba-8791-559468b443f3,Certified Information Systems Security Professional,"Khan, George and Valenzuela",True,Frontend Developer
+46b434fd-e646-4c87-ab4e-a353e807dbf0,Google Professional Cloud Developer,"Daniels, Garcia and Meyer",True,Frontend Developer
+6d5db9c6-ed89-4f2c-9f9f-ff58840f4dde,Certified Analytics Professional,"Perry, Turner and Lozano",True,Frontend Developer
+0a8a0a3a-d6f1-4868-b00b-e6cccbf2dfca,Certified Business Analysis Professional,Lindsey-Hall,True,Frontend Developer
+80879d5a-b5cc-4a0a-8d90-e61a4863998f,AWS Certified Solutions Architect,"Andersen, Harris and Johnson",True,Backend Developer
+2b0d3b48-fe76-43f6-864b-b9c8579651ce,Certified Ethical Hacker,Hinton-Bailey,True,Backend Developer
+ce7e5e0d-b8f6-4b52-a910-0964eac2c700,CompTIA Security+,Thompson Ltd,True,Backend Developer
+777367fa-afb7-4e68-9039-af0089eec63d,Microsoft Certified: Azure Solutions Architect Expert,"Moore, Davis and Garcia",True,Backend Developer
+8e5e160a-1a89-4ee2-90e8-80b103e60ff0,Certified in Risk and Information Systems Control,"Hill, Ramirez and Salazar",True,Backend Developer
+c16f0eee-08b9-4310-9e6c-5a4eda334d09,Certified Blockchain Professional,Pearson-Evans,True,Backend Developer
+157465a9-8ac2-48bf-bc8f-43680394e29b,AWS Certified Developer,Mckay-Burgess,True,Backend Developer
+1e257813-0040-4de8-898d-330667dffeeb,Certified ScrumMaster,"Espinoza, Nelson and Mccormick",True,Backend Developer
+8d8674a6-b346-4b12-bdf4-0637039dccb4,Google Professional Data Engineer,"Pittman, Andrade and Robbins",True,Backend Developer
+a03731a1-3b7c-47ca-b8ce-1787904dddbe,Certified Information Systems Auditor,Hoffman-George,True,Backend Developer
+0b41b7ef-7ad1-4811-8e34-4333980d9b36,Node.js Certification,Young-Johnston,True,Backend Developer
+7b7f74c7-9627-4313-98ae-8db6fe2a3d68,Python Developer Certification,Palmer-York,True,Backend Developer
+602c75df-e7f7-4c91-a7ff-7a8c7b520dc1,Java SE 11 Developer Certification,Garner-Baldwin,True,Backend Developer
+f3546d4a-5e3c-4f17-b0b5-b7e2756a4717,Spring Professional Certification,"Powell, Watson and Reyes",True,Backend Developer
+6fb2e6c5-eea4-494a-803a-8a4b4a094af5,Django Certification,Garcia-Perez,True,Backend Developer
+f35adb5c-aa17-4628-bb0f-8c963dbc1cf3,Flask Certification,Glass-Smith,True,Backend Developer
+9f1c2820-4e98-4bff-b9d7-654593743261,Express.js Certification,Perez-West,True,Backend Developer
+45b7595c-5121-46f7-b7e7-870b7c1f4b25,MongoDB Certified Developer,"Martinez, Young and Ellis",True,Backend Developer
+e0d736bb-4fb6-47dc-9db0-599212f0b2b7,AWS Certified Solutions Architect,"Whitehead, Williams and Wiley",True,Full Stack Developer
+7e63ca54-b8b1-40ba-ad6e-639f0ecee833,Microsoft Certified: Azure Developer Associate,"Farley, Leonard and Doyle",True,Full Stack Developer
+62d69aee-4160-413f-9fc8-04dd56f160d9,Certified Ethical Hacker,"Patterson, Mathews and Vance",True,Full Stack Developer
+506e5d07-dee7-46c7-b504-377bbe90a7cc,Certified ScrumMaster,"Smith, Bates and Brooks",True,Full Stack Developer
+db1db4ea-d0f6-4f55-8b8a-c1008c840e30,AWS Certified Developer - Associate,Martin-Johnson,True,Full Stack Developer
+6be3737d-e27a-4353-aa78-a518b2e687d8,Certified Information Systems Security Professional,Thompson and Sons,True,Full Stack Developer
+886de651-9e43-41d4-9ecd-798e37e0653e,Certified Kubernetes Administrator,"Roach, Tran and Thompson",True,Full Stack Developer
+f87a442d-da04-48e4-9b0e-a25c5d51f8bf,Google Cloud Professional Developer,Brewer-Green,True,Full Stack Developer
+a3f7842f-694e-4b6c-85f8-434a9d42f86c,AWS Certified Machine Learning - Specialty,"Jackson, Stephens and Lynn",True,Full Stack Developer
+75f9fd3c-03c5-4c6f-8de9-08e35ce09027,Microsoft Certified: Power Platform App Maker Associate,Wiley LLC,True,Full Stack Developer
+525c833d-84c8-448b-b9f8-02a90f4b7e6b,React Certification,Jones-Johnson,True,Full Stack Developer
+d7df309a-fa02-4788-9c2a-94c0973c0f7b,HTML5 Developer Certification,Warren Ltd,True,Full Stack Developer
+cb565e76-b388-4fc1-9732-f7b9384350ab,CSS Certification,Hunter PLC,True,Full Stack Developer
+0cfbcfeb-0626-42ad-bf82-4687c9e51f77,JavaScript Certification,"Brock, Rojas and Dunn",True,Full Stack Developer
+9aeb49f2-2206-4cd5-b7bd-e0c44201ad6a,Node.js Certification,"Drake, Orr and Thompson",True,Full Stack Developer
+4871c6f0-fa61-4e59-a16e-fe49877cc72b,Python Developer Certification,Evans-Mckinney,True,Full Stack Developer
+cd864b4b-ac6c-4a89-9764-f37aea3a44dd,Java SE 11 Developer Certification,"Warner, Lawson and Barker",True,Full Stack Developer
+59df5255-ac85-4d09-be9b-7dc396ea4357,Spring Professional Certification,"Holland, Roberts and Delacruz",True,Full Stack Developer
+405918c0-d6fb-49a3-bf93-dca015d43695,Django Certification,Perez-Johnson,True,Full Stack Developer
+f296d234-d1dc-4625-a722-ba6167fcd400,Flask Certification,Cummings-Lee,True,Full Stack Developer
+6225df9c-f0e4-4ebc-a4f0-e77825a4837a,Express.js Certification,Calhoun Group,True,Full Stack Developer
+95311b96-35a3-4184-9d88-68dee5088ded,MongoDB Certified Developer,Brown-Baker,True,Full Stack Developer
+9b3d8d7f-f7af-4753-8019-d6e579d3d286,MySQL Database Administrator Certification,"Payne, Morris and Harper",True,Full Stack Developer
+4ef6e707-e4b4-4042-9d35-a64952fdd71f,PostgreSQL Certification,Black Group,True,Full Stack Developer
+1e1c6ddd-3b8a-41c5-b3e3-c2a116959730,Microsoft Certified: Azure Database Administrator Associate,Smith Group,True,Full Stack Developer
+1745f8b6-d74f-45f2-b90b-2a056d7acf3d,Google Data Analytics Professional Certificate,"Ramirez, Williams and Holland",True,Data Analyst
+dc6bb630-99f1-4794-a381-2aab45442503,Certified Data Management Professional,Hayes Inc,True,Data Analyst
+a7d85561-e008-4461-964f-77cc7acc17a9,IBM Certified Data Analyst,Walton-Zavala,True,Data Analyst
+a82d365e-a8c1-43be-9434-0ea97172126d,Microsoft Certified: Power BI Data Analyst Associate,"Schneider, Davis and Smith",True,Data Analyst
+e2d4239b-d6c1-4882-82b0-e3fa1958825a,CompTIA Security+,"Mcpherson, Hooper and Ellis",True,Data Analyst
+2c5f12c6-c568-41fb-8aa5-60aa4ea19b56,Certified Analytics Professional,Gutierrez and Sons,True,Data Analyst
+b6dfa718-2078-40f6-9700-377bc19f2b49,AWS Certified Data Analytics - Specialty,Cline-Sanchez,True,Data Analyst
+e5b4f571-82d3-40da-92b4-247e71b218b6,Certified Information Systems Security Professional,"Green, Williams and Thompson",True,Data Analyst
+6307681d-af26-4180-8389-efa27ae7c6b8,Certified Business Analysis Professional,Duarte-Eaton,True,Data Analyst
+0fcb44b8-6e29-4b0e-a267-c016a6fbaeec,Microsoft Certified: Data Analyst Associate,"Alvarado, Campbell and Lawrence",True,Data Analyst
+73b72729-de46-40c9-9192-ea6a67579f24,SAS Certified Data Scientist,Novak-Payne,True,Data Analyst
+7aab5812-34e8-45b4-bf77-824cd9beed57,Tableau Desktop Specialist,Butler-Moon,True,Data Analyst
+a2e28377-06f3-421f-b062-e9d7eb2074f7,Excel Certification (Microsoft Office Specialist),"Skinner, Miranda and Potter",True,Data Analyst
+27e6d3a9-7b31-43ef-bf72-b61f88c56ab2,Data Science and Machine Learning Bootcamp,Ruiz Ltd,True,Data Analyst
+e811d57d-6431-440f-9dc2-06a1bc6e3ccd,R Programming Certification,"Coleman, Sanchez and Wallace",True,Data Analyst
+d27f541c-dd65-4ddf-8443-3690a696e3ac,Apache Spark Certification,"Glass, Wilson and Smith",True,Data Analyst
+150e60d1-c47e-465b-be4c-5f69ea35dc36,Data Visualization with Python,Lawrence-Thompson,True,Data Analyst
+b44c0b16-0d0d-4bfd-89bf-fcfa5604a384,Statistics for Data Science Certification,Davis-Mata,True,Data Analyst
+40b393d6-ff27-4450-a366-7eb5370c132e,Certified Data Scientist (CDS),"Williams, Davis and Robinson",True,Data Analyst
+a7a47d77-9709-4ecc-bddf-0d31409b835f,Advanced SQL for Data Analysts,Mullen Ltd,True,Data Analyst
+ce57b1db-db7b-4527-9908-458edca3176c,Data Mining and Predictive Analytics Certification,Vazquez-Barry,True,Data Analyst
+488a56ee-f1df-44a4-9c58-c9d89bff8a08,Certified Ethical Hacker,"Chapman, Reynolds and White",True,Cybersecurity Analyst
+612d0cf9-dd51-4891-b592-88491ccd295a,CompTIA Security+,"Keller, Martinez and Miller",True,Cybersecurity Analyst
+0ae46996-5d58-4c74-96ef-be2599e1baef,Certified Information Systems Security Professional,"Smith, Sampson and Nelson",True,Cybersecurity Analyst
+4bc0fc7d-5529-4c36-814e-31a602f9206f,Certified Cloud Security Professional,Bennett Group,True,Cybersecurity Analyst
+c3e4e8f9-15b9-482f-a0cd-7abdbb1a32bd,CompTIA Cybersecurity Analyst,Butler and Sons,True,Cybersecurity Analyst
+7c30364a-acc6-4986-b3e9-5d8ce7b6af2b,Certified Information Systems Auditor,Atkinson-Jackson,True,Cybersecurity Analyst
+aa32d4ba-df55-48c3-be2c-a09202e151ef,Certified in Risk and Information Systems Control,Foster-Peters,True,Cybersecurity Analyst
+d0d512e7-1fa3-415b-a551-d18a97425271,Cisco Certified CyberOps Associate,Wagner-Schultz,True,Cybersecurity Analyst
+3beb1de7-1d15-4a79-a43d-f8db1b3d433b,AWS Certified Security Specialty,Little-Gonzalez,True,Cybersecurity Analyst
+9d76bd4d-83d2-4a8f-876e-029a7b8901fa,Certified Information Security Manager,Cook Group,True,Cybersecurity Analyst
+13ae95dd-c285-4d67-bbf6-21a90ec66abc,Certified Information Systems Security Officer (CISSO),Kennedy-Campbell,True,Cybersecurity Analyst
+61e853b7-bf9e-4b60-b287-192f27c6158c,GIAC Security Essentials (GSEC),Wolf-Bush,True,Cybersecurity Analyst
+78c4a0c1-4783-4b98-8ef7-c5f9bb30a71e,Certified Information Systems Security Manager (CISSP),Simpson and Sons,True,Cybersecurity Analyst
+008e85a1-fcb3-4f82-bba2-51643d0a7d4f,Microsoft Certified: Azure Security Engineer Associate,Wilson-Dean,True,Cybersecurity Analyst
+2f38f821-d4e1-4723-8897-e360dbeefc97,Certified Threat Intelligence Analyst (CTIA),Reyes-Butler,True,Cybersecurity Analyst
+6baa93b2-9a17-4f24-84cc-76013b455977,Certified Incident Handler (GCIH),Kirby Group,True,Cybersecurity Analyst
+d5b36764-c0cc-498f-9ac0-a3c3a512c356,CompTIA Advanced Security Practitioner (CASP+),Clark Inc,True,Cybersecurity Analyst
+fe19ab3a-543b-4d2f-b54e-4cbad15d787b,EC-Council Certified Security Analyst (ECSA),Payne and Sons,True,Cybersecurity Analyst
+5b9253ac-a037-4fa7-8bc3-a436952d28eb,Certified Wireless Network Administrator (CWNA),Williams Inc,True,Cybersecurity Analyst
+f562f3d0-594c-4ed3-9d57-8360e86ed51d,NIST Cybersecurity Framework Certification,"Cook, Lamb and Baker",True,Cybersecurity Analyst
+3ef13655-3eab-471b-b3bc-ee996fc4d2ef,Certified Cybersecurity Technician (CybExer),Alvarez-Sanchez,True,Cybersecurity Analyst
+81553601-da36-4021-978c-0c1561652c88,Google Data Analytics Professional Certificate,"White, Parks and Watkins",True,Machine Learning Engineer
+5013286b-3f17-4649-9c73-92c4fcc953b9,AWS Certified Machine Learning - Specialty,Gallegos-Davis,True,Machine Learning Engineer
+10a3e504-9fe6-4488-8f49-2ce14e317f61,IBM Certified Data Scientist,Barrett LLC,True,Machine Learning Engineer
+50924cf1-3860-428d-9139-a75fd7124d80,Certified Analytics Professional,Marquez-Neal,True,Machine Learning Engineer
+84a3a53a-2009-4109-9e7e-857c5cce039f,Certified Ethical Hacker,Graves-Ward,True,Machine Learning Engineer
+2344b49b-074e-4a09-b059-b393f1767bf5,AWS Certified Developer - Associate,Anderson-Welch,True,Machine Learning Engineer
+c50a2101-5b45-4fa6-910b-9f97eb72d189,Microsoft Certified: Azure Data Scientist Associate,Mccormick and Sons,True,Machine Learning Engineer
+04f43ce9-80ac-423f-93e5-5d8c220b752d,Google Professional Cloud Developer,"Sullivan, Richardson and Mccarthy",True,Machine Learning Engineer
+edeec766-6841-4b14-aff9-c13c8fbff5ee,CompTIA Security+,"Jackson, Morris and Torres",True,Machine Learning Engineer
+1b118c8b-e343-4b0c-a563-21f2bef2e437,Certified Information Systems Security Professional,Fox Group,True,Machine Learning Engineer
+624830d9-a9a7-49a7-9efc-b97bb4fb2d09,TensorFlow Developer Certificate,Dunn Inc,True,Machine Learning Engineer
+066015ef-9e78-4899-afd8-fda17db70dc6,Deep Learning Specialization (Coursera - Andrew Ng),Cunningham Ltd,True,Machine Learning Engineer
+8c96f708-f0c8-45f7-baeb-b7b71ed9299e,Data Science Professional Certificate (IBM),"Thomas, Hernandez and Clark",True,Machine Learning Engineer
+12809412-a44f-4612-b0f1-07b616207562,Microsoft Certified: Azure AI Engineer Associate,"Lee, Morris and Goodman",True,Machine Learning Engineer
+ccd57116-06e3-4c66-bf31-9a55843099bf,Certified Machine Learning Specialist (CML),Martinez Inc,True,Machine Learning Engineer
+6958b5e6-03ab-48fe-b9c3-d087f3e47e7d,Data Science and Machine Learning Bootcamp (Udemy),"Smith, Hoffman and Hall",True,Machine Learning Engineer
+78e9deb3-9418-4a8b-bf8f-f28f9214bcce,NVIDIA Deep Learning Institute Certifications,Mcintyre Group,True,Machine Learning Engineer
+7eb0c1d8-ccd8-429d-ae69-b5167dcba691,AWS Certified Solutions Architect - Associate,Gonzales-Green,True,Machine Learning Engineer
+c23768dc-2f0e-4346-bad2-911a03f8f523,Databricks Certified Associate Developer for Apache Spark,"Barry, Wall and Bender",True,Machine Learning Engineer
+e5e024a9-bf1b-4339-b02e-b8755b1050f2,Kaggle Master (Kaggle),Mcmahon-Mata,True,Machine Learning Engineer
+09aae86e-5e79-4c07-bf19-b5a5367cdd84,Introduction to Machine Learning with Python (edX),Tran-Allen,True,Machine Learning Engineer
+b34c5739-82f7-4580-8c04-8dfd5702c799,AWS Certified Solutions Architect,Ramos PLC,True,Cloud Engineer
+65cf8b10-ddcd-4a1a-a950-59a523cc8686,Microsoft Certified: Azure Developer Associate,Bishop-Mendez,True,Cloud Engineer
+bdaae1d3-ed11-4f99-91b8-f2f431cf807b,Certified Cloud Security Professional,Jones-Rogers,True,Cloud Engineer
+393b24c9-b5dc-4062-a69b-999e2a3d44e3,AWS Certified Advanced Networking - Specialty,Rodriguez-Jackson,True,Cloud Engineer
+fab66667-58a7-4a21-8e12-9481399327e6,Google Cloud Professional Architect,Kramer and Sons,True,Cloud Engineer
+08ad611e-82c3-4fea-aa5b-93ea60565e8c,Microsoft Certified: Azure Administrator Associate,"Adams, Lee and Flores",True,Cloud Engineer
+011aed8b-dd2e-4807-a254-affec28f4c63,Certified Ethical Hacker,Greene-Pitts,True,Cloud Engineer
+51652dce-a5fa-451d-9eef-fb6ccf88f01c,Certified Information Systems Security Professional,Wyatt-Willis,True,Cloud Engineer
+d88da0d1-6f81-4cc1-86d6-280e2c74e2a4,AWS Certified Developer,Sanchez-Combs,True,Cloud Engineer
+2db22ee4-6b32-4796-9b7e-57270cbab7cf,Certified Information Systems Auditor,Nixon-Foster,True,Cloud Engineer
+7c2887bd-d120-42d6-9737-228c8412554c,AWS Certified DevOps Engineer - Professional,"Austin, Russell and Perez",True,Cloud Engineer
+4eae4301-093d-4a60-8b9e-b10858f1f4e5,Google Cloud Professional Data Engineer,Richards-Hayes,True,Cloud Engineer
+13dd22dd-039b-41ef-82ae-0806e111c840,Microsoft Certified: Azure Solutions Architect Expert,Cruz-Valdez,True,Cloud Engineer
+eabb27f5-4796-43b9-a7b1-803fced26df1,HashiCorp Certified: Terraform Associate,Peterson-White,True,Cloud Engineer
+5f33b079-b96e-4c6b-82fb-cf6231a4e1b0,CompTIA Cloud+,"Schmidt, Hall and Perez",True,Cloud Engineer
+013b67af-34bb-4c7c-a6a8-47634acafd64,Cisco Certified Network Associate (CCNA),"Phillips, Davis and Padilla",True,Cloud Engineer
+b5a86b33-c6d9-4c41-9107-2259b035b2b7,AWS Certified Security - Specialty,Smith-Allen,True,Cloud Engineer
+d1b34117-09cb-48de-afb7-e860750f116a,Cloud Foundry Certified Developer,Collins-Gutierrez,True,Cloud Engineer
+5f2e6167-4772-434e-a4cd-7596718413f8,Certified Kubernetes Administrator (CKA),"Leonard, Sullivan and Fry",True,Cloud Engineer
+008a1d29-08e6-43fd-92fe-16be5ae27e46,VMware Certified Professional - Cloud Management and Automation,"Hayes, Rodriguez and Long",True,Cloud Engineer
+2536a91a-97cb-4c8b-aae1-30283a90fe29,Red Hat Certified Specialist in OpenShift Administration,Gilbert Inc,True,Cloud Engineer
+96858711-cf30-4f3f-9e9b-9cb1ff472ada,Google UX Design Professional Certificate,"Williams, Torres and Huffman",True,UX/UI Designer
+aa92e357-9821-4ce2-9d9d-cfa7895a53fc,Certified User Experience Professional (CUXP),Scott Ltd,True,UX/UI Designer
+d6abb8df-e314-47c5-b46c-5e9de626cb2c,Adobe Certified Expert (ACE),White and Sons,True,UX/UI Designer
+d1edc8d5-dda4-4bae-9f10-fcbecd8dc75d,Nielsen Norman Group UX Certification,"Lewis, Murray and Price",True,UX/UI Designer
+fd222d00-6dd9-4cb6-8195-acc5b95f10f8,Interaction Design Foundation (IDF) UX Design Courses,Rodriguez Inc,True,UX/UI Designer
+81762200-cff4-4d86-8c2a-de0c61238907,Certified ScrumMaster,Morrison-Johnson,True,UX/UI Designer
+2e35f89c-20d3-4085-b10c-d85eafad93b1,CompTIA Security+,Miller-Hanson,True,UX/UI Designer
+cf8b50bf-f5ec-494c-a96e-d81c81302fc3,Certified Usability Analyst (CUA),Huber PLC,True,UX/UI Designer
+5e24bc44-8b01-48d9-a995-f076bcff5a60,Microsoft Certified: Power Platform App Maker Associate,Spears LLC,True,UX/UI Designer
+26d8b302-3763-41ac-97ac-fca63df3c4f7,Human-Computer Interaction (HCI) Certification,Werner PLC,True,UX/UI Designer
+812f0f3e-4690-4e5e-9a31-a519bef147e7,Web Accessibility Specialist (WAS),Bennett Ltd,True,UX/UI Designer
+32a8a195-27bc-44d5-8180-10f3ea3bb0b7,UX Certification from the Nielsen Norman Group,Harris Ltd,True,UX/UI Designer
+3de83010-6016-4331-8805-3a91a1dcf901,Professional Certificate in UX Design from MIT,"Cooke, Bennett and Smith",True,UX/UI Designer
+bb7ec609-e500-4030-89de-2c69887eb585,UX Design Institute Diploma in UX Design,Trujillo and Sons,True,UX/UI Designer
+38d27d37-9ffb-4337-8f2d-95d9cba6cd4c,Responsive Web Design Certification from freeCodeCamp,"Martinez, Wright and Davis",True,UX/UI Designer
+d2173885-493f-4078-acc1-851062586fce,UX Research and Design Certificate from UC Irvine,Parsons Ltd,True,UX/UI Designer
+8043d89f-c03a-4931-9293-5bcd80d71644,Digital Marketing and UX Certification from Google,Black and Sons,True,UX/UI Designer
+288ec2d4-c69c-4771-9107-50d6c18e32c1,Certified ScrumMaster,"Perez, Molina and Hernandez",True,Product Manager
+46bde244-583f-42f4-8a99-62cce8ebf138,Project Management Professional (PMP),Tran PLC,True,Product Manager
+6f8c1604-9967-4ef8-b1b4-36e98c11c877,Certified Product Manager (CPM),Daniels-Johnson,True,Product Manager
+e16243a5-41d9-4e5f-b058-51bc45dae287,Certified Business Analysis Professional (CBAP),Cowan-Friedman,True,Product Manager
+09d0a2db-8b91-47b0-be2a-0c6e6e6f65ab,Google Analytics Individual Qualification (GAIQ),"Gutierrez, Mills and Hall",True,Product Manager
+a7d7cef1-0908-43a3-b824-50efecc9cff6,Agile Certified Practitioner (PMI-ACP),"James, Mcknight and Curtis",True,Product Manager
+7673ec01-4a2e-4e68-aba9-d2217b774a55,Lean Six Sigma Green Belt Certification,Parker-Stewart,True,Product Manager
+9eb5ca08-aa32-4fed-b4ad-68ac6477c58b,AWS Certified Solutions Architect,Rivera Ltd,True,Product Manager
+5c5b2adc-0f23-4c84-beb2-86330e82687b,Certified Agile Leadership (CAL),Edwards-Marquez,True,Product Manager
+1d3d9538-d264-49ea-bf2c-624a949227cd,Certified Information Systems Security Professional (CISSP),Bowers PLC,True,Product Manager
+6585c952-749a-495c-8477-435d9e8d743d,CompTIA Security+,"Thomas, Patton and Guerrero",True,Product Manager
+f9478a43-e359-4ac9-92e3-838b1a4828e8,Certified Business Analysis Professional (CBAP),"Hartman, Bell and Reed",True,Business Analyst
+06729f19-dbc4-4c1d-be39-f11ba8a6cbc5,Project Management Professional (PMP),"Hill, Griffin and Miles",True,Business Analyst
+1fe18841-df3c-41fa-9be4-3ed0d0d7f727,Certified ScrumMaster,Wallace-Castro,True,Business Analyst
+bdf6d672-4ab3-4fa2-abe0-558a24ec716e,Agile Business Analysis Certification,"Byrd, Scott and Mills",True,Business Analyst
+ecb3bdda-c2f9-449b-ae8c-8011cce30819,Lean Six Sigma Green Belt Certification,"Foster, Dunn and Calhoun",True,Business Analyst
+e7384d14-6128-4ec0-8bdf-c4bfe95a833c,Certified Analytics Professional (CAP),Hernandez PLC,True,Business Analyst
+0ae5b0b2-81de-49d8-9c81-82ccb4928292,Google Data Analytics Professional Certificate,Prince-Potter,True,Business Analyst
+b75c1f92-baea-4c65-9c37-a2d290ef9fba,AWS Certified Solutions Architect,Petersen Inc,True,Business Analyst
+47f59c06-c36c-4364-9240-16fd89dbdb44,Certified Information Systems Security Professional (CISSP),"Russo, Taylor and Dunn",True,Business Analyst
+ee94ebe1-c1ad-46ec-a365-611a346d0831,IBM Certified Data Analyst,"Leon, Swanson and Williams",True,Business Analyst
+1e68dd7c-c396-4b45-b696-db553f963a4e,CompTIA Security+,Martin Inc,True,Business Analyst
+5319f500-296c-42e3-8f67-ccb2bbd04630,Certified Software Tester (CST),"Torres, Mendez and Cox",True,Quality Assurance Engineer
+bb417dad-0c6b-49e6-b770-d7bb84a369c5,Certified ScrumMaster,"Sexton, Boyd and Blair",True,Quality Assurance Engineer
+3cc9a234-978d-4e0d-a9bf-0a5bb5481b8d,ISTQB Certified Tester,Shaffer Ltd,True,Quality Assurance Engineer
+48a0afb7-f7aa-4d5c-a4cb-666b3dd1959a,Agile Tester Certification,"Johnson, Harris and Anderson",True,Quality Assurance Engineer
+5b71dc16-c82f-4523-8430-a45c3161064a,AWS Certified Developer,Mack PLC,True,Quality Assurance Engineer
+c3c339c8-e345-4c0c-8d7c-477b7cbdb10f,Google Data Analytics Professional Certificate,"Adams, Richardson and Cole",True,Quality Assurance Engineer
+8d95dcc1-479f-4503-a608-7ba768840bef,Microsoft Certified: Azure Developer Associate,"Cox, Luna and Brown",True,Quality Assurance Engineer
+b569614e-c9c8-45c9-9624-24248cce53a2,CompTIA Security+,Gilbert-Hicks,True,Quality Assurance Engineer
+e11c39cd-a330-400c-8e57-d7b89692ebed,Certified Ethical Hacker (CEH),Payne-Miller,True,Quality Assurance Engineer
+07c0d976-cddc-48f4-91c2-a935aaef7e4f,Certified Information Systems Security Professional (CISSP),"Lee, Lyons and Rodriguez",True,Quality Assurance Engineer
+0943b8d5-8f61-4ec4-8374-195f207223e3,Certified Quality Engineer (CQE),Johnson and Sons,True,Quality Assurance Engineer
+64522fd2-9477-4e87-b87c-7e416a736b09,Certified Technical Writer (CTW),Bates-Cunningham,True,Technical Writer
+b434cdf3-c232-4e0a-b2d7-ef794eb751e2,Documentation and Technical Communication Certification,"Johnson, Cooper and Gray",True,Technical Writer
+78eabdd8-0078-4e4d-95e8-55741be4ba04,Certified ScrumMaster,Ortiz-Shaw,True,Technical Writer
+a7a9325c-d520-4014-a887-1ddaaf4f5a91,CompTIA Security+,Caldwell-Mullins,True,Technical Writer
+9e112569-96bd-47c5-ab3c-92d4760b1261,Certified Ethical Hacker (CEH),"Miranda, Porter and Smith",True,Technical Writer
+60dc9648-c229-439b-8a83-ad0837414247,Certified Information Systems Security Professional (CISSP),Mason-Walters,True,Technical Writer
+80cb4527-53b7-4ce5-8e48-0fa0458ec60a,AWS Certified Solutions Architect,Hart Inc,True,Technical Writer
+0e70abd3-f207-4b9d-8fde-5b31e7048747,Microsoft Certified: Azure Developer Associate,"Lee, Williamson and Turner",True,Technical Writer
+1cb73d2c-f6a6-418f-87ad-11118e0c3567,Google Data Analytics Professional Certificate,"Guzman, Ramos and Day",True,Technical Writer
+815f1804-ad57-49d7-b033-0d9a87ec781f,Technical Communication Certification from Society for Technical Communication (STC),"Stephenson, Mcdaniel and Aguilar",True,Technical Writer
