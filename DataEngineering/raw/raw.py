@@ -79,13 +79,13 @@ user_certification_fields = ['_id', 'userId', 'certificationId', 'certificationN
 role_skill_fields = ['_id', 'RoleId', 'skillId']
 
 # Read fake data from CSV files
-fake_users = read_from_csv('E:/JMAN/fp/DataEngineering/Fake_Data/users.csv', user_fields)
-fake_certifications = read_from_csv('E:/JMAN/fp/DataEngineering/Fake_Data/certifications.csv', certification_fields)
-fake_skills = read_from_csv('E:/JMAN/fp/DataEngineering/Fake_Data/skills.csv', skill_fields)
-fake_roles = read_from_csv('E:/JMAN/fp/DataEngineering/Fake_Data/roles.csv', role_fields)
-fake_user_skills = read_from_csv('E:/JMAN/fp/DataEngineering/Fake_Data/user_skills.csv', user_skill_fields)
-fake_user_certifications = read_from_csv('E:/JMAN/fp/DataEngineering/Fake_Data/user_certifications.csv', user_certification_fields)
-fake_role_skills = read_from_csv('E:/JMAN/fp/DataEngineering/Fake_Data/role_skills.csv', role_skill_fields)
+fake_users = read_from_csv('C:/Users/RithikHarendarMahesh/Desktop/fp/DataEngineering/Fake_Data/users.csv', user_fields)
+fake_certifications = read_from_csv('C:/Users/RithikHarendarMahesh/Desktop/fp/DataEngineering/Fake_Data/certifications.csv', certification_fields)
+fake_skills = read_from_csv('C:/Users/RithikHarendarMahesh/Desktop/fp/DataEngineering/Fake_Data/skills.csv', skill_fields)
+fake_roles = read_from_csv('C:/Users/RithikHarendarMahesh/Desktop/fp/DataEngineering/Fake_Data/roles.csv', role_fields)
+fake_user_skills = read_from_csv('C:/Users/RithikHarendarMahesh/Desktop/fp/DataEngineering/Fake_Data/user_skills.csv', user_skill_fields)
+fake_user_certifications = read_from_csv('C:/Users/RithikHarendarMahesh/Desktop/fp/DataEngineering/Fake_Data/user_certifications.csv', user_certification_fields)
+fake_role_skills = read_from_csv('C:/Users/RithikHarendarMahesh/Desktop/fp/DataEngineering/Fake_Data/role_skills.csv', role_skill_fields)
 
 # Merge existing data with fake data
 merged_users = merge_data(existing_users, fake_users)
