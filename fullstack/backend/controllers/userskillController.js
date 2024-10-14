@@ -185,7 +185,7 @@ const get_user_skill=async(req,res)=>{
 
 const role_skill_count = async (req, res) => {
   const resp = await prisma.UserSkill.groupBy({
-    by:['userId'],
+    by:['userId',],
     _count: {
       userId: true,
     },

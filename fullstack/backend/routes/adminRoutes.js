@@ -55,6 +55,7 @@ router.post('/skilled_user_count',userskillController.role_skill_count)
 router.post('/hours_count',certificationController.hours_count)
 router.post('/role_count',roleController.role_count)
 
+router.post('/skilled_user_dept_count',userController.skilled_user_dept_count)
 
 
 module.exports = router;

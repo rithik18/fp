@@ -4,22 +4,9 @@ import { addDays, format } from "date-fns"
 import { DateRange } from "react-day-picker"
 
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../../components/ui/card"
-import { Button } from "../../components/ui/button"
-import { Calendar } from "../../components/ui/calendar"
-import { Input } from "../../components/ui/input"
+
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "../../components/ui/table"
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "../../components/ui/popover"
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "../../components/ui/select"
+
 import axios from "axios";
 import { toast, ToastContainer } from "react-toastify";
 import LoadingOverlay from "react-loading-overlay";
@@ -30,14 +17,17 @@ import { useNavigate } from 'react-router-dom';
 import Cookies from "js-cookie";
 import Navbar from '../../components/navbar';
 
-// Sample data
-const departmentSkillData = [
-  { department: "Engineering", averageSkillLevel: 7.5, headcount: 150 },
-  { department: "Marketing", averageSkillLevel: 6.8, headcount: 50 },
-  { department: "Sales", averageSkillLevel: 7.2, headcount: 75 },
-  { department: "HR", averageSkillLevel: 6.5, headcount: 25 },
-  { department: "Finance", averageSkillLevel: 7.8, headcount: 40 },
-]
+import { TrendingUp } from "lucide-react"
+
+
+import {
+  ChartConfig,
+  ChartContainer,
+  ChartTooltip,
+  ChartTooltipContent,
+} from "../../components/ui/chart"
+
+
 
 const roleSkillDistribution = [
   { name: "Junior", value: 30 },
@@ -72,6 +62,7 @@ const recentSkillUpdates = [
 
 
 export default function EnhancedSkillManagementDashboard() {
+  const [dept_skill_count, setdept_skill_count] = useState([])
   const [user, setUser] = useState({
         id: "",
         name: "",
@@ -88,6 +79,7 @@ export default function EnhancedSkillManagementDashboard() {
       const [user_count, setuser_count] = useState(0)
       const [skilled_user_count, setskilled_user_count] = useState(0)
       const [role_count, setrole_count] = useState(0)
+      const [skilled_user_dept_count, setskilled_user_dept_count] = useState([])
   const [date, setDate] = useState<DateRange | undefined>({
     from: addDays(new Date(), -30),
     to: new Date(),
@@ -103,6 +95,7 @@ export default function EnhancedSkillManagementDashboard() {
       axios.post("http://localhost:3000/admin/skilled_user_count", { token }),
       axios.post("http://localhost:3000/admin/hours_count", { token}),
       axios.post("http://localhost:3000/admin/role_count", { token}),
+      axios.post("http://localhost:3000/admin/skilled_user_dept_count", { token}),
     ];
 
     try {
@@ -111,6 +104,7 @@ export default function EnhancedSkillManagementDashboard() {
         get_skilled_user_count_Response,
         user_hours_Response,
         role_count_Response,
+        skilled_user_dept_count_Response
       ] = await Promise.all(requests);
 
       if (get_user_count_Response.status === 200) {
@@ -132,12 +126,18 @@ export default function EnhancedSkillManagementDashboard() {
         console.log(role_count_Response.data.data.length, "4");
         setrole_count(role_count_Response.data.data.length);
       }
+      if (skilled_user_dept_count_Response.status == 200) {
+        console.log(skilled_user_dept_count_Response.data.data, "5");
+        setdept_skill_count(skilled_user_dept_count_Response.data.data);
+
+      }
       
       if (
         get_user_count_Response.status === 200 &&
         get_skilled_user_count_Response.status === 200 &&
         user_hours_Response.status == 200 &&
-        role_count_Response.status == 200 
+        role_count_Response.status == 200 &&
+        skilled_user_dept_count_Response.status==200
       ) {
         setloading(false);
       }
@@ -146,6 +146,10 @@ export default function EnhancedSkillManagementDashboard() {
       setloading(false);
     }
   };
+  const chartConfig = dept_skill_count.reduce((acc:any, item:any) => {
+    acc[item.roleName] = { label: item.roleName }; // Use roleName as the key and set the label
+    return acc;
+  }, {});
   useEffect(() => {
     const init = async () => {
       const keysToStore = [
@@ -245,24 +249,73 @@ export default function EnhancedSkillManagementDashboard() {
         </Card>
       </div>
 
-      <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-7">
-        <Card className="col-span-4">
+      <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-6">
+        <Card className="col-span-2">
           <CardHeader>
             <CardTitle>Department Skill Levels</CardTitle>
           </CardHeader>
           <CardContent>
-            <BarChart
-              data={departmentSkillData}
-              // index="department"
-              // categories={["averageSkillLevel", "headcount"]}
-              // colors={["sky", "indigo"]}
-              // valueFormatter={(value:any) => `${value}`}
-              // yAxisWidth={48}
-              className="h-[300px]"
-            />
+          <ChartContainer config={chartConfig} className="">
+      <BarChart
+        accessibilityLayer
+        data={dept_skill_count}
+        layout="horizontal"
+        margin={{
+          left: 20,
+        }}
+      >
+        <XAxis
+          dataKey="roleName" // Use roleName directly
+          type="category"
+          tickLine={false}
+          tickMargin={10}
+          axisLine={false}
+          tickFormatter={(value) => chartConfig[value]?.label || value} // Use chartConfig to format labels
+        />
+        <YAxis dataKey="count" type="number" hide />
+        <ChartTooltip
+          cursor={false}
+          content={<ChartTooltipContent hideLabel />}
+        />
+        <Bar dataKey="count" layout="horizontal" radius={5} fill="#8884d8" /> {/* Ensure fill color is set */}
+      </BarChart>
+    </ChartContainer>
           </CardContent>
         </Card>
-        <Card className="col-span-3">
+        <Card className="col-span-2">
+          <CardHeader>
+            <CardTitle>Department Skill Levels</CardTitle>
+          </CardHeader>
+          <CardContent>
+          <ChartContainer config={chartConfig} className="">
+      <BarChart
+        accessibilityLayer
+        data={dept_skill_count}
+        layout="vertical"
+        margin={{
+          left: 20,
+        }}
+      >
+        <YAxis
+          dataKey="roleName" // Use roleName directly
+          type="category"
+          tickLine={false}
+          tickMargin={10}
+          axisLine={false}
+          tickFormatter={(value) => chartConfig[value]?.label || value} // Use chartConfig to format labels
+        />
+        <XAxis dataKey="count" type="number" hide />
+        <ChartTooltip
+          cursor={false}
+          content={<ChartTooltipContent hideLabel />}
+        />
+        <Bar dataKey="count" layout="vertical" radius={5} fill="#8884d8" /> {/* Ensure fill color is set */}
+      </BarChart>
+    </ChartContainer>
+          </CardContent>
+        </Card>
+        
+        <Card className="col-span-2">
           <CardHeader>
             <CardTitle>Role Skill Distribution</CardTitle>
           </CardHeader>

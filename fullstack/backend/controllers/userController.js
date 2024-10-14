@@ -86,6 +86,39 @@ const view_user_count = async (req, res) => {
     res.send(error);
   }
 };
+const skilled_user_dept_count = async (req, res) => {
+  try {
+    // Fetch users with their roles and skills
+    const usersWithRoles = await prisma.user.findMany({
+      
+      include: {
+        role: true, // Include the role data
+      },
+    });
+
+    // Group by role and count users
+    const roleCountMap = usersWithRoles.reduce((acc, user) => {
+      const roleName = user.role.name; // Access the role name
+      if (!acc[roleName]) {
+        acc[roleName] = 0;
+      }
+      acc[roleName]++;
+      return acc;
+    }, {});
+
+    // Convert the map to an array
+    const responseData = Object.entries(roleCountMap).map(([name, count]) => ({
+      roleName: name,
+      count,
+    }));
+
+    console.log(responseData);
+    res.send({ data: responseData });
+  } catch (error) {
+    console.error(error);
+    res.status(500).send({ error: 'An error occurred while fetching data.' });
+  }
+};
 
 module.exports = {
   view_user,
@@ -93,5 +126,6 @@ module.exports = {
   bulk_add_user,
   delete_user,
   update_user_data,
-  view_user_count
+  view_user_count,
+  skilled_user_dept_count
 };
