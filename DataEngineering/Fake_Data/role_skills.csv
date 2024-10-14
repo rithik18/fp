@@ -1,91 +1,151 @@
 roleId,skillId,name
-Software Engineer,b2780056-9703-4c9a-91a2-f0a14dcac2a6,Java
-Software Engineer,733b90fc-9f19-4a81-bcf2-6250b683fc02,Python
-Software Engineer,f619c86e-f085-480f-978a-d86b945455a3,C#
-Software Engineer,014e1698-6d93-4bfb-a835-b77ad2271f08,JavaScript
-Software Engineer,273d1c01-d465-4814-9406-443a480674d1,React
-Software Engineer,7e5f0b1d-d979-4428-a12f-905e5c43599b,Node.js
-Software Engineer,eb7234d0-6aea-43bb-9da7-b4324523a356,SQL
-Software Engineer,c6d05706-eea7-482d-8dd9-ce802a837ef7,HTML/CSS
-Software Engineer,2dac9ca8-f3b4-48ac-81e7-347941a00472,Git
-Software Engineer,4bf9974f-d64a-449b-858a-e075556700dc,Agile Methodologies
-Data Scientist,1f6aa54b-25c2-4aae-b7f0-9a5e6846fb5a,Python
-Data Scientist,3bb057b5-4c7c-4e15-85cc-1fcc0312306a,R
-Data Scientist,053f8377-0495-492c-b66b-4b589e587014,SQL
-Data Scientist,2d513e39-23d4-41c0-aea0-9ade9bb923e1,Machine Learning
-Data Scientist,e5904739-f46b-43f3-b2e4-9a226445ab30,Statistics
-Data Scientist,e813b1b7-8b79-459d-901c-36a45b169cdb,Data Visualization
-Data Scientist,ab02b821-abc9-43d8-b41f-31484ea5b12b,Big Data Technologies
-Data Scientist,63119e08-a91e-4110-924a-689e61e88ca8,Data Wrangling
-Data Scientist,3ed1c77a-a55c-4b78-9a00-98b1759f19a1,Deep Learning
-Data Scientist,32b2eba8-f899-4d19-bef0-139c62398b12,Data Mining
-DevOps Engineer,1162d17d-de3c-4a02-806c-42a8cfac2620,Docker
-DevOps Engineer,cf70b6bd-aa40-45e2-ae12-d8d000359219,Kubernetes
-DevOps Engineer,0f1d3460-ea77-46dc-859b-dc9ce542fd55,CI/CD
-DevOps Engineer,f682ace9-6274-4dfa-9dc5-1f5a7a78650f,Cloud Computing
-DevOps Engineer,5c1f9fd3-139c-4eb7-b757-b3033bffed34,Infrastructure as Code
-DevOps Engineer,c9db6e17-a149-4ea1-b062-3084e5cfd3b8,Linux
-DevOps Engineer,c0d0b544-8545-4bcd-817e-d7dd65bce4b9,Scripting
-DevOps Engineer,fcb9e387-5ac1-43ab-a127-3e77fe185269,Monitoring
-DevOps Engineer,ab9139e6-352a-4e85-b455-3497937873f2,Agile Methodologies
-DevOps Engineer,9aa196b9-ca3f-4c25-b42d-18454715bd29,Networking
-Frontend Developer,7c70474f-ff24-4d64-ba36-8de90e99b0ef,HTML
-Frontend Developer,fb7f2d22-829b-48e2-b531-8ceb2ca2eb94,CSS
-Frontend Developer,db66db22-d105-4c36-a825-f1fba8a592a4,JavaScript
-Frontend Developer,82ffc361-84f5-4c12-92a4-a592de26c702,React
-Frontend Developer,0a66070c-3dd4-431a-825b-bf8ca733b8ac,Angular
-Frontend Developer,f2d4104a-4bbf-49f8-9a81-13878a05cd1b,Vue.js
-Frontend Developer,56e6aaab-d046-4edb-a2c2-b42fdd1840ee,Responsive Design
-Frontend Developer,5d165274-b073-4354-96ef-448a093f5c36,Cross-browser Compatibility
-Frontend Developer,2abe61e1-12f2-41bc-8fc5-bb3a38b75e0f,Version Control/Git
-Frontend Developer,c7e1d26d-f46c-48b7-b6dd-ea34bea3d288,Web Performance Optimization
-Backend Developer,912c2445-41dc-478b-9ed7-e8818d20d9ad,Node.js
-Backend Developer,6ffcc80b-2558-4008-b084-ae3b8940bfc3,Java
-Backend Developer,39da59ad-dceb-4813-a41e-fc3f41894b97,Python
-Backend Developer,076f37f0-58ce-4f15-b4d7-e7c7086ee2c1,Ruby
-Backend Developer,c7edf858-eb42-4f08-ab46-deedf24d41df,PHP
-Backend Developer,89051593-2c5c-4f26-a806-53f0342e038e,SQL
-Backend Developer,8647b4f8-0528-4ecd-8570-46f7b1bdbdb2,NoSQL
-Backend Developer,b0681a23-1908-477f-a5ea-cdc0522d5462,API Development
-Backend Developer,802c7b79-060c-45ec-9f5f-1eabd891a85c,Microservices
-Backend Developer,2a1cd660-6957-4ba4-bce4-8aaf0aec8a3b,Security Best Practices
-Full Stack Developer,74504986-e8b9-42e1-9ab6-8a15d3646fa7,JavaScript
-Full Stack Developer,4ffd1c78-dc40-4c41-a900-af8326e80439,Node.js
-Full Stack Developer,d9ae728c-7aa5-48c8-b150-d472cbfc43ea,React
-Full Stack Developer,4eafa144-e580-4b4c-9096-19f64aa2aebc,HTML/CSS
-Full Stack Developer,018701c7-53ed-4cf8-ac07-91f637c01fd5,SQL
-Full Stack Developer,2c94b709-3e9e-484e-af94-1810370da18d,RESTful APIs
-Full Stack Developer,ef2646ae-6547-4c04-90ec-bd0905ec2846,Git
-Full Stack Developer,c3fd3f98-b755-4e17-a1f2-57fd05b785f2,Agile Methodologies
-Full Stack Developer,d8b92035-1dfd-43ac-8338-4ba31ff1cab4,Testing/Debugging
-Full Stack Developer,44fe7801-77a7-4285-adf7-6e44c52d42fc,DevOps Practices
-Business Analyst,79d68e14-91f6-425a-ace0-b64ee2a29b5b,Business Analysis
-Business Analyst,29beeb66-8b0c-42ef-8a40-d1b20ae69a10,Requirements Gathering
-Business Analyst,4c33bf29-e492-489c-9944-0485403e39b9,Data Analysis
-Business Analyst,4af1eac3-d34a-45b2-8605-66bac0049be8,Stakeholder Management
-Business Analyst,0c2173a4-5ed0-4360-b22f-02c71ca268ce,Process Mapping
-Business Analyst,7f5725c4-c486-46f9-8cd2-82f6400cd654,Project Management
-Business Analyst,43e170b9-7520-4674-9755-daed0e9d5e1e,Agile Methodologies
-Business Analyst,cddfc2af-5533-47ac-999f-02e384ee2f22,Communication Skills
-Business Analyst,f06a5a19-0f83-4faf-9876-e8d1c5019420,Problem-Solving
-Business Analyst,3d1f825c-8878-4f3e-b660-16d7105103f7,SQL
-Quality Assurance Engineer,a675b2b0-8f4f-4297-940f-c7831b6f0391,Testing
-Quality Assurance Engineer,b4c47bcc-90ca-465a-80a9-336ffd843ce8,Automation Testing
-Quality Assurance Engineer,0bef82b4-fc5a-4839-a66f-843011e4bde2,Manual Testing
-Quality Assurance Engineer,0fe401bf-eb67-4247-9ea6-8175d2a910d6,Performance Testing
-Quality Assurance Engineer,abcda4c9-a5a5-4c62-9d05-cf35d9fcd165,Agile Methodologies
-Quality Assurance Engineer,742f265f-3f6f-47c9-a61d-d700d1cc73eb,Defect Tracking
-Quality Assurance Engineer,4150b140-0efd-4603-a0e2-f2b45bb72e15,Test Automation Tools
-Quality Assurance Engineer,2e69c3f0-257d-4e43-95a5-ad9e4a5cf150,Test Planning
-Quality Assurance Engineer,adf71c45-6a3d-4342-a0e0-64792aef3ae3,Version Control/Git
-Quality Assurance Engineer,fe362873-26a1-43db-ba7b-df874cbb4257,Risk Management
-Technical Writer,61d3b0de-c015-47e8-9ebe-e5209932a1fa,Technical Writing
-Technical Writer,695e6be0-2042-45a4-9336-d6e820d1e414,Documentation
-Technical Writer,a6eed375-6d77-4807-a736-757fd1419455,Content Creation
-Technical Writer,3a98dd0d-9354-4570-ac66-76117fe13c7e,Editing
-Technical Writer,bf04108d-cc76-4349-9067-67246b074e98,SEO Writing
-Technical Writer,7a94ab57-2691-4627-87f9-f807128b3446,Research Skills
-Technical Writer,99392fbf-2619-4ab7-ab37-1afa98a79267,Agile Methodologies
-Technical Writer,a600dbca-ebd8-4d6b-a7cd-0599566468ba,Communication Skills
-Technical Writer,68dbb4cd-04eb-4015-9436-92dd21c7cd98,User Documentation
-Technical Writer,967c94ea-b037-4a5d-9218-74e28ab6da18,Graphic Design
+4a7cdfaf-b436-46e2-a8a2-5dc4835d40b9,640c213d-8a6a-4056-8097-f503261f10f2,Java
+4a7cdfaf-b436-46e2-a8a2-5dc4835d40b9,88e8b761-f319-43ad-b4a5-f7a4ec5ce84a,Python
+4a7cdfaf-b436-46e2-a8a2-5dc4835d40b9,e191e70b-6f79-4445-b734-9cc534f8b0c5,C#
+4a7cdfaf-b436-46e2-a8a2-5dc4835d40b9,c3fa5509-12fc-4ea6-8757-922636072436,JavaScript
+4a7cdfaf-b436-46e2-a8a2-5dc4835d40b9,b67791b0-c917-4aed-bd8b-62d0f1ac33f8,React
+4a7cdfaf-b436-46e2-a8a2-5dc4835d40b9,30ac28f2-99e6-46fb-8187-85575ce7ed92,Node.js
+4a7cdfaf-b436-46e2-a8a2-5dc4835d40b9,07183731-e1f0-43c1-8934-8d85c833a21f,SQL
+4a7cdfaf-b436-46e2-a8a2-5dc4835d40b9,84e45dca-8ac8-4d5a-8545-f151411945e6,HTML/CSS
+4a7cdfaf-b436-46e2-a8a2-5dc4835d40b9,490046b3-0ea5-4c93-ab82-c55fefe42d09,Git
+4a7cdfaf-b436-46e2-a8a2-5dc4835d40b9,888df043-7361-4447-a98e-96012d704ba6,Agile Methodologies
+1a52dd70-8466-4e47-8600-1677136f4fec,47fe9e10-2339-4341-8942-99a777e0f2fe,Python
+1a52dd70-8466-4e47-8600-1677136f4fec,6c73cf60-eca7-4b4f-9664-6ea45fa21938,R
+1a52dd70-8466-4e47-8600-1677136f4fec,786a392a-c4c7-41a5-882f-5298eb35b28c,SQL
+1a52dd70-8466-4e47-8600-1677136f4fec,b0804c18-ecb0-4fde-910e-b4de6aa89c7b,Machine Learning
+1a52dd70-8466-4e47-8600-1677136f4fec,aeee53c1-c5ea-48f4-a654-2c2ba8a64222,Statistics
+1a52dd70-8466-4e47-8600-1677136f4fec,79d6db6d-ebb1-4ee7-9303-56fece6021e3,Data Visualization
+1a52dd70-8466-4e47-8600-1677136f4fec,f424367e-45ae-4223-af4b-9ab12057210b,Big Data Technologies
+1a52dd70-8466-4e47-8600-1677136f4fec,5022d4e8-f6e2-4535-b3ba-327e1643cee2,Data Wrangling
+1a52dd70-8466-4e47-8600-1677136f4fec,448666f9-5ab4-44e7-9577-fdc85096e84e,Deep Learning
+1a52dd70-8466-4e47-8600-1677136f4fec,10d0d63a-6eac-4180-8b27-e0fe685dfb27,Data Mining
+e35f4200-b9f8-44c1-b417-09d833a343d9,4d1ae759-311b-4924-8ed3-fd26e33445ae,Docker
+e35f4200-b9f8-44c1-b417-09d833a343d9,7c4f47c3-8dc6-4c0f-8988-ce247276b49b,Kubernetes
+e35f4200-b9f8-44c1-b417-09d833a343d9,c216c802-62a2-4803-bb28-c4d1626cdf3e,CI/CD
+e35f4200-b9f8-44c1-b417-09d833a343d9,7e0fc272-3238-4b50-b0c6-68cc66ea818f,Cloud Computing
+e35f4200-b9f8-44c1-b417-09d833a343d9,3a87f5a4-2e01-4e0b-9163-f41c2b8a908a,Infrastructure as Code
+e35f4200-b9f8-44c1-b417-09d833a343d9,5e6611c9-725c-41fa-adec-8ff2f50047ac,Linux
+e35f4200-b9f8-44c1-b417-09d833a343d9,c9aef49f-f693-478a-a448-54cfa8d97759,Scripting
+e35f4200-b9f8-44c1-b417-09d833a343d9,831cdce8-48ad-45f1-b624-e3c888660fb0,Monitoring
+e35f4200-b9f8-44c1-b417-09d833a343d9,983a9474-c156-4974-ac39-454bc63ab606,Agile Methodologies
+e35f4200-b9f8-44c1-b417-09d833a343d9,23d5a29f-e2a3-4608-8e8b-30042de030f6,Networking
+c581ca4e-3b3e-47fe-b1c1-ac3dcaf75783,db79c479-a5c5-4935-bf1f-3d59db1f51a4,HTML
+c581ca4e-3b3e-47fe-b1c1-ac3dcaf75783,a5f7f3ff-7f72-4ed6-b3b1-110a846ae21a,CSS
+c581ca4e-3b3e-47fe-b1c1-ac3dcaf75783,9b9da1f8-f33d-446e-a33e-fca62aee8af0,JavaScript
+c581ca4e-3b3e-47fe-b1c1-ac3dcaf75783,3abb1d8f-c2ea-4776-9563-ec5c3df9cb30,React
+c581ca4e-3b3e-47fe-b1c1-ac3dcaf75783,5c839fc2-51a9-40c7-95a6-bf098573a78a,Angular
+c581ca4e-3b3e-47fe-b1c1-ac3dcaf75783,36d16390-9c26-40b9-bb0e-5f5c2ebf0f12,Vue.js
+c581ca4e-3b3e-47fe-b1c1-ac3dcaf75783,a06cf7a5-bce5-4f01-8b90-4b53c270c700,Responsive Design
+c581ca4e-3b3e-47fe-b1c1-ac3dcaf75783,15c0a618-fbba-49b6-a38b-630b73e9a65e,Cross-browser Compatibility
+c581ca4e-3b3e-47fe-b1c1-ac3dcaf75783,1df7cce7-6087-4534-abe8-2711bc329d4d,Version Control/Git
+c581ca4e-3b3e-47fe-b1c1-ac3dcaf75783,38a02a10-ffef-4a69-ad71-d31dd6d3995f,Web Performance Optimization
+196c18a9-4aef-4755-a3ee-4b6f418c71e3,c1f57ab2-772e-4b08-a506-e345a56b47ca,Node.js
+196c18a9-4aef-4755-a3ee-4b6f418c71e3,0159c8e1-09fa-46e8-b100-68385fb83e74,Java
+196c18a9-4aef-4755-a3ee-4b6f418c71e3,d377f5cb-ae3f-4eec-8421-4fb27320a1a9,Python
+196c18a9-4aef-4755-a3ee-4b6f418c71e3,247b2dea-6a20-434c-97fd-441d94e090ba,Ruby
+196c18a9-4aef-4755-a3ee-4b6f418c71e3,e2f9a2d1-be29-4b2c-8437-2bcaea5f4678,PHP
+196c18a9-4aef-4755-a3ee-4b6f418c71e3,d4f2c198-8c54-4439-ab34-df0942abd6ce,SQL
+196c18a9-4aef-4755-a3ee-4b6f418c71e3,00da8420-57ae-4fa2-b05c-e9328cb72c07,NoSQL
+196c18a9-4aef-4755-a3ee-4b6f418c71e3,a3f33f63-745f-4a8b-a9d4-322c1cc2ea29,API Development
+196c18a9-4aef-4755-a3ee-4b6f418c71e3,67f9ac00-d96e-40a9-8112-73ced6526405,Microservices
+196c18a9-4aef-4755-a3ee-4b6f418c71e3,8a8d599d-b5aa-4cde-bbbd-58ea1684bd13,Security Best Practices
+791867b5-ae38-44aa-b2b0-c258b4f25afb,c89f0d58-d1b8-42a0-b6fe-18c6ea5f8557,JavaScript
+791867b5-ae38-44aa-b2b0-c258b4f25afb,bbf00ae0-96c2-4253-b2a9-8594e7df393b,Node.js
+791867b5-ae38-44aa-b2b0-c258b4f25afb,816b7740-1699-4485-80e5-d45ba6f78154,React
+791867b5-ae38-44aa-b2b0-c258b4f25afb,1d534eaa-2af4-4c8d-b2fe-48c6c79f963e,HTML/CSS
+791867b5-ae38-44aa-b2b0-c258b4f25afb,eb4a14c2-d62a-4b1c-a9e9-ed12c4cbc8b0,SQL
+791867b5-ae38-44aa-b2b0-c258b4f25afb,15244bbf-fbe1-4147-94a6-aa9eff510d1e,RESTful APIs
+791867b5-ae38-44aa-b2b0-c258b4f25afb,37b9f5f5-ad13-4b8c-adb2-8ef8d3690442,Git
+791867b5-ae38-44aa-b2b0-c258b4f25afb,6fb0e637-bff9-44d8-809d-cad9fa34894b,Agile Methodologies
+791867b5-ae38-44aa-b2b0-c258b4f25afb,c3fa2944-5083-44a1-af7b-50888fe05f9e,Testing/Debugging
+791867b5-ae38-44aa-b2b0-c258b4f25afb,bf8529c8-2bb5-45f2-94ac-b53eb92d13a5,DevOps Practices
+83f4c079-c440-4fa4-b5f5-a75d22347cc4,9328254b-21fe-4cbf-9d32-e26923c41945,SQL
+83f4c079-c440-4fa4-b5f5-a75d22347cc4,07c8db4d-0672-4f7b-b050-6eb10d69c9ce,Excel
+83f4c079-c440-4fa4-b5f5-a75d22347cc4,f8180a48-1efb-41ac-8fef-0d1f3d828b5d,Data Visualization
+83f4c079-c440-4fa4-b5f5-a75d22347cc4,5c01cf6b-f6dd-4182-85dc-426150729a4e,Python
+83f4c079-c440-4fa4-b5f5-a75d22347cc4,711be605-c06e-499c-b9ec-e1f23c44bdbb,Data Cleaning
+83f4c079-c440-4fa4-b5f5-a75d22347cc4,7da799ed-d9b8-424a-a25b-f8412e870184,Data Analysis
+83f4c079-c440-4fa4-b5f5-a75d22347cc4,04334ee4-0bf9-4e71-9e09-088ca64c6707,Statistics
+83f4c079-c440-4fa4-b5f5-a75d22347cc4,7b9f0f9c-bea1-4ba1-a598-ab4f09c0aeab,Reporting
+83f4c079-c440-4fa4-b5f5-a75d22347cc4,a0fa9bb2-78f0-4ac2-bb8e-96af991441af,Business Intelligence
+83f4c079-c440-4fa4-b5f5-a75d22347cc4,b158f142-3871-48ff-8d80-2b6b326046fd,Data Mining
+2ff032a8-e315-4073-afa5-9906c87db625,f6759005-fc44-4b3c-aedc-130890d11167,Network Security
+2ff032a8-e315-4073-afa5-9906c87db625,b553b19c-f7f5-4a2d-a011-77b1c04f897a,Firewalls
+2ff032a8-e315-4073-afa5-9906c87db625,cffc7c1c-ce81-4c16-b264-a347ba24580c,Intrusion Detection
+2ff032a8-e315-4073-afa5-9906c87db625,4e1ec7bd-9d3b-433b-bf12-43b47a81b363,Penetration Testing
+2ff032a8-e315-4073-afa5-9906c87db625,fdca0240-5b81-4a33-b4f6-3b933ebe8f10,Incident Response
+2ff032a8-e315-4073-afa5-9906c87db625,33b8c843-aca9-42f1-82e5-bd9bf753e675,Risk Assessment
+2ff032a8-e315-4073-afa5-9906c87db625,e1c5aa85-052e-4ec8-9e51-2a99eafc3b08,Security Compliance
+2ff032a8-e315-4073-afa5-9906c87db625,ec197aef-5047-415c-a008-047a43f85eb7,Encryption
+2ff032a8-e315-4073-afa5-9906c87db625,fca9bb97-14d2-49ff-a1c8-7eb515c4824f,Vulnerability Management
+2ff032a8-e315-4073-afa5-9906c87db625,39fcafc0-0bf9-47be-ac60-eaef086e55b9,Security Auditing
+d70499b1-0629-47f6-ad56-cd859093daf9,230c965c-d746-480f-a3a3-a46eedc0e3ec,Python
+d70499b1-0629-47f6-ad56-cd859093daf9,c97a6043-d6d5-4a92-8561-699299e865c4,TensorFlow
+d70499b1-0629-47f6-ad56-cd859093daf9,5c3035e2-5e74-49c3-b1e4-02e368d42c9d,PyTorch
+d70499b1-0629-47f6-ad56-cd859093daf9,5e346236-f7d3-423f-b840-395393101eaa,Scikit-Learn
+d70499b1-0629-47f6-ad56-cd859093daf9,30164567-1713-43aa-a545-0a6cc5c27da4,Machine Learning Algorithms
+d70499b1-0629-47f6-ad56-cd859093daf9,d2ca64af-d3d6-4f6c-aa88-bc21280ccf2e,Data Preprocessing
+d70499b1-0629-47f6-ad56-cd859093daf9,e9cabb60-773f-4b49-b46f-d2601e94c8be,Model Deployment
+d70499b1-0629-47f6-ad56-cd859093daf9,cac076e1-07d0-4f96-93b0-e8c323d3e82c,NLP
+d70499b1-0629-47f6-ad56-cd859093daf9,d728e378-3177-48f5-bdf1-771d0fb53518,Deep Learning
+d70499b1-0629-47f6-ad56-cd859093daf9,e31bbe98-74bc-4634-af92-ee7c65b41385,Big Data Technologies
+ccb4b4f9-80cb-4f1b-9ae8-f16d9da11659,c77b7439-2dbb-4250-a3ce-0e5a6d84129b,AWS
+ccb4b4f9-80cb-4f1b-9ae8-f16d9da11659,99c5f627-e2eb-4271-8556-d9652fdc3453,Azure
+ccb4b4f9-80cb-4f1b-9ae8-f16d9da11659,c701ca5b-a7bb-41eb-a811-ae3a1f7bf0e4,Google Cloud
+ccb4b4f9-80cb-4f1b-9ae8-f16d9da11659,96151367-0674-4fd1-86a7-f0666eddb03f,Cloud Security
+ccb4b4f9-80cb-4f1b-9ae8-f16d9da11659,ec5160c9-5738-4383-a19d-5fae7aebc478,Infrastructure as Code
+ccb4b4f9-80cb-4f1b-9ae8-f16d9da11659,39b14d32-dfee-4500-b2ae-0db185643ddb,Networking
+ccb4b4f9-80cb-4f1b-9ae8-f16d9da11659,7f247661-af4a-4250-8833-047cc0a101b5,CI/CD Pipelines
+ccb4b4f9-80cb-4f1b-9ae8-f16d9da11659,c4618ef9-21e7-4c28-9991-241bbd72e6e9,Containerization
+ccb4b4f9-80cb-4f1b-9ae8-f16d9da11659,ed78cfbf-05d6-4693-8e86-ac54ca611fac,Serverless Architectures
+ccb4b4f9-80cb-4f1b-9ae8-f16d9da11659,f253a7ec-6c85-4ccc-906c-5b246534adda,DevOps Practices
+4e0c4606-0668-4356-bb17-e3b13140c28e,056b3d19-4e67-48ca-85ef-8cc10ae8ed1a,User Research
+4e0c4606-0668-4356-bb17-e3b13140c28e,3e7aaa48-8db8-4cea-8bc9-a4a2fb27f538,Wireframing
+4e0c4606-0668-4356-bb17-e3b13140c28e,1c4710e4-e409-40f7-9e06-3673ed33dbde,Prototyping
+4e0c4606-0668-4356-bb17-e3b13140c28e,a3734caf-4152-4d60-88a2-a5fb580f2dec,Adobe XD
+4e0c4606-0668-4356-bb17-e3b13140c28e,a440bfef-c43e-43bc-bf83-fc6d1b9d418a,Figma
+4e0c4606-0668-4356-bb17-e3b13140c28e,693ea41c-a884-4071-a234-88197e541bc2,UI Design
+4e0c4606-0668-4356-bb17-e3b13140c28e,ea3c490c-ccc9-402c-953e-a337e5733136,User Testing
+4e0c4606-0668-4356-bb17-e3b13140c28e,e5572d38-202a-4f68-bf92-feb13e6ca889,Responsive Design
+4e0c4606-0668-4356-bb17-e3b13140c28e,1197a550-1adb-4f28-94a4-3531cd15019a,Interaction Design
+4e0c4606-0668-4356-bb17-e3b13140c28e,cce2a385-7d18-4c35-8caa-17397d30de99,Design Systems
+7b9c2b3e-e21e-463b-83c5-04e5cc2e720d,d5035054-47f0-40ae-9ec1-8ac1cb21b3e1,Product Roadmap
+7b9c2b3e-e21e-463b-83c5-04e5cc2e720d,52379d9a-841a-4d60-abfd-635553257044,Stakeholder Management
+7b9c2b3e-e21e-463b-83c5-04e5cc2e720d,953462de-05e2-4deb-b13c-69c0aa625018,User Research
+7b9c2b3e-e21e-463b-83c5-04e5cc2e720d,9b9c52dc-71ba-4838-9b70-8a42179c6c8e,Agile Methodologies
+7b9c2b3e-e21e-463b-83c5-04e5cc2e720d,4147f274-e189-495c-8a9a-5fbb3ca92b22,Data-Driven Decision Making
+7b9c2b3e-e21e-463b-83c5-04e5cc2e720d,834a8fcc-a8ad-4bc8-a2f7-c28da5fbd251,Wireframing
+7b9c2b3e-e21e-463b-83c5-04e5cc2e720d,a37599ab-347f-4833-aa88-801d35d1d8e2,Market Research
+7b9c2b3e-e21e-463b-83c5-04e5cc2e720d,1e87e1d8-4048-4a84-8486-0ef215f28ded,Product Lifecycle Management
+7b9c2b3e-e21e-463b-83c5-04e5cc2e720d,9306a071-a343-4d9a-b256-252252d14079,Communication Skills
+7b9c2b3e-e21e-463b-83c5-04e5cc2e720d,867dfdeb-3cf3-47b9-8ca4-d07b48f11090,Leadership
+9cfc890c-5d4f-414a-9de6-6b411d75624a,907e4c6a-7446-4541-a0f4-677832bf9fbd,Business Analysis
+9cfc890c-5d4f-414a-9de6-6b411d75624a,51cae6b5-9c16-456c-b1bd-683cc499b539,Requirements Gathering
+9cfc890c-5d4f-414a-9de6-6b411d75624a,b5d39d2f-52f1-46d1-ae42-1015112dcf15,Data Analysis
+9cfc890c-5d4f-414a-9de6-6b411d75624a,bad7a297-7e7a-40df-aeb6-fe3fb3a10657,Stakeholder Management
+9cfc890c-5d4f-414a-9de6-6b411d75624a,fb84f784-1707-44ae-83aa-bc8ff9395a58,Process Mapping
+9cfc890c-5d4f-414a-9de6-6b411d75624a,de5d41c1-b401-4645-963c-45567b35ebd7,Project Management
+9cfc890c-5d4f-414a-9de6-6b411d75624a,f24d397d-0189-47d3-bdc2-e8ec32c02303,Agile Methodologies
+9cfc890c-5d4f-414a-9de6-6b411d75624a,a03c33cd-a4b2-4cce-8750-28d714a5c78d,Communication Skills
+9cfc890c-5d4f-414a-9de6-6b411d75624a,b5f4cbe2-e85e-40bd-893e-a194a7e0638a,Problem-Solving
+9cfc890c-5d4f-414a-9de6-6b411d75624a,488eb409-d29f-4a50-af21-bbff8d8d7cfd,SQL
+73f8078d-03a9-46a9-a5cb-efabc4099cd3,b7f6a650-ff3c-4c7f-8dbf-1b4795bef4ef,Testing
+73f8078d-03a9-46a9-a5cb-efabc4099cd3,9265e8b5-0d87-414d-bcb7-2defb68d63be,Automation Testing
+73f8078d-03a9-46a9-a5cb-efabc4099cd3,0074a9dc-faa2-4598-879f-f686729c7b49,Manual Testing
+73f8078d-03a9-46a9-a5cb-efabc4099cd3,729d7749-bfa8-44b8-b571-1b1e1a681994,Performance Testing
+73f8078d-03a9-46a9-a5cb-efabc4099cd3,6ce5fbe0-8508-44fc-9346-9961e77fc818,Agile Methodologies
+73f8078d-03a9-46a9-a5cb-efabc4099cd3,483f6eb1-bc10-42db-b08a-5ee89ad5f724,Defect Tracking
+73f8078d-03a9-46a9-a5cb-efabc4099cd3,b96d19aa-d1dd-490d-a14b-47cb63e3c4cd,Test Automation Tools
+73f8078d-03a9-46a9-a5cb-efabc4099cd3,9de39a49-fff7-4cc7-bf15-6b393b06fbe9,Test Planning
+73f8078d-03a9-46a9-a5cb-efabc4099cd3,c75398d9-cf86-4032-8c8c-9658c87b94cb,Version Control/Git
+73f8078d-03a9-46a9-a5cb-efabc4099cd3,af12f5c1-8b0e-40a7-923b-1536fb2b9309,Risk Management
+663c1743-1dc9-4c1a-8200-701078aefaf8,d42bbe4a-e9b2-45fa-a93c-285365f233a9,Technical Writing
+663c1743-1dc9-4c1a-8200-701078aefaf8,3d670795-edf7-4c7b-a069-bd822df3b36c,Documentation
+663c1743-1dc9-4c1a-8200-701078aefaf8,d6156c58-e793-475b-a6e5-f9edf2601e6f,Content Creation
+663c1743-1dc9-4c1a-8200-701078aefaf8,b44bf73d-0ba6-4330-bf17-c401b4d09156,Editing
+663c1743-1dc9-4c1a-8200-701078aefaf8,5f271fe2-fb6b-459c-b44c-1a55edcca1f7,SEO Writing
+663c1743-1dc9-4c1a-8200-701078aefaf8,e1d5913c-bc9a-4484-b983-5028060c0603,Research Skills
+663c1743-1dc9-4c1a-8200-701078aefaf8,f8aaa6dc-3518-4c40-9e04-62a4b3e37e7b,Agile Methodologies
+663c1743-1dc9-4c1a-8200-701078aefaf8,f8ccfc58-7d91-4a51-9e8f-dc77d31f2b5f,Communication Skills
+663c1743-1dc9-4c1a-8200-701078aefaf8,f231332c-0e06-4dea-b0ba-d8e75839d80d,User Documentation
+663c1743-1dc9-4c1a-8200-701078aefaf8,d422c946-f775-4e88-9531-a463c79624a2,Graphic Design
