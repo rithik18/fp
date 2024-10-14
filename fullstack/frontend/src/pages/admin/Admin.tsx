@@ -29,11 +29,6 @@ import {
 
 
 
-const roleSkillDistribution = [
-  { name: "Junior", value: 30 },
-  { name: "Mid-level", value: 45 },
-  { name: "Senior", value: 25 },
-]
 
 const topSkills = [
   { skill: "JavaScript", users: 120 },
@@ -154,7 +149,7 @@ export default function EnhancedSkillManagementDashboard() {
     }
   };
   const chartConfig = dept_skill_count.reduce((acc:any, item:any) => {
-    acc[item.roleName] = { label: item.roleName }; // Use roleName as the key and set the label
+    acc[item.roleName] = { label: item.roleName,fill:`hsl(var(--chart-${dept_skill_count.findIndex(item)}))` }; // Use roleName as the key and set the label
     return acc;
   }, {});
   const chartConfig1 = skilled_user_dept_count.reduce((acc:any, item:any) => {

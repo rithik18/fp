@@ -112,7 +112,6 @@ const skilled_user_dept_count = async (req, res) => {
       count,
     }));
 
-    console.log(responseData);
     res.send({ data: responseData });
   } catch (error) {
     console.error(error);

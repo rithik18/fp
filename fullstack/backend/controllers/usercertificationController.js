@@ -229,8 +229,6 @@ async function getTotalDuration(req,res) {
         totalTimeSpent: timeSpent,
       }));
   
-      // Debug: log the result before sending it
-      console.log("Role Wise Time Spent:", result);
   
       res.send({ data: result });
     } catch (error) {
