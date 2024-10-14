@@ -96,6 +96,7 @@ export default function EnhancedSkillManagementDashboard() {
       axios.post("http://localhost:3000/admin/hours_count", { token}),
       axios.post("http://localhost:3000/admin/role_count", { token}),
       axios.post("http://localhost:3000/admin/skilled_user_dept_count", { token}),
+      axios.post("http://localhost:3000/admin/skilled_user_hour_count", { token}),
     ];
 
     try {
@@ -104,7 +105,8 @@ export default function EnhancedSkillManagementDashboard() {
         get_skilled_user_count_Response,
         user_hours_Response,
         role_count_Response,
-        skilled_user_dept_count_Response
+        skilled_user_dept_count_Response,
+        skilled_user_hour_count_Response
       ] = await Promise.all(requests);
 
       if (get_user_count_Response.status === 200) {
@@ -129,6 +131,11 @@ export default function EnhancedSkillManagementDashboard() {
       if (skilled_user_dept_count_Response.status == 200) {
         console.log(skilled_user_dept_count_Response.data.data, "5");
         setdept_skill_count(skilled_user_dept_count_Response.data.data);
+
+      }
+      if (skilled_user_hour_count_Response.status == 200) {
+        console.log(skilled_user_hour_count_Response.data.data, "6");
+        // setdept_skill_count(skilled_user_hour_count_Response.data.data);
 
       }
       
@@ -191,6 +198,25 @@ export default function EnhancedSkillManagementDashboard() {
    }, []);
    const [loading, setloading] = useState(false);
    const n = useNavigate();
+   const renderLabel = (value:any) => {
+    // Split the label into two lines if it exceeds 15 characters
+    const maxChars = 15;
+    const lines = value.length > maxChars ? [value.slice(0, maxChars), value.slice(maxChars)] : [value];
+
+    return (
+      <text
+        style={{
+          display: 'block', // Use block display to force new lines
+          overflow: 'visible',
+          whiteSpace: 'pre-wrap', // Allows for wrapping
+        }}
+      >
+        {lines.map((line, index) => (
+          <tspan key={index} dy={index === 0 ? 0 : 15}>{line}</tspan> // Adjust dy to create spacing between lines
+        ))}
+      </text>
+    );
+  };
 
   return (
     <div>
@@ -249,7 +275,7 @@ export default function EnhancedSkillManagementDashboard() {
         </Card>
       </div>
 
-      <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-6">
+      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-6">
         <Card className="col-span-2">
           <CardHeader>
             <CardTitle>Department Skill Levels</CardTitle>
@@ -265,11 +291,16 @@ export default function EnhancedSkillManagementDashboard() {
         }}
       >
         <XAxis
+        className="line-clamp-2"
           dataKey="roleName" // Use roleName directly
           type="category"
           tickLine={false}
           tickMargin={10}
           axisLine={false}
+          label={{
+            position: 'insideLeft', // Adjust the label position if necessary
+            formatter: renderLabel, // Use custom label renderer
+          }}
           tickFormatter={(value) => chartConfig[value]?.label || value} // Use chartConfig to format labels
         />
         <YAxis dataKey="count" type="number" hide />
@@ -314,20 +345,36 @@ export default function EnhancedSkillManagementDashboard() {
     </ChartContainer>
           </CardContent>
         </Card>
-        
         <Card className="col-span-2">
           <CardHeader>
-            <CardTitle>Role Skill Distribution</CardTitle>
+            <CardTitle>Department Skill Levels</CardTitle>
           </CardHeader>
           <CardContent>
-            <PieChart
-              data={roleSkillDistribution}
-              // category={"value"}
-              // index="name"
-              // valueFormatter={(value:any) => `${value}%`}
-              // colors={["sky", "violet", "indigo"]}
-              className="h-[300px]"
-            />
+          <ChartContainer config={chartConfig} className="">
+      <BarChart
+        accessibilityLayer
+        data={dept_skill_count}
+        layout="vertical"
+        margin={{
+          left: 20,
+        }}
+      >
+        <YAxis
+          dataKey="roleName" // Use roleName directly
+          type="category"
+          tickLine={false}
+          tickMargin={10}
+          axisLine={false}
+          tickFormatter={(value) => chartConfig[value]?.label || value} // Use chartConfig to format labels
+        />
+        <XAxis dataKey="count" type="number" hide />
+        <ChartTooltip
+          cursor={false}
+          content={<ChartTooltipContent hideLabel />}
+        />
+        <Bar dataKey="count" layout="vertical" radius={5} fill="#8884d8" /> {/* Ensure fill color is set */}
+      </BarChart>
+    </ChartContainer>
           </CardContent>
         </Card>
       </div>

@@ -174,6 +174,68 @@ async function getTotalDuration(req,res) {
     res.status(403).send({ msg: e });
   }
   }
+  const findDeptWiseTimeSpent = async (req, res) => {
+    try {
+      // Get the current date if needed for calculations
+      const currentDate = new Date();
+  
+      const certifications = await prisma.userCertification.findMany({
+        select: {
+          started_at: true,
+          completed_at: true,
+          user: {
+            select: {
+              department: true, // Assuming department is a field in User model
+            },
+          },
+        },
+        
+      });
+  
+      // Debug: log retrieved certifications
+      console.log("Retrieved Certifications:", certifications);
+  
+      const deptWiseTimeSpent = {};
+  
+      certifications.forEach(cert => {
+        const { started_at, completed_at, user } = cert;
+  
+        // Debug: log each certification's details
+        console.log(`Processing Certification - Started At: ${started_at}, Completed At: ${completed_at}, Department: ${user.department}`);
+  
+        // Calculate the duration in milliseconds
+        const duration = new Date(completed_at) - new Date(started_at);
+  
+        // Convert duration to hours (or any other unit you prefer)
+        const durationInHours = duration / (1000 * 60 * 60); // Convert milliseconds to hours
+  
+        const dept = user.department;
+  
+        // Initialize the department in the result object if it doesn't exist
+        if (!deptWiseTimeSpent[dept]) {
+          deptWiseTimeSpent[dept] = 0;
+        }
+  
+        // Accumulate the time spent for each department
+        deptWiseTimeSpent[dept] += durationInHours;
+      });
+  
+      // Convert the result object to an array if needed
+      const result = Object.entries(deptWiseTimeSpent).map(([department, timeSpent]) => ({
+        department,
+        totalTimeSpent: timeSpent,
+      }));
+  
+      // Debug: log the result before sending it
+      console.log("Department Wise Time Spent:", result);
+  
+      res.send({ data: result });
+    } catch (error) {
+      console.error(error);
+      res.status(500).send({ error: 'An error occurred while fetching data.' });
+    }
+  };
+  
   
   module.exports={
     add_certification,
@@ -184,5 +246,6 @@ async function getTotalDuration(req,res) {
     getTotalDuration,
     get_admin_certification,
     verify,
-    reject
+    reject,
+    findDeptWiseTimeSpent
   }
