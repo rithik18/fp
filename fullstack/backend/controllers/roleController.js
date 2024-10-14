@@ -53,10 +53,20 @@ const delete_role = async (req, res) => {
       res.status(403).send(error);
     }
   }
+  const role_count= async(req,res) =>{
+    try {
+      const resp = await prisma.role.groupBy({ by:['id'],_count:{id:true}});
+      res.send({data:resp});
+    } catch (e) {
+      console.log(e);
+      res.status(403).send({ msg: e });
+    }
+  }
 module.exports = {
   view_role,
   add_role,
   update_role,
   delete_role,
-  get_role
+  get_role,
+  role_count
 };

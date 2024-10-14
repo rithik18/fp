@@ -77,6 +77,15 @@ const update_user_data = async (req, res) => {
     res.status(403).send(error);
   }
 };
+const view_user_count = async (req, res) => {
+  console.log("in_get_all_user")
+  try {
+    const resp = await prisma.user.findMany();
+    res.send({ data: resp.length });
+  } catch (error) {
+    res.send(error);
+  }
+};
 
 module.exports = {
   view_user,
@@ -84,4 +93,5 @@ module.exports = {
   bulk_add_user,
   delete_user,
   update_user_data,
+  view_user_count
 };

@@ -42,9 +42,38 @@ const delete_certification = async (req, res) => {
       res.status(403).send({ msg: e });
     }
   };
+
+const hours_count=async(req,res)=>{
+
+    try
+    {
+    const certifications = await prisma.userCertification.findMany({});
+    var sum=0
+    console.log(certifications.length,"cert")
+    certifications.map((cert) => {
+      const startDate = new Date(cert.started_at);
+      const endDate = new Date(cert.completed_at);
+      startDate.setHours(0, 0, 0, 0);
+      endDate.setHours(0, 0, 0, 0);
+      // Calculate the difference in milliseconds
+      const durationMs = endDate.getTime() - startDate.getTime();
+      sum+=durationMs
+    });
+  
+    const totalDurationInDays = sum / (1000 * 60 * 60 * 24); // Convert from milliseconds to days
+  
+    res.send({data:totalDurationInDays});
+  }catch(e){
+    console.log(e);
+    res.status(403).send({ msg: e });
+  }
+
+}
+
 module.exports = {
   view_certification,
   add_certification,
   update_certification,
-  delete_certification
+  delete_certification,
+  hours_count
 };
