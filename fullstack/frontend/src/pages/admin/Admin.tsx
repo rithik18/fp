@@ -135,7 +135,7 @@ export default function EnhancedSkillManagementDashboard() {
       }
       if (skilled_user_hour_count_Response.status == 200) {
         console.log(skilled_user_hour_count_Response.data.data, "6");
-        // setdept_skill_count(skilled_user_hour_count_Response.data.data);
+        setskilled_user_dept_count(skilled_user_hour_count_Response.data.data);
 
       }
       
@@ -155,6 +155,10 @@ export default function EnhancedSkillManagementDashboard() {
   };
   const chartConfig = dept_skill_count.reduce((acc:any, item:any) => {
     acc[item.roleName] = { label: item.roleName }; // Use roleName as the key and set the label
+    return acc;
+  }, {});
+  const chartConfig1 = skilled_user_dept_count.reduce((acc:any, item:any) => {
+    acc[item.role] = { label: item.role }; // Use roleName as the key and set the label
     return acc;
   }, {});
   useEffect(() => {
@@ -285,12 +289,12 @@ export default function EnhancedSkillManagementDashboard() {
       <BarChart
         accessibilityLayer
         data={dept_skill_count}
-        layout="horizontal"
+        layout="vertical"
         margin={{
           left: 20,
         }}
       >
-        <XAxis
+        <YAxis
         className="line-clamp-2"
           dataKey="roleName" // Use roleName directly
           type="category"
@@ -303,12 +307,12 @@ export default function EnhancedSkillManagementDashboard() {
           }}
           tickFormatter={(value) => chartConfig[value]?.label || value} // Use chartConfig to format labels
         />
-        <YAxis dataKey="count" type="number" hide />
+        <XAxis dataKey="count" type="number" hide />
         <ChartTooltip
           cursor={false}
           content={<ChartTooltipContent hideLabel />}
         />
-        <Bar dataKey="count" layout="horizontal" radius={5} fill="#8884d8" /> {/* Ensure fill color is set */}
+        <Bar dataKey="count" layout="vertical" radius={5} fill="#8884d8" /> {/* Ensure fill color is set */}
       </BarChart>
     </ChartContainer>
           </CardContent>
@@ -318,29 +322,29 @@ export default function EnhancedSkillManagementDashboard() {
             <CardTitle>Department Skill Levels</CardTitle>
           </CardHeader>
           <CardContent>
-          <ChartContainer config={chartConfig} className="">
+          <ChartContainer config={chartConfig1} className="">
       <BarChart
         accessibilityLayer
-        data={dept_skill_count}
-        layout="vertical"
+        data={skilled_user_dept_count}
+        layout="horizontal"
         margin={{
           left: 20,
         }}
       >
-        <YAxis
-          dataKey="roleName" // Use roleName directly
+        <XAxis
+          dataKey="role" // Use roleName directly
           type="category"
           tickLine={false}
           tickMargin={10}
           axisLine={false}
           tickFormatter={(value) => chartConfig[value]?.label || value} // Use chartConfig to format labels
         />
-        <XAxis dataKey="count" type="number" hide />
+        <YAxis dataKey="totalTimeSpent" type="number" hide />
         <ChartTooltip
           cursor={false}
           content={<ChartTooltipContent hideLabel />}
         />
-        <Bar dataKey="count" layout="vertical" radius={5} fill="#8884d8" /> {/* Ensure fill color is set */}
+        <Bar dataKey="totalTimeSpent" layout="horizontal" radius={5} fill="#8884d8" /> {/* Ensure fill color is set */}
       </BarChart>
     </ChartContainer>
           </CardContent>
