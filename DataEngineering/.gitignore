@@ -1,1 +1,5 @@
 venv
+/mart/*.csv
+/prep/*.csv
+/raw/*.csv
+/Fake_Data/*.csv
