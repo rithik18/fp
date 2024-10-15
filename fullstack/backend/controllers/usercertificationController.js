@@ -201,11 +201,7 @@ async function getTotalDuration(req,res) {
       const roleWiseTimeSpent = {};
   
       certifications.forEach(cert => {
-        const { started_at, completed_at, user } = cert;
-        
-        // Debug: log each certification's details
-        console.log(`Processing Certification - Started At: ${started_at}, Completed At: ${completed_at}, Role: ${user.role.name}`);
-  
+        const { started_at, completed_at, user } = cert;  
         // Calculate the duration in milliseconds
         const duration = new Date(completed_at) - new Date(started_at);
   
@@ -213,8 +209,6 @@ async function getTotalDuration(req,res) {
         const durationInHours = duration / (1000 * 60 * 60); // Convert milliseconds to hours
   
         const role = user.role.name;
-  
-        // Initialize the role in the result object if it doesn't exist
         if (!roleWiseTimeSpent[role]) {
           roleWiseTimeSpent[role] = 0;
         }

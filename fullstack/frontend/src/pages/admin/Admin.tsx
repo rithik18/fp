@@ -88,7 +88,7 @@ export default function EnhancedSkillManagementDashboard() {
       
       axios.post("http://localhost:3000/admin/user_count", { token }),
       axios.post("http://localhost:3000/admin/skilled_user_count", { token }),
-      axios.post("http://localhost:3000/admin/hours_count", { token}),
+      // axios.post("http://localhost:3000/admin/hours_count", { token}),
       axios.post("http://localhost:3000/admin/role_count", { token}),
       axios.post("http://localhost:3000/admin/skilled_user_dept_count", { token}),
       axios.post("http://localhost:3000/admin/skilled_user_hour_count", { token}),
@@ -98,7 +98,7 @@ export default function EnhancedSkillManagementDashboard() {
       const [
         get_user_count_Response,
         get_skilled_user_count_Response,
-        user_hours_Response,
+        // user_hours_Response,
         role_count_Response,
         skilled_user_dept_count_Response,
         skilled_user_hour_count_Response
@@ -112,13 +112,13 @@ export default function EnhancedSkillManagementDashboard() {
         console.log(get_skilled_user_count_Response.data.data[0]._count.userId, "2");
         setskilled_user_count(get_skilled_user_count_Response.data.data[0]._count.userId);
       }
-      if (user_hours_Response.status === 200) {
-        console.log(
-          user_hours_Response.data.data,
-          "3"
-        );
-        sethours_count(user_hours_Response.data.data);
-      }
+      // if (user_hours_Response.status === 200) {
+      //   console.log(
+      //     user_hours_Response.data.data,
+      //     "3"
+      //   );
+      //   sethours_count(user_hours_Response.data.data);
+      // }
       if (role_count_Response.status == 200) {
         console.log(role_count_Response.data.data.length, "4");
         setrole_count(role_count_Response.data.data.length);
@@ -137,7 +137,7 @@ export default function EnhancedSkillManagementDashboard() {
       if (
         get_user_count_Response.status === 200 &&
         get_skilled_user_count_Response.status === 200 &&
-        user_hours_Response.status == 200 &&
+        // user_hours_Response.status == 200 &&
         role_count_Response.status == 200 &&
         skilled_user_dept_count_Response.status==200
       ) {
@@ -148,14 +148,14 @@ export default function EnhancedSkillManagementDashboard() {
       setloading(false);
     }
   };
-  const chartConfig = dept_skill_count.reduce((acc:any, item:any) => {
-    acc[item.roleName] = { label: item.roleName,fill:`hsl(var(--chart-${dept_skill_count.findIndex(item)}))` }; // Use roleName as the key and set the label
-    return acc;
-  }, {});
-  const chartConfig1 = skilled_user_dept_count.reduce((acc:any, item:any) => {
-    acc[item.role] = { label: item.role }; // Use roleName as the key and set the label
-    return acc;
-  }, {});
+  // const chartConfig = 
+  // const chartConfig1 = skilled_user_dept_count.reduce((acc:any, item:any) => {
+  //   acc[item.role] = { label: item.role }; // Use roleName as the key and set the label
+  //   return acc;
+  // }, {});
+  const [chartConfig1,setchartConfig1] =useState<any>([]) 
+  const [chartConfig,setchartConfig] =useState<any>([]) 
+
   useEffect(() => {
     const init = async () => {
       const keysToStore = [
@@ -195,6 +195,35 @@ export default function EnhancedSkillManagementDashboard() {
      n('/')
    }
    }, []);
+   useEffect(() => {
+    const tailwindColors = [
+      'blue-500',   
+      'pink-500',   
+      'orange-500', 
+      'purple-500', 
+      'green-500'   
+    ];
+     setchartConfig1(skilled_user_dept_count.reduce((acc: any, item: any, index: number) => {
+      const colorIndex = index % tailwindColors.length;
+       acc[item.role] = { label: item.role,colorClass: `text-${tailwindColors[colorIndex]}`}; // Add index to the object
+       return acc;
+      }, {}))
+      setchartConfig(dept_skill_count.reduce((acc: any, item: any, index: number) => {
+        const colorIndex = index % tailwindColors.length; // Cycle through the Tailwind colors
+        
+        acc[item.roleName] = { 
+          label: item.roleName, 
+          colorClass: `text-${tailwindColors[colorIndex]}` // Use the corresponding Tailwind color class
+        };
+        
+        return acc;
+      }, {}));
+      
+      
+      
+      console.log(chartConfig1,chartConfig,"chart")
+   }, [dept_skill_count,skilled_user_dept_count])
+   
    const [loading, setloading] = useState(false);
    const n = useNavigate();
    const renderLabel = (value:any) => {

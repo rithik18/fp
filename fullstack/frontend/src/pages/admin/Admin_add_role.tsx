@@ -72,7 +72,7 @@ const Admin_add_role = () => {
         toast.success("role added");
         getAllrole();
       }
-    } catch (e) {
+    } catch (e:any) {
       if (e!.status == 403) {
         toast.error("role exsist");
       } else {
@@ -111,7 +111,7 @@ const Admin_add_role = () => {
         descInput.value = "";
         seteditrole(!editrole);
       }
-    } catch (e) {
+    } catch (e:any) {
       if (e!.status == 403) {
         console.log(e);
         toast.error("role exsist");
@@ -135,7 +135,7 @@ const Admin_add_role = () => {
         toast.success("role Deleted");
         getAllrole();
       }
-    } catch (e) {
+    } catch (e:any) {
       if (e!.status == 403) {
         console.log(e);
         toast.error("role exsist");
@@ -209,6 +209,7 @@ const Admin_add_role = () => {
     <div>
       <ToastContainer />
       <Navbar />
+
       <p className="text-center scroll-m-20 text-3xl font-extrabold tracking-tight lg:text-4xl pb-8 mx-auto">Roles Section</p>
       <div className="grid grid-cols-3 gap-4 mx-auto px-4">
         {editrole ? (
