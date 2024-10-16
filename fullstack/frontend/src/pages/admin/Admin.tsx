@@ -57,7 +57,28 @@ const recentSkillUpdates = [
 
 
 export default function EnhancedSkillManagementDashboard() {
-  const [dept_skill_count, setdept_skill_count] = useState([])
+  const [dept_skill_count, setdept_skill_count] = useState([
+    {
+        "roleName": "ADMIN",
+        "count": 2
+    },
+    {
+        "roleName": "Senior Software Engineer",
+        "count": 5
+    },
+    {
+        "roleName": "Software Engineer",
+        "count": 4
+    },
+    {
+        "roleName": "Senior Consultant",
+        "count": 1
+    },
+    {
+        "roleName": "Solution Enabler",
+        "count": 1
+    }
+])
   const [user, setUser] = useState({
         id: "",
         name: "",
@@ -74,15 +95,24 @@ export default function EnhancedSkillManagementDashboard() {
       const [user_count, setuser_count] = useState(0)
       const [skilled_user_count, setskilled_user_count] = useState(0)
       const [role_count, setrole_count] = useState(0)
-      const [skilled_user_dept_count, setskilled_user_dept_count] = useState([])
+      const [skilled_user_dept_count, setskilled_user_dept_count] = useState([
+        {
+            "role": "Solution Enabler",
+            "totalTimeSpent": 169.37055305555555
+        },
+        {
+            "role": "Senior Software Engineer",
+            "totalTimeSpent": 411.91777444444443
+        }
+    ])
   const [date, setDate] = useState<DateRange | undefined>({
     from: addDays(new Date(), -30),
     to: new Date(),
   })
   const get_all_stat_data = async () => {
-    setloading(true);
+    // setloading(true);
     const token = Cookies.get("token");
-
+    return
     // Prepare requests
     const requests = [
       
@@ -205,7 +235,7 @@ export default function EnhancedSkillManagementDashboard() {
     ];
      setchartConfig1(skilled_user_dept_count.reduce((acc: any, item: any, index: number) => {
       const colorIndex = index % tailwindColors.length;
-       acc[item.role] = { label: item.role,colorClass: `text-${tailwindColors[colorIndex]}`}; // Add index to the object
+       acc[item.role] = { label: item.role,color: `text-${tailwindColors[colorIndex]}`}; // Add index to the object
        return acc;
       }, {}))
       setchartConfig(dept_skill_count.reduce((acc: any, item: any, index: number) => {
@@ -315,7 +345,7 @@ export default function EnhancedSkillManagementDashboard() {
         data={dept_skill_count}
         layout="vertical"
         margin={{
-          left: 20,
+          left: 5,
         }}
       >
         <YAxis
@@ -352,7 +382,7 @@ export default function EnhancedSkillManagementDashboard() {
         data={skilled_user_dept_count}
         layout="horizontal"
         margin={{
-          left: 20,
+          left: 0,
         }}
       >
         <XAxis

@@ -88,11 +88,32 @@ const view_user_count = async (req, res) => {
 };
 const skilled_user_dept_count = async (req, res) => {
   try {
+    const skills = await prisma.skill.findMany({
+      where: {
+        name: {
+          in: skillNamesArray, // Array of skill names you're looking for
+        },
+      },
+      select: {
+        id: true, // Fetch only the skill ID
+      },
+    });
+    
+    const skillIds = skills.map(skill => skill.id); // Extract the skill IDs
+    
     // Fetch users with their roles and skills
     const usersWithRoles = await prisma.user.findMany({
-      
+      where: {
+        userSkills: {
+          some: {
+            skillId: {
+              in: skillIds, // Use dynamically fetched skill IDs
+            },
+          },
+        },
+      },
       include: {
-        role: true, // Include the role data
+        userSkills: true, // Include user skills in the response
       },
     });
 

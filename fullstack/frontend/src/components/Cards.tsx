@@ -16,6 +16,7 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "../components/ui/alert-dialog";
+import Admin_View_User_profile from "./Admin_View_User_profile"
 
 export default function Cards({ props, roles }: any) {
   const getShortName = (fullName: any) => {
@@ -39,7 +40,7 @@ export default function Cards({ props, roles }: any) {
       if (response.status == 200) {
         toast.success("Skill Deleted");
       }
-    } catch (e:any) {
+    } catch (e: any) {
       if (e!.status == 403) {
         console.log(e);
         toast.error("Skill exsist");
@@ -53,10 +54,7 @@ export default function Cards({ props, roles }: any) {
       <CardContent className="pt-6">
         <div className="flex flex-col items-center space-y-2">
           <Avatar className="w-24 h-24">
-            <AvatarImage
-              src={props.profileImage}
-              alt="Profile picture"
-            />
+            <AvatarImage src={props.profileImage} alt="Profile picture" />
             <AvatarFallback>{getShortName(props.name)}</AvatarFallback>
           </Avatar>
           <div className="text-center space-y-2">
@@ -68,35 +66,51 @@ export default function Cards({ props, roles }: any) {
         </div>
       </CardContent>
       <CardFooter className="flex justify-between gap-2">
-        <Button variant="outline" className="w-2/3 mx-auto">
-          <Eye className="mr-2 h-4 w-4 mx-a" />
-          View
-        </Button>
-        <div className="w-2/3 mx-auto">
-
         <AlertDialog>
-          <AlertDialogTrigger className="w-full">
-            <Button variant="outline" className="w-full">
-              <Trash2 className="mr-2 h-4 w-4  text-red-700" />
-              Delete
+          <AlertDialogTrigger className="w-2/3">
+            <Button variant="outline" className="w-full mx-auto">
+              <Eye className="mr-2 h-4 w-4 mx-a" />
+              View
             </Button>
           </AlertDialogTrigger>
-          <AlertDialogContent>
+          <AlertDialogContent className="max-w-[60%] w-full">
             <AlertDialogHeader>
-              <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+              <AlertDialogTitle>{props.name}</AlertDialogTitle>
               <AlertDialogDescription>
-                This action cannot be undone. This will permanently delete
-                User.
+              <Admin_View_User_profile props={props} />
               </AlertDialogDescription>
             </AlertDialogHeader>
             <AlertDialogFooter>
               <AlertDialogCancel>Cancel</AlertDialogCancel>
-              <AlertDialogAction onClick={handleUserDelete}>
-                Continue
-              </AlertDialogAction>
+              {/* <AlertDialogAction>Continue</AlertDialogAction> */}
             </AlertDialogFooter>
           </AlertDialogContent>
         </AlertDialog>
+
+        <div className="w-2/3 mx-auto">
+          <AlertDialog>
+            <AlertDialogTrigger className="w-full">
+              <Button variant="outline" className="w-full">
+                <Trash2 className="mr-2 h-4 w-4  text-red-700" />
+                Delete
+              </Button>
+            </AlertDialogTrigger>
+            <AlertDialogContent>
+              <AlertDialogHeader>
+                <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+                <AlertDialogDescription>
+                  This action cannot be undone. This will permanently delete
+                  User.
+                </AlertDialogDescription>
+              </AlertDialogHeader>
+              <AlertDialogFooter>
+                <AlertDialogCancel>Cancel</AlertDialogCancel>
+                <AlertDialogAction onClick={handleUserDelete}>
+                  Continue
+                </AlertDialogAction>
+              </AlertDialogFooter>
+            </AlertDialogContent>
+          </AlertDialog>
         </div>
       </CardFooter>
     </Card>

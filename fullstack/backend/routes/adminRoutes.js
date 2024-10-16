@@ -58,5 +58,14 @@ router.post('/role_count',roleController.role_count)
 router.post('/skilled_user_dept_count',userController.skilled_user_dept_count)
 router.post('/skilled_user_hour_count',usercertificationController.findDeptWiseTimeSpent)
 
+router.post('/view_certification',certificationController.view_certification)
+
+// To view user skills and certification
+router.post('/get_certification',usercertificationController.get_certification)
+router.post('/get_certification_count',usercertificationController.get_certification_count)
+router.post('/get_course_count',usercertificationController.get_course_count)
+router.post('/get_total_duration',usercertificationController.getTotalDuration)
+router.post('/get_user_skill',userskillController.get_user_skill)
+router.post('/view_skill',skillController.view_skill)
 
 module.exports = router;
