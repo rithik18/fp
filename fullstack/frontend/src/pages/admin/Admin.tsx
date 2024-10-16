@@ -58,26 +58,26 @@ const recentSkillUpdates = [
 
 export default function EnhancedSkillManagementDashboard() {
   const [dept_skill_count, setdept_skill_count] = useState([
-    {
-        "roleName": "ADMIN",
-        "count": 2
-    },
-    {
-        "roleName": "Senior Software Engineer",
-        "count": 5
-    },
-    {
-        "roleName": "Software Engineer",
-        "count": 4
-    },
-    {
-        "roleName": "Senior Consultant",
-        "count": 1
-    },
-    {
-        "roleName": "Solution Enabler",
-        "count": 1
-    }
+    // {
+    //     "roleName": "ADMIN",
+    //     "count": 2
+    // },
+    // {
+    //     "roleName": "Senior Software Engineer",
+    //     "count": 5
+    // },
+    // {
+    //     "roleName": "Software Engineer",
+    //     "count": 4
+    // },
+    // {
+    //     "roleName": "Senior Consultant",
+    //     "count": 1
+    // },
+    // {
+    //     "roleName": "Solution Enabler",
+    //     "count": 1
+    // }
 ])
   const [user, setUser] = useState({
         id: "",
@@ -96,23 +96,23 @@ export default function EnhancedSkillManagementDashboard() {
       const [skilled_user_count, setskilled_user_count] = useState(0)
       const [role_count, setrole_count] = useState(0)
       const [skilled_user_dept_count, setskilled_user_dept_count] = useState([
-        {
-            "role": "Solution Enabler",
-            "totalTimeSpent": 169.37055305555555
-        },
-        {
-            "role": "Senior Software Engineer",
-            "totalTimeSpent": 411.91777444444443
-        }
+      //   {
+      //       "role": "Solution Enabler",
+      //       "totalTimeSpent": 169.37055305555555
+      //   },
+      //   {
+      //       "role": "Senior Software Engineer",
+      //       "totalTimeSpent": 411.91777444444443
+      //   }
     ])
   const [date, setDate] = useState<DateRange | undefined>({
     from: addDays(new Date(), -30),
     to: new Date(),
   })
   const get_all_stat_data = async () => {
-    // setloading(true);
+    setloading(true);
     const token = Cookies.get("token");
-    return
+
     // Prepare requests
     const requests = [
       
@@ -123,7 +123,7 @@ export default function EnhancedSkillManagementDashboard() {
       axios.post("http://localhost:3000/admin/skilled_user_dept_count", { token}),
       axios.post("http://localhost:3000/admin/skilled_user_hour_count", { token}),
     ];
-
+    console.log("444444444444")
     try {
       const [
         get_user_count_Response,
@@ -133,7 +133,7 @@ export default function EnhancedSkillManagementDashboard() {
         skilled_user_dept_count_Response,
         skilled_user_hour_count_Response
       ] = await Promise.all(requests);
-
+      console.log("promise done")
       if (get_user_count_Response.status === 200) {
         console.log(get_user_count_Response.data.data,"1");
         setuser_count(get_user_count_Response.data.data)
@@ -160,6 +160,11 @@ export default function EnhancedSkillManagementDashboard() {
       }
       if (skilled_user_hour_count_Response.status == 200) {
         console.log(skilled_user_hour_count_Response.data.data, "6");
+        var time=0
+        skilled_user_hour_count_Response.data.data.map((e:any)=>{
+          time+=e.totalTimeSpent
+        })
+        sethours_count(time)
         setskilled_user_dept_count(skilled_user_hour_count_Response.data.data);
 
       }
@@ -178,13 +183,17 @@ export default function EnhancedSkillManagementDashboard() {
       setloading(false);
     }
   };
-  // const chartConfig = 
-  // const chartConfig1 = skilled_user_dept_count.reduce((acc:any, item:any) => {
-  //   acc[item.role] = { label: item.role }; // Use roleName as the key and set the label
-  //   return acc;
-  // }, {});
-  const [chartConfig1,setchartConfig1] =useState<any>([]) 
-  const [chartConfig,setchartConfig] =useState<any>([]) 
+  const chartConfig = skilled_user_dept_count.reduce((acc: any, item: any) => {
+    
+     acc[item.role] = { label: item.role,}; // Add index to the object
+     return acc;
+    }, {})
+  const chartConfig1 = skilled_user_dept_count.reduce((acc:any, item:any) => {
+    acc[item.role] = { label: item.role }; // Use roleName as the key and set the label
+    return acc;
+  }, {});
+  // const [chartConfig1,setchartConfig1] =useState<any>([]) 
+  // const [chartConfig,setchartConfig] =useState<any>([]) 
 
   useEffect(() => {
     const init = async () => {
@@ -225,34 +234,34 @@ export default function EnhancedSkillManagementDashboard() {
      n('/')
    }
    }, []);
-   useEffect(() => {
-    const tailwindColors = [
-      'blue-500',   
-      'pink-500',   
-      'orange-500', 
-      'purple-500', 
-      'green-500'   
-    ];
-     setchartConfig1(skilled_user_dept_count.reduce((acc: any, item: any, index: number) => {
-      const colorIndex = index % tailwindColors.length;
-       acc[item.role] = { label: item.role,color: `text-${tailwindColors[colorIndex]}`}; // Add index to the object
-       return acc;
-      }, {}))
-      setchartConfig(dept_skill_count.reduce((acc: any, item: any, index: number) => {
-        const colorIndex = index % tailwindColors.length; // Cycle through the Tailwind colors
+  //  useEffect(() => {
+  //   const tailwindColors = [
+  //     'blue-500',   
+  //     'pink-500',   
+  //     'orange-500', 
+  //     'purple-500', 
+  //     'green-500'   
+  //   ];
+  //    setchartConfig1(skilled_user_dept_count.reduce((acc: any, item: any, index: number) => {
+  //     const colorIndex = index % tailwindColors.length;
+  //      acc[item.role] = { label: item.role,color: `text-${tailwindColors[colorIndex]}`}; // Add index to the object
+  //      return acc;
+  //     }, {}))
+  //     setchartConfig(dept_skill_count.reduce((acc: any, item: any, index: number) => {
+  //       const colorIndex = index % tailwindColors.length; // Cycle through the Tailwind colors
         
-        acc[item.roleName] = { 
-          label: item.roleName, 
-          colorClass: `text-${tailwindColors[colorIndex]}` // Use the corresponding Tailwind color class
-        };
+  //       acc[item.roleName] = { 
+  //         label: item.roleName, 
+  //         colorClass: `text-${tailwindColors[colorIndex]}` // Use the corresponding Tailwind color class
+  //       };
         
-        return acc;
-      }, {}));
+  //       return acc;
+  //     }, {}));
       
       
       
-      console.log(chartConfig1,chartConfig,"chart")
-   }, [dept_skill_count,skilled_user_dept_count])
+  //     console.log(chartConfig1,chartConfig,"chart")
+  //  }, [dept_skill_count,skilled_user_dept_count])
    
    const [loading, setloading] = useState(false);
    const n = useNavigate();

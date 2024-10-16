@@ -204,6 +204,7 @@ async function getTotalDuration(req,res) {
         const { started_at, completed_at, user } = cert;  
         // Calculate the duration in milliseconds
         const duration = new Date(completed_at) - new Date(started_at);
+        console.log(cert)
   
         // Convert duration to hours (or any other unit you prefer)
         const durationInHours = duration / (1000 * 60 * 60); // Convert milliseconds to hours
@@ -223,7 +224,7 @@ async function getTotalDuration(req,res) {
         totalTimeSpent: timeSpent,
       }));
   
-  
+  console.log("befroe send")
       res.send({ data: result });
     } catch (error) {
       console.error(error);

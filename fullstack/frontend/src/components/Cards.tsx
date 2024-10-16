@@ -1,7 +1,7 @@
 import { Card, CardContent, CardFooter } from "./ui/card";
 import { Button } from "./ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
-import { Eye, Trash2 } from "lucide-react";
+import { Eye, Trash2, X } from "lucide-react";
 import axios from "axios";
 import Cookies from "js-cookie";
 import { toast } from "react-toastify";
@@ -75,15 +75,18 @@ export default function Cards({ props, roles }: any) {
           </AlertDialogTrigger>
           <AlertDialogContent className="max-w-[60%] w-full">
             <AlertDialogHeader>
+              <div className="flex justify-between ">
               <AlertDialogTitle>{props.name}</AlertDialogTitle>
-              <AlertDialogDescription>
-              <Admin_View_User_profile props={props} />
-              </AlertDialogDescription>
+              <AlertDialogCancel className=""><X className="w-6 h-6"/></AlertDialogCancel>
+              </div>
             </AlertDialogHeader>
-            <AlertDialogFooter>
+              <AlertDialogDescription>
+              <Admin_View_User_profile props={props} roles={roles}/>
+              </AlertDialogDescription>
+            {/* <AlertDialogFooter>
               <AlertDialogCancel>Cancel</AlertDialogCancel>
-              {/* <AlertDialogAction>Continue</AlertDialogAction> */}
-            </AlertDialogFooter>
+              <AlertDialogAction>Continue</AlertDialogAction>
+            </AlertDialogFooter> */}
           </AlertDialogContent>
         </AlertDialog>
 

@@ -1,19 +1,38 @@
-import { useEffect, useState } from "react"
-import axios from "axios"
-import Cookies from "js-cookie"
-import { Card, CardContent, CardHeader, CardTitle } from "./ui/card"
-import { Badge } from "./ui/badge"
-import { Progress } from "./ui/progress"
-import { ScrollArea } from "./ui/scroll-area"
-import { FileBadge, GraduationCap, TvMinimalPlay, CalendarFold, CalendarCheck2, Shield, ShieldAlert, User, Mail, Building, Calendar } from "lucide-react"
-import { toast } from "react-toastify"
+import { useEffect, useState } from "react";
+import axios from "axios";
+import Cookies from "js-cookie";
+import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
+import { Badge } from "./ui/badge";
+import { Progress } from "./ui/progress";
+import { ScrollArea } from "./ui/scroll-area";
+import {
+  FileBadge,
+  GraduationCap,
+  TvMinimalPlay,
+  CalendarFold,
+  CalendarCheck2,
+  Shield,
+  ShieldAlert,
+  User,
+  Mail,
+  Building,
+  Calendar,
+} from "lucide-react";
+import { toast } from "react-toastify";
+import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 
-export default function MiniUserDashboard({ props }:any) {
-//   const [userData, setUserData] = useState<any>(null)
+export default function MiniUserDashboard({ props, roles }: any) {
+  const getShortName = (fullName: any) => {
+    const nameParts = fullName.split(" ");
+    const shortName = nameParts
+      .map((part: any) => part.charAt(0).toUpperCase())
+      .join("");
+    return shortName;
+  };
 
   useEffect(() => {
-      fetchAllData()
-  }, [props])
+    fetchAllData();
+  }, [props]);
   const [skills, setskills] = useState<any>([]);
   const [allskills, setallskills] = useState<any>([]);
   const [certifications, setcertifications] = useState<any>([]);
@@ -26,7 +45,7 @@ export default function MiniUserDashboard({ props }:any) {
   const fetchAllData = async () => {
     setloading(true);
     const token = Cookies.get("token");
-    const id = props.id
+    const id = props.id;
 
     // Prepare requests
     const requests = [
@@ -35,13 +54,19 @@ export default function MiniUserDashboard({ props }:any) {
         id,
       }),
       axios.post("http://localhost:3000/admin/get_course_count", { token, id }),
-      axios.post("http://localhost:3000/admin/get_certification", { token, id }),
+      axios.post("http://localhost:3000/admin/get_certification", {
+        token,
+        id,
+      }),
       axios.post("http://localhost:3000/admin/get_user_skill", {
         token,
         id: id,
       }),
       axios.post("http://localhost:3000/admin/view_skill", { token }),
-      axios.post("http://localhost:3000/admin/get_total_duration", { token,id }),
+      axios.post("http://localhost:3000/admin/get_total_duration", {
+        token,
+        id,
+      }),
     ];
 
     try {
@@ -51,7 +76,7 @@ export default function MiniUserDashboard({ props }:any) {
         user_Certification_Response,
         user_skill_Response,
         all_skill_response,
-        duration_Response
+        duration_Response,
       ] = await Promise.all(requests);
 
       if (get_certification_count_Response.status === 200) {
@@ -113,140 +138,178 @@ export default function MiniUserDashboard({ props }:any) {
   };
 
   if (loading) {
-    return <div>Loading...</div>
+    return <div>Loading...</div>;
   }
 
   if (!props) {
-    return <div>Error loading user data</div>
+    return <div>Error loading user data</div>;
   }
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-      <div>
-        <h3 className="text-lg font-semibold mb-2">User Info</h3>
-        <Card>
-        <CardContent className="p-4">
-            <div className="space-y-3">
-              <div className="flex items-center">
-                <User className="w-5 h-5 mr-2 text-primary" />
-                <p className="text-sm"><span className="font-medium">Name:</span> {props.name}</p>
+      <div className="flex flex-col justify-evenly items-center">
+        {/* User Info */}
+        <div className="w-full">
+          <Card className="w-full max-w-sm mx-auto bg-gradient-to-br from-primary/10 to-secondary/10 overflow-hidden">
+            <CardContent className="p-6">
+              <div className="flex flex-col items-center space-y-4">
+                <div className="relative">
+                  <Avatar className="mx-auto w-32 h-32 border-4 border-primary">
+                    <AvatarImage
+                      src={props.profileImage}
+                      alt="Profile picture"
+                    />
+                    <AvatarFallback className="text-2xl">
+                      {getShortName(props.name)}
+                    </AvatarFallback>
+                  </Avatar>
+                </div>
               </div>
-              <div className="flex items-center">
-                <Mail className="w-5 h-5 mr-2 text-primary" />
-                <p className="text-sm"><span className="font-medium">Email:</span> {props.mail}</p>
-              </div>
-              <div className="flex items-center">
-                <Building className="w-5 h-5 mr-2 text-primary" />
-                <p className="text-sm"><span className="font-medium">Department:</span> {props.department}</p>
-              </div>
-              <div className="flex items-center">
-                <Calendar className="w-5 h-5 mr-2 text-primary" />
-                <p className="text-sm"><span className="font-medium">Joining Date:</span> {new Date(props.joining_date).toLocaleDateString()}</p>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-      </div>
+               <div className="text-center space-y-2">
+            <h2 className="text-xl font-bold">{props.name}</h2>
+            <Badge
+                    className="mt-2 mx-auto rounded-full text-center text-xs"
+                    variant="outline"
+                  >
+                    {roles}
+                  </Badge>
+            <p className="text-sm">{props.mail}</p>
+            <p className="text-sm">{props.joining_date}</p>
 
-      <div>
-        <h3 className="text-lg font-semibold mb-2">Learning Progress</h3>
-        <div className="grid grid-cols-3 gap-2">
-          <Card className="bg-primary/5">
-            <CardHeader className="pb-2">
-              <CardTitle className="text-sm font-semibold flex items-center">
-                <FileBadge className="mr-2 h-4 w-4" />
-                Certifications
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="text-2xl font-bold">{certificationCompleted}</div>
+              </div>
             </CardContent>
           </Card>
-          <Card className="bg-primary/5">
-            <CardHeader className="pb-2">
-              <CardTitle className="text-sm font-semibold flex items-center">
-                <GraduationCap className="mr-2 h-4 w-4" />
-                Courses
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="text-2xl font-bold">{coursesCompleted}</div>
-            </CardContent>
-          </Card>
-          <Card className="bg-primary/5">
-            <CardHeader className="pb-2">
-              <CardTitle className="text-sm font-semibold flex items-center">
-                <TvMinimalPlay className="mr-2 h-4 w-4" />
-                Learning
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="text-2xl font-bold">{learningHours}</div>
-              <p className="text-xs">Hours</p>
+        </div>
+        {/* Skills */}
+        <div className="w-full mt-5">
+          <h3 className="text-lg font-semibold mb-2">Skills</h3>
+          <Card>
+            <CardContent className="p-4">
+              <ScrollArea className="h-40">
+                {skills.map((skill: any, index: number) => (
+                  <div key={index} className="flex items-center mb-2">
+                    <Badge
+                      variant="outline"
+                      className="mr-2 w-24 justify-center"
+                    >
+                      {skill.name}
+                    </Badge>
+                    <Progress value={skill.score} className="flex-grow" />
+                    <span className="ml-2 text-sm font-medium">
+                      {skill.score}%
+                    </span>
+                  </div>
+                ))}
+              </ScrollArea>
             </CardContent>
           </Card>
         </div>
       </div>
 
-      <div>
-        <h3 className="text-lg font-semibold mb-2">Skills</h3>
-        <Card>
-          <CardContent className="p-4">
-            <ScrollArea className="h-40">
-              {skills.map((skill: any, index: number) => (
-                <div key={index} className="flex items-center mb-2">
-                  <Badge variant="outline" className="mr-2 w-24 justify-center">
-                    {skill.name}
-                  </Badge>
-                  <Progress value={skill.score} className="flex-grow" />
-                  <span className="ml-2 text-sm font-medium">{skill.score}%</span>
+      <div className="flex flex-col justify-evenly items-center">
+        {/* Learning Progress */}
+        <div className="w-full">
+          <h3 className="text-lg font-semibold mb-2">Learning Progress</h3>
+          <div className="grid grid-cols-3 gap-2">
+            <Card className="bg-primary/5">
+              <CardHeader className="pb-2">
+                <CardTitle className="text-sm font-semibold flex items-center">
+                  <FileBadge className="mr-2 h-4 w-4" />
+                  Certifications
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="text-2xl font-bold">
+                  {certificationCompleted}
                 </div>
-              ))}
-            </ScrollArea>
-          </CardContent>
-        </Card>
-      </div>
-
-      <div>
-        <h3 className="text-lg font-semibold mb-2">Latest Certification</h3>
-        <Card>
-          <CardContent className="p-4">
-            {certifications.length > 0 ? (
-              <div>
-                <h4 className="font-semibold">{certifications[0].certificationName}</h4>
-                <div className="mt-2 flex items-center space-x-2">
-                  <Badge variant="secondary" className="rounded-full">
-                    {certifications[0].competency}
-                  </Badge>
-                  {certifications[0].isVerified ? (
-                    <Badge variant="default" className="bg-green-500 rounded-full">
-                      <Shield className="w-3 h-3 mr-1" />
-                      Verified
+              </CardContent>
+            </Card>
+            <Card className="bg-primary/5">
+              <CardHeader className="pb-2">
+                <CardTitle className="text-sm font-semibold flex items-center">
+                  <GraduationCap className="mr-2 h-4 w-4" />
+                  Courses
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="text-2xl font-bold">{coursesCompleted}</div>
+              </CardContent>
+            </Card>
+            <Card className="bg-primary/5">
+              <CardHeader className="pb-2">
+                <CardTitle className="text-sm font-semibold flex items-center">
+                  <TvMinimalPlay className="mr-2 h-4 w-4" />
+                  Learning
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="text-2xl font-bold">{learningHours}</div>
+                <p className="text-xs">Hours</p>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+        {/* Certification */}
+        <div className="w-full mt-10">
+          <h3 className="text-lg font-semibold mb-2">Latest Certification</h3>
+          <Card>
+            <CardContent className="p-4">
+              {certifications.length > 0 ? (
+                <div>
+                  <h4 className="font-semibold">
+                    {certifications[0].certificationName}
+                  </h4>
+                  <div className="relative w-11/12 mx-auto h-48 bg-gray-100 rounded-lg overflow-hidden">
+                    <img
+                      src={certifications[0]?.imageData}
+                      alt={certifications[0]?.name}
+                      className="absolute inset-0 w-full h-full object-contain"
+                    />
+                  </div>
+                  <div className="mt-2 flex justify-center items-center space-x-2">
+                    <Badge variant="default" className="rounded-full">
+                      {certifications[0].competency}
                     </Badge>
-                  ) : (
-                    <Badge variant="outline" className="text-yellow-500 border-yellow-500 rounded-full">
-                      <ShieldAlert className="w-3 h-3 mr-1" />
-                      Pending Verification
-                    </Badge>
-                  )}
+                    {certifications[0].isVerified ? (
+                      <Badge
+                        variant="default"
+                        className="bg-green-500 rounded-full"
+                      >
+                        <Shield className="w-3 h-3 mr-1" />
+                        Verified
+                      </Badge>
+                    ) : (
+                      <Badge
+                        variant="outline"
+                        className="text-yellow-500 border-yellow-500 rounded-full"
+                      >
+                        <ShieldAlert className="w-3 h-3 mr-1" />
+                        Pending Verification
+                      </Badge>
+                    )}
+                  </div>
+                  <div className="flex items-center justify-center mt-2 gap-4">
+                    <p className="flex items-center text-xs text-muted-foreground">
+                      <CalendarFold className="w-3 h-3 mr-1" />
+                      {new Date(
+                        certifications[0].started_at
+                      ).toLocaleDateString()}
+                    </p>
+                    <p className="flex items-center text-xs text-muted-foreground">
+                      <CalendarCheck2 className="w-3 h-3 mr-1" />
+                      {new Date(
+                        certifications[0].completed_at
+                      ).toLocaleDateString()}
+                    </p>
+                  </div>
                 </div>
-                <div className="flex items-center justify-between mt-2">
-                  <p className="flex text-xs text-muted-foreground">
-                    <CalendarFold className="w-3 h-3 mr-1" />
-                    {new Date(certifications[0].started_at).toLocaleDateString()}
-                  </p>
-                  <p className="flex text-xs text-muted-foreground">
-                    <CalendarCheck2 className="w-3 h-3 mr-1" />
-                    {new Date(certifications[0].completed_at).toLocaleDateString()}
-                  </p>
-                </div>
-              </div>
-            ) : (
-              <p>No certifications</p>
-            )}
-          </CardContent>
-        </Card>
+              ) : (
+                <p>No certifications</p>
+              )}
+            </CardContent>
+          </Card>
+        </div>
       </div>
     </div>
-  )
+  );
 }

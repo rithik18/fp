@@ -89,22 +89,15 @@ const view_user_count = async (req, res) => {
 const skilled_user_dept_count = async (req, res) => {
   try {
     const skills = await prisma.skill.findMany({
-      where: {
-        name: {
-          in: skillNamesArray, // Array of skill names you're looking for
-        },
-      },
       select: {
         id: true, // Fetch only the skill ID
       },
     });
-    
     const skillIds = skills.map(skill => skill.id); // Extract the skill IDs
-    
     // Fetch users with their roles and skills
     const usersWithRoles = await prisma.user.findMany({
       where: {
-        userSkills: {
+        skills: {
           some: {
             skillId: {
               in: skillIds, // Use dynamically fetched skill IDs
@@ -113,10 +106,10 @@ const skilled_user_dept_count = async (req, res) => {
         },
       },
       include: {
-        userSkills: true, // Include user skills in the response
+        skills: true, // Include user skills in the response
+        role:true
       },
     });
-
     // Group by role and count users
     const roleCountMap = usersWithRoles.reduce((acc, user) => {
       const roleName = user.role.name; // Access the role name
@@ -126,13 +119,11 @@ const skilled_user_dept_count = async (req, res) => {
       acc[roleName]++;
       return acc;
     }, {});
-
     // Convert the map to an array
     const responseData = Object.entries(roleCountMap).map(([name, count]) => ({
       roleName: name,
       count,
     }));
-
     res.send({ data: responseData });
   } catch (error) {
     console.error(error);
