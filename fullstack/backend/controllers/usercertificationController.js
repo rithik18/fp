@@ -231,6 +231,25 @@ async function getTotalDuration(req,res) {
       res.status(500).send({ error: 'An error occurred while fetching data.' });
     }
   };
+  const user_skill_level_distribution=async (req, res) => {
+    try {
+      const skillLevelDistribution = await prisma.userCertification.groupBy({
+        by: 'competency',
+        _count: {
+          competency: true,
+        },
+      });
+      const data=skillLevelDistribution.map((e)=>({
+        competency:e.competency,
+        count:e._count.competency
+      }))
+      res.send({data:data});
+    } catch (error) {
+      console.log(error,"error")
+      res.status(500).json({ error: 'Failed to fetch skill level distribution.' });
+    }
+  };
+  
   
   
   
@@ -244,5 +263,6 @@ async function getTotalDuration(req,res) {
     get_admin_certification,
     verify,
     reject,
-    findDeptWiseTimeSpent
+    findDeptWiseTimeSpent,
+    user_skill_level_distribution
   }

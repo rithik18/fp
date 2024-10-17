@@ -75,4 +75,8 @@ router.post('/view_skill',skillController.view_skill)
 router.post('/skill_user_count',skillController.skillUserCounts)
 router.post('/cert_user_count',certificationController.certificationUserCounts)
 
+
+router.post('/user_skill_level_distribution',usercertificationController.user_skill_level_distribution)
+
+
 module.exports = router;

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
-import { CalendarIcon, Users, Briefcase, GraduationCap, Search, AlarmClockCheck, LeafyGreen } from "lucide-react"
-import { addDays, format } from "date-fns"
+import { Users, Briefcase, GraduationCap, AlarmClockCheck } from "lucide-react"
+import { addDays } from "date-fns"
 import { DateRange } from "react-day-picker"
 
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../../components/ui/card"
@@ -11,13 +11,12 @@ import axios from "axios";
 import { toast, ToastContainer } from "react-toastify";
 import LoadingOverlay from "react-loading-overlay";
 import CircleLoader from "react-spinners/CircleLoader";
-import { BarChart, Bar, LineChart, Line, PieChart, Pie, Tooltip, XAxis, YAxis, CartesianGrid, Legend, AreaChart, Area } from 'recharts';
+import { BarChart, Bar, LineChart, Line, PieChart, Pie, Tooltip, XAxis, YAxis, CartesianGrid, Legend, AreaChart, Area, Label } from 'recharts';
 import { validate } from '../../utils/validation';
 import { useNavigate } from 'react-router-dom';
 import Cookies from "js-cookie";
 import Navbar from '../../components/navbar';
 
-import { TrendingUp } from "lucide-react"
 
 
 
@@ -31,22 +30,7 @@ import {
 
 
 
-const topSkills = [
-  { skill: "JavaScript", users: 120 },
-  { skill: "Project Management", users: 95 },
-  { skill: "Data Analysis", users: 80 },
-  { skill: "UX Design", users: 65 },
-  { skill: "Machine Learning", users: 50 },
-]
 
-const skillGrowthData = [
-  { month: "Jan", skillGrowth: 5 },
-  { month: "Feb", skillGrowth: 8 },
-  { month: "Mar", skillGrowth: 12 },
-  { month: "Apr", skillGrowth: 15 },
-  { month: "May", skillGrowth: 20 },
-  { month: "Jun", skillGrowth: 18 },
-]
 
 const recentSkillUpdates = [
   { user: "John Doe", skill: "React", level: 8, date: "2023-06-15" },
@@ -57,7 +41,7 @@ const recentSkillUpdates = [
 ]
 
 
-export default function EnhancedSkillManagementDashboard() {
+export default function Admin() {
   const [dept_skill_count, setdept_skill_count] = useState([
     // {
     //     "roleName": "ADMIN",
@@ -98,6 +82,7 @@ export default function EnhancedSkillManagementDashboard() {
       const [role_count, setrole_count] = useState(0)
       const [skill_user_count, setskill_user_count] = useState([])
       const [cert_user_count, setcert_user_count] = useState([])
+      const [user_skill_level_distribution, setuser_skill_level_distribution] = useState([])
       const [skilled_user_dept_count, setskilled_user_dept_count] = useState([
       //   {
       //       "role": "Solution Enabler",
@@ -112,6 +97,7 @@ export default function EnhancedSkillManagementDashboard() {
     from: addDays(new Date(), -30),
     to: new Date(),
   })
+  const [chartData, setchartData] = useState([])
   const get_all_stat_data = async () => {
     setloading(true);
     const token = Cookies.get("token");
@@ -127,6 +113,7 @@ export default function EnhancedSkillManagementDashboard() {
       axios.post("http://localhost:3000/admin/skilled_user_hour_count", { token}),
       axios.post("http://localhost:3000/admin/skill_user_count", { token}),
       axios.post("http://localhost:3000/admin/cert_user_count", { token}),
+      axios.post("http://localhost:3000/admin/user_skill_level_distribution", { token}),
     ];
     console.log("444444444444")
     try {
@@ -138,7 +125,8 @@ export default function EnhancedSkillManagementDashboard() {
         skilled_user_dept_count_Response,
         skilled_user_hour_count_Response,
         skill_user_count_Response,
-        cert_user_count_Response
+        cert_user_count_Response,
+        user_skill_level_distribution_Response
       ] = await Promise.all(requests);
       console.log("promise done")
       if (get_user_count_Response.status === 200) {
@@ -178,13 +166,22 @@ export default function EnhancedSkillManagementDashboard() {
         setcert_user_count(cert_user_count_Response.data.data);
 
       }
+      if (user_skill_level_distribution_Response.status == 200) {
+        console.log(user_skill_level_distribution_Response.data.data, "9");
+        const d=user_skill_level_distribution_Response.data.data.map((e:any,i:any)=>{
+          e.fill=`hsl(var(--chart-${i+1}))`
+        })
+        setuser_skill_level_distribution(d);
+
+      }
       
       if (
         get_user_count_Response.status === 200 &&
         get_skilled_user_count_Response.status === 200 &&
         // user_hours_Response.status == 200 &&
         role_count_Response.status == 200 &&
-        skilled_user_dept_count_Response.status==200
+        skilled_user_dept_count_Response.status==200&&
+        user_skill_level_distribution_Response.status==200
       ) {
         setloading(false);
       }
@@ -208,15 +205,25 @@ const chartConfig1=dept_skill_count.reduce((acc: any, item: any, index: number) 
 const chartConfig2=skill_user_count.reduce((acc: any, item: any, index: number) => {
     
     acc[item.skillName] = { 
-      label: item.userCount, 
+      label: item.skillName, 
     };
     
     return acc;
   }, {})
 const chartConfig3=cert_user_count.reduce((acc: any, item: any, index: number) => {
+  console.log(item)
     
     acc[item.certificationName] = { 
-      label: item.userCount, 
+      label: item.certificationName, 
+    };
+    
+    return acc;
+  }, {})
+
+  const chartConfig4 = user_skill_level_distribution.reduce((acc: any, item: any, index: number) => {
+    
+    acc[item.competency] = { 
+      lable: item.competency, 
     };
     
     return acc;
@@ -419,30 +426,50 @@ const chartConfig3=cert_user_count.reduce((acc: any, item: any, index: number) =
             <CardTitle>Department Skill Levels</CardTitle>
           </CardHeader>
           <CardContent>
-          <ChartContainer config={chartConfig2} className="">
-      <BarChart
-        accessibilityLayer
-        data={skill_user_count}
-        layout="horizontal"
-      >
-        <XAxis
-          dataKey="skillName" // Use roleName directly
-          type="category"
-          tickLine={false}
-          tickMargin={10}
-          axisLine={false}
-          angle={90}
-          textAnchor="middle"
-          dy={10}
-          tickFormatter={(value) => chartConfig[value]?.label || value} // Use chartConfig to format labels
-        />
-        <YAxis dataKey="userCount" type="number" hide />
-        <ChartTooltip
-          cursor={false}
-          content={<ChartTooltipContent hideLabel />}
-        />
-        <Bar dataKey="userCount" layout="horizontal" radius={5} fill="#8884d8" /> {/* Ensure fill color is set */}
-      </BarChart>
+          <ChartContainer config={chartConfig4} className="">
+          <PieChart>
+            <ChartTooltip
+              cursor={false}
+              content={<ChartTooltipContent hideLabel />}
+            />
+            <Pie
+              data={chartData}
+              dataKey="count"
+              nameKey="count"
+              innerRadius={60}
+              strokeWidth={5}
+            >
+              <Label
+                content={({ viewBox }) => {
+                  if (viewBox && "cx" in viewBox && "cy" in viewBox) {
+                    return (
+                      <text
+                        x={viewBox.cx}
+                        y={viewBox.cy}
+                        textAnchor="middle"
+                        dominantBaseline="middle"
+                      >
+                        {/* <tspan
+                          x={viewBox.cx}
+                          y={viewBox.cy}
+                          className="fill-foreground text-3xl font-bold"
+                        >
+                          {totalVisitors.toLocaleString()}
+                        </tspan> */}
+                        <tspan
+                          x={viewBox.cx}
+                          y={(viewBox.cy || 0) + 24}
+                          className="fill-muted-foreground"
+                        >
+                          Visitors
+                        </tspan>
+                      </text>
+                    )
+                  }
+                }}
+              />
+            </Pie>
+          </PieChart>
     </ChartContainer>
           </CardContent>
         </Card>
