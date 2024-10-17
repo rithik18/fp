@@ -60,6 +60,8 @@ router.post('/skilled_user_hour_count',usercertificationController.findDeptWiseT
 
 router.post('/view_certification',certificationController.view_certification)
 
+router.post('/update_user_data',userController.update_user_data)
+
 // To view user skills and certification
 router.post('/get_certification',usercertificationController.get_certification)
 router.post('/get_certification_count',usercertificationController.get_certification_count)

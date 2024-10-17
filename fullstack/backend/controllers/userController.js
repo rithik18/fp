@@ -77,6 +77,27 @@ const update_user_data = async (req, res) => {
     res.status(403).send(error);
   }
 };
+const admin_update_user_data = async (req, res) => {
+  console.log("in user");
+  const { data } = req.body;
+  try {
+    const resp = await prisma.user.update(
+      {where:{
+        id:data.id
+      },
+    data:{
+      role_id:data.role_id,
+      department:data.department,
+      updated_at:new Date().toISOString()
+    }}
+    )
+    res.send({"msg":"Updated successfully","status":resp.status});
+  } catch (error) {
+    console.log("in error")
+    console.log(error)
+    res.status(403).send(error);
+  }
+};
 const view_user_count = async (req, res) => {
   console.log("in_get_all_user")
   try {
@@ -138,5 +159,6 @@ module.exports = {
   delete_user,
   update_user_data,
   view_user_count,
-  skilled_user_dept_count
+  skilled_user_dept_count,
+  admin_update_user_data
 };

@@ -18,7 +18,7 @@ import {
 } from "../components/ui/alert-dialog";
 import Admin_View_User_profile from "./Admin_View_User_profile"
 
-export default function Cards({ props, roles }: any) {
+export default function Cards({ props, roles,roleData }: any) {
   const getShortName = (fullName: any) => {
     const nameParts = fullName.split(" ");
     const shortName = nameParts
@@ -81,7 +81,7 @@ export default function Cards({ props, roles }: any) {
               </div>
             </AlertDialogHeader>
               <AlertDialogDescription>
-              <Admin_View_User_profile props={props} roles={roles}/>
+              <Admin_View_User_profile props={props} roles={roles} roleData={roleData}/>
               </AlertDialogDescription>
             {/* <AlertDialogFooter>
               <AlertDialogCancel>Cancel</AlertDialogCancel>

@@ -625,7 +625,7 @@ const getAllData = async () => {
                     return e.id == card.role_id;
                   });
                   console.log(card, "first");
-                  return <Cards props={card} roles={roles.name} />;
+                  return <Cards props={card} roles={roles.name} roleData={roleData} />;
                 })}
               </div>
               {/* Pagination */}

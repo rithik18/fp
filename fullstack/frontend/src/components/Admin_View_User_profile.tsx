@@ -13,15 +13,25 @@ import {
   CalendarCheck2,
   Shield,
   ShieldAlert,
-  User,
-  Mail,
-  Building,
-  Calendar,
+  UserRoundPen,
+  ChevronDown,
+  Save,
+  X,
 } from "lucide-react";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuRadioGroup,
+  DropdownMenuRadioItem,
+  DropdownMenuTrigger,
+} from "./ui/dropdown-menu";
 import { toast } from "react-toastify";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
+import { Button } from "./ui/button";
 
-export default function MiniUserDashboard({ props, roles }: any) {
+export default function MiniUserDashboard({ props, roles,roleData }: any) {
+  const [department1, setDepartment1] = useState(props.department);
+const [role1, setrole1] = useState(props.role_id);
   const getShortName = (fullName: any) => {
     const nameParts = fullName.split(" ");
     const shortName = nameParts
@@ -31,9 +41,11 @@ export default function MiniUserDashboard({ props, roles }: any) {
   };
 
   useEffect(() => {
+    console.log(props,roles,"**********************")
     fetchAllData();
   }, [props]);
   const [skills, setskills] = useState<any>([]);
+  const [edit,setedit]=useState<Boolean>(true)
   const [allskills, setallskills] = useState<any>([]);
   const [certifications, setcertifications] = useState<any>([]);
 
@@ -136,6 +148,58 @@ export default function MiniUserDashboard({ props, roles }: any) {
       setloading(false);
     }
   };
+  const handleSave = async () => {
+    console.log("in save")
+    const token = Cookies.get("token");
+    const data: any = { role_id:roleData,department:department1,id:props.id, updated_at: new Date().toISOString() };
+    console.log(data);
+    const reqOptions = {
+      url: "http://localhost:3000/admin/admin_update_user_data",
+      method: "POST",
+      data: { token, data },
+    };
+    try {
+      await axios.request(reqOptions).then((e) => {
+        console.log(e);
+        if (e.status == 200) {
+          toast.success("Details Updated Successfully");
+        }
+      });
+    } catch (e: any) {
+      const init = async () => {
+        const keysToStore = [
+          "role_id",
+          "department",
+        ];
+        var data_old: any = {};
+
+        keysToStore.forEach((key) => {
+          
+            data_old[key] = Cookies.get(key);
+
+        })
+        console.log(data, "data");
+      };
+      if (e.status == 403) {
+        toast.error("Error");
+        init();
+        return;
+      } else {
+        toast.error(e);
+        init();
+        return;
+      }
+    }
+    console.log(data, "in save");
+    setedit(false);
+    for (const key in data) {
+      if (key == "profileImage") {
+        localStorage.setItem(key, data[key].toString());
+      } else {
+        Cookies.set(key, data[key]);
+      }
+    }
+  };
 
   if (loading) {
     return <div>Loading...</div>;
@@ -152,6 +216,13 @@ export default function MiniUserDashboard({ props, roles }: any) {
         <div className="w-full">
           <Card className="w-full max-w-sm mx-auto bg-gradient-to-br from-primary/10 to-secondary/10 overflow-hidden">
             <CardContent className="p-6">
+              {edit?<div className='flex justify-end'>
+                <UserRoundPen className="h-6 w-6" onClick={()=>setedit(!edit)}/>
+              </div>:
+              <div  className='flex justify-between '>
+                <Save className="h-6 w-6" onClick={()=>{setedit(!edit);handleSave()}} />
+                <X className="h-6 w-6" onClick={()=>setedit(!edit)}/>
+                  </div>}
               <div className="flex flex-col items-center space-y-4">
                 <div className="relative">
                   <Avatar className="mx-auto w-32 h-32 border-4 border-primary">
@@ -165,17 +236,82 @@ export default function MiniUserDashboard({ props, roles }: any) {
                   </Avatar>
                 </div>
               </div>
-               <div className="text-center space-y-2">
-            <h2 className="text-xl font-bold">{props.name}</h2>
-            <Badge
-                    className="mt-2 mx-auto rounded-full text-center text-xs"
-                    variant="outline"
+              <div className="text-center space-y-2">
+                <h2 className="text-xl font-bold">{props.name}</h2>
+                {edit?<Badge
+                  className="mt-2 mx-auto rounded-full text-center text-xs"
+                  variant="outline"
+                >
+                  {roles}
+                </Badge>:
+                <div className="flex flex-col gap-2">
+                  <DropdownMenu>
+                <DropdownMenuTrigger asChild className="w-full rounded-full">
+                  <Button variant="outline">
+                    {roleData.length != 0 && role1 != "None"
+                      ? roleData.filter((e: any) => e.id === role1)[0]?.name
+                      : role1}
+                    <ChevronDown />
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent className="w-56">
+                  <DropdownMenuRadioGroup
+                    value={role1}
+                    onValueChange={setrole1}
                   >
-                    {roles}
-                  </Badge>
-            <p className="text-sm">{props.mail}</p>
-            <p className="text-sm">{props.joining_date}</p>
+                    <DropdownMenuRadioItem value="None">
+                      None
+                    </DropdownMenuRadioItem>
+                    {roleData.length != 0 &&
+                      roleData.map((e: any) => {
+                        // console.log(role1,"jjjj")
+                        return (
+                          <DropdownMenuRadioItem value={e.id}>
+                            {e.name}
+                          </DropdownMenuRadioItem>
+                        );
+                      })}
+                  </DropdownMenuRadioGroup>
+                </DropdownMenuContent>
+              </DropdownMenu>
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild className="w-full rounded-full">
+                  <Button variant="outline">
+                    {department1} <ChevronDown />
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent>
+                  <DropdownMenuRadioGroup
+                    value={department1}
+                    onValueChange={setDepartment1}
+                  >
+                    <DropdownMenuRadioItem value="ADMIN">
+                      ADMIN
+                    </DropdownMenuRadioItem>
+                    <DropdownMenuRadioItem value="FULL_STACK">
+                      FULL_STACK
+                    </DropdownMenuRadioItem>
+                    <DropdownMenuRadioItem value="DATA_ANALYTICS">
+                      DATA_ANALYTICS
+                    </DropdownMenuRadioItem>
+                    <DropdownMenuRadioItem value="DATA_ENGINEERING">
+                      DATA_ENGINEERING
+                    </DropdownMenuRadioItem>
+                    <DropdownMenuRadioItem value="DEVOPS">
+                      DEVOPS
+                    </DropdownMenuRadioItem>
+                    <DropdownMenuRadioItem value="OTHER">
+                      OTHER
+                    </DropdownMenuRadioItem>
+                  </DropdownMenuRadioGroup>
+                </DropdownMenuContent>
+              </DropdownMenu>
 
+                </div>
+                
+                }
+                <p className="text-sm">{props.mail}</p>
+                <p className="text-sm">{props.joining_date}</p>
               </div>
             </CardContent>
           </Card>
