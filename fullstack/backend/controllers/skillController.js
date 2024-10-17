@@ -36,9 +36,30 @@ const delete_skill = async (req, res) => {
       res.status(403).send({ msg: e });
     }
   };
+  const skillUserCounts = async (req,res)=>{
+    const data=await prisma.skill.findMany({
+    select: {
+      id: true,
+      name: true,
+      User: {
+        select: {
+          userId: true,
+        },
+      },
+    },
+  })
+  
+  const skillCounts = data.map(skill => ({
+    skillName: skill.name,
+    userCount: skill.User.length, // Count users per skill
+  }));
+  res.send({ data: skillCounts });
+
+  }
 module.exports = {
   view_skill,
   add_skill,
   update_skill,
-  delete_skill
+  delete_skill,
+  skillUserCounts
 };

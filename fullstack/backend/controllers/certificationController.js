@@ -70,10 +70,32 @@ const hours_count=async(req,res)=>{
 
 }
 
+const certificationUserCounts = async(req,res)=>{
+  const data=await prisma.certification.findMany({
+  select: {
+    id: true,
+    name: true,
+    is_certificate:true,
+    UserCertification: {
+      select: {
+        userId: true,
+      },
+    },
+  },
+});
+const certificationCounts = data.map(certification => ({
+  certificationName: certification.name,
+  userCount: certification.UserCertification.length, // Count users per certification
+}));
+
+console.log("cert",certificationCounts)
+res.send({data:certificationCounts});
+}
 module.exports = {
   view_certification,
   add_certification,
   update_certification,
   delete_certification,
-  hours_count
+  hours_count,
+  certificationUserCounts
 };

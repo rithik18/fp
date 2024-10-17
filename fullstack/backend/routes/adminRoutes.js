@@ -70,4 +70,9 @@ router.post('/get_total_duration',usercertificationController.getTotalDuration)
 router.post('/get_user_skill',userskillController.get_user_skill)
 router.post('/view_skill',skillController.view_skill)
 
+
+
+router.post('/skill_user_count',skillController.skillUserCounts)
+router.post('/cert_user_count',certificationController.certificationUserCounts)
+
 module.exports = router;

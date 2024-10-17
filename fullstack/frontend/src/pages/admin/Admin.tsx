@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { CalendarIcon, Users, Briefcase, GraduationCap, Search, AlarmClockCheck } from "lucide-react"
+import { CalendarIcon, Users, Briefcase, GraduationCap, Search, AlarmClockCheck, LeafyGreen } from "lucide-react"
 import { addDays, format } from "date-fns"
 import { DateRange } from "react-day-picker"
 
@@ -11,13 +11,14 @@ import axios from "axios";
 import { toast, ToastContainer } from "react-toastify";
 import LoadingOverlay from "react-loading-overlay";
 import CircleLoader from "react-spinners/CircleLoader";
-import { BarChart, Bar, LineChart, Line, PieChart, Pie, Tooltip, XAxis, YAxis, CartesianGrid, Legend } from 'recharts';
+import { BarChart, Bar, LineChart, Line, PieChart, Pie, Tooltip, XAxis, YAxis, CartesianGrid, Legend, AreaChart, Area } from 'recharts';
 import { validate } from '../../utils/validation';
 import { useNavigate } from 'react-router-dom';
 import Cookies from "js-cookie";
 import Navbar from '../../components/navbar';
 
 import { TrendingUp } from "lucide-react"
+
 
 
 import {
@@ -95,6 +96,8 @@ export default function EnhancedSkillManagementDashboard() {
       const [user_count, setuser_count] = useState(0)
       const [skilled_user_count, setskilled_user_count] = useState(0)
       const [role_count, setrole_count] = useState(0)
+      const [skill_user_count, setskill_user_count] = useState([])
+      const [cert_user_count, setcert_user_count] = useState([])
       const [skilled_user_dept_count, setskilled_user_dept_count] = useState([
       //   {
       //       "role": "Solution Enabler",
@@ -122,6 +125,8 @@ export default function EnhancedSkillManagementDashboard() {
       axios.post("http://localhost:3000/admin/role_count", { token}),
       axios.post("http://localhost:3000/admin/skilled_user_dept_count", { token}),
       axios.post("http://localhost:3000/admin/skilled_user_hour_count", { token}),
+      axios.post("http://localhost:3000/admin/skill_user_count", { token}),
+      axios.post("http://localhost:3000/admin/cert_user_count", { token}),
     ];
     console.log("444444444444")
     try {
@@ -131,7 +136,9 @@ export default function EnhancedSkillManagementDashboard() {
         // user_hours_Response,
         role_count_Response,
         skilled_user_dept_count_Response,
-        skilled_user_hour_count_Response
+        skilled_user_hour_count_Response,
+        skill_user_count_Response,
+        cert_user_count_Response
       ] = await Promise.all(requests);
       console.log("promise done")
       if (get_user_count_Response.status === 200) {
@@ -142,13 +149,6 @@ export default function EnhancedSkillManagementDashboard() {
         console.log(get_skilled_user_count_Response.data.data[0]._count.userId, "2");
         setskilled_user_count(get_skilled_user_count_Response.data.data[0]._count.userId);
       }
-      // if (user_hours_Response.status === 200) {
-      //   console.log(
-      //     user_hours_Response.data.data,
-      //     "3"
-      //   );
-      //   sethours_count(user_hours_Response.data.data);
-      // }
       if (role_count_Response.status == 200) {
         console.log(role_count_Response.data.data.length, "4");
         setrole_count(role_count_Response.data.data.length);
@@ -168,6 +168,16 @@ export default function EnhancedSkillManagementDashboard() {
         setskilled_user_dept_count(skilled_user_hour_count_Response.data.data);
 
       }
+      if (skill_user_count_Response.status == 200) {
+        console.log(skill_user_count_Response.data.data, "7");
+        setskill_user_count(skill_user_count_Response.data.data);
+
+      }
+      if (cert_user_count_Response.status == 200) {
+        console.log(cert_user_count_Response.data.data, "8");
+        setcert_user_count(cert_user_count_Response.data.data);
+
+      }
       
       if (
         get_user_count_Response.status === 200 &&
@@ -183,17 +193,34 @@ export default function EnhancedSkillManagementDashboard() {
       setloading(false);
     }
   };
-  const chartConfig = skilled_user_dept_count.reduce((acc: any, item: any) => {
+const chartConfig= skilled_user_dept_count.reduce((acc: any, item: any, index: number) => {
+         acc[item.role] = { label: item.role}
+         return acc;
+        }, {})
+const chartConfig1=dept_skill_count.reduce((acc: any, item: any, index: number) => {
     
-     acc[item.role] = { label: item.role,}; // Add index to the object
-     return acc;
-    }, {})
-  const chartConfig1 = skilled_user_dept_count.reduce((acc:any, item:any) => {
-    acc[item.role] = { label: item.role }; // Use roleName as the key and set the label
+    acc[item.roleName] = { 
+      label: item.roleName, 
+    };
+    
     return acc;
-  }, {});
-  // const [chartConfig1,setchartConfig1] =useState<any>([]) 
-  // const [chartConfig,setchartConfig] =useState<any>([]) 
+  }, {})
+const chartConfig2=skill_user_count.reduce((acc: any, item: any, index: number) => {
+    
+    acc[item.skillName] = { 
+      label: item.userCount, 
+    };
+    
+    return acc;
+  }, {})
+const chartConfig3=cert_user_count.reduce((acc: any, item: any, index: number) => {
+    
+    acc[item.certificationName] = { 
+      label: item.userCount, 
+    };
+    
+    return acc;
+  }, {})
 
   useEffect(() => {
     const init = async () => {
@@ -234,34 +261,7 @@ export default function EnhancedSkillManagementDashboard() {
      n('/')
    }
    }, []);
-  //  useEffect(() => {
-  //   const tailwindColors = [
-  //     'blue-500',   
-  //     'pink-500',   
-  //     'orange-500', 
-  //     'purple-500', 
-  //     'green-500'   
-  //   ];
-  //    setchartConfig1(skilled_user_dept_count.reduce((acc: any, item: any, index: number) => {
-  //     const colorIndex = index % tailwindColors.length;
-  //      acc[item.role] = { label: item.role,color: `text-${tailwindColors[colorIndex]}`}; // Add index to the object
-  //      return acc;
-  //     }, {}))
-  //     setchartConfig(dept_skill_count.reduce((acc: any, item: any, index: number) => {
-  //       const colorIndex = index % tailwindColors.length; // Cycle through the Tailwind colors
-        
-  //       acc[item.roleName] = { 
-  //         label: item.roleName, 
-  //         colorClass: `text-${tailwindColors[colorIndex]}` // Use the corresponding Tailwind color class
-  //       };
-        
-  //       return acc;
-  //     }, {}));
-      
-      
-      
-  //     console.log(chartConfig1,chartConfig,"chart")
-  //  }, [dept_skill_count,skilled_user_dept_count])
+
    
    const [loading, setloading] = useState(false);
    const n = useNavigate();
@@ -304,6 +304,7 @@ export default function EnhancedSkillManagementDashboard() {
       </div>
 
       <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
+        {/* Stats section */}
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">Total Users</CardTitle>
@@ -343,6 +344,7 @@ export default function EnhancedSkillManagementDashboard() {
       </div>
 
       <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-6">
+        {/* Chart section */}
         <Card className="col-span-2">
           <CardHeader>
             <CardTitle>Department Skill Levels</CardTitle>
@@ -417,51 +419,68 @@ export default function EnhancedSkillManagementDashboard() {
             <CardTitle>Department Skill Levels</CardTitle>
           </CardHeader>
           <CardContent>
-          <ChartContainer config={chartConfig} className="">
+          <ChartContainer config={chartConfig2} className="">
       <BarChart
         accessibilityLayer
-        data={dept_skill_count}
-        layout="vertical"
-        margin={{
-          left: 20,
-        }}
+        data={skill_user_count}
+        layout="horizontal"
       >
-        <YAxis
-          dataKey="roleName" // Use roleName directly
+        <XAxis
+          dataKey="skillName" // Use roleName directly
           type="category"
           tickLine={false}
           tickMargin={10}
           axisLine={false}
+          angle={90}
+          textAnchor="middle"
+          dy={10}
           tickFormatter={(value) => chartConfig[value]?.label || value} // Use chartConfig to format labels
         />
-        <XAxis dataKey="count" type="number" hide />
+        <YAxis dataKey="userCount" type="number" hide />
         <ChartTooltip
           cursor={false}
           content={<ChartTooltipContent hideLabel />}
         />
-        <Bar dataKey="count" layout="vertical" radius={5} fill="#8884d8" /> {/* Ensure fill color is set */}
+        <Bar dataKey="userCount" layout="horizontal" radius={5} fill="#8884d8" /> {/* Ensure fill color is set */}
       </BarChart>
     </ChartContainer>
           </CardContent>
         </Card>
       </div>
-
       <div className="grid gap-8 md:grid-cols-2">
         <Card>
           <CardHeader>
             <CardTitle>Top Skills</CardTitle>
           </CardHeader>
           <CardContent>
-            <BarChart
-              data={topSkills}
-              // index="skill"
-              // categories={["users"]}
-              // colors={["blue"]}
-              layout="vertical"
-              // valueFormatter={(value:any) => `${value} users`}
-              // yAxisWidth={100}
-              className="h-[300px]"
-            />
+          <ChartContainer config={chartConfig2} className="">
+      <BarChart
+        accessibilityLayer
+        margin={
+         { bottom:50}
+        }
+        data={skill_user_count}
+        layout="horizontal"
+      >
+        <XAxis
+        className="mt-10"
+          dataKey="skillName" // Use roleName directly
+          type="category"
+          tickLine={false}
+          tickMargin={10}
+          axisLine={false}
+          angle={90}
+          textAnchor="start"
+          tickFormatter={(value) => value} // Use chartConfig to format labels
+        />
+        <YAxis dataKey="userCount" type="number" hide />
+        <ChartTooltip
+          cursor={false}
+          content={<ChartTooltipContent hideLabel />}
+        />
+        <Bar dataKey="userCount" layout="horizontal" radius={5} fill="#8884d8" /> {/* Ensure fill color is set */}
+      </BarChart>
+    </ChartContainer>
           </CardContent>
         </Card>
         <Card>
@@ -469,15 +488,37 @@ export default function EnhancedSkillManagementDashboard() {
             <CardTitle>Skill Growth Over Time</CardTitle>
           </CardHeader>
           <CardContent>
-            <LineChart
-              data={skillGrowthData}
-              // index="month"
-              // categories={["skillGrowth"]}
-              // colors={["green"]}
-              // valueFormatter={(value:any) => `${value}%`}
-              // yAxisWidth={40}
-              className="h-[300px]"
+          <ChartContainer config={chartConfig3}>
+          <AreaChart
+            accessibilityLayer
+            data={cert_user_count}
+            margin={
+              { bottom:50}
+             }
+          >
+            <CartesianGrid vertical={false} />
+            <XAxis
+              dataKey="certificationName"
+              tickLine={false}
+              axisLine={false}
+              tickMargin={8}
+              angle={90}
+              textAnchor="start"
+              tickFormatter={(value) => value.slice(0, 3)}
             />
+            <ChartTooltip
+              cursor={false}
+              content={<ChartTooltipContent indicator="dot" />}
+            />
+            <Area
+              dataKey="userCount"
+              type="natural"
+              fill=""
+              stackId="a"
+            />
+            
+          </AreaChart>
+        </ChartContainer>
           </CardContent>
         </Card>
       </div>
