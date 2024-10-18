@@ -78,5 +78,6 @@ router.post('/cert_user_count',certificationController.certificationUserCounts)
 
 router.post('/user_skill_level_distribution',usercertificationController.user_skill_level_distribution)
 
+router.post('/cert_updated_trend',usercertificationController.cert_updated_trend)
 
 module.exports = router;

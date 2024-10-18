@@ -39,6 +39,7 @@ import {
   AreaChart,
   Area,
   Label,
+  LabelList,
 } from "recharts";
 import { validate } from "../../utils/validation";
 import { useNavigate } from "react-router-dom";
@@ -106,8 +107,8 @@ export default function Admin() {
   const [role_count, setrole_count] = useState(0);
   const [skill_user_count, setskill_user_count] = useState([]);
   const [cert_user_count, setcert_user_count] = useState([]);
-  const [user_skill_level_distribution, setuser_skill_level_distribution] =
-    useState([]);
+  const [user_skill_level_distribution, setuser_skill_level_distribution] =useState([]);
+  const [cert_updated_trend, setcert_updated_trend] =useState([]);
   const [skilled_user_dept_count, setskilled_user_dept_count] = useState([
     //   {
     //       "role": "Solution Enabler",
@@ -143,6 +144,9 @@ export default function Admin() {
       axios.post("http://localhost:3000/admin/user_skill_level_distribution", {
         token,
       }),
+      axios.post("http://localhost:3000/admin/cert_updated_trend", {
+        token,
+      }),
     ];
     console.log("444444444444");
     try {
@@ -156,6 +160,7 @@ export default function Admin() {
         skill_user_count_Response,
         cert_user_count_Response,
         user_skill_level_distribution_Response,
+        cert_updated_trend_Response
       ] = await Promise.all(requests);
       console.log("promise done");
       if (get_user_count_Response.status === 200) {
@@ -214,10 +219,18 @@ export default function Admin() {
             e.fill = `hsl(var(--chart-${(i+1)%5}))`;
           }
         );
-        // console.log(d)
         setuser_skill_level_distribution(
           user_skill_level_distribution_Response.data.data
         );
+      }
+      if (cert_updated_trend_Response.status == 200) {
+        console.log(cert_updated_trend_Response.data.data, "10");
+        cert_updated_trend_Response.data.data.map(
+          (e: any, i: any) => {
+            e.fill = `hsl(var(--chart-${(i+1)%5}))`;
+          }
+        );
+        setcert_updated_trend(cert_updated_trend_Response.data.data)
       }
 
       if (
@@ -262,10 +275,10 @@ export default function Admin() {
     },
     {}
   );
-  const chartConfig3 = cert_user_count.reduce(
+  const chartConfig3 = cert_updated_trend.reduce(
     (acc: any, item: any, index: number) => {
-      acc[item.certificationName] = {
-        label: item.certificationName,
+      acc[item.month] = {
+        label: item.month,
       };
 
       return acc;
@@ -604,43 +617,60 @@ export default function Admin() {
             </CardContent>
           </Card>
           <Card>
-            <CardHeader>
-              <CardTitle>Skill Growth Over Time</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <ChartContainer config={chartConfig3}>
-                <AreaChart
-                  accessibilityLayer
-                  data={cert_user_count}
-                  margin={{ bottom: 50 }}
-                >
-                  <CartesianGrid vertical={false} />
-                  <XAxis
-                    dataKey="certificationName"
-                    tickLine={false}
-                    axisLine={false}
-                    tickMargin={8}
-                    angle={90}
-                    textAnchor="start"
-                    tickFormatter={(value) => value.slice(0, 3)}
-                  />
-                  <ChartTooltip
-                    cursor={false}
-                    content={<ChartTooltipContent indicator="dot" />}
-                  />
-                  <Area
-                    dataKey="userCount"
-                    type="natural"
-                    fill=""
-                    stackId="a"
-                  />
-                </AreaChart>
-              </ChartContainer>
-            </CardContent>
-          </Card>
+      <CardHeader>
+        <CardTitle>Line Chart - Label</CardTitle>
+      </CardHeader>
+      <CardContent>
+        <ChartContainer config={chartConfig3}>
+          <LineChart
+            accessibilityLayer
+            data={cert_updated_trend}
+            margin={{
+              bottom:30,
+              left:12,
+              right:12
+            }}
+          >
+            <CartesianGrid vertical={false} />
+            <XAxis
+              dataKey="month"
+              angle={90}
+              tickLine={false}
+              axisLine={false}
+              tickMargin={8}
+              textAnchor="start"
+              tickFormatter={(value) => value}
+            />
+            <ChartTooltip
+              cursor={false}
+              content={<ChartTooltipContent indicator="line" />}
+            />
+            <Line
+              dataKey="count"
+              type="natural"
+              stroke="hsl(var(--chart-2))"
+              strokeWidth={2}
+              dot={{
+                fill: "hsl(var(--chart-2))",
+              }}
+              activeDot={{
+                r: 6,
+              }}
+            >
+              <LabelList
+                position="top"
+                offset={12}
+                className="fill-foreground"
+                fontSize={12}
+              />
+            </Line>
+          </LineChart>
+        </ChartContainer>
+      </CardContent>
+    </Card>
         </div>
 
-        <Card>
+        {/* <Card>
           <CardHeader>
             <CardTitle>Recent Skill Updates</CardTitle>
             <CardDescription>
@@ -669,7 +699,7 @@ export default function Admin() {
               </TableBody>
             </Table>
           </CardContent>
-        </Card>
+        </Card> */}
       </div>
     </div>
   );

@@ -250,7 +250,38 @@ async function getTotalDuration(req,res) {
     }
   };
   
-  
+  const cert_updated_trend = async (req, res) => {
+    const updatedSkills=await prisma.userCertification.findMany({
+      where: {
+        completed_at: {
+          gte: new Date(new Date().setFullYear(new Date().getFullYear() - 1)), // last 12 months
+        },
+      },
+      select: {
+        completed_at: true,
+      },
+    });
+    const latestMonth = new Date();
+const months = Array.from({ length: 12 }, (_, i) => {
+  const date = new Date(latestMonth);
+  date.setMonth(latestMonth.getMonth() - i);
+  return date.toISOString().slice(0, 7); // format: YYYY-MM
+}).reverse(); // Reverse to get ascending order
+
+// Group skills by month using the Prisma result
+const monthlyUpdates = updatedSkills.reduce((acc, skill) => {
+  const month = skill.completed_at.toISOString().slice(0, 7); // format: YYYY-MM
+  acc[month] = (acc[month] || 0) + 1;
+  return acc;
+}, {});
+
+// Fill missing months with 0 counts
+const fullYearData = months.map(month => ({
+  month,
+  count: monthlyUpdates[month] || 0,
+}));
+    res.send({ data: fullYearData });
+  };
   
   
   module.exports={
@@ -264,5 +295,6 @@ async function getTotalDuration(req,res) {
     verify,
     reject,
     findDeptWiseTimeSpent,
-    user_skill_level_distribution
+    user_skill_level_distribution,
+    cert_updated_trend
   }
