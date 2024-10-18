@@ -78,6 +78,9 @@ router.post('/cert_user_count',certificationController.certificationUserCounts)
 
 router.post('/user_skill_level_distribution',usercertificationController.user_skill_level_distribution)
 
-router.post('/cert_updated_trend',usercertificationController.cert_updated_trend)
+ router.post('/cert_updated_trend',usercertificationController.cert_updated_trend)
+ 
+ router.post('/admin_update_user_data',userController.admin_update_user_data)
+ router.post('/admin_update_admin_data',userController.admin_update_admin_data)
 
 module.exports = router;
