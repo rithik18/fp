@@ -61,76 +61,76 @@ const Admin_verify_certification = () => {
     Certification[]
   >([]);
   const [loading, setloading] = useState(false);
-  const getAllData = async () => {
-    setloading(true)
-    const token = await Cookies.get("token");
+  // const getAllData = async () => {
+  //   setloading(true)
+  //   const token = await Cookies.get("token");
   
-    // Create an array of promises for both API calls
-    const requests = [
-      axios.post("http://localhost:3000/admin/view_user", { token }),
-    ];
+  //   // Create an array of promises for both API calls
+  //   const requests = [
+  //     axios.post("http://localhost:3000/admin/view_user", { token }),
+  //   ];
   
-    try {
-      // Wait for both requests to resolve
-      const [userResponse] = await Promise.all(requests);
+  //   try {
+  //     // Wait for both requests to resolve
+  //     const [userResponse] = await Promise.all(requests);
   
   
-      // Check the status of the user response
-      if (userResponse.status === 200) {
-        console.log(userResponse.data.data, "alluser");
-        setuserData(userResponse.data.data);
-        setloading(false)
+  //     // Check the status of the user response
+  //     if (userResponse.status === 200) {
+  //       console.log(userResponse.data.data, "alluser");
+  //       setuserData(userResponse.data.data);
+  //       setloading(false)
         
-      }
-    } catch (e) {
-      toast.error(e as string);
-      setloading(false)
-    }
-  };
+  //     }
+  //   } catch (e) {
+  //     toast.error(e as string);
+  //     setloading(false)
+  //   }
+  // };
   
-  const fetchUserCertifications = async () => {
-    setloading(true);
-    const token = await Cookies.get("token");
-    const reqOptions = {
-      url: "http://localhost:3000/admin/get_admin_certification",
-      method: "POST",
-      data: { token: token, id: Cookies.get("id") },
-    };
-    console.log(reqOptions);
+  // const fetchUserCertifications = async () => {
+  //   setloading(true);
+  //   const token = await Cookies.get("token");
+  //   const reqOptions = {
+  //     url: "http://localhost:3000/admin/get_admin_certification",
+  //     method: "POST",
+  //     data: { token: token, id: Cookies.get("id") },
+  //   };
+  //   console.log(reqOptions);
 
-    try {
-      const response = await axios.request(reqOptions);
-      if (response.status == 200) {
-        console.log(response.data.data, "data");
-        setUserCertifications(response.data.data);
-        setloading(false);
-      }
-    } catch (e) {
-      setloading(false);
-      toast.error(e as String);
-    }
-  };
-  const fetchCertifications = async () => {
-    const token = await Cookies.get("token");
-    const reqOptions = {
-      url: "http://localhost:3000/admin/view_certification",
-      method: "POST",
-      data: { token: token },
-    };
-    console.log(reqOptions);
+  //   try {
+  //     const response = await axios.request(reqOptions);
+  //     if (response.status == 200) {
+  //       console.log(response.data.data, "data");
+  //       setUserCertifications(response.data.data);
+  //       setloading(false);
+  //     }
+  //   } catch (e) {
+  //     setloading(false);
+  //     toast.error(e as String);
+  //   }
+  // };
+  // const fetchCertifications = async () => {
+  //   const token = await Cookies.get("token");
+  //   const reqOptions = {
+  //     url: "http://localhost:3000/admin/view_certification",
+  //     method: "POST",
+  //     data: { token: token },
+  //   };
+  //   console.log(reqOptions);
 
-    try {
-      const response = await axios.request(reqOptions);
-      if (response.status == 200) {
-        console.log(response.data.data);
-        setpredefinedCertifications(response.data.data);
-      }
-    } catch (e) {
-      toast.error(e as String);
-    }
-  };
+  //   try {
+  //     const response = await axios.request(reqOptions);
+  //     if (response.status == 200) {
+  //       console.log(response.data.data);
+  //       setpredefinedCertifications(response.data.data);
+  //     }
+  //   } catch (e) {
+  //     toast.error(e as String);
+  //   }
+  // };
   const fetchAllData = async () => {
-    // setloading(true);
+    setloading(true);
     console.log("in fetch data")
     const token = await Cookies.get("token");
   
@@ -190,7 +190,9 @@ const Admin_verify_certification = () => {
       n("/");
     }
   }, []);
+  // const [loading, setloading] = useState(false)
   const onVerify=async(data:any)=>{
+    setloading(true)
     const token = await Cookies.get("token");
     const reqOptions = {
       url: "http://localhost:3000/admin/verify",
@@ -204,13 +206,16 @@ const Admin_verify_certification = () => {
       if (response.status == 200) {
         console.log(response.data.data);
         fetchAllData()
+        setloading(false)
       }
     } catch (e) {
       toast.error(e as String);
       fetchAllData()
+      setloading(false)
     }
   };
   const onReject=async(data:any)=>{
+    setloading(true)
     const token = await Cookies.get("token");
     const reqOptions = {
       url: "http://localhost:3000/admin/reject",
@@ -224,10 +229,12 @@ const Admin_verify_certification = () => {
       if (response.status == 200) {
         console.log(response.data.data);
         fetchAllData()
+        setloading(false)
       }
     } catch (e) {
       toast.error(e as String);
       fetchAllData()
+      setloading(false)
     }
   };
   

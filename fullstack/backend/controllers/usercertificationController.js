@@ -235,6 +235,9 @@ async function getTotalDuration(req,res) {
     try {
       const skillLevelDistribution = await prisma.userCertification.groupBy({
         by: 'competency',
+        where:{
+          isVerified:true
+        },
         _count: {
           competency: true,
         },
@@ -256,6 +259,7 @@ async function getTotalDuration(req,res) {
         completed_at: {
           gte: new Date(new Date().setFullYear(new Date().getFullYear() - 1)), // last 12 months
         },
+        isVerified:true
       },
       select: {
         completed_at: true,

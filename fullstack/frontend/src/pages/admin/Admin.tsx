@@ -1,24 +1,14 @@
 import { useEffect, useState } from "react";
 import { Users, Briefcase, GraduationCap, AlarmClockCheck } from "lucide-react";
-import { addDays, roundToNearestHours } from "date-fns";
-import { DateRange } from "react-day-picker";
 
 import {
   Card,
   CardContent,
-  CardDescription,
   CardHeader,
   CardTitle,
 } from "../../components/ui/card";
 
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "../../components/ui/table";
+
 
 import axios from "axios";
 import { toast, ToastContainer } from "react-toastify";
@@ -31,13 +21,9 @@ import {
   Line,
   PieChart,
   Pie,
-  Tooltip,
   XAxis,
   YAxis,
   CartesianGrid,
-  Legend,
-  AreaChart,
-  Area,
   Label,
   LabelList,
 } from "recharts";
@@ -47,49 +33,15 @@ import Cookies from "js-cookie";
 import Navbar from "../../components/navbar";
 
 import {
-  ChartConfig,
   ChartContainer,
   ChartTooltip,
   ChartTooltipContent,
 } from "../../components/ui/chart";
 
-const recentSkillUpdates = [
-  { user: "John Doe", skill: "React", level: 8, date: "2023-06-15" },
-  { user: "Jane Smith", skill: "Python", level: 7, date: "2023-06-14" },
-  { user: "Mike Johnson", skill: "UI/UX Design", level: 9, date: "2023-06-13" },
-  { user: "Emily Brown", skill: "Data Analysis", level: 6, date: "2023-06-12" },
-  {
-    user: "Chris Lee",
-    skill: "Project Management",
-    level: 8,
-    date: "2023-06-11",
-  },
-];
 
 export default function Admin() {
-  const [dept_skill_count, setdept_skill_count] = useState([
-    // {
-    //     "roleName": "ADMIN",
-    //     "count": 2
-    // },
-    // {
-    //     "roleName": "Senior Software Engineer",
-    //     "count": 5
-    // },
-    // {
-    //     "roleName": "Software Engineer",
-    //     "count": 4
-    // },
-    // {
-    //     "roleName": "Senior Consultant",
-    //     "count": 1
-    // },
-    // {
-    //     "roleName": "Solution Enabler",
-    //     "count": 1
-    // }
-  ]);
-  const [user, setUser] = useState({
+  const [dept_skill_count, setdept_skill_count] = useState([]);
+  const [_, setUser] = useState({
     id: "",
     name: "",
     role_id: "",
@@ -106,7 +58,6 @@ export default function Admin() {
   const [skilled_user_count, setskilled_user_count] = useState(0);
   const [role_count, setrole_count] = useState(0);
   const [skill_user_count, setskill_user_count] = useState([]);
-  const [cert_user_count, setcert_user_count] = useState([]);
   const [user_skill_level_distribution, setuser_skill_level_distribution] =useState([]);
   const [cert_updated_trend, setcert_updated_trend] =useState([]);
   const [skilled_user_dept_count, setskilled_user_dept_count] = useState([
@@ -119,10 +70,7 @@ export default function Admin() {
     //       "totalTimeSpent": 411.91777444444443
     //   }
   ]);
-  const [date, setDate] = useState<DateRange | undefined>({
-    from: addDays(new Date(), -30),
-    to: new Date(),
-  });
+
   const get_all_stat_data = async () => {
     setloading(true);
     const token = Cookies.get("token");
@@ -131,57 +79,44 @@ export default function Admin() {
     const requests = [
       axios.post("http://localhost:3000/admin/user_count", { token }),
       axios.post("http://localhost:3000/admin/skilled_user_count", { token }),
-      // axios.post("http://localhost:3000/admin/hours_count", { token}),
       axios.post("http://localhost:3000/admin/role_count", { token }),
-      axios.post("http://localhost:3000/admin/skilled_user_dept_count", {
-        token,
-      }),
-      axios.post("http://localhost:3000/admin/skilled_user_hour_count", {
-        token,
-      }),
+      axios.post("http://localhost:3000/admin/skilled_user_dept_count", {token,}),
+      axios.post("http://localhost:3000/admin/skilled_user_hour_count", {token,}),
       axios.post("http://localhost:3000/admin/skill_user_count", { token }),
-      axios.post("http://localhost:3000/admin/cert_user_count", { token }),
-      axios.post("http://localhost:3000/admin/user_skill_level_distribution", {
-        token,
-      }),
-      axios.post("http://localhost:3000/admin/cert_updated_trend", {
-        token,
-      }),
+      axios.post("http://localhost:3000/admin/user_skill_level_distribution", {token,}),
+      axios.post("http://localhost:3000/admin/cert_updated_trend", {token,}),
     ];
-    console.log("444444444444");
     try {
       const [
         get_user_count_Response,
         get_skilled_user_count_Response,
-        // user_hours_Response,
         role_count_Response,
         skilled_user_dept_count_Response,
         skilled_user_hour_count_Response,
         skill_user_count_Response,
-        cert_user_count_Response,
         user_skill_level_distribution_Response,
         cert_updated_trend_Response
       ] = await Promise.all(requests);
       console.log("promise done");
       if (get_user_count_Response.status === 200) {
-        console.log(get_user_count_Response.data.data, "1");
+        // console.log(get_user_count_Response.data.data, "1");
         setuser_count(get_user_count_Response.data.data);
       }
       if (get_skilled_user_count_Response.status === 200) {
-        console.log(
-          get_skilled_user_count_Response.data.data[0]._count.userId,
-          "2"
-        );
+        // console.log(
+        //   get_skilled_user_count_Response.data.data[0]._count.userId,
+        //   "2"
+        // );
         setskilled_user_count(
           get_skilled_user_count_Response.data.data[0]._count.userId
         );
       }
       if (role_count_Response.status == 200) {
-        console.log(role_count_Response.data.data.length, "4");
+        // console.log(role_count_Response.data.data.length, "4");
         setrole_count(role_count_Response.data.data.length);
       }
       if (skilled_user_dept_count_Response.status == 200) {
-        console.log(skilled_user_dept_count_Response.data.data, "5");
+        // console.log(skilled_user_dept_count_Response.data.data, "5");
         skilled_user_dept_count_Response.data.data.map(
           (e: any, i: any) => {
             e.fill = `hsl(var(--chart-${(i+1)%5}))`;
@@ -190,7 +125,7 @@ export default function Admin() {
         setdept_skill_count(skilled_user_dept_count_Response.data.data);
       }
       if (skilled_user_hour_count_Response.status == 200) {
-        console.log(skilled_user_hour_count_Response.data.data, "6");
+        // console.log(skilled_user_hour_count_Response.data.data, "6");
         var time = 0;
         skilled_user_hour_count_Response.data.data.map((e: any,i:any) => {
           time += e.totalTimeSpent;
@@ -200,7 +135,7 @@ export default function Admin() {
         setskilled_user_dept_count(skilled_user_hour_count_Response.data.data);
       }
       if (skill_user_count_Response.status == 200) {
-        console.log(skill_user_count_Response.data.data, "7");
+        // console.log(skill_user_count_Response.data.data, "7");
         skill_user_count_Response.data.data.map(
           (e: any, i: any) => {
             e.fill = `hsl(var(--chart-${(i+1)%5}))`;
@@ -208,12 +143,8 @@ export default function Admin() {
         );
         setskill_user_count(skill_user_count_Response.data.data);
       }
-      if (cert_user_count_Response.status == 200) {
-        console.log(cert_user_count_Response.data.data, "8");
-        setcert_user_count(cert_user_count_Response.data.data);
-      }
       if (user_skill_level_distribution_Response.status == 200) {
-        console.log(user_skill_level_distribution_Response.data.data, "9");
+        // console.log(user_skill_level_distribution_Response.data.data, "9");
         user_skill_level_distribution_Response.data.data.map(
           (e: any, i: any) => {
             e.fill = `hsl(var(--chart-${(i+1)%5}))`;
@@ -234,12 +165,14 @@ export default function Admin() {
       }
 
       if (
-        get_user_count_Response.status === 200 &&
-        get_skilled_user_count_Response.status === 200 &&
-        // user_hours_Response.status == 200 &&
-        role_count_Response.status == 200 &&
-        skilled_user_dept_count_Response.status == 200 &&
-        user_skill_level_distribution_Response.status == 200
+        get_user_count_Response.status==200&&
+        get_skilled_user_count_Response.status==200&&
+        role_count_Response.status==200&&
+        skilled_user_dept_count_Response.status==200&&
+        skilled_user_hour_count_Response.status==200&&
+        skill_user_count_Response.status==200&&
+        user_skill_level_distribution_Response.status==200&&
+        cert_updated_trend_Response.status==200
       ) {
         setloading(false);
       }
@@ -249,14 +182,14 @@ export default function Admin() {
     }
   };
   const chartConfig = skilled_user_dept_count.reduce(
-    (acc: any, item: any, index: number) => {
+    (acc: any, item: any) => {
       acc[item.role] = { label: item.role };
       return acc;
     },
     {}
   );
   const chartConfig1 = dept_skill_count.reduce(
-    (acc: any, item: any, index: number) => {
+    (acc: any, item: any) => {
       acc[item.roleName] = {
         label: item.roleName,
       };
@@ -266,7 +199,7 @@ export default function Admin() {
     {}
   );
   const chartConfig2 = skill_user_count.reduce(
-    (acc: any, item: any, index: number) => {
+    (acc: any, item: any) => {
       acc[item.skillName] = {
         label: item.skillName,
       };
@@ -276,7 +209,7 @@ export default function Admin() {
     {}
   );
   const chartConfig3 = cert_updated_trend.reduce(
-    (acc: any, item: any, index: number) => {
+    (acc: any, item: any) => {
       acc[item.month] = {
         label: item.month,
       };
@@ -287,7 +220,7 @@ export default function Admin() {
   );
 
   const chartConfig4 = user_skill_level_distribution.reduce(
-    (acc: any, item: any, index: number) => {
+    (acc: any, item: any) => {
       acc[item.competency] = {
         lable: item.competency,
       };
@@ -435,7 +368,7 @@ export default function Admin() {
           {/* Chart section */}
           <Card className="col-span-2">
             <CardHeader>
-              <CardTitle>Department Skill Levels</CardTitle>
+              <CardTitle>Department wise Skilled User Count</CardTitle>
             </CardHeader>
             <CardContent>
               <ChartContainer config={chartConfig} className="">
@@ -480,7 +413,7 @@ export default function Admin() {
           </Card>
           <Card className="col-span-2">
             <CardHeader>
-              <CardTitle>Department Skill Levels</CardTitle>
+              <CardTitle>Department wise Time Spent on Certification</CardTitle>
             </CardHeader>
             <CardContent>
               <ChartContainer config={chartConfig1} className="">
@@ -618,7 +551,7 @@ export default function Admin() {
           </Card>
           <Card>
       <CardHeader>
-        <CardTitle>Line Chart - Label</CardTitle>
+        <CardTitle>LTM certification done</CardTitle>
       </CardHeader>
       <CardContent>
         <ChartContainer config={chartConfig3}>
