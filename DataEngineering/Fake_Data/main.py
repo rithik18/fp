@@ -585,11 +585,11 @@ roles = [{
     "updated_at": fake.date_time_this_decade().isoformat()
 } for role in roles_list]
 
-def get_role_id(role_name, roles):
-    for role in roles:
-        if role == role_name:
-            return role  # Assuming the Role ID is the same as the Role Name in this context
-    return None  # Return None if the role is not found
+# def get_role_id(role_name, roles):
+#     for role in roles:
+#         if role == role_name:
+#             return role  # Assuming the Role ID is the same as the Role Name in this context
+#     return None  # Return None if the role is not found
 
 def find_key_value(json_array, key, value):
       
