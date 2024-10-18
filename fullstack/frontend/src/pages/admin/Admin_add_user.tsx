@@ -29,7 +29,7 @@ import {
   UserRoundCheck,
 } from "lucide-react";
 import axios from "axios";
-import { toast } from "react-toastify";
+import { toast, ToastContainer } from "react-toastify";
 import { format } from "date-fns";
 import { Calendar as CalendarIcon } from "lucide-react";
 
@@ -44,6 +44,8 @@ import {
 import readXlsxFile from "read-excel-file";
 import { H2, H4 } from "../../components/ui/Typography";
 import { ScrollArea } from "../../components/ui/scroll-area";
+import LoadingOverlay from "react-loading-overlay";
+import CircleLoader from "react-spinners/CircleLoader";
 
 const Admin_add_user = () => {
   const [roleData, setroleData] = useState<any>([]);
@@ -323,9 +325,10 @@ const Admin_add_user = () => {
       }
     }
   };
-
+  const [loading, setloading] = useState(false);
 
 const getAllData = async () => {
+  setloading(true)
   const token = await Cookies.get("token");
 
   // Create an array of promises for both API calls
@@ -347,6 +350,7 @@ const getAllData = async () => {
     // Check the status of the user response
     if (userResponse.status === 200) {
       console.log(userResponse.data.data, "alluser");
+      setloading(false)
       setuserData(userResponse.data.data);
       setsearchuserData(userResponse.data.data);
       seta(userResponse.data.data);
@@ -356,12 +360,22 @@ const getAllData = async () => {
     }
   } catch (e) {
     toast.error(e as string);
+    setloading(false)
   }
 };
 
   return (
     <div className="px-2">
       <Navbar />
+      <ToastContainer />
+      {loading && (
+        <div className="fixed inset-0 bg-black bg-opacity-25  flex justify-center items-center backdrop-blur-md z-50">
+          <LoadingOverlay
+            active={loading}
+            spinner={<CircleLoader />}
+          ></LoadingOverlay>
+        </div>
+      )}
       <p className="text-center text-3xl font-extrabold tracking-tight lg:text-4xl pb-8 mx-auto">
         User Section
       </p>
