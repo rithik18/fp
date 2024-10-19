@@ -29,6 +29,15 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "../../components/ui/alert-dialog";
+import { PolarAngleAxis, PolarGrid, Radar, RadarChart } from "recharts";
+import {
+  ChartConfig,
+  ChartContainer,
+  ChartLegend,
+  ChartLegendContent,
+  ChartTooltip,
+  ChartTooltipContent,
+} from "../../components/ui/chart";
 
 import {
   Pencil,
@@ -72,6 +81,8 @@ const User = () => {
     profileImage: "",
   });
   const [skills, setskills] = useState<any>([]);
+  const [chartData, setchartData] = useState<any>([]);
+  const [roleSkills, setroleSkills] = useState<any>([]);
   const [allskills, setallskills] = useState<any>([]);
   const [certifications, setcertifications] = useState<any>([]);
 
@@ -181,7 +192,16 @@ const User = () => {
 
     return () => clearInterval(timer);
   }, []);
-
+  const chartConfig = {
+    roleSkill: {
+      label: "roleSkill",
+      color: "hsl(220 70% 50%)",
+    },
+    userSkill: {
+      label: "userSkill",
+      color: "hsl(340 75% 55%)",
+    },
+  };
   useEffect(() => {
     validate();
     fetchAllData();
@@ -232,6 +252,8 @@ const User = () => {
     setloading(true);
     const token = Cookies.get("token");
     const id = Cookies.get("id");
+    const role_id = Cookies.get("role_id");
+    const dept = Cookies.get("department");
 
     // Prepare requests
     const requests = [
@@ -246,7 +268,15 @@ const User = () => {
         id: id,
       }),
       axios.post("http://localhost:3000/user/view_skill", { token }),
-      axios.post("http://localhost:3000/user/get_total_duration", { token,id }),
+      axios.post("http://localhost:3000/user/get_total_duration", {
+        token,
+        id,
+      }),
+      axios.post("http://localhost:3000/user/view_user_role_skill", {
+        token,
+        role_id: role_id,
+        department: dept,
+      }),
     ];
 
     try {
@@ -256,7 +286,8 @@ const User = () => {
         user_Certification_Response,
         user_skill_Response,
         all_skill_response,
-        duration_Response
+        duration_Response,
+        role_skill_Response,
       ] = await Promise.all(requests);
 
       if (get_certification_count_Response.status === 200) {
@@ -300,14 +331,52 @@ const User = () => {
             return e;
           })
         );
-        // setskills(user_skill_Response.data.data);
       }
+      if (role_skill_Response.status == 200) {
+        console.log(role_skill_Response.data.data, "data3");
+        setroleSkills(
+          role_skill_Response.data.data.map((e: any) => {
+            const matchedSkill = all_skill_response.data.data.find(
+              (m: any) => m.id === e.skillId
+            );
+            if (matchedSkill) {
+              e["name"] = matchedSkill.name;
+              e["score"] = 100;
+            } else {
+              console.warn(`No matching skill found for id ${e.id}`);
+            }
+            return e;
+          })
+        );
+      }
+      const data: any = [];
+      user_skill_Response.data.data.map((e: any) => {
+        const matched = role_skill_Response.data.data.find(
+          (f: any) => e.skillId == f.skillId
+        );
+        const dict: any = {};
+        if (matched) {
+          dict["skillId"] = e.skillId;
+          dict["name"] = e.name;
+          dict["roleSkill"] = matched.score;
+          dict["userSkill"] = e.score;
+        } else {
+          dict["skillId"] = e.skillId;
+          dict["name"] = e.name;
+          dict["roleSkill"] = 0;
+          dict["userSkill"] = e.score;
+        }
+        data.push(dict);
+      });
+      setchartData(data);
+      console.log(data);
       if (
         get_certification_count_Response.status === 200 &&
         get_course_count_Response.status === 200 &&
         user_Certification_Response.status == 200 &&
         user_skill_Response.status == 200 &&
-        all_skill_response.status == 200
+        all_skill_response.status == 200 &&
+        role_skill_Response.status == 200
       ) {
         setloading(false);
       }
@@ -548,12 +617,12 @@ const User = () => {
                       View Skill
                     </Button>
                   </AlertDialogTrigger>
-                  <AlertDialogContent>
+                  <AlertDialogContent className="w-10/12 mx-auto">
                     <AlertDialogHeader>
                       <AlertDialogTitle>Skills</AlertDialogTitle>
                       <AlertDialogDescription>
-                        <ScrollArea>
                           <h3 className="text-lg font-semibold mb-2">Skills</h3>
+                        <div className="grid grid-cols-2 gap-8 w-4/5 mx-auto content-center align-middle">
                           <div className="grid grid-cols-1 gap-4">
                             {skills.map((skill: any, index: number) => (
                               <div key={index} className="flex items-center">
@@ -573,7 +642,51 @@ const User = () => {
                               </div>
                             ))}
                           </div>
-                        </ScrollArea>
+                          <div className="grid grid-cols-1 mt-10">
+                            <Card>
+                              <CardHeader className="items-center pb-4">
+                                <CardTitle>Skill comparision Chart </CardTitle>
+                              </CardHeader>
+                              <CardContent>
+                                <ChartContainer
+                                  config={chartConfig}
+                                  className="mx-auto w-full  max-h-[250px]"
+                                >
+                                  <RadarChart
+                                    data={chartData}
+                                    margin={{
+                                      top: -40,
+                                      bottom: -10,
+                                    }}
+                                  >
+                                    <ChartTooltip
+                                      cursor={false}
+                                      content={
+                                        <ChartTooltipContent indicator="line" />
+                                      }
+                                    />
+                                    <PolarAngleAxis dataKey="name" />
+                                    <PolarGrid />
+                                    <Radar
+                                      dataKey="roleSkill"
+                                      fill="var(--color-roleSkill)"
+                                      fillOpacity={0.6}
+                                    />
+                                    <Radar
+                                      dataKey="userSkill"
+                                      fill="var(--color-userSkill)"
+                                    />
+                                    <ChartLegend
+                                      className="mt-8"
+                                      content={<ChartLegendContent />}
+                                    />
+                                  </RadarChart>
+                                </ChartContainer>
+                              </CardContent>
+                            </Card>
+                          </div>
+                          
+                        </div>
                       </AlertDialogDescription>
                     </AlertDialogHeader>
                     <AlertDialogFooter>
