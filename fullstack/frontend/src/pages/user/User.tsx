@@ -610,20 +610,19 @@ const User = () => {
                     </CardContent>
                   </Card>
                 </div>
-                {/*Skill Carousel*/}
+                {/*Skill Button*/}
                 <AlertDialog>
                   <AlertDialogTrigger className="w-full">
                     <Button variant={"default"} className="w-full">
                       View Skill
                     </Button>
                   </AlertDialogTrigger>
-                  <AlertDialogContent className="w-10/12 mx-auto">
+                  <AlertDialogContent className="max-w-[75%] w-full">
                     <AlertDialogHeader>
                       <AlertDialogTitle>Skills</AlertDialogTitle>
-                      <AlertDialogDescription>
-                          <h3 className="text-lg font-semibold mb-2">Skills</h3>
-                        <div className="grid grid-cols-2 gap-8 w-4/5 mx-auto content-center align-middle">
-                          <div className="grid grid-cols-1 gap-4">
+                      <AlertDialogDescription className="max-w-[100%] w-full mx-auto">
+                        <div className="flex gap-8 max-w-[90%] w-full mx-auto items-center justify-evenly">
+                          <div className="grid grid-cols-1 gap-4 w-1/2">
                             {skills.map((skill: any, index: number) => (
                               <div key={index} className="flex items-center">
                                 <Badge
@@ -642,7 +641,7 @@ const User = () => {
                               </div>
                             ))}
                           </div>
-                          <div className="grid grid-cols-1 mt-10">
+                          <div className="grid grid-cols-1  w-1/2">
                             <Card>
                               <CardHeader className="items-center pb-4">
                                 <CardTitle>Skill comparision Chart </CardTitle>
