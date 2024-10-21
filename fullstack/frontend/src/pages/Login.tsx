@@ -36,6 +36,20 @@ const Login = () => {
       const password = passwordInput.value;
       console.log(email);
       console.log(password);
+      const regex = new RegExp(`/^([a-z0-9@#$%&^*!_']{8,})$/`);
+      const email_regex = new RegExp(`/^([a-z0-9@]{8,})$/`);
+    if (
+      !regex.test(password)
+    ) {
+      toast.warn("Fill a valid Password");
+      return;
+    }
+    if (
+      !email_regex.test(email)
+    ) {
+      toast.warn("Fill a valid Email ID");
+      return;
+    }
       let reqOptions = {
         url: "http://localhost:3000/role",
         method: "POST",

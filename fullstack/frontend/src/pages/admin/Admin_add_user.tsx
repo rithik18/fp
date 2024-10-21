@@ -219,21 +219,25 @@ const Admin_add_user = () => {
       return;
     }
     const emailInpput = document.getElementById("email") as HTMLInputElement;
+    const email_regex = new RegExp(`/^([a-z0-9@]{8,})$/`);
     if (
       emailInpput.value == "" ||
       emailInpput.value == null ||
-      emailInpput.value == undefined
+      emailInpput.value == undefined ||
+      !email_regex.test(emailInpput.value)
     ) {
       toast.warn("Fill Email");
       return;
     }
     const passInpput = document.getElementById("password") as HTMLInputElement;
+    const regex = new RegExp(`/^([a-z0-9@#$%&^*!_']{8,})$/`);
     if (
       passInpput.value == "" ||
       passInpput.value == null ||
-      passInpput.value == undefined
+      passInpput.value == undefined ||
+      !regex.test(passInpput.value)
     ) {
-      toast.warn("Fill Password");
+      toast.warn("Fill a valid Password");
       return;
     }
     const singleData = {

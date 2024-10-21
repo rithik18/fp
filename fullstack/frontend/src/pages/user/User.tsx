@@ -99,6 +99,20 @@ const User = () => {
 
   const handleSave = async () => {
     const token = Cookies.get("token");
+    const name_regex = new RegExp(`/^([a-z']{3,})$/`);
+    const regex = new RegExp(`/^([a-z0-9@#$%&^*!_']{8,})$/`);
+    if (
+      !regex.test(editedUser.password)
+    ) {
+      toast.warn("Fill a valid Password");
+      return;
+    }
+    if (
+      !name_regex.test(editedUser.name)
+    ) {
+      toast.warn("Fill a valid Name");
+      return;
+    }
     const data: any = { ...editedUser, updated_at: new Date().toISOString() };
     console.log(data);
     const reqOptions = {
