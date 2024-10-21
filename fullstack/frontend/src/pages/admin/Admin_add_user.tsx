@@ -24,9 +24,9 @@ import {
 import {
   ChevronDown,
   ChevronLeft,
-  UserRoundSearch,
   ChevronRight,
   UserRoundCheck,
+  FileDown,
 } from "lucide-react";
 import axios from "axios";
 import { toast, ToastContainer } from "react-toastify";
@@ -519,6 +519,12 @@ const getAllData = async () => {
             }}
           >
             <H2>Excel File</H2>
+            <Button>
+              <a className="w-full flex" target="_blank" href="https://docs.google.com/spreadsheets/d/1WtEafoU-nYl9ib0jTmh4Yn6wd2UYO1Mu/edit?usp=sharing&ouid=100236932522550611267&rtpof=true&sd=true">
+            <FileDown  className="relative left-0 top-0 mr-2 items-center" />
+            Download Template Excel
+              </a>
+            </Button>
             <H4>Drag And Drop File / Click Below</H4>
             <Input
               className="w-2/5"
@@ -556,9 +562,13 @@ const getAllData = async () => {
                   placeholder={"Search User"}
                   className="p-4 mb-8 rounded-full"
                   onChange={(e) => {
-                    console.log(e.target.value);
+                    console.log(e.target.value.toLowerCase(),userData.length,"1111");
                     if (e.target.value.toLowerCase() == "") {
                       setsearchuserData(userData);
+                      seta(userData);
+                      setb(userData.slice(0, c));
+                      setpc(Math.ceil(userData.length / c));
+                      setd(userData.length);
                     } else {
                       var d: any = searchuserData.filter((item: any) =>
                         item.name
@@ -566,6 +576,10 @@ const getAllData = async () => {
                           .includes(e.target.value.toLowerCase())
                       );
                       setsearchuserData(d);
+                      seta(d);
+                      setb(d.slice(0, c));
+                      setpc(Math.ceil(d.length / c));
+                      setd(d.length);
                     }
                   }}
                 />
@@ -708,7 +722,7 @@ const getAllData = async () => {
                   })}
                 </TableBody>
               </Table>
-              <div>
+              <div className="mt-20 flex gap-4">
                 <Button onClick={handleMultipleSubmit}>Submit</Button>
                 <Button
                   className="hover:bg-red-700 hover:text-white"
